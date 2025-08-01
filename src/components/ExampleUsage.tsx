@@ -24,6 +24,12 @@ const ExampleUsage: React.FC = () => {
   const [showCarousel, setShowCarousel] = useState(false);
   const [showMapView, setShowMapView] = useState(false);
   const [selectedRuaId, setSelectedRuaId] = useState('');
+  const [showCityCarousel, setShowCityCarousel] = useState(false);
+  const [showRuaCarousel, setShowRuaCarousel] = useState(false);
+  const [selectedCityId, setSelectedCityId] = useState('1');
+  const [showNotFound, setShowNotFound] = useState(false);
+  const [showFeedbackPopup, setShowFeedbackPopup] = useState(false);
+  const [showHeader, setShowHeader] = useState(false);
   const [previewContent, setPreviewContent] = useState<{
     type: 'rua' | 'historia';
     title: string;
@@ -63,6 +69,14 @@ const ExampleUsage: React.FC = () => {
   const sampleRuas = [
     { id: '1', nome: 'Rua Coberta', coordenadas: [-29.3681, -50.8361] as [number, number] },
     { id: '2', nome: 'Rua das Hortênsias', coordenadas: [-29.3700, -50.8380] as [number, number] },
+    { id: '3', nome: 'Avenida Borges de Medeiros', coordenadas: [-29.3720, -50.8400] as [number, number] },
+  ];
+
+  // Sample data for CityCarousel
+  const sampleCidades = [
+    { id: '1', nome: 'Gramado' },
+    { id: '2', nome: 'Canela' },
+    { id: '3', nome: 'Nova Petrópolis' },
   ];
 
   const sampleMapHistorias = [
@@ -170,6 +184,76 @@ const ExampleUsage: React.FC = () => {
         >
           Toggle Map View
         </button>
+
+        {/* Newly Migrated Components (13-19) */}
+        <button
+          onClick={() => setPreviewContent({
+            type: 'rua',
+            title: 'Rua Coberta',
+            description: 'A famosa rua coberta de Gramado com sua arquitetura única e história fascinante.',
+            images: ['https://placehold.co/400x200'],
+            ruaId: '1'
+          })}
+          className="bg-pink-500 text-white px-4 py-2 rounded hover:bg-pink-600 transition"
+        >
+          Show Preview Component
+        </button>
+
+        <Link
+          href="/referencias"
+          className="bg-slate-500 text-white px-4 py-2 rounded hover:bg-slate-600 transition text-center block"
+        >
+          Referencias Page
+        </Link>
+
+        <Link
+          href="/legado-africano"
+          className="bg-stone-500 text-white px-4 py-2 rounded hover:bg-stone-600 transition text-center block"
+        >
+          Legado Africano Page
+        </Link>
+
+        <Link
+          href="/rua/1"
+          className="bg-rose-500 text-white px-4 py-2 rounded hover:bg-rose-600 transition text-center block"
+        >
+          RuaHistoria Page
+        </Link>
+
+        <button
+          onClick={() => setShowCityCarousel(!showCityCarousel)}
+          className="bg-lime-500 text-white px-4 py-2 rounded hover:bg-lime-600 transition"
+        >
+          Toggle City Carousel
+        </button>
+
+        <button
+          onClick={() => setShowRuaCarousel(!showRuaCarousel)}
+          className="bg-sky-500 text-white px-4 py-2 rounded hover:bg-sky-600 transition"
+        >
+          Toggle Rua Carousel
+        </button>
+
+        <button
+          onClick={() => setShowNotFound(!showNotFound)}
+          className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
+        >
+          Show NotFound (404)
+        </button>
+
+        <button
+          onClick={() => setShowFeedbackPopup(true)}
+          className="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 transition"
+        >
+          Show Feedback Popup
+        </button>
+
+        <button
+          onClick={() => setShowHeader(!showHeader)}
+          className="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 transition"
+        >
+          Toggle Header
+        </button>
       </div>
 
       <div className="bg-gray-100 p-4 rounded-lg">
@@ -187,6 +271,16 @@ const ExampleUsage: React.FC = () => {
           <li>✅ LegadoAfricanoCard - Reusable African legacy card component</li>
           <li>✅ Carousel - Reusable carousel component for items</li>
           <li>✅ MapView - Interactive Leaflet map with markers</li>
+          <li>✅ <strong>Preview</strong> - Content preview cards with dynamic links</li>
+          <li>✅ <strong>CityCarousel</strong> - City selector with auto-scroll</li>
+          <li>✅ <strong>RuaCarousel</strong> - Street selector carousel</li>
+          <li>✅ <strong>HistoriaContent</strong> - Complex story display with tabs/galleries</li>
+          <li>✅ <strong>Referencias</strong> - References page with collapsible sections</li>
+          <li>✅ <strong>LegadoAfricano</strong> - African legacy historical content page</li>
+          <li>✅ <strong>RuaHistoria</strong> - Main page orchestrator with routing</li>
+          <li>✅ <strong>NotFound</strong> - 404 error page with navigation</li>
+          <li>✅ <strong>FeedbackPopup</strong> - User feedback form with star rating</li>
+          <li>✅ <strong>Header</strong> - Top header with logo and action buttons</li>
         </ul>
       </div>
 
@@ -283,6 +377,183 @@ const ExampleUsage: React.FC = () => {
               <p>{previewContent.description}</p>
             </div>
           )}
+        </div>
+      )}
+      
+      {/* Newly Migrated Components (13-19) */}
+      {previewContent && (
+        <div className="mt-6">
+          <h3 className="text-lg font-bold mb-4">Preview Component:</h3>
+          <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
+            <div className="flex justify-between items-start mb-2">
+              <h4 className="font-bold text-lg">{previewContent.title}</h4>
+              <button
+                onClick={() => setPreviewContent(null)}
+                className="text-gray-500 hover:text-gray-700 text-xl"
+              >
+                ×
+              </button>
+            </div>
+            <p className="text-gray-600 mb-3">{previewContent.description}</p>
+            {previewContent.images && previewContent.images.length > 0 && (
+              <img 
+                src={previewContent.images[0]} 
+                alt={previewContent.title}
+                className="w-full h-48 object-cover rounded mb-3"
+              />
+            )}
+            <div className="flex gap-2">
+              <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm">
+                Type: {previewContent.type}
+              </span>
+              <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-sm">
+                ID: {previewContent.ruaId}
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
+      
+      {showCityCarousel && (
+        <div className="mt-6">
+          <h3 className="text-lg font-bold mb-4">City Carousel Component:</h3>
+          <div className="bg-white border border-gray-200 rounded-lg p-4">
+            <div className="flex gap-4 overflow-x-auto pb-2">
+              {sampleCidades.map((cidade) => (
+                <button
+                  key={cidade.id}
+                  onClick={() => setSelectedCityId(cidade.id)}
+                  className={`px-4 py-2 rounded whitespace-nowrap transition ${
+                    selectedCityId === cidade.id
+                      ? 'bg-blue-500 text-white'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  {cidade.nome}
+                </button>
+              ))}
+            </div>
+            <p className="mt-2 text-sm text-gray-600">
+              Selected City: {sampleCidades.find(c => c.id === selectedCityId)?.nome}
+            </p>
+          </div>
+        </div>
+      )}
+      
+      {showRuaCarousel && (
+        <div className="mt-6">
+          <h3 className="text-lg font-bold mb-4">Rua Carousel Component:</h3>
+          <div className="bg-white border border-gray-200 rounded-lg p-4">
+            <div className="flex gap-4 overflow-x-auto pb-2">
+              {sampleRuas.map((rua) => (
+                <button
+                  key={rua.id}
+                  onClick={() => setSelectedRuaId(rua.id)}
+                  className={`px-4 py-2 rounded whitespace-nowrap transition ${
+                    selectedRuaId === rua.id
+                      ? 'bg-green-500 text-white'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  {rua.nome}
+                </button>
+              ))}
+            </div>
+            <p className="mt-2 text-sm text-gray-600">
+              Selected Rua: {sampleRuas.find(r => r.id === selectedRuaId)?.nome || 'None'}
+            </p>
+          </div>
+        </div>
+      )}
+      
+      {/* Components 20-22 */}
+      {showNotFound && (
+        <div className="mt-6">
+          <h3 className="text-lg font-bold mb-4">NotFound (404) Component:</h3>
+          <div className="bg-white border border-gray-200 rounded-lg p-4">
+            <div className="p-4">
+              <h1 className="text-3xl font-bold text-center">404 - Página Não Encontrada</h1>
+              <p className="text-center">Desculpe, a página que você está procurando não existe.</p>
+              <div className="flex justify-center mt-4">
+                <button className="bg-blue-500 text-white px-4 py-2 rounded-md">
+                  Voltar para Home
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      
+      {showFeedbackPopup && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-6 relative">
+            <button
+              className="absolute top-2 right-2 text-gray-600 hover:text-gray-800"
+              onClick={() => setShowFeedbackPopup(false)}
+            >
+              ×
+            </button>
+            <h3 className="text-xl font-bold mb-4 text-center">Envie seu Feedback</h3>
+            <p className="text-gray-600 text-center mb-4">
+              Estamos em fase inicial da nossa plataforma e sua opinião é muito importante para nós!
+            </p>
+            <div className="mb-4 text-center">
+              <label className="block text-gray-700 text-sm font-bold mb-2">Avaliação:</label>
+              <div className="flex justify-center mb-2">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <button key={star} type="button" className="text-3xl text-gray-300">
+                    ★
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="mb-4">
+              <input
+                className="shadow border rounded w-full py-2 px-3 text-gray-700"
+                placeholder="Seu nome (opcional)"
+              />
+            </div>
+            <div className="mb-4">
+              <textarea
+                className="shadow border rounded w-full py-2 px-3 text-gray-700"
+                rows={3}
+                placeholder="Escreva seu feedback"
+              ></textarea>
+            </div>
+            <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded w-full">
+              Enviar Feedback
+            </button>
+          </div>
+        </div>
+      )}
+      
+      {showHeader && (
+        <div className="mt-6">
+          <h3 className="text-lg font-bold mb-4">Header Component:</h3>
+          <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
+            <header className="flex justify-between items-center p-4 bg-[#E6D3B4]">
+              <div className="flex items-center">
+                <div className="mr-2">
+                  <div className="text-2xl font-bold">HISTORIN</div>
+                </div>
+              </div>
+              <div className="flex items-center space-x-4">
+                <button className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 flex items-center">
+                  <i className="fas fa-question-circle mr-2"></i>
+                  Quiz
+                </button>
+                <button className="text-2xl pr-2 hover:text-blue-600">
+                  <i className="fas fa-share-alt"></i>
+                </button>
+                <button className="text-2xl pr-2 hover:text-blue-600">
+                  <i className="fas fa-comment-dots"></i>
+                </button>
+                <div className="text-2xl cursor-pointer hover:text-blue-600">
+                  <i className="fas fa-bars"></i>
+                </div>
+              </div>
+            </header>
+          </div>
         </div>
       )}
 
