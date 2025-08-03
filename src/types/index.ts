@@ -1,0 +1,86 @@
+// Core data types for the Historin application
+export interface Rua {
+  id: string;
+  nome: string;
+  fotos: string;
+  cidade_id?: string;
+  descricao?: string;
+}
+
+export interface Historia {
+  id: string;
+  rua_id: string;
+  titulo: string;
+  descricao: string;
+  fotos: string[];
+  coordenadas?: [number, number];
+  ano?: string;
+  personagens?: string[];
+  orgId?: string;
+}
+
+export interface Cidade {
+  id: string;
+  nome: string;
+  estado: string;
+  populacao: string;
+}
+
+export interface Organizacao {
+  id: string;
+  nome: string;
+  descricao: string;
+  endereco: string;
+}
+
+export interface Autor {
+  id: string;
+  nome: string;
+  biografia: string;
+  obras: string[];
+}
+
+export interface Obra {
+  id: string;
+  titulo: string;
+  autor: string;
+  ano: string;
+  editora: string;
+  paginas: number;
+}
+
+export interface Site {
+  id: string;
+  nome: string;
+  url: string;
+  descricao: string;
+}
+
+export interface Negocio {
+  id: string;
+  nome: string;
+  endereco: string;
+  telefone?: string;
+  categoria: string;
+}
+
+export interface PreviewContent {
+  type: 'rua' | 'historia';
+  title: string;
+  description: string;
+  images?: string[];
+  ruaId?: string;
+  historiaId?: string;
+}
+
+// Application data structure
+export interface AppData {
+  historias: Historia[];
+  ruas: Rua[];
+  cidades: Cidade[];
+  orgs: Organizacao[];
+  autores: Autor[];
+  obras: Obra[];
+  sites: Site[];
+  negocios: Negocio[];
+}
