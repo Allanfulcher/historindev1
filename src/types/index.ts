@@ -24,6 +24,8 @@ export interface Cidade {
   nome: string;
   estado: string;
   populacao: string;
+  descricao?: string;
+  foto?: string;
 }
 
 export interface Organizacao {

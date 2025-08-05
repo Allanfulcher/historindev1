@@ -1,14 +1,14 @@
 'use client';
 
 import React, { useState } from 'react';
-import OnboardingPopup from './OnboardingPopup';
-import DonationPopup from './DonationPopup';
+import OnboardingPopup from './popups/OnboardingPopup';
+import DonationPopup from './popups/DonationPopup';
 import DataModal from './DataModal';
-import PopupCarrossel from './PopupCarrossel';
-import QuizModal from './QuizModal';
+import PopupCarrossel from './popups/PopupCarrossel';
+import QuizModal from './popups/QuizModal';
 import Menu from './Menu';
 import Link from 'next/link';
-import LegadoAfricanoCard from './LegadoAfricanoCard';
+import LegadoAfricanoCard from './cards/LegadoAfricanoCard';
 import Carousel from './Carousel';
 import MapView from './MapView';
 

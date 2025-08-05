@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import PrimaryBtn from './buttons/PrimaryBtn';
+import TransparentBtn from './buttons/TransparentBtn';
 
 interface HeaderProps {
   setMenuOpen: (open: boolean) => void;
@@ -31,8 +33,6 @@ const Header: React.FC<HeaderProps> = ({ setMenuOpen, setShowFeedback }) => {
     }
   };
 
-  const buttonStyle = 'px-4 py-2 bg-blue-500 text-white rounded-lg cursor-pointer hover:bg-blue-600';
-
   return (
     <header className="flex justify-between items-center p-4 bg-[#E6D3B4]">
       {/* Logo section */}
@@ -40,7 +40,7 @@ const Header: React.FC<HeaderProps> = ({ setMenuOpen, setShowFeedback }) => {
         <Link href="/" className="mr-2">
           <img
             src="fotos/historin-logo.svg"
-            alt="HISTORIN Logo"
+            alt="DEV"
             className="text-2xl font-bold logo"
           />
         </Link>
@@ -49,13 +49,12 @@ const Header: React.FC<HeaderProps> = ({ setMenuOpen, setShowFeedback }) => {
       {/* Buttons section */}
       <div className="flex items-center space-x-4">
         {/* Quiz button */}
-        <button
+        <PrimaryBtn
           onClick={() => setShowQuiz(true)}
-          className={`${buttonStyle} flex items-center`}
         >
           <i className="fas fa-question-circle mr-2" />
           Quiz
-        </button>
+        </PrimaryBtn>
         
         {/* Quiz Modal (conditionally rendered) */}
         {showQuiz && typeof window !== 'undefined' && (window as any).QuizModal && (
@@ -74,30 +73,27 @@ const Header: React.FC<HeaderProps> = ({ setMenuOpen, setShowFeedback }) => {
         )}
         
         {/* Share button */}
-        <button
+        <TransparentBtn
           onClick={handleShare}
           aria-label="Compartilhar"
-          className="text-2xl pr-2 hover:text-blue-600"
         >
           <i className="fas fa-share-alt" />
-        </button>
+        </TransparentBtn>
         
         {/* Feedback button */}
-        <button
+        <TransparentBtn
           onClick={() => setShowFeedback(true)}
           aria-label="Feedback"
-          className="text-2xl pr-2 hover:text-blue-600"
         >
           <i className="fas fa-comment-dots" />
-        </button>
+        </TransparentBtn>
         
         {/* Menu button */}
-        <div
-          className="text-2xl cursor-pointer hover:text-blue-600"
+        <TransparentBtn
           onClick={() => setMenuOpen(true)}
         >
           <i className="fas fa-bars" />
-        </div>
+        </TransparentBtn>
       </div>
     </header>
   );

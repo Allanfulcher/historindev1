@@ -1,0 +1,29 @@
+'use client';
+
+import React from 'react';
+import { Rua } from '../../types';
+
+const StreetCard = ({ ruas, handleRuaClick }: { ruas: Rua[]; handleRuaClick: (rua: Rua) => void }) => {
+return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {ruas.slice(0, 3).map((rua) => (
+      <div
+        key={rua.id}
+        className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-shadow"
+        onClick={() => handleRuaClick(rua)}
+      >
+        <img
+          src={rua.fotos}
+          alt={rua.nome}
+          className="w-full h-48 object-cover"
+        />
+        <div className="p-4">
+          <h3 className="font-semibold text-gray-800 mb-2">{rua.nome}</h3>
+          <p className="text-sm text-gray-600">{rua.descricao}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+) 
+} 
+export default StreetCard;

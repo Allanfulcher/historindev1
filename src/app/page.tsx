@@ -1,129 +1,15 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { AppProviders } from '../contexts/AppContext';
-import dynamic from 'next/dynamic';
-import type { AppData } from '../types';
+import { App } from '../components/App';
+import { sampleData } from '../data/sampleData';
 
-// Dynamically import the App component to avoid SSR issues
-const DynamicApp = dynamic(() => import('../components/App'), {
-  loading: () => (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
-      <div className="text-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mx-auto mb-4"></div>
-        <p className="text-gray-600">Carregando aplicação...</p>
-      </div>
-    </div>
-  ),
-  ssr: false
-});
-
-// Setup global data for components
-const setupGlobalData = () => {
-  // Only run on client side
-  if (typeof window === 'undefined') return;
-  
-  // Sample data for all components
-  const historias = [
-    { 
-      id: '1', 
-      rua_id: '1', 
-      titulo: 'A História da Rua Coberta', 
-      descricao: 'Descubra como surgiu a famosa rua coberta de Gramado e sua importância para o turismo local.',
-      fotos: ['https://placehold.co/400x300'],
-      coordenadas: [-29.3681, -50.8361] as [number, number],
-      ano: '1950',
-      personagens: ['Arquiteto João Silva', 'Prefeito Pedro Santos']
-    },
-    { 
-      id: '2', 
-      rua_id: '2', 
-      titulo: 'Memórias das Hortênsias', 
-      descricao: 'As flores que deram nome à rua e as histórias dos primeiros moradores da região.',
-      fotos: ['https://placehold.co/400x300'],
-      coordenadas: [-29.3700, -50.8380] as [number, number],
-      ano: '1930',
-      personagens: ['Dona Maria Flores', 'Jardineiro José']
-    },
-    { 
-      id: '3', 
-      rua_id: '3', 
-      titulo: 'Borges de Medeiros e Gramado', 
-      descricao: 'A conexão histórica entre o político gaúcho e o desenvolvimento da cidade.',
-      fotos: ['https://placehold.co/400x300'],
-      coordenadas: [-29.3720, -50.8400],
-      ano: '1920',
-      personagens: ['Borges de Medeiros', 'Coronel Diniz']
-    }
-  ];
-
-  const ruas = [
-    { id: '1', nome: 'Rua Coberta', fotos: 'https://placehold.co/300x200', cidade_id: '1', descricao: 'A famosa rua coberta, símbolo de Gramado' },
-    { id: '2', nome: 'Rua das Hortênsias', fotos: 'https://placehold.co/300x200', cidade_id: '1', descricao: 'Rua florida com jardins encantadores' },
-    { id: '3', nome: 'Avenida Borges de Medeiros', fotos: 'https://placehold.co/300x200', cidade_id: '1', descricao: 'Principal avenida da cidade' }
-  ];
-
-  const cidades = [
-    { id: '1', nome: 'Gramado', estado: 'Rio Grande do Sul', populacao: '35.000' },
-    { id: '2', nome: 'Canela', estado: 'Rio Grande do Sul', populacao: '45.000' },
-    { id: '3', nome: 'Nova Petrópolis', estado: 'Rio Grande do Sul', populacao: '22.000' }
-  ];
-
-  const orgs = [
-    { id: '1', nome: 'Arquivo Histórico José Pompeo de Mattos', descricao: 'Principal arquivo histórico da região', endereco: 'Centro, Gramado' },
-    { id: '2', nome: 'Museu do Perfume', descricao: 'Preservação da história olfativa local', endereco: 'Rua Coberta, Gramado' }
-  ];
-
-  const autores = [
-    { id: '1', nome: 'Maria Silva', biografia: 'Historiadora especializada em Gramado', obras: ['História de Gramado'] },
-    { id: '2', nome: 'João Santos', biografia: 'Pesquisador da cultura gaúcha', obras: ['Tradições Gaúchas'] }
-  ];
-
-  const obras = [
-    { id: '1', titulo: 'História de Gramado', autor: 'Maria Silva', ano: '2020', editora: 'Editora Serra', paginas: 320 },
-    { id: '2', titulo: 'Tradições Gaúchas', autor: 'João Santos', ano: '2019', editora: 'Gaúcha Livros', paginas: 280 }
-  ];
-
-  const sites = [
-    { id: '1', nome: 'Portal da Prefeitura', url: 'https://gramado.rs.gov.br', descricao: 'Site oficial da Prefeitura de Gramado' },
-    { id: '2', nome: 'Turismo Gramado', url: 'https://turismo.gramado.rs.gov.br', descricao: 'Portal oficial do turismo' }
-  ];
-
-  const negocios = [
-    { id: '1', nome: 'Hotel Casa da Montanha', rua_id: '1', descricao: 'Hotel histórico desde 1950', categoria: 'Hotelaria' },
-    { id: '2', nome: 'Chocolateria Gramado', rua_id: '2', descricao: 'Tradição em chocolates artesanais', categoria: 'Alimentação' }
-  ];
-
-  // Set up global data on window object for legacy components
-  if (typeof window !== 'undefined') {
-    (window as any).historias = historias;
-    (window as any).ruas = ruas;
-    (window as any).cidades = cidades;
-    (window as any).orgs = orgs;
-    (window as any).autores = autores;
-    (window as any).obras = obras;
-    (window as any).sites = sites;
-    (window as any).negocios = negocios;
-  }
-};
-
-// Simple page component that sets up data and renders the app
-const HistorinPageContent: React.FC = () => {
-
-  useEffect(() => {
-    // Setup global data when component mounts
-    setupGlobalData();
-
-  }, []);
-
-  return <DynamicApp />;
-};
-
-// Main page component using modern React patterns
+// Main page component - clean and simple
 export default function HistorinPage() {
   return (
     <AppProviders>
-      <HistorinPageContent />
+      <App data={sampleData} />
     </AppProviders>
   );
 }

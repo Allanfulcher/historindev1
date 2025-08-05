@@ -235,9 +235,9 @@ const MapView: React.FC<MapViewProps> = ({
   }
 
   return (
-    <div ref={mapContainerRef} className="map-container relative h-96 w-full">
+    <div ref={mapContainerRef} className="map-container relative h-96 w-full z-0">
       {/* Buttons in the top left corner to toggle between street and story markers */}
-      <div className="absolute top-2 left-2 z-50">
+      <div className="absolute top-2 left-2">
         <button
           onClick={() => setSelectedType('ruas')}
           className={`px-4 py-2 ${

@@ -42,9 +42,30 @@ export const sampleData: AppData = {
   ],
 
   cidades: [
-    { id: '1', nome: 'Gramado', estado: 'Rio Grande do Sul', populacao: '35.000' },
-    { id: '2', nome: 'Canela', estado: 'Rio Grande do Sul', populacao: '45.000' },
-    { id: '3', nome: 'Nova Petrópolis', estado: 'Rio Grande do Sul', populacao: '22.000' }
+    { 
+      id: '1', 
+      nome: 'Gramado', 
+      estado: 'Rio Grande do Sul', 
+      populacao: '35.000',
+      descricao: 'Conhecida como a Suíça Brasileira, Gramado é famosa por sua arquitetura europeia, festivais de cinema e chocolate artesanal.',
+      foto: 'https://placehold.co/600x400'
+    },
+    { 
+      id: '2', 
+      nome: 'Canela', 
+      estado: 'Rio Grande do Sul', 
+      populacao: '45.000',
+      descricao: 'Cidade vizinha de Gramado, conhecida pela Catedral de Pedra e pelo Parque do Caracol com sua famosa cascata.',
+      foto: 'https://placehold.co/600x400'
+    },
+    { 
+      id: '3', 
+      nome: 'Nova Petrópolis', 
+      estado: 'Rio Grande do Sul', 
+      populacao: '22.000',
+      descricao: 'Cidade com forte influência alemã, conhecida por suas flores, arquitetura típica e tradições germânicas.',
+      foto: 'https://placehold.co/600x400'
+    }
   ],
 
   orgs: [

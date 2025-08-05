@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
-import LegadoAfricanoCard from './LegadoAfricanoCard';
+import LegadoAfricanoCard from './cards/LegadoAfricanoCard';
 
 interface Rua {
   id: string;
