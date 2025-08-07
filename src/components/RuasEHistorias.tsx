@@ -2,7 +2,14 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { FiArrowLeft } from 'react-icons/fi';
+import Header from './Header';
 import LegadoAfricanoCard from './cards/LegadoAfricanoCard';
+import SearchInput from './SearchInput';
+import ViewMap from './buttons/ViewMap';
+import StreetCard from './cards/StreetCard';
+import HistoryCard from './cards/HistoryCard';
 
 interface Rua {
   id: string;
@@ -52,111 +59,104 @@ const RuasEHistorias: React.FC<RuasEHistoriasProps> = ({
     });
   }, [filteredRuas, historias]);
 
+  const router = useRouter();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [showFeedback, setShowFeedback] = useState(false);
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      // Always show header when at top of page
+      if (currentScrollY === 0) {
+        setIsHeaderVisible(true);
+      } else {
+        // Hide header when scrolling down, show when scrolling up
+        setIsHeaderVisible(currentScrollY < lastScrollY);
+      }
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
+
   return (
-    <div className="p-4 w-full lg:w-4/5 mx-auto">
-      {/* Header and fixed search bar */}
-      <header className="sticky top-0 z-10 bg-white py-4">
-        <div className="flex justify-between items-center mb-4">
-          <div className="text-2xl cursor-pointer">
-            <Link href="/">
-              <i className="fas fa-arrow-left"></i>
-            </Link>
+    <div className="min-h-screen bg-gray-50">
+      <div className={`fixed top-0 left-0 right-0 z-20 transition-transform duration-300 ${
+        isHeaderVisible ? 'translate-y-0' : '-translate-y-full'
+      }`}>
+        <Header 
+          setMenuOpen={setMenuOpen} 
+          setShowFeedback={setShowFeedback} 
+        />
+      </div>
+      
+      {/* Sticky Search Bar */}
+      <div className="fixed top-0 left-0 right-0 z-30 bg-white border-b border-gray-200 shadow-sm transition-transform duration-300"
+           style={{ transform: isHeaderVisible ? 'translateY(64px)' : 'translateY(0)' }}>
+        <div className="max-w-4xl mx-auto px-4 py-3">
+          <div className="flex items-center gap-3">
+            <button 
+              onClick={() => router.back()}
+              className="p-1.5 rounded-full hover:bg-gray-100 transition-colors"
+              aria-label="Voltar"
+            >
+              <FiArrowLeft className="w-5 h-5 text-gray-600" />
+            </button>
+            <div className="flex-1">
+              <SearchInput />
+            </div>
           </div>
-          <h1 className="text-lg font-bold">Ruas e Histórias</h1>
-          <div className="w-10 h-10"></div>
+        </div>
+      </div>
+      
+      <main className="max-w-4xl mx-auto px-4 pb-4">
+        {/* Spacer to push content below fixed search bar */}
+        <div className="h-35">
+          
         </div>
         
-        {/* Enhanced Search Field */}
-        <div className="relative mb-4">
-          <input
-            type="text"
-            placeholder="Buscar..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-[#8A5A44]"
-          />
-          <i className="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+        <div className="mb-3">
+          <h1 className="text-xl font-bold text-gray-900 mb-4 pt-4">Ruas e Histórias</h1>
+          <ViewMap />
         </div>
-      </header>
 
-      {/* View Map Button */}
-      <div className="mb-4">
-        <Link href="/">
-          <button className="w-full p-4 rounded-lg bg-[#8A5A44] text-white font-semibold flex items-center justify-center hover:bg-[#5a3e2e] transition-colors duration-200">
-            <i className="fas fa-map-marker-alt mr-2"></i> Ver Mapa
-          </button>
-        </Link>
-      </div>
+        {/* All Streets Section */}
+        <section className="mb-10">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-semibold text-gray-900">Todas as Ruas</h2>
+          </div>
+          {filteredRuasWithImages.length > 0 ? (
+            <StreetCard ruas={filteredRuasWithImages} handleRuaClick={(rua) => console.log(rua)} />
+          ) : (
+            <div className="text-center py-8">
+              <p className="text-gray-500">Nenhuma rua encontrada para "{searchTerm}"</p>
+            </div>
+          )}
+        </section>
 
-      {/* Highlight Section */}
-      <section className="mb-6">
-        <h2 className="text-lg font-semibold mb-4">Destaque</h2>
-        <LegadoAfricanoCard />
-      </section>
-
-      {/* All Streets Section */}
-      <div className="mb-6">
-        <h2 className="text-lg font-semibold mb-2">Todas as Ruas</h2>
-        {filteredRuasWithImages.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {filteredRuasWithImages.map(rua => (
-              <Link
-                key={rua.id}
-                href={`/rua/${rua.id}`}
-                className="bg-white p-2 rounded-lg shadow cursor-pointer block hover:shadow-lg transition-shadow duration-300"
-              >
-                <img 
-                  src={rua.fotos} 
-                  alt={rua.nome} 
-                  className="rounded-lg mb-2 w-full h-40 object-cover" 
-                />
-                <h3 className="font-semibold">{rua.nome}</h3>
-              </Link>
-            ))}
+        {/* All Stories Section */}
+        <section className="mb-6">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-semibold text-gray-900">Todas as Histórias</h2>
           </div>
-        ) : (
-          <div className="text-center py-8 text-gray-500">
-            <p>Nenhuma rua encontrada para "{searchTerm}"</p>
-          </div>
-        )}
-      </div>
-
-      {/* All Stories Section */}
-      <div className="mt-6">
-        <h2 className="text-lg font-semibold mb-2">Todas as Histórias</h2>
-        {filteredHistorias.length > 0 ? (
-          <div className="space-y-2">
-            {filteredHistorias.map(historia => (
-              <Link
-                key={historia.id}
-                href={`/rua/${historia.rua_id}/historia/${historia.id}`}
-                className="bg-white p-2 rounded-lg shadow mb-2 flex items-center cursor-pointer block hover:shadow-lg transition-shadow duration-300"
-              >
-                <img 
-                  src={historia.fotos[0] || 'https://placehold.co/100x100'} 
-                  alt={historia.titulo} 
-                  className="rounded-lg mr-2 w-24 h-24 object-cover flex-shrink-0" 
-                />
-                <div className="flex-grow">
-                  <h3 className="font-semibold">{historia.titulo}</h3>
-                  <p className="text-sm text-gray-600">
-                    {historia.descricao.length > 60 
-                      ? `${historia.descricao.slice(0, 60)}...` 
-                      : historia.descricao
-                    }
-                  </p>
-                </div>
-              </Link>
-            ))}
-          </div>
-        ) : (
-          <div className="text-center py-8 text-gray-500">
-            <p>Nenhuma história encontrada para "{searchTerm}"</p>
-          </div>
-        )}
-      </div>
+          {filteredHistorias.length > 0 ? (
+            <HistoryCard historias={filteredHistorias} />
+          ) : (
+            <div className="text-center py-8">
+              <p className="text-gray-500">Nenhuma história encontrada para "{searchTerm}"</p>
+            </div>
+          )}
+        </section>
+      </main>
     </div>
   );
 };
 
+// Add display name for better debugging
+RuasEHistorias.displayName = 'RuasEHistorias';
+
 export default RuasEHistorias;
+
