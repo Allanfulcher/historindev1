@@ -1,11 +1,10 @@
 'use client';
 
 import React, { useState, useEffect, useMemo } from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { FiArrowLeft } from 'react-icons/fi';
 import Header from './Header';
-import LegadoAfricanoCard from './cards/LegadoAfricanoCard';
+import Menu from './Menu';
 import SearchInput from './SearchInput';
 import ViewMap from './buttons/ViewMap';
 import StreetCard from './cards/StreetCard';
@@ -34,10 +33,18 @@ const RuasEHistorias: React.FC<RuasEHistoriasProps> = ({
   ruas = [], 
   historias = [] 
 }) => {
+  // Router and state management
+  const router = useRouter();
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredRuas, setFilteredRuas] = useState<Rua[]>(ruas);
   const [filteredHistorias, setFilteredHistorias] = useState<Historia[]>(historias);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [showFeedback, setShowFeedback] = useState(false);
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [showMap, setShowMap] = useState(true); // For the Menu component
 
+  // Filter ruas and historias based on search term
   useEffect(() => {
     if (searchTerm === '') {
       setFilteredRuas(ruas);
@@ -59,12 +66,6 @@ const RuasEHistorias: React.FC<RuasEHistoriasProps> = ({
     });
   }, [filteredRuas, historias]);
 
-  const router = useRouter();
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [showFeedback, setShowFeedback] = useState(false);
-  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
-
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -83,18 +84,27 @@ const RuasEHistorias: React.FC<RuasEHistoriasProps> = ({
   }, [lastScrollY]);
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className={`fixed top-0 left-0 right-0 z-20 transition-transform duration-300 ${
+    <div className="min-h-screen bg-gray-50 relative">
+      {/* Header */}
+      <div className={`fixed top-0 left-0 right-0 z-40 transition-transform duration-300 ${
         isHeaderVisible ? 'translate-y-0' : '-translate-y-full'
       }`}>
         <Header 
-          setMenuOpen={setMenuOpen} 
+          setMenuOpen={() => setMenuOpen(true)} 
           setShowFeedback={setShowFeedback} 
         />
       </div>
       
+      {/* Menu Component - Placed outside the header at the root level */}
+      <Menu 
+        menuOpen={menuOpen}
+        setMenuOpen={setMenuOpen}
+        setShowMap={setShowMap}
+        historias={historias}
+      />
+      
       {/* Sticky Search Bar */}
-      <div className="fixed top-0 left-0 right-0 z-30 bg-white border-b border-gray-200 shadow-sm transition-transform duration-300"
+      <div className="fixed top-0 left-0 right-0 z-40 bg-white border-b border-gray-200 shadow-sm transition-transform duration-300"
            style={{ transform: isHeaderVisible ? 'translateY(64px)' : 'translateY(0)' }}>
         <div className="max-w-4xl mx-auto px-4 py-3">
           <div className="flex items-center gap-3">

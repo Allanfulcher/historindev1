@@ -63,16 +63,18 @@ const Menu: React.FC<MenuProps> = ({
   return (
     <>
       {/* Menu Overlay */}
+      {/* Overlay with high z-index */}
       <div
-        className={`fixed inset-0 bg-black z-40 transition-opacity duration-300 ${
+        className={`fixed inset-0 bg-black transition-opacity duration-300 z-[9998] ${
           menuOpen ? 'opacity-40 visible' : 'opacity-0 invisible'
         }`}
         onClick={() => setMenuOpen(false)}
       />
 
       {/* Navigation Menu */}
+      {/* Menu with highest z-index */}
       <nav
-        className={`fixed top-0 right-0 h-full w-80 bg-amber-50 shadow-lg z-50 transform transition-transform duration-300 ease-in-out flex flex-col border-l border-amber-200 ${
+        className={`fixed top-0 right-0 h-full w-80 bg-amber-50 shadow-lg z-[9999] transform transition-transform duration-300 ease-in-out flex flex-col border-l border-amber-200 ${
           menuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
         style={{
