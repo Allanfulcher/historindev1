@@ -1,7 +1,7 @@
 // Sample data for development and testing
 import { AppData } from '../types';
 
-export const sampleData: AppData = {
+export const sampleData: AppData & { orgs: any[], autores: any[], obras: any[], sites: any[] } = {
   historias: [
     { 
       id: '1', 
@@ -69,23 +69,99 @@ export const sampleData: AppData = {
   ],
 
   orgs: [
-    { id: '1', nome: 'Arquivo Histórico José Pompeo de Mattos', descricao: 'Principal arquivo histórico da região', endereco: 'Centro, Gramado' },
-    { id: '2', nome: 'Museu do Perfume', descricao: 'Preservação da história olfativa local', endereco: 'Rua Coberta, Gramado' }
+    {
+      id: '1',
+      fantasia: 'Arquivo Histórico José Pompeo de Mattos',
+      logo: 'https://placehold.co/200x100?text=Arquivo',
+      descricao: 'Principal arquivo histórico da região, guardando documentos importantes da história de Gramado.',
+      link: 'https://arquivohistorico.gramado.rs.gov.br'
+    },
+    {
+      id: '2',
+      fantasia: 'Museu do Perfume',
+      logo: 'https://placehold.co/200x100?text=Museu',
+      descricao: 'Preservação da história olfativa local e mundial.',
+      link: 'https://museudoperfume.com.br'
+    },
+    {
+      id: '3',
+      fantasia: 'Instituto Histórico de Gramado',
+      logo: 'https://placehold.co/200x100?text=IHG',
+      descricao: 'Dedicado à preservação e divulgação da história de Gramado e região.',
+      link: 'https://institutohistorico.gramado.rs.gov.br'
+    }
   ],
 
   autores: [
-    { id: '1', nome: 'Maria Silva', biografia: 'Historiadora especializada em Gramado', obras: ['História de Gramado'] },
-    { id: '2', nome: 'João Santos', biografia: 'Pesquisador da cultura gaúcha', obras: ['Tradições Gaúchas'] }
+    {
+      id: '1',
+      nome: 'Maria Silva',
+      foto: 'https://placehold.co/300x300?text=Maria',
+      descricao: 'Historiadora especializada em Gramado, autora de diversas obras sobre a região.',
+      link: '#'
+    },
+    {
+      id: '2',
+      nome: 'João Santos',
+      foto: 'https://placehold.co/300x300?text=Joao',
+      descricao: 'Pesquisador da cultura gaúcha e escritor premiado.',
+      link: '#'
+    },
+    {
+      id: '3',
+      nome: 'Ana Beatriz Rocha',
+      foto: 'https://placehold.co/300x300?text=Ana',
+      descricao: 'Pesquisadora da cultura e tradições dos imigrantes na região de Gramado.',
+      link: '#'
+    }
   ],
 
   obras: [
-    { id: '1', titulo: 'História de Gramado', autor: 'Maria Silva', ano: '2020', editora: 'Editora Serra', paginas: 320 },
-    { id: '2', titulo: 'Tradições Gaúchas', autor: 'João Santos', ano: '2019', editora: 'Gaúcha Livros', paginas: 280 }
+    {
+      id: '1',
+      titulo: 'História de Gramado',
+      capa: 'https://placehold.co/400x600?text=História+de+Gramado',
+      descricao: 'Uma obra abrangente sobre a história da cidade, desde sua fundação até os dias atuais.',
+      link: '#',
+      pago: false
+    },
+    {
+      id: '2',
+      titulo: 'Tradições Gaúchas',
+      capa: 'https://placehold.co/400x600?text=Tradições+Gaúchas',
+      descricao: 'Um estudo aprofundado sobre as tradições e cultura do povo gaúcho.',
+      link: '#',
+      pago: true
+    },
+    {
+      id: '3',
+      titulo: 'Arquitetura de Gramado',
+      capa: 'https://placehold.co/400x600?text=Arquitetura',
+      descricao: 'Estudo sobre a evolução arquitetônica da cidade ao longo dos anos.',
+      link: '#',
+      pago: false
+    }
   ],
 
   sites: [
-    { id: '1', nome: 'Portal da Prefeitura', url: 'https://gramado.rs.gov.br', descricao: 'Site oficial da Prefeitura de Gramado' },
-    { id: '2', nome: 'Gramado Turismo', url: 'https://gramadoturismo.com.br', descricao: 'Portal oficial de turismo' }
+    {
+      id: '1',
+      nome: 'Portal da Prefeitura',
+      logo: 'https://placehold.co/200x80?text=Prefeitura',
+      link: 'https://gramado.rs.gov.br'
+    },
+    {
+      id: '2',
+      nome: 'Gramado Turismo',
+      logo: 'https://placehold.co/200x80?text=Turismo',
+      link: 'https://gramadoturismo.com.br'
+    },
+    {
+      id: '3',
+      nome: 'Memória Viva Gramado',
+      logo: 'https://placehold.co/200x80?text=Memória',
+      link: 'https://memoriaviva.gramado.rs.gov.br'
+    }
   ],
 
   negocios: [

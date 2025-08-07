@@ -1,5 +1,7 @@
 import { Metadata } from 'next';
-import AdicionarHistoria from '../../components/AdicionarHistoria';
+import AdicionarHistoria from '../../components/adicionar-historia/AdicionarHistoria';
+import Header from '../../components/Header';
+import Menu from '../../components/Menu';
 
 export const metadata: Metadata = {
   title: 'Compartilhe seu acervo - Historin',
@@ -7,5 +9,9 @@ export const metadata: Metadata = {
 };
 
 export default function AdicionarHistoriaPage() {
-  return <AdicionarHistoria />;
+  return (
+    <>
+      <AdicionarHistoria />
+    </>
+  );
 }

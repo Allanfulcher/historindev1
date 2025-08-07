@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 
-import Referencias from "../../components/Referencias";
+import Referencias from "../../components/referencias/Referencias";
 
 export const metadata: Metadata = {
     title: 'Referências - Historin',

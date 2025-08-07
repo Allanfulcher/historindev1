@@ -1,83 +1,32 @@
 'use client';
 
-import React, { useState } from 'react';
-import Link from 'next/link';
+import { useState } from 'react';
 
 interface FormData {
-  nome: string;
-  telefone: string;
-  local: string;
-  historia: string;
+    nome: string;
+    telefone: string;
+    local: string;
+    historia: string;
 }
 
-const AdicionarHistoria: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({
-    nome: '',
-    telefone: '',
-    local: '',
-    historia: ''
-  });
+const AddForm: React.FC = () => {
+    const [formData, setFormData] = useState<FormData>({
+        nome: '',
+        telefone: '',
+        local: '',
+        historia: ''
+    });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { id, value } = e.target;
-    setFormData({ ...formData, [id]: value });
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const formspreeEndpoint = "https://formspree.io/f/meojbabr";
-
-    const data = {
-      nome: formData.nome,
-      telefone: formData.telefone,
-      local: formData.local,
-      historia: formData.historia
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { id, value } = e.target;
+        setFormData({ ...formData, [id]: value });
     };
 
-    try {
-      const response = await fetch(formspreeEndpoint, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      });
-
-      if (response.ok) {
-        alert('História enviada com sucesso! Entraremos em contato para captar os materiais que serão postados no seu nome.');
-        setFormData({
-          nome: '',
-          telefone: '',
-          local: '',
-          historia: ''
-        });
-      } else {
-        alert('Houve um problema ao enviar sua história. Por favor, tente novamente.');
-      }
-    } catch (error) {
-      console.error('Erro:', error);
-      alert('Houve um erro ao enviar sua história. Por favor, tente novamente.');
-    }
-  };
-
-  return (
-    <div className="p-4">
-      <header className="flex justify-between items-center mb-4">
-        <div className="text-2xl cursor-pointer">
-          <Link href="/">
-            <i className="fas fa-arrow-left"></i>
-          </Link>
-        </div>
-        <h1 className="text-lg font-bold">Compartilhe seu acervo</h1>
-        <div className="w-10 h-10"></div>
-      </header>
-      
-      <div className="bg-[#f5f0e1] p-4 rounded-lg shadow-md max-w-lg mx-auto">
-        <p className="mb-4 text-gray-700">
-          Dependemos de pessoas como você para aumentar nosso acervo. Vamos até o local para captar uma série de fotos ou até mesmo apenas uma história que você queira compartilhar.
-        </p>
-        
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        console.log(formData);
+    };
+    return (
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="nome">
@@ -155,9 +104,7 @@ const AdicionarHistoria: React.FC = () => {
             </button>
           </div>
         </form>
-      </div>
-    </div>
-  );
+    );
 };
 
-export default AdicionarHistoria;
+export default AddForm;
