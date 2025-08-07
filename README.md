@@ -1,6 +1,6 @@
 Historin Dev
 
-- [ ] Migrar Pagina de ruas e historias
+- [x] Migrar Pagina de ruas e historias
 - [ ] Migrar Pagina Referencias
 - [ ] Migrar Pagina Legado Africano
 - [ ] Atualizar paginas para terem o mesmo conteudo que o site atual
