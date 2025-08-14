@@ -3,6 +3,10 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
+import Contribuir from './contribuir';
+import Menu from '../Menu';
+import Header from '../Header';
+import DropDown from '../buttons/DropDown';
 
 interface TeamMember {
   name: string;
@@ -11,6 +15,7 @@ interface TeamMember {
 }
 
 const Sobre: React.FC = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
   const [showJoinModal, setShowJoinModal] = useState(false);
   const searchParams = useSearchParams();
@@ -73,176 +78,127 @@ const Sobre: React.FC = () => {
     }
   };
 
+  // Smooth scroll to top on mount
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
   return (
-    <div className="p-4 w-full lg:w-4/5 mx-auto">
+    <div className="min-h-screen bg-gray-50 text-gray-900">
       {/* Header */}
-      <header className="flex justify-between items-center mb-4">
-        <div className="text-2xl cursor-pointer">
-          <Link href="/">
-            <i className="fas fa-arrow-left"></i>
-          </Link>
-        </div>
-        <h1 className="text-lg font-bold">Sobre Nós</h1>
-        <div className="w-10 h-10"></div>
-      </header>
+      <Header 
+        setMenuOpen={() => setMenuOpen(true)} 
+        setShowFeedback={() => {}} 
+      />
+      <Menu 
+        menuOpen={menuOpen} 
+        setMenuOpen={setMenuOpen} 
+      />
+      
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <header className="mb-8">
+          <nav className="flex items-center">
+            <Link href="/" className="p-2 -ml-2 rounded-full hover:bg-gray-100 transition-colors duration-200">
+              <i className="fas fa-arrow-left text-xl text-gray-600"></i>
+            </Link>
+            <h1 className="text-2xl font-bold ml-4">Sobre Nós</h1>
+          </nav>
+        </header>
 
       {/* About Us Section */}
-      <section className="mb-6">
-        <h2 className="text-center text-2xl font-bold mb-4">Sobre Nós</h2>
-        <p className="text-justify">
+      <section className="mb-8 bg-white rounded-xl shadow-sm p-6">
+        <h2 className="text-xl font-semibold mb-4 text-gray-800">Sobre o Historin</h2>
+        <p className="text-gray-700 leading-relaxed">
           O Historin nasceu da paixão pela história, pela inovação e pelo desejo de conectar passado e presente de maneira interativa. Somos um projeto incubado na Secretaria de Cultura de Gramado, desenvolvido para preservar as memórias da cidade através de uma plataforma acessível e inovadora.
         </p>
       </section>
 
       {/* YouTube Video Section */}
-      <section className="mb-6">
-        <div className="video-container mb-4">
+      <section className="mb-10">
+        <div className="relative w-full" style={{ paddingBottom: '56.25%' }}> {/* 16:9 Aspect Ratio */}
           <iframe
-            width="100%"
-            height="215"
+            className="absolute top-0 left-0 w-full h-full rounded-lg shadow-sm"
             src="https://www.youtube.com/embed/1_oyH5Af9fk"
-            title="YouTube video player"
-            frameBorder="0"
+            title="Conheça o Historin"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-            className="rounded-lg shadow-md"
           ></iframe>
         </div>
       </section>
 
       {/* Who We Are Section */}
-      <section className="mb-6">
-        <h2 className="text-center text-2xl font-bold mb-4">Quem Somos</h2>
-        <p className="text-justify mb-4">
+      <section className="mb-10 bg-white rounded-xl shadow-sm p-6">
+        <h2 className="text-2xl font-bold mb-6 text-gray-800">Quem Somos</h2>
+        <p className="text-gray-700 leading-relaxed mb-6">
           Allan Fulcher e Mateus Canova, dois empreendedores apaixonados por tecnologia, inovação e desenvolvimento local, são os responsáveis pela criação do Historin.
         </p>
-      </section>
 
-      {/* Creation and Curation Section */}
-      <section className="mb-6">
-        <h3 className="text-center text-xl font-bold mb-4">Criação e Curadoria</h3>
-        <div className="space-y-2">
+      {/* Team Members */}
+      <div className="space-y-4">
+        <h3 className="text-xl font-semibold mb-6 text-gray-800">Nossa Equipe</h3>
+        <div className="space-y-4">
           {teamMembers.map((member, index) => (
-            <button
-              key={index}
-              className={`w-full py-2 px-4 rounded-full focus:outline-none flex justify-between items-center transition-colors duration-300 ${
-                selectedMember === member ? 'bg-[#8A5A44] text-white' : 'bg-gray-200 text-black'
-              }`}
-              onClick={() => setSelectedMember(selectedMember === member ? null : member)}
-            >
-              <span>{member.name}</span>
-              <i
-                className={`fas ${
-                  selectedMember === member ? 'fa-chevron-up' : 'fa-chevron-down'
-                } transition-transform duration-300`}
-              ></i>
-            </button>
+            <DropDown
+              key={member.name}
+              title={
+                <div className="flex items-center justify-between w-full">
+                  <div className="flex-1">
+                    <div className="font-medium text-gray-900">{member.name}</div>
+                    <div className="text-sm text-amber-600">{member.role}</div>
+                  </div>
+                </div>
+              }
+              items={[member]}
+              itemKey="name"
+              renderItem={(item) => (
+                <div className="pt-3 mt-2 border-t border-gray-100">
+                  <p className="text-gray-700 leading-relaxed">{item.description}</p>
+                </div>
+              )}
+              buttonClassName="w-full p-4 bg-white hover:bg-gray-50 rounded-lg transition-colors duration-200 text-left flex items-center justify-between"
+              contentClassName="px-4 pb-4 -mt-2"
+            />
           ))}
         </div>
-        {/* Display selected member description */}
-        {selectedMember && (
-          <div className="mt-4 border border-black p-4 rounded-md bg-[#f5f1e8]">
-            <h4 className="text-xl font-bold mb-2">{selectedMember.name}</h4>
-            <p className="text-sm text-gray-600 mb-2">{selectedMember.role}</p>
-            <p>{selectedMember.description}</p>
-          </div>
-        )}
+      </div>
       </section>
 
       {/* We Need Help / Sign Up Section */}
-      <section className="mb-6">
-        <h3 className="text-center text-xl font-bold mb-4">Precisamos de Ajuda</h3>
-        <p className="text-center text-gray-700 mb-4">
-          Estamos sempre em busca de pessoas apaixonadas por história, tecnologia e inovação para se juntarem ao nosso time. Se você deseja contribuir com o Historin, inscreva-se abaixo!
-        </p>
-        <div className="flex justify-center">
+      <section className="mb-10 bg-gradient-to-r from-amber-50 to-amber-50 rounded-xl p-6 shadow-sm">
+        <div className="text-center">
+          <h3 className="text-xl font-semibold mb-3 text-gray-800">Faça parte do Historin</h3>
+          <p className="text-gray-700 mb-6 max-w-2xl mx-auto">
+            Estamos sempre em busca de pessoas apaixonadas por história, tecnologia e inovação para se juntarem ao nosso time. Se você deseja contribuir com o Historin, inscreva-se abaixo!
+          </p>
           <button
             onClick={() => setShowJoinModal(true)}
-            className="bg-[#8A5A44] text-white px-6 py-3 rounded-md hover:bg-[#5a3e2e] transition"
+            className="bg-amber-600 hover:bg-amber-700 text-white font-medium px-6 py-3 rounded-lg transition-colors duration-200 shadow-sm hover:shadow"
           >
-            Cadastre-se
+            Quero contribuir
           </button>
         </div>
       </section>
 
       {/* Join Modal */}
       {showJoinModal && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div
-            className="bg-white rounded-lg shadow-lg w-full max-w-md p-6 relative"
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50 backdrop-blur-sm">
+          <div 
+            className="relative w-full max-w-2xl bg-white rounded-2xl shadow-xl overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Close Button */}
-            <button
-              className="absolute top-2 right-2 text-gray-600 hover:text-gray-800"
-              onClick={() => setShowJoinModal(false)}
-              aria-label="Fechar formulário"
-            >
-              <i className="fas fa-times text-xl"></i>
-            </button>
-            <h3 className="text-xl font-bold mb-4 text-center">Junte-se ao Historin</h3>
-            <form onSubmit={handleJoinSubmit}>
-              <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="nome">
-                  Nome:
-                </label>
-                <input
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id="nome"
-                  type="text"
-                  name="nome"
-                  placeholder="Seu nome"
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-                  E-mail:
-                </label>
-                <input
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id="email"
-                  type="email"
-                  name="email"
-                  placeholder="Seu e-mail"
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="cargo">
-                  Cargo de Interesse:
-                </label>
-                <input
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id="cargo"
-                  type="text"
-                  name="cargo"
-                  placeholder="Qual posição você deseja ocupar?"
-                  required
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="mensagem">
-                  Mensagem:
-                </label>
-                <textarea
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id="mensagem"
-                  name="mensagem"
-                  rows={4}
-                  placeholder="Por que você quer se juntar ao Historin?"
-                  required
-                ></textarea>
-              </div>
-              <div className="flex items-center justify-center">
-                <button
-                  type="submit"
-                  className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                >
-                  Enviar
-                </button>
-              </div>
-            </form>
+            <div className="sticky top-0 z-10 flex items-center justify-between p-4 bg-white border-b border-gray-100">
+              <h3 className="text-xl font-semibold text-gray-900">Junte-se ao Historin</h3>
+              <button
+                onClick={() => setShowJoinModal(false)}
+                className="p-2 -mr-2 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500"
+                aria-label="Fechar formulário"
+              >
+                <i className="w-5 h-5 fas fa-times"></i>
+              </button>
+            </div>
+            <div className="max-h-[80vh] overflow-y-auto p-6">
+              <Contribuir />
+            </div>
           </div>
         </div>
       )}
@@ -359,7 +315,7 @@ const Sobre: React.FC = () => {
         </div>
       </section>
     </div>
+    </div>
   );
 };
-
 export default Sobre;

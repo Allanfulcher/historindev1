@@ -14,6 +14,7 @@ interface FormData {
 }
 
 const AdicionarHistoria: React.FC = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     nome: '',
     telefone: '',
@@ -66,8 +67,14 @@ const AdicionarHistoria: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header setMenuOpen={() => {}} setShowFeedback={() => {}} />
-      <Menu menuOpen={false} setMenuOpen={() => {}} />
+      <Header 
+        setMenuOpen={() => setMenuOpen(true)} 
+        setShowFeedback={() => {}} 
+      />
+      <Menu 
+        menuOpen={menuOpen} 
+        setMenuOpen={setMenuOpen} 
+      />
       
       <div className="max-w-3xl mx-auto px-4 py-8">
         {/* Header with back button and title */}

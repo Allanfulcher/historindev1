@@ -3,7 +3,7 @@
 import { ReactNode, useState } from 'react';
 
 interface DropDownProps<T> {
-  title: string;
+  title: ReactNode;
   items: T[];
   itemKey: keyof T | ((item: T) => string | number);
   renderItem: (item: T) => ReactNode;
