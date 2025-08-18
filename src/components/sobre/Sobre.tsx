@@ -230,7 +230,7 @@ const Sobre: React.FC = () => {
         <div className="grid grid-cols-2 gap-4 mb-4">
           <div className="text-center">
             <img
-              src="https://gramado.atende.net/static/portal/img/2024/08/30/img_79375C9ED9F9C9774D60D45812CF5EEEEBDB33F1.png"
+              src="images/orgs/prefeituragramado.png"
               alt="Prefeitura de Gramado"
               className="mx-auto mb-1 h-12 w-auto"
             />
@@ -248,7 +248,7 @@ const Sobre: React.FC = () => {
 
           <div className="text-center">
             <img
-              src="fotos/orgs/logo-mundo-vapor.png"
+              src="images/orgs/logo-mundo-vapor.png"
               alt="Mundo a Vapor"
               className="mx-auto mb-1 h-12 w-auto"
             />
