@@ -9,53 +9,18 @@ import Menu from '../Menu';
 import TitleSubtitle from '../text/TitleSubtitle';
 import Paragraph from '../text/Paragraph';
 import DropDown from '../buttons/DropDown';
-import { sampleData } from '../../data/sampleData';
-
-// Type definitions for the data structures
-interface Org {
-  id: string;
-  fantasia: string;
-  logo: string;
-  descricao: string;
-  link: string;
-}
-
-interface Autor {
-  id: string;
-  nome: string;
-  foto: string;
-  descricao: string;
-  link: string;
-}
-
-interface Obra {
-  id: string;
-  titulo: string;
-  capa: string;
-  descricao: string;
-  link: string;
-  pago: boolean;
-}
-
-interface Site {
-  id: string;
-  nome: string;
-  logo: string;
-  link: string;
-}
+import { useLegacyData } from '../../hooks/useLegacyData';
+import { Organizacao, Autor, Obra, Site } from '../../types';
 
 type SectionType = 'orgs' | 'autores' | 'obras' | 'sites' | null;
 
 const Referencias: React.FC = () => {
   const [activeSection, setActiveSection] = useState<SectionType>(null);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [data, setData] = useState({
-    orgs: sampleData.orgs,
-    autores: sampleData.autores,
-    obras: sampleData.obras,
-    sites: sampleData.sites
-  });
   const [showFeedback, setShowFeedback] = useState(false);
+  
+  // Use legacy data hook
+  const { data } = useLegacyData();
   const searchParams = useSearchParams();
 
   useEffect(() => {
@@ -95,7 +60,7 @@ const Referencias: React.FC = () => {
               title="Organizações"
               items={data.orgs}
               itemKey="id"
-              renderItem={(org: Org) => (
+              renderItem={(org: Organizacao) => (
                 <a 
                   href={org.link} 
                   target="_blank" 
@@ -113,7 +78,7 @@ const Referencias: React.FC = () => {
                     <h3 className="text-lg font-bold text-center text-[#6B5B4F] group-hover:text-[#A0522D] transition-colors">
                       {org.fantasia}
                     </h3>
-                    <p className="text-[#A0958A] mt-3 text-sm text-center flex-grow">{org.descricao}</p>
+                    <p className="text-[#A0958A] mt-3 text-sm text-center flex-grow">{org.sobre}</p>
                     <div className="mt-4 flex justify-center">
                       <span className="inline-flex items-center px-4 py-2 bg-[#F5F1EB] text-[#6B5B4F] rounded-md text-sm font-medium hover:bg-[#CD853F] hover:text-white transition-colors">
                         Visitar site
@@ -132,28 +97,38 @@ const Referencias: React.FC = () => {
               title="Autores"
               items={data.autores}
               itemKey="id"
-              renderItem={(autor: Autor) => (
-                <a 
-                  href={autor.link} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="block group"
-                >
+              renderItem={(autor: Autor) => {
+                const content = (
                   <div className="bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 h-full flex flex-col border border-gray-100">
                     <div className="flex-grow flex items-center justify-center mb-4 h-32">
                       <img
                         src={autor.foto}
-                        alt={`Foto de ${autor.nome}`}
+                        alt={`${autor.nome} foto`}
                         className="h-32 w-32 rounded-full object-cover border-2 border-[#F5F1EB]"
                       />
                     </div>
                     <h3 className="text-lg font-bold text-center text-[#6B5B4F] group-hover:text-[#A0522D] transition-colors">
                       {autor.nome}
                     </h3>
-                    <p className="text-[#A0958A] mt-3 text-sm text-center flex-grow">{autor.descricao}</p>
+                    <p className="text-[#A0958A] mt-3 text-sm text-center flex-grow">{autor.bio}</p>
                   </div>
-                </a>
-              )}
+                );
+                
+                return autor.link ? (
+                  <a 
+                    href={autor.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="block group"
+                  >
+                    {content}
+                  </a>
+                ) : (
+                  <div className="block">
+                    {content}
+                  </div>
+                );
+              }}
             />
 
             {/* Works Section */}

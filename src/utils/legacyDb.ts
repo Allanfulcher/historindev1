@@ -60,12 +60,12 @@ interface LegacyHistoria {
   id: number;
   rua_id: number;
   criador?: string;
-  fotos: string[] | Array<{ url: string; credito: string }>;
+  fotos: string[] | Array<{ url: string; credito?: string | null }>;
   titulo: string;
   descricao: string;
   ano: number;
-  coordenadas: number[] | [number, number];
-  orgId?: number;
+  coordenadas: number[] | [number, number] | null;
+  orgId?: number | null;
 }
 
 interface LegacyRua {
@@ -167,9 +167,12 @@ export function normalizeCidade(legacyCidade: LegacyCidade): Cidade {
 export function normalizeOrganizacao(legacyOrg: LegacyOrg): Organizacao {
   return {
     id: legacyOrg.id.toString(),
-    nome: legacyOrg.fantasia,
-    descricao: legacyOrg.sobre,
-    endereco: 'Gramado, RS' // Default address
+    fantasia: legacyOrg.fantasia,
+    link: legacyOrg.link,
+    logo: legacyOrg.logo,
+    cor: legacyOrg.cor,
+    sobre: legacyOrg.sobre,
+    foto: legacyOrg.foto
   };
 }
 
@@ -192,8 +195,10 @@ export function normalizeAutor(legacyAutor: LegacyAutor): Autor {
   return {
     id: legacyAutor.id.toString(),
     nome: legacyAutor.nome,
-    biografia: legacyAutor.bio,
-    obras: legacyAutor.obras.map(id => id.toString())
+    bio: legacyAutor.bio,
+    obras: legacyAutor.obras,
+    foto: legacyAutor.foto,
+    link: undefined // Legacy data doesn't have links for authors
   };
 }
 
@@ -204,10 +209,11 @@ export function normalizeObra(legacyObra: LegacyObra): Obra {
   return {
     id: legacyObra.id.toString(),
     titulo: legacyObra.titulo,
-    autor: legacyObra.autorId.toString(),
-    ano: '2024', // Default year
-    editora: 'Editora Local',
-    paginas: 100 // Default pages
+    descricao: legacyObra.descricao,
+    capa: legacyObra.capa,
+    pago: legacyObra.pago,
+    autorId: legacyObra.autorId,
+    link: legacyObra.link
   };
 }
 
@@ -218,8 +224,8 @@ export function normalizeSite(legacySite: LegacySite): Site {
   return {
     id: legacySite.id.toString(),
     nome: legacySite.nome,
-    url: legacySite.link,
-    descricao: `Site oficial: ${legacySite.nome}`
+    link: legacySite.link,
+    logo: legacySite.logo
   };
 }
 

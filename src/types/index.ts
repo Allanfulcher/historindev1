@@ -30,32 +30,38 @@ export interface Cidade {
 
 export interface Organizacao {
   id: string;
-  nome: string;
-  descricao: string;
-  endereco: string;
+  fantasia: string;
+  link: string;
+  logo: string;
+  cor?: string;
+  sobre?: string;
+  foto?: string;
 }
 
 export interface Autor {
   id: string;
   nome: string;
-  biografia: string;
-  obras: string[];
+  bio: string;
+  obras: number[];
+  foto: string;
+  link?: string;
 }
 
 export interface Obra {
   id: string;
   titulo: string;
-  autor: string;
-  ano: string;
-  editora: string;
-  paginas: number;
+  descricao: string;
+  capa: string;
+  pago: boolean;
+  autorId: number;
+  link: string;
 }
 
 export interface Site {
   id: string;
   nome: string;
-  url: string;
-  descricao: string;
+  link: string;
+  logo: string;
 }
 
 export interface Negocio {

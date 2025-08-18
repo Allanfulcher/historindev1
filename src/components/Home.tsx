@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { AppData, Historia, Rua, Cidade } from '../types';
+import { Historia, Rua, Cidade } from '../types';
+import { useLegacyData } from '../hooks/useLegacyData';
 import Header from './Header';
 import Menu from './Menu';
 import MapView from './MapView';
@@ -16,7 +17,6 @@ import SiteInfo from './cards/SiteInfo';
 import Footer from './extra/footer';
 
 interface HomeProps {
-  data: AppData;
   onPreviewOpen: (content: any) => void;
 }
 
@@ -29,7 +29,9 @@ interface PreviewContent {
   historiaId?: string;
 }
 
-const Home: React.FC<HomeProps> = ({ data, onPreviewOpen }) => {
+const Home: React.FC<HomeProps> = ({ onPreviewOpen }) => {
+  // Use legacy data hook
+  const { data } = useLegacyData();
   const { historias, ruas, cidades } = data;
   
   // State for UI components

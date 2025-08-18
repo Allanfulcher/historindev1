@@ -68,7 +68,7 @@ export const sampleData: AppData & { orgs: any[], autores: any[], obras: any[], 
     }
   ],
 
-  orgs: [
+  orgs2: [
     {
       id: '1',
       fantasia: 'Arquivo Histórico José Pompeo de Mattos',
@@ -92,7 +92,7 @@ export const sampleData: AppData & { orgs: any[], autores: any[], obras: any[], 
     }
   ],
 
-  autores: [
+  autores2: [
     {
       id: '1',
       nome: 'Maria Silva',
@@ -116,7 +116,7 @@ export const sampleData: AppData & { orgs: any[], autores: any[], obras: any[], 
     }
   ],
 
-  obras: [
+  obras2: [
     {
       id: '1',
       titulo: 'História de Gramado',
@@ -143,7 +143,7 @@ export const sampleData: AppData & { orgs: any[], autores: any[], obras: any[], 
     }
   ],
 
-  sites: [
+  sites2: [
     {
       id: '1',
       nome: 'Portal da Prefeitura',

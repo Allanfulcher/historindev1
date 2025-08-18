@@ -3,6 +3,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { FiArrowLeft } from 'react-icons/fi';
+import { useLegacyData } from '../hooks/useLegacyData';
+import { Rua, Historia } from '../types';
 import Header from './Header';
 import Menu from './Menu';
 import SearchInput from './SearchInput';
@@ -10,29 +12,10 @@ import ViewMap from './buttons/ViewMap';
 import StreetCard from './cards/StreetCard';
 import HistoryCard from './cards/HistoryCard';
 
-interface Rua {
-  id: string;
-  nome: string;
-  fotos?: string;
-}
-
-interface Historia {
-  id: string;
-  rua_id: string;
-  titulo: string;
-  descricao: string;
-  fotos: string[];
-}
-
-interface RuasEHistoriasProps {
-  ruas?: Rua[];
-  historias?: Historia[];
-}
-
-const RuasEHistorias: React.FC<RuasEHistoriasProps> = ({ 
-  ruas = [], 
-  historias = [] 
-}) => {
+const RuasEHistorias: React.FC = () => {
+  // Use legacy data hook
+  const { data } = useLegacyData();
+  const { ruas, historias } = data;
   // Router and state management
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState('');
