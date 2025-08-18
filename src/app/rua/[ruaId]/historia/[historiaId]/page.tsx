@@ -3,7 +3,7 @@
 import React from 'react';
 import { useParams } from 'next/navigation';
 import { AppProviders } from '../../../../../contexts/AppContext';
-import RuaHistoria from '../../../../../components/RuaHistoria';
+import RuaHistoria from '../../../../../components/ruas/RuaHistoria';
 import { sampleData } from '../../../../../data/sampleData';
 
 // Dynamic page for individual rua/historia combinations

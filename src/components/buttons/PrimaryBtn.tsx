@@ -11,7 +11,7 @@ const PrimaryBtn: React.FC<PrimaryBtnProps> = ({ children, onClick, disabled }) 
         <button
             onClick={onClick}
             disabled={disabled}
-            className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded whitespace-nowrap flex-shrink-0 text-sm sm:text-base"
+            className="bg-[#8B4513] hover:bg-[#A0522D] text-white py-2 px-4 rounded whitespace-nowrap flex-shrink-0 text-sm sm:text-base transition-colors duration-200"
         >
             {children}
         </button>

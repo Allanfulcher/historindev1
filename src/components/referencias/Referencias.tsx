@@ -73,7 +73,7 @@ const Referencias: React.FC = () => {
   }, [searchParams]);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#f4ede0]">
       {/* Header */}
       <Header setMenuOpen={setMenuOpen} setShowFeedback={setShowFeedback} />
       
@@ -85,7 +85,7 @@ const Referencias: React.FC = () => {
       
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8 max-w-4xl">
-        <div className="bg-white rounded-lg shadow-sm p-6 md:p-8">
+        <div className="bg-[#FEFCF8] rounded-lg shadow-sm p-6 md:p-8">
           <TitleSubtitle /> 
           <Paragraph /> 
           {/* Sections */}
@@ -110,12 +110,12 @@ const Referencias: React.FC = () => {
                         className="max-h-full max-w-full object-contain"
                       />
                     </div>
-                    <h3 className="text-lg font-bold text-center text-amber-900 group-hover:text-amber-700 transition-colors">
+                    <h3 className="text-lg font-bold text-center text-[#6B5B4F] group-hover:text-[#A0522D] transition-colors">
                       {org.fantasia}
                     </h3>
-                    <p className="text-gray-600 mt-3 text-sm text-center flex-grow">{org.descricao}</p>
+                    <p className="text-[#A0958A] mt-3 text-sm text-center flex-grow">{org.descricao}</p>
                     <div className="mt-4 flex justify-center">
-                      <span className="inline-flex items-center px-4 py-2 bg-amber-100 text-amber-800 rounded-md text-sm font-medium hover:bg-amber-200 transition-colors">
+                      <span className="inline-flex items-center px-4 py-2 bg-[#F5F1EB] text-[#6B5B4F] rounded-md text-sm font-medium hover:bg-[#CD853F] hover:text-white transition-colors">
                         Visitar site
                         <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
@@ -144,13 +144,13 @@ const Referencias: React.FC = () => {
                       <img
                         src={autor.foto}
                         alt={`Foto de ${autor.nome}`}
-                        className="h-32 w-32 rounded-full object-cover border-2 border-amber-100"
+                        className="h-32 w-32 rounded-full object-cover border-2 border-[#F5F1EB]"
                       />
                     </div>
-                    <h3 className="text-lg font-bold text-center text-amber-900 group-hover:text-amber-700 transition-colors">
+                    <h3 className="text-lg font-bold text-center text-[#6B5B4F] group-hover:text-[#A0522D] transition-colors">
                       {autor.nome}
                     </h3>
-                    <p className="text-gray-600 mt-3 text-sm text-center flex-grow">{autor.descricao}</p>
+                    <p className="text-[#A0958A] mt-3 text-sm text-center flex-grow">{autor.descricao}</p>
                   </div>
                 </a>
               )}
@@ -168,7 +168,7 @@ const Referencias: React.FC = () => {
                   rel="noopener noreferrer"
                   className="block group h-full"
                 >
-                  <div className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 h-full flex flex-col border border-gray-100 overflow-hidden">
+                  <div className="bg-[#FEFCF8] rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 h-full flex flex-col border border-[#F5F1EB] overflow-hidden">
                     <div className="h-48 overflow-hidden">
                       <img
                         src={obra.capa}
@@ -177,14 +177,14 @@ const Referencias: React.FC = () => {
                       />
                     </div>
                     <div className="p-4 flex-grow flex flex-col">
-                      <h3 className="text-lg font-bold text-amber-900 group-hover:text-amber-700 transition-colors">
+                      <h3 className="text-lg font-bold text-[#6B5B4F] group-hover:text-[#A0522D] transition-colors">
                         {obra.titulo}
                       </h3>
-                      <p className="text-gray-600 mt-2 text-sm flex-grow">
+                      <p className="text-[#A0958A] mt-2 text-sm flex-grow">
                         {obra.descricao}
                       </p>
                       {obra.pago && (
-                        <span className="mt-3 inline-block bg-amber-100 text-amber-800 text-xs px-2 py-1 rounded-full">
+                        <span className="mt-3 inline-block bg-[#CD853F] text-white text-xs px-2 py-1 rounded-full">
                           Conteúdo pago
                         </span>
                       )}
@@ -206,7 +206,7 @@ const Referencias: React.FC = () => {
                   rel="noopener noreferrer"
                   className="block group h-full"
                 >
-                  <div className="bg-white p-5 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 h-full flex flex-col items-center border border-gray-100">
+                  <div className="bg-[#FEFCF8] p-5 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 h-full flex flex-col items-center border border-[#F5F1EB]">
                     <div className="h-16 w-full mb-4 flex items-center justify-center">
                       <img
                         src={site.logo}
@@ -214,11 +214,11 @@ const Referencias: React.FC = () => {
                         className="max-h-full max-w-full object-contain"
                       />
                     </div>
-                    <h3 className="text-lg font-bold text-center text-amber-900 group-hover:text-amber-700 transition-colors">
+                    <h3 className="text-lg font-bold text-center text-[#6B5B4F] group-hover:text-[#A0522D] transition-colors">
                       {site.nome}
                     </h3>
                     <div className="mt-3">
-                      <span className="inline-flex items-center text-sm text-amber-700 hover:text-amber-900">
+                      <span className="inline-flex items-center text-sm text-[#A0958A] hover:text-[#6B5B4F]">
                         Acessar site
                         <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>

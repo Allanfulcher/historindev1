@@ -84,7 +84,7 @@ const Sobre: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-900">
+    <div className="min-h-screen text-gray-900 bg-[#f4ede0]"> 
       {/* Header */}
       <Header 
         setMenuOpen={() => setMenuOpen(true)} 

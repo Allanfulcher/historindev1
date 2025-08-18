@@ -12,8 +12,8 @@ return (
       className="w-full md:w-1/3 rounded-lg mb-4 md:mb-0 md:mr-6 object-cover"
     />
     <div className="flex-1">
-      <h2 className="text-xl font-bold mb-2">Estamos só começando!</h2>
-      <p className="text-gray-700 mb-4">
+      <h2 className="text-xl text-[#6B5B4F] font-bold mb-2">Estamos só começando!</h2>
+      <p className="text-[#6B5B4F] mb-4">
         O Historin é mais do que uma plataforma de histórias. Nossa jornada está apenas começando, e em breve, traremos uma experiência imersiva com{' '}
         <strong>Realidade Aumentada</strong>. QR codes serão espalhados pelas ruas de Gramado, permitindo a todos explorar a história de maneira interativa.
       </p>

@@ -29,11 +29,11 @@ const AddForm: React.FC = () => {
     return (
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="nome">
+            <label className="block text-[#4A3F35] text-sm font-bold mb-2" htmlFor="nome">
               Nome:
             </label>
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border border-[#F5F1EB] rounded w-full py-2 px-3 text-[#6B5B4F] bg-[#FEFCF8] leading-tight focus:outline-none focus:ring-2 focus:ring-[#8B4513]/30 focus:border-[#8B4513]"
               id="nome"
               type="text"
               placeholder="Seu nome"
@@ -44,11 +44,11 @@ const AddForm: React.FC = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="telefone">
+            <label className="block text-[#4A3F35] text-sm font-bold mb-2" htmlFor="telefone">
               Telefone:
             </label>
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border border-[#F5F1EB] rounded w-full py-2 px-3 text-[#6B5B4F] bg-[#FEFCF8] leading-tight focus:outline-none focus:ring-2 focus:ring-[#8B4513]/30 focus:border-[#8B4513]"
               id="telefone"
               type="text"
               placeholder="Seu telefone"
@@ -59,11 +59,11 @@ const AddForm: React.FC = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="local">
+            <label className="block text-[#4A3F35] text-sm font-bold mb-2" htmlFor="local">
               Local:
             </label>
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border border-[#F5F1EB] rounded w-full py-2 px-3 text-[#6B5B4F] bg-[#FEFCF8] leading-tight focus:outline-none focus:ring-2 focus:ring-[#8B4513]/30 focus:border-[#8B4513]"
               id="local"
               type="text"
               placeholder="Local relacionado à história"
@@ -74,11 +74,11 @@ const AddForm: React.FC = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="historia">
+            <label className="block text-[#4A3F35] text-sm font-bold mb-2" htmlFor="historia">
               Conte sua história:
             </label>
             <textarea
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border border-[#F5F1EB] rounded w-full py-2 px-3 text-[#6B5B4F] bg-[#FEFCF8] leading-tight focus:outline-none focus:ring-2 focus:ring-[#8B4513]/30 focus:border-[#8B4513]"
               id="historia"
               rows={4}
               placeholder="Compartilhe uma história relacionada ao local ou à época descrita. Pode ser um acontecimento histórico, memórias pessoais ou contribuições culturais."
@@ -89,15 +89,15 @@ const AddForm: React.FC = () => {
           </div>
 
           {/* Informational card about the material collection process */}
-          <div className="mb-4 p-4 bg-[#e2e8f0] rounded">
-            <p className="text-gray-700">
+          <div className="mb-4 p-4 bg-[#F5F1EB] rounded">
+            <p className="text-[#6B5B4F]">
               Sua história passará por análise e entraremos em contato para captar os materiais que serão postados em seu nome.
             </p>
           </div>
 
           <div className="flex items-center justify-center">
             <button
-              className="bg-[#8A5A44] hover:bg-[#5a3e2e] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-200"
+              className="bg-[#8B4513] hover:bg-[#A0522D] text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-[#8B4513]/50 transition-colors duration-200"
               type="submit"
             >
               Enviar

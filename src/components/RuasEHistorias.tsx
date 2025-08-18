@@ -84,7 +84,7 @@ const RuasEHistorias: React.FC<RuasEHistoriasProps> = ({
   }, [lastScrollY]);
 
   return (
-    <div className="min-h-screen bg-gray-50 relative">
+    <div className="min-h-screen bg-[#f4ede0] relative">
       {/* Header */}
       <div className={`fixed top-0 left-0 right-0 z-40 transition-transform duration-300 ${
         isHeaderVisible ? 'translate-y-0' : '-translate-y-full'

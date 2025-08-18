@@ -34,14 +34,14 @@ const Header: React.FC<HeaderProps> = ({ setMenuOpen, setShowFeedback }) => {
   };
 
   return (
-    <header className="flex justify-between items-center p-4 bg-[#E6D3B4]">
+    <header className="flex justify-between items-center p-4 bg-[#e6d3b4] border-b border-[#F5F1EB]">
       {/* Logo section */}
       <div className="flex items-center">
         <Link href="/" className="mr-2">
           <img
-            src="fotos/historin-logo.svg"
-            alt="DEV"
-            className="text-2xl font-bold logo"
+            src="images/meta/historin-logo.svg"
+            alt="Historin"
+            className="h-12 w-auto"
           />
         </Link>
       </div>

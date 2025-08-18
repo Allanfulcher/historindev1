@@ -66,7 +66,7 @@ const AdicionarHistoria: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#f4ede0]">
       <Header 
         setMenuOpen={() => setMenuOpen(true)} 
         setShowFeedback={() => {}} 
@@ -81,25 +81,25 @@ const AdicionarHistoria: React.FC = () => {
         <div className="flex items-center mb-6">
           <Link 
             href="/" 
-            className="flex items-center text-gray-700 hover:text-amber-700 transition-colors"
+            className="flex items-center text-[#6B5B4F] hover:text-[#A0522D] transition-colors"
           >
             <i className="fas fa-arrow-left text-xl mr-3"></i>
             <span className="text-lg font-medium">Voltar</span>
           </Link>
         </div>
         
-        <div className="bg-white rounded-xl shadow-md overflow-hidden">
+        <div className="bg-[#FEFCF8] rounded-xl shadow-md overflow-hidden">
           {/* Page header */}
-          <div className="bg-amber-800 px-6 py-4">
+          <div className="bg-[#8B4513] px-6 py-4">
             <h1 className="text-2xl font-bold text-white">
               Compartilhe seu acervo
             </h1>
           </div>
           <div className="p-6">
-            <p className="mb-6 text-gray-700 leading-relaxed">
+            <p className="mb-6 text-[#6B5B4F] leading-relaxed">
               Dependemos de pessoas como você para aumentar nosso acervo. Vamos até o local para captar uma série de fotos ou até mesmo apenas uma história que você queira compartilhar.
             </p>
-            <div className="bg-gray-50 p-6 rounded-lg">
+            <div className="bg-[#FAF7F2] p-6 rounded-lg">
               <AddForm />
             </div>
           </div>
