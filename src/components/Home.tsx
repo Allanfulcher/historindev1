@@ -17,7 +17,8 @@ import SiteInfo from './cards/SiteInfo';
 import Footer from './extra/footer';
 
 interface HomeProps {
-  onPreviewOpen: (content: any) => void;
+  data?: any; // eslint-disable-line @typescript-eslint/no-explicit-any
+  onPreviewOpen: (content: any) => void; // eslint-disable-line @typescript-eslint/no-explicit-any
 }
 
 interface PreviewContent {

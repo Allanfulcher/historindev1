@@ -1,7 +1,7 @@
 // Sample data for development and testing
 import { AppData } from '../types';
 
-export const sampleData: AppData & { orgs: any[], autores: any[], obras: any[], sites: any[] } = {
+export const sampleData: AppData = {
   historias: [
     { 
       id: '1', 
@@ -35,7 +35,7 @@ export const sampleData: AppData & { orgs: any[], autores: any[], obras: any[], 
     }
   ],
 
-  ruas2: [
+  ruas: [
     { id: '1', nome: 'Rua Coberta', fotos: 'https://placehold.co/300x200', cidade_id: '1', descricao: 'A famosa rua coberta, símbolo de Gramado' },
     { id: '2', nome: 'Rua das Hortênsias', fotos: 'https://placehold.co/300x200', cidade_id: '1', descricao: 'Rua florida com jardins encantadores' },
     { id: '3', nome: 'Avenida Borges de Medeiros', fotos: 'https://placehold.co/300x200', cidade_id: '1', descricao: 'Principal avenida da cidade' }
@@ -68,62 +68,66 @@ export const sampleData: AppData & { orgs: any[], autores: any[], obras: any[], 
     }
   ],
 
-  orgs2: [
+  orgs: [
     {
       id: '1',
       fantasia: 'Arquivo Histórico José Pompeo de Mattos',
       logo: 'https://placehold.co/200x100?text=Arquivo',
-      descricao: 'Principal arquivo histórico da região, guardando documentos importantes da história de Gramado.',
-      link: 'https://arquivohistorico.gramado.rs.gov.br'
+      link: 'https://arquivohistorico.gramado.rs.gov.br',
+      sobre: 'Principal arquivo histórico da região, guardando documentos importantes da história de Gramado.'
     },
     {
       id: '2',
       fantasia: 'Museu do Perfume',
       logo: 'https://placehold.co/200x100?text=Museu',
-      descricao: 'Preservação da história olfativa local e mundial.',
-      link: 'https://museudoperfume.com.br'
+      link: 'https://museudoperfume.com.br',
+      sobre: 'Preservação da história olfativa local e mundial.'
     },
     {
       id: '3',
       fantasia: 'Instituto Histórico de Gramado',
       logo: 'https://placehold.co/200x100?text=IHG',
-      descricao: 'Dedicado à preservação e divulgação da história de Gramado e região.',
-      link: 'https://institutohistorico.gramado.rs.gov.br'
+      link: 'https://institutohistorico.gramado.rs.gov.br',
+      sobre: 'Dedicado à preservação e divulgação da história de Gramado e região.'
     }
   ],
 
-  autores2: [
+  autores: [
     {
       id: '1',
       nome: 'Maria Silva',
+      bio: 'Historiadora especializada em Gramado, autora de diversas obras sobre a região.',
       foto: 'https://placehold.co/300x300?text=Maria',
-      descricao: 'Historiadora especializada em Gramado, autora de diversas obras sobre a região.',
+      obras: [1, 3],
       link: '#'
     },
     {
       id: '2',
       nome: 'João Santos',
+      bio: 'Pesquisador da cultura gaúcha e escritor premiado.',
       foto: 'https://placehold.co/300x300?text=Joao',
-      descricao: 'Pesquisador da cultura gaúcha e escritor premiado.',
+      obras: [2],
       link: '#'
     },
     {
       id: '3',
       nome: 'Ana Beatriz Rocha',
+      bio: 'Pesquisadora da cultura e tradições dos imigrantes na região de Gramado.',
       foto: 'https://placehold.co/300x300?text=Ana',
-      descricao: 'Pesquisadora da cultura e tradições dos imigrantes na região de Gramado.',
+      obras: [1],
       link: '#'
     }
   ],
 
-  obras2: [
+  obras: [
     {
       id: '1',
       titulo: 'História de Gramado',
       capa: 'https://placehold.co/400x600?text=História+de+Gramado',
       descricao: 'Uma obra abrangente sobre a história da cidade, desde sua fundação até os dias atuais.',
       link: '#',
-      pago: false
+      pago: false,
+      autorId: 1
     },
     {
       id: '2',
@@ -131,7 +135,8 @@ export const sampleData: AppData & { orgs: any[], autores: any[], obras: any[], 
       capa: 'https://placehold.co/400x600?text=Tradições+Gaúchas',
       descricao: 'Um estudo aprofundado sobre as tradições e cultura do povo gaúcho.',
       link: '#',
-      pago: true
+      pago: true,
+      autorId: 2
     },
     {
       id: '3',
@@ -139,11 +144,12 @@ export const sampleData: AppData & { orgs: any[], autores: any[], obras: any[], 
       capa: 'https://placehold.co/400x600?text=Arquitetura',
       descricao: 'Estudo sobre a evolução arquitetônica da cidade ao longo dos anos.',
       link: '#',
-      pago: false
+      pago: false,
+      autorId: 1
     }
   ],
 
-  sites2: [
+  sites: [
     {
       id: '1',
       nome: 'Portal da Prefeitura',
