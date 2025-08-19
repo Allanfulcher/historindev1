@@ -2,7 +2,6 @@
 
 import { Historia } from '@/types';
 import Link from 'next/link';
-import Image from 'next/image';
 
 interface HistoryCardProps {
   historias: Historia[];
@@ -19,11 +18,9 @@ const HistoryCard = ({ historias, className = '' }: HistoryCardProps) => {
           className="group relative flex items-start gap-4 rounded-xl bg-white p-4 shadow-sm ring-1 ring-gray-900/5 transition-all hover:shadow-md hover:ring-1 hover:ring-blue-500/20"
         >
           <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-lg bg-gray-100">
-            <Image
+            <img
               src={historia.fotos[0] || '/placeholder-history.jpg'}
               alt={historia.titulo}
-              width={96}
-              height={96}
               className="h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;

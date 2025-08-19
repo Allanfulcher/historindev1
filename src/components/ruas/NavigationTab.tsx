@@ -8,39 +8,43 @@ interface NavigationTabProps {
 
 const NavigationTab = ({ activeTab, changeTab, className = '' }: NavigationTabProps) => {
   const tabItems = [
-    { id: 'historia', label: 'História' },
-    { id: 'rua', label: 'Rua' },
-    { id: 'cidade', label: 'Cidade' }
+    { id: 'historia', label: 'História', icon: 'fas fa-book-open' },
+    { id: 'rua', label: 'Rua', icon: 'fas fa-road' },
+    { id: 'cidade', label: 'Cidade', icon: 'fas fa-city' }
   ];
 
   return (
-    <div className={`w-full ${className}`}>
+    <div className={`w-full mb-6 ${className}`}>
       <div className="max-w-5xl mx-auto px-4">
-        <div className="flex border-b border-[#F5F1EB]">
-        {tabItems.map((tab) => {
-          const isActive = activeTab === tab.id;
-          return (
-            <button
-              key={tab.id}
-              onClick={() => changeTab(tab.id as any)}
-              className={`
-                relative px-4 py-3 text-sm font-medium 
-                ${isActive 
-                  ? 'text-[#8B4513] border-b-2 border-[#8B4513]' 
-                  : 'text-[#A0958A] hover:text-[#6B5B4F] hover:bg-[#F5F1EB]'
-                }
-                focus:outline-none focus-visible:ring-1 focus-visible:ring-[#8B4513]/50 focus-visible:ring-offset-1
-                flex-1 text-center whitespace-nowrap transition-colors duration-150
-              `}
-              role="tab"
-              aria-selected={isActive}
-              aria-controls={`${tab.id}-panel`}
-              id={`${tab.id}-tab`}
-            >
-              {tab.label}
-            </button>
-          );
-        })}
+        <div className="bg-[#FEFCF8] rounded-xl shadow-sm ring-1 ring-[#A0958A]/20 p-1">
+          <div className="flex">
+            {tabItems.map((tab) => {
+              const isActive = activeTab === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => changeTab(tab.id as any)}
+                  className={`
+                    relative flex items-center justify-center px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200
+                    ${isActive 
+                      ? 'bg-[#8B4513] text-white shadow-sm' 
+                      : 'text-[#6B5B4F] hover:text-[#4A3F35] hover:bg-[#F5F1EB]'
+                    }
+                    focus:outline-none focus:ring-2 focus:ring-[#8B4513]/30 focus:ring-offset-1
+                    flex-1 whitespace-nowrap
+                  `}
+                  role="tab"
+                  aria-selected={isActive}
+                  aria-controls={`${tab.id}-panel`}
+                  id={`${tab.id}-tab`}
+                >
+                  <i className={`${tab.icon} mr-2 text-xs`}></i>
+                  <span className="hidden sm:inline">{tab.label}</span>
+                  <span className="sm:hidden">{tab.label.charAt(0)}</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>

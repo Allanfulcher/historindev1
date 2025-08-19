@@ -333,23 +333,23 @@ export class LegacyDatabase {
 
   // Query methods
   getHistoriaById(id: string): Historia | undefined {
-    return this.historias.find(h => h.id === id);
+    return this.historias.find(h => h.id.toString() === id);
   }
 
   getHistoriasByRuaId(ruaId: string): Historia[] {
-    return this.historias.filter(h => h.rua_id === ruaId);
+    return this.historias.filter(h => h.rua_id.toString() === ruaId);
   }
 
   getRuaById(id: string): Rua | undefined {
-    return this.ruas.find(r => r.id === id);
+    return this.ruas.find(r => r.id.toString() === id);
   }
 
   getRuasByCidadeId(cidadeId: string): Rua[] {
-    return this.ruas.filter(r => r.cidade_id === cidadeId);
+    return this.ruas.filter(r => r.cidade_id && r.cidade_id.toString() === cidadeId);
   }
 
   getCidadeById(id: string): Cidade | undefined {
-    return this.cidades.find(c => c.id === id);
+    return this.cidades.find(c => c.id.toString() === id);
   }
 
   getOrganizacaoById(id: string): Organizacao | undefined {

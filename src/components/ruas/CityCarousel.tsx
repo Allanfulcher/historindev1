@@ -91,18 +91,10 @@ const CityCarousel: React.FC<CityCarouselProps> = ({
         {showBackButton && (
           <Link
             href="/"
-            className="flex-shrink-0 flex bg-[#FEFCF8] rounded-full border border-[#F5F1EB] shadow-sm items-center px-4 py-3 text-sm font-medium text-[#6B5B4F] hover:text-[#A0522D] transition-colors duration-200 whitespace-nowrap"
+            className="flex-shrink-0 flex bg-[#FEFCF8] rounded-full border border-[#F5F1EB] shadow-sm items-center px-4 py-3 text-sm font-medium text-[#6B5B4F] hover:text-[#A0522D] hover:bg-[#F5F1EB] transition-all duration-200 whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-[#8B4513]/30"
             aria-label={backButtonLabel}
           >
-            <svg 
-              className="w-4 h-4 mr-2" 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24" 
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
+            <i className="fas fa-arrow-left w-4 h-4 mr-2 text-sm"></i>
             <span className="hidden sm:inline">{backButtonLabel}</span>
             <span className="sm:hidden">Voltar</span>
           </Link>

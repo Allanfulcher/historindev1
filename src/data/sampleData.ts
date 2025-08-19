@@ -35,7 +35,7 @@ export const sampleData: AppData & { orgs: any[], autores: any[], obras: any[], 
     }
   ],
 
-  ruas: [
+  ruas2: [
     { id: '1', nome: 'Rua Coberta', fotos: 'https://placehold.co/300x200', cidade_id: '1', descricao: 'A famosa rua coberta, símbolo de Gramado' },
     { id: '2', nome: 'Rua das Hortênsias', fotos: 'https://placehold.co/300x200', cidade_id: '1', descricao: 'Rua florida com jardins encantadores' },
     { id: '3', nome: 'Avenida Borges de Medeiros', fotos: 'https://placehold.co/300x200', cidade_id: '1', descricao: 'Principal avenida da cidade' }
