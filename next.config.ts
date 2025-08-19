@@ -29,14 +29,27 @@ const nextConfig: NextConfig = {
     // Disable content security policy for SVG
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
+  // Completely disable all optimizations that use lightningcss
+  optimizeFonts: false,
+  // Disable SWC minification which can trigger lightningcss
+  swcMinify: false,
   // Disable experimental features that may cause build issues
   experimental: {
-    // optimizeCss: true, // Disabled due to critters dependency issue
-    // Disable font optimization to avoid lightningcss dependency issues
+    // Disable all CSS and font optimizations
+    optimizeCss: false,
     optimizePackageImports: [],
+    // Disable server components optimization
+    serverComponentsExternalPackages: [],
   },
-  // Disable font optimization that uses lightningcss
-  optimizeFonts: false,
+  // Override webpack config to exclude lightningcss
+  webpack: (config: any) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      'lightningcss': false,
+      '@parcel/css': false,
+    };
+    return config;
+  },
 };
 
 export default nextConfig;
