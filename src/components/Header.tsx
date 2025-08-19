@@ -39,7 +39,7 @@ const Header: React.FC<HeaderProps> = ({ setMenuOpen, setShowFeedback }) => {
       <div className="flex items-center">
         <Link href="/" className="mr-2">
           <img
-            src="images/meta/historin-logo.svg"
+            src="/images/meta/historin-logo.svg"
             alt="Historin"
             className="h-12 w-auto"
           />

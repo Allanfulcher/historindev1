@@ -1,16 +1,20 @@
 'use client';
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 
 const HashRouter = () => {
   const router = useRouter();
+  const pathname = usePathname();
+  const [isProcessingHash, setIsProcessingHash] = useState(false);
 
   useEffect(() => {
     const handleHashRoute = () => {
       const hash = window.location.hash;
       
       if (hash) {
+        setIsProcessingHash(true);
+        
         // Remove the # from the beginning
         const route = hash.substring(1);
         
@@ -41,11 +45,16 @@ const HashRouter = () => {
         if (route !== '/') {
           router.replace('/');
         }
+        
+        setIsProcessingHash(false);
       }
     };
 
-    // Handle initial load
-    handleHashRoute();
+    // Check for hash on initial load
+    const initialHash = window.location.hash;
+    if (initialHash && pathname === '/') {
+      handleHashRoute();
+    }
 
     // Listen for hash changes
     window.addEventListener('hashchange', handleHashRoute);
@@ -53,9 +62,21 @@ const HashRouter = () => {
     return () => {
       window.removeEventListener('hashchange', handleHashRoute);
     };
-  }, [router]);
+  }, [router, pathname]);
 
-  return null; // This component doesn't render anything
+  // Show loading overlay if we're processing a hash route and on home page
+  if (isProcessingHash && pathname === '/') {
+    return (
+      <div className="fixed inset-0 bg-white z-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Carregando...</p>
+        </div>
+      </div>
+    );
+  }
+
+  return null;
 };
 
 export default HashRouter;
