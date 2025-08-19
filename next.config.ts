@@ -32,7 +32,11 @@ const nextConfig: NextConfig = {
   // Disable experimental features that may cause build issues
   experimental: {
     // optimizeCss: true, // Disabled due to critters dependency issue
+    // Disable font optimization to avoid lightningcss dependency issues
+    optimizePackageImports: [],
   },
+  // Disable font optimization that uses lightningcss
+  optimizeFonts: false,
 };
 
 export default nextConfig;
