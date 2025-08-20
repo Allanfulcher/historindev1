@@ -7,6 +7,7 @@ Historin Dev
 - [x] Migrar Pagina Legado Africano
 - [x] Atualizar paginas para terem o mesmo conteudo que o site atual
 - [x] Migrar CSS para ter paridade com o site atual
+- [x] Serch bar funcional
 
 - [ ] Adcionar Quiz
 - [ ] Adcionar pins no mapa
@@ -20,5 +21,5 @@ Historin Dev
 - [ ] Migrar Banco de dados para um tradicional
 - [ ] Criar Sistema de atualizacao de banco de dados
 - [ ] Simplificacao e organizacao de componentes
-
+- [ ] popup de feedback
 

@@ -46,29 +46,29 @@ const FeedbackPopup: React.FC<FeedbackPopupProps> = ({ isOpen, onClose }) => {
 
   return (
     <div 
-      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-high"
+      className="fixed inset-0 flex items-start justify-end p-4 z-50"
       onClick={handleBackdropClick}
     >
       <div 
-        className="bg-white rounded-lg shadow-lg w-full max-w-md p-6 relative"
+        className="bg-[#FEFCF8] rounded-lg shadow-lg w-full max-w-md p-6 relative ring-1 ring-[#A0958A]/20"
         onClick={handleStopPropagation}
       >
         {/* Close button */}
         <button
-          className="absolute top-2 right-2 text-gray-600 hover:text-gray-800"
+          className="absolute top-2 right-2 bg-transparent hover:bg-[#F5F1EB] text-[#6B5B4F] p-1 rounded-full flex items-center justify-center text-xl transition-colors duration-200"
           onClick={onClose}
           aria-label="Fechar formulário de feedback"
         >
-          <i className="fas fa-times text-xl" />
+          <i className="fas fa-times" />
         </button>
         
         {/* Title */}
-        <h3 className="text-xl font-bold mb-4 text-center">
+        <h3 className="text-xl font-bold mb-4 text-center text-[#4A3F35]">
           Envie seu Feedback
         </h3>
         
         {/* Description */}
-        <p className="text-gray-600 text-center mb-4">
+        <p className="text-[#6B5B4F] text-center mb-4">
           Estamos em fase inicial da nossa plataforma e sua opinião é muito importante para nós! 
           Por favor, avalie-nos ajude a melhorar.
         </p>
@@ -80,7 +80,7 @@ const FeedbackPopup: React.FC<FeedbackPopupProps> = ({ isOpen, onClose }) => {
         >
           {/* Star rating section */}
           <div className="mb-4 text-center">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
+            <label className="block text-[#4A3F35] text-sm font-bold mb-2">
               Avaliação:
             </label>
             <div className="flex justify-center mb-2">
@@ -89,15 +89,15 @@ const FeedbackPopup: React.FC<FeedbackPopupProps> = ({ isOpen, onClose }) => {
                   key={star}
                   type="button"
                   onClick={() => handleStarClick(star)}
-                  className={`text-3xl ${
-                    formData.estrelas >= star ? 'text-yellow-400' : 'text-gray-300'
+                  className={`text-3xl transition-colors duration-200 hover:scale-110 transition-transform ${
+                    formData.estrelas >= star ? 'text-[#DAA520]' : 'text-[#A0958A]'
                   }`}
                 >
                   ★
                 </button>
               ))}
             </div>
-            <p className="text-gray-500 text-sm">
+            <p className="text-[#A0958A] text-sm">
               Sua avaliação: {formData.estrelas} estrela(s)
             </p>
             <input
@@ -110,13 +110,13 @@ const FeedbackPopup: React.FC<FeedbackPopupProps> = ({ isOpen, onClose }) => {
           {/* Name field */}
           <div className="mb-4">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block text-[#4A3F35] text-sm font-bold mb-2"
               htmlFor="nome"
             >
               Nome (opcional):
             </label>
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border border-[#F5F1EB] rounded w-full py-2 px-3 text-[#6B5B4F] bg-[#FEFCF8] leading-tight focus:outline-none focus:ring-2 focus:ring-[#8B4513]/30 focus:border-[#8B4513]"
               id="nome"
               type="text"
               name="nome"
@@ -129,13 +129,13 @@ const FeedbackPopup: React.FC<FeedbackPopupProps> = ({ isOpen, onClose }) => {
           {/* Email field */}
           <div className="mb-4">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block text-[#4A3F35] text-sm font-bold mb-2"
               htmlFor="email"
             >
               E-mail (opcional):
             </label>
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border border-[#F5F1EB] rounded w-full py-2 px-3 text-[#6B5B4F] bg-[#FEFCF8] leading-tight focus:outline-none focus:ring-2 focus:ring-[#8B4513]/30 focus:border-[#8B4513]"
               id="email"
               type="email"
               name="email"
@@ -148,13 +148,13 @@ const FeedbackPopup: React.FC<FeedbackPopupProps> = ({ isOpen, onClose }) => {
           {/* Comment field */}
           <div className="mb-4">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block text-[#4A3F35] text-sm font-bold mb-2"
               htmlFor="comentario"
             >
               Comentário:
             </label>
             <textarea
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border border-[#F5F1EB] rounded w-full py-2 px-3 text-[#6B5B4F] bg-[#FEFCF8] leading-tight focus:outline-none focus:ring-2 focus:ring-[#8B4513]/30 focus:border-[#8B4513]"
               id="comentario"
               name="comentario"
               rows={4}
@@ -169,7 +169,7 @@ const FeedbackPopup: React.FC<FeedbackPopupProps> = ({ isOpen, onClose }) => {
           <div className="flex items-center justify-center">
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="bg-[#8B4513] hover:bg-[#A0522D] text-white py-2 px-4 rounded whitespace-nowrap flex-shrink-0 text-sm sm:text-base transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#8B4513]/50"
             >
               Enviar Feedback
             </button>

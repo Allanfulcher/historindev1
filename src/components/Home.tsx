@@ -1,13 +1,11 @@
 'use client';
 
 import React, { useState } from 'react';
-import Link from 'next/link';
 import { Historia, Rua, Cidade } from '../types';
 import { useLegacyData } from '../hooks/useLegacyData';
 import Header from './Header';
 import Menu from './Menu';
 import MapView from './MapView';
-import StreetCard from './cards/StreetCard';
 import LegadoAfricanoCard from './cards/LegadoAfricanoCard';
 import FeedbackPopup from './popups/FeedbackPopup';
 import OnboardingPopup from './popups/OnboardingPopup';
@@ -15,6 +13,7 @@ import DonationPopup from './popups/DonationPopup';
 import PopupCarrossel from './popups/PopupCarrossel';
 import SiteInfo from './cards/SiteInfo';
 import Footer from './extra/footer';
+import RecomendedStreets from './cards/RecomendedStreets';
 
 interface HomeProps {
   data?: any; // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -112,7 +111,7 @@ const Home: React.FC<HomeProps> = ({ onPreviewOpen }) => {
           {/* Recommended Streets */}
           <section className="mb-12">
             <h2 className="text-2xl font-bold text-[#4A3F35] mb-6">Ruas Recomendadas</h2>
-            <StreetCard ruas={ruas} handleRuaClick={handleRuaClick} />
+            <RecomendedStreets ruas={ruas} handleRuaClick={handleRuaClick} />
           </section>  
         </div>
 

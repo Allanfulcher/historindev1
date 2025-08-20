@@ -18,12 +18,15 @@ const HashRouter = () => {
         // Remove the # from the beginning
         const route = hash.substring(1);
         
+        // Preserve existing URL search parameters (UTM, etc.)
+        const searchParams = window.location.search;
+        
         // Check if it matches our rua/historia pattern
         const ruaHistoriaMatch = route.match(/^\/rua\/(\d+)\/historia\/(\d+)$/);
         
         if (ruaHistoriaMatch) {
           const [, ruaId, historiaId] = ruaHistoriaMatch;
-          const nextjsRoute = `/rua/${ruaId}/historia/${historiaId}`;
+          const nextjsRoute = `/rua/${ruaId}/historia/${historiaId}${searchParams}`;
           
           // Replace the current URL with the Next.js route
           router.replace(nextjsRoute);
@@ -35,7 +38,7 @@ const HashRouter = () => {
         
         if (ruaMatch) {
           const [, ruaId] = ruaMatch;
-          const nextjsRoute = `/rua/${ruaId}/historia/1`; // Default to first historia
+          const nextjsRoute = `/rua/${ruaId}/historia/1${searchParams}`; // Default to first historia
           
           router.replace(nextjsRoute);
           return;
@@ -43,7 +46,7 @@ const HashRouter = () => {
         
         // If no pattern matches, redirect to home
         if (route !== '/') {
-          router.replace('/');
+          router.replace(`/${searchParams}`);
         }
         
         setIsProcessingHash(false);

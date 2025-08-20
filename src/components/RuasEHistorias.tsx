@@ -99,7 +99,10 @@ const RuasEHistorias: React.FC = () => {
               <FiArrowLeft className="w-5 h-5 text-gray-600" />
             </button>
             <div className="flex-1">
-              <SearchInput />
+              <SearchInput 
+                placeholder="Buscar ruas e histórias..."
+                onSearch={setSearchTerm}
+              />
             </div>
           </div>
         </div>
@@ -122,7 +125,7 @@ const RuasEHistorias: React.FC = () => {
             <h2 className="text-lg font-semibold text-gray-900">Todas as Ruas</h2>
           </div>
           {filteredRuasWithImages.length > 0 ? (
-            <StreetCard ruas={filteredRuasWithImages} handleRuaClick={(rua) => console.log(rua)} />
+            <StreetCard ruas={filteredRuasWithImages} handleRuaClick={(rua) => router.push(`/rua/${rua.id}`)} />
           ) : (
             <div className="text-center py-8">
               <p className="text-gray-500">Nenhuma rua encontrada para "{searchTerm}"</p>

@@ -14,6 +14,15 @@ const SearchInput = ({
 }: SearchInputProps) => {
   const [searchTerm, setSearchTerm] = useState('');
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    setSearchTerm(newValue);
+    // Call onSearch immediately on every keystroke for real-time filtering
+    if (onSearch) {
+      onSearch(newValue);
+    }
+  };
+
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && onSearch) {
       onSearch(searchTerm);
@@ -42,7 +51,7 @@ const SearchInput = ({
           type="text"
           placeholder={placeholder}
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={handleInputChange}
           onKeyDown={handleKeyDown}
           className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm"
         />
