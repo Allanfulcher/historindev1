@@ -161,12 +161,12 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
 
       {/* Main Content */}
       <main className="w-full py-6 bg-[#f4ede0]">
-        <div className="w-full max-w-none px-0">
+        <div className="w-full max-w-none px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 2xl:px-32 bg-[#f4ede0]">
           {/* Navigation Tabs */}
           <NavigationTab activeTab={activeTab} changeTab={changeTab} />
           
           {/* Content Card */}
-          <div className="bg-[#FEFCF8] rounded-xl shadow-sm ring-1 ring-[#A0958A]/20 p-2 sm:p-3 lg:p-0">
+          <div className="bg-[#FEFCF8] rounded-xl shadow-sm p-2 sm:p-3 lg:p-0 bg-[#f4ede0]">
             {activeTab === 'historia' && (
               <>
                 {/* Feed Header and Controls */}
@@ -262,8 +262,8 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
             {activeTab === 'rua' && rua && (
               <>
                 {/* Rua Content */}
-                <div className="mb-6">
-                  <div className="flex items-center justify-between mb-4">
+                <div className="mb-6 p-4 sm:p-6 lg:p-8">
+                  <div className="flex items-center justify-between mb-6">
                     <div className="text-sm text-[#A0958A] font-medium">
                       {cidade?.nome && (
                         <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#F5F1EB] text-[#6B5B4F]">
@@ -274,16 +274,16 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
                     </div>
                   </div>
                   
-                  <h1 className="text-2xl sm:text-3xl font-bold mb-4 text-[#4A3F35]">{rua.nome}</h1>
+                  <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-[#4A3F35]">{rua.nome}</h1>
                   
-                  <div className="prose max-w-none bg-[#FDFBF7] border border-[#F0E8DC] border-l-4 border-l-[#CD853F] rounded-lg p-4 mb-6 shadow-inner">
-                    <p className="text-[#6B5B4F] leading-relaxed text-base">{rua.descricao}</p>
+                  <div className="prose max-w-none bg-[#FDFBF7] border border-[#F0E8DC] border-l-4 border-l-[#CD853F] rounded-lg p-6 mb-8 shadow-inner">
+                    <p className="text-[#6B5B4F] leading-relaxed text-lg">{rua.descricao}</p>
                   </div>
                   
                   {/* Image Gallery */}
                   {rua.fotos && (
-                    <div className="mt-6">
-                      <h3 className="text-lg font-medium text-[#4A3F35] mb-4">
+                    <div className="mt-8">
+                      <h3 className="text-xl font-medium text-[#4A3F35] mb-6">
                         <i className="fas fa-images mr-2 text-[#CD853F]"></i>
                         Galeria de Imagens
                       </h3>
@@ -310,28 +310,28 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
             {activeTab === 'cidade' && cidade && (
               <>
                 {/* Cidade Content */}
-                <div className="mb-6">
-                  <h1 className="text-2xl sm:text-3xl font-bold mb-4 text-[#4A3F35]">{cidade.nome}</h1>
+                <div className="mb-6 p-4 sm:p-6 lg:p-8">
+                  <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-[#4A3F35]">{cidade.nome}</h1>
                   
-                  <div className="prose max-w-none bg-[#FDFBF7] border border-[#F0E8DC] border-l-4 border-l-[#CD853F] rounded-lg p-4 mb-6 shadow-inner">
-                    <p className="text-[#6B5B4F] leading-relaxed text-base">{cidade.descricao}</p>
+                  <div className="prose max-w-none bg-[#FDFBF7] border border-[#F0E8DC] border-l-4 border-l-[#CD853F] rounded-lg p-6 mb-8 shadow-inner">
+                    <p className="text-[#6B5B4F] leading-relaxed text-lg">{cidade.descricao}</p>
                   </div>
                   
-                  <div className="mb-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="p-4 bg-[#F5F1EB] rounded-lg">
-                      <h3 className="text-sm font-medium text-[#4A3F35] mb-1">Estado</h3>
-                      <p className="text-[#6B5B4F]">{cidade.estado}</p>
+                  <div className="mb-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div className="p-6 bg-[#F5F1EB] rounded-lg">
+                      <h3 className="text-base font-medium text-[#4A3F35] mb-2">Estado</h3>
+                      <p className="text-[#6B5B4F] text-lg">{cidade.estado}</p>
                     </div>
-                    <div className="p-4 bg-[#F5F1EB] rounded-lg">
-                      <h3 className="text-sm font-medium text-[#4A3F35] mb-1">População</h3>
-                      <p className="text-[#6B5B4F]">{cidade.populacao}</p>
+                    <div className="p-6 bg-[#F5F1EB] rounded-lg">
+                      <h3 className="text-base font-medium text-[#4A3F35] mb-2">População</h3>
+                      <p className="text-[#6B5B4F] text-lg">{cidade.populacao}</p>
                     </div>
                   </div>
                   
                   {/* Image Gallery */}
                   {cidade.foto && (
-                    <div className="mt-6">
-                      <h3 className="text-lg font-medium text-[#4A3F35] mb-4">
+                    <div className="mt-8">
+                      <h3 className="text-xl font-medium text-[#4A3F35] mb-6">
                         <i className="fas fa-images mr-2 text-[#CD853F]"></i>
                         Galeria de Imagens
                       </h3>
