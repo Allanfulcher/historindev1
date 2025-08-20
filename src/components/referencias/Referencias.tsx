@@ -11,6 +11,7 @@ import Paragraph from '../text/Paragraph';
 import DropDown from '../buttons/DropDown';
 import { useLegacyData } from '../../hooks/useLegacyData';
 import { Organizacao, Autor, Obra, Site } from '../../types';
+import FeedbackPopup from '../popups/FeedbackPopup';
 
 type SectionType = 'orgs' | 'autores' | 'obras' | 'sites' | null;
 
@@ -209,7 +210,13 @@ const Referencias: React.FC = () => {
           {/* YouTube Section */}
           <YoutubeSection /> 
           </main>
-        </div>
+          {showFeedback && (
+            <FeedbackPopup  
+              isOpen={showFeedback}
+              onClose={() => setShowFeedback(false)}
+            />
+          )}
+      </div>
   );
 };
 

@@ -7,6 +7,7 @@ import Contribuir from './contribuir';
 import Menu from '../Menu';
 import Header from '../Header';
 import DropDown from '../buttons/DropDown';
+import FeedbackPopup from '../popups/FeedbackPopup';
 
 interface TeamMember {
   name: string;
@@ -19,6 +20,7 @@ const Sobre: React.FC = () => {
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
   const [showJoinModal, setShowJoinModal] = useState(false);
   const searchParams = useSearchParams();
+  const [showFeedback, setShowFeedback] = useState(false);
 
   // Handle hash navigation for donation section
   useEffect(() => {
@@ -88,7 +90,7 @@ const Sobre: React.FC = () => {
       {/* Header */}
       <Header 
         setMenuOpen={() => setMenuOpen(true)} 
-        setShowFeedback={() => {}} 
+        setShowFeedback={setShowFeedback} 
       />
       <Menu 
         menuOpen={menuOpen} 
@@ -315,6 +317,12 @@ const Sobre: React.FC = () => {
         </div>
       </section>
     </div>
+    {showFeedback && (
+              <FeedbackPopup  
+                isOpen={showFeedback}
+                onClose={() => setShowFeedback(false)}
+              />
+            )}
     </div>
   );
 };

@@ -11,18 +11,19 @@ import SearchInput from './SearchInput';
 import ViewMap from './buttons/ViewMap';
 import StreetCard from './cards/StreetCard';
 import HistoryCard from './cards/HistoryCard';
+import FeedbackPopup from './popups/FeedbackPopup';
 
 const RuasEHistorias: React.FC = () => {
   // Use legacy data hook
   const { data } = useLegacyData();
   const { ruas, historias } = data;
   // Router and state management
+  const [showFeedback, setShowFeedback] = useState(false);
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredRuas, setFilteredRuas] = useState<Rua[]>(ruas);
   const [filteredHistorias, setFilteredHistorias] = useState<Historia[]>(historias);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [showFeedback, setShowFeedback] = useState(false);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [showMap, setShowMap] = useState(true); // For the Menu component
@@ -147,6 +148,12 @@ const RuasEHistorias: React.FC = () => {
           )}
         </section>
       </main>
+      {showFeedback && (
+            <FeedbackPopup  
+                isOpen={showFeedback}
+                onClose={() => setShowFeedback(false)}
+            />
+        )}
     </div>
   );
 };

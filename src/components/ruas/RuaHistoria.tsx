@@ -8,6 +8,7 @@ import type { Historia, Rua, Cidade } from '../../types';
 import Header from '../Header';
 import Menu from '../Menu';
 import NavigationTab from './NavigationTab';
+import FeedbackPopup from '../popups/FeedbackPopup';
 
 interface RuaHistoriaProps {
   className?: string;
@@ -411,6 +412,12 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
           </div>
         </div>
       </main>
+      {showFeedback && (
+        <FeedbackPopup
+          isOpen={showFeedback}
+          onClose={() => setShowFeedback(false)}
+        />
+      )}
     </div>
   );
 };

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Header from '../Header';
 import Menu from '../Menu';
 import AddForm from './AddForm';
+import FeedbackPopup from '../popups/FeedbackPopup';
 
 interface FormData {
   nome: string;
@@ -15,6 +16,7 @@ interface FormData {
 
 const AdicionarHistoria: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showFeedback, setShowFeedback] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     nome: '',
     telefone: '',
@@ -69,7 +71,7 @@ const AdicionarHistoria: React.FC = () => {
     <div className="min-h-screen bg-[#f4ede0]">
       <Header 
         setMenuOpen={() => setMenuOpen(true)} 
-        setShowFeedback={() => {}} 
+        setShowFeedback={setShowFeedback}
       />
       <Menu 
         menuOpen={menuOpen} 
@@ -105,6 +107,12 @@ const AdicionarHistoria: React.FC = () => {
           </div>
         </div>
       </div>
+        {showFeedback && (
+              <FeedbackPopup  
+                isOpen={showFeedback}
+                onClose={() => setShowFeedback(false)}
+              />
+            )}
     </div>
   );
 };
