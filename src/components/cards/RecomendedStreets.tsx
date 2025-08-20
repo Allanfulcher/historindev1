@@ -5,8 +5,8 @@ import { Rua } from '../../types';
 
 const RecomendedStreets = ({ ruas, handleRuaClick }: { ruas: Rua[]; handleRuaClick: (rua: Rua) => void }) => {
 return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    {ruas.slice(0, 3).map((rua) => (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+    {ruas.slice(0, 4).map((rua) => (
       <div
         key={rua.id}
         className="bg-[#FEFCF8] rounded-lg shadow-sm overflow-hidden cursor-pointer hover:shadow-md transition-all duration-300 border border-[#F5F1EB] hover:border-[#E6D3B4]"

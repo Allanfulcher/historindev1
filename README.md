@@ -21,5 +21,5 @@ Historin Dev
 - [ ] Migrar Banco de dados para um tradicional
 - [ ] Criar Sistema de atualizacao de banco de dados
 - [ ] Simplificacao e organizacao de componentes
-- [ ] popup de feedback
+- [x] popup de feedback
 

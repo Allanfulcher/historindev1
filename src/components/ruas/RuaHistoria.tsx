@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { legacyDb } from '../../utils/legacyDb';
 import { legacyHistorias, legacyRuas, legacyCidades } from '../../data/legacyData';
@@ -27,6 +27,9 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
   const [showFeedback, setShowFeedback] = useState(false);
   const [activeTab, setActiveTab] = useState<'historia' | 'rua' | 'cidade'>('historia');
   const [validationError, setValidationError] = useState<string | null>(null);
+  const [ruaHistorias, setRuaHistorias] = useState<Historia[]>([]);
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc'); // asc = oldest first
+  const focusedHistoriaRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     // Initialize database
@@ -40,6 +43,9 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
     if (ruaId) {
       const foundRua = legacyDb.getRuaById(ruaId);
       setRua(foundRua || null);
+      // Load all historias for this rua
+      const list = legacyDb.getHistoriasByRuaId(ruaId);
+      setRuaHistorias(list || []);
       
       if (foundRua?.cidade_id) {
         const foundCidade = legacyDb.getCidadeById(foundRua.cidade_id.toString());
@@ -73,6 +79,35 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
 
     setIsLoading(false);
   }, [ruaId, historiaId, router]);
+
+  // Compute sorted historias for feed
+  const sortedHistorias = useMemo(() => {
+    const copy = [...ruaHistorias];
+    copy.sort((a, b) => {
+      const ay = parseInt(a.ano || '0', 10);
+      const by = parseInt(b.ano || '0', 10);
+      return sortOrder === 'asc' ? ay - by : by - ay;
+    });
+    return copy;
+  }, [ruaHistorias, sortOrder]);
+
+  // Only auto-scroll when the historiaId changes via client navigation, not on initial load
+  const prevHistoriaIdRef = useRef<string | null>(null);
+  useEffect(() => {
+    if (!historiaId) return;
+    // Skip on initial mount
+    if (prevHistoriaIdRef.current === null) {
+      prevHistoriaIdRef.current = historiaId;
+      return;
+    }
+    if (prevHistoriaIdRef.current !== historiaId) {
+      const el = document.getElementById(`historia-${historiaId}`);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      prevHistoriaIdRef.current = historiaId;
+    }
+  }, [historiaId]);
 
   const changeTab = (tab: 'historia' | 'rua' | 'cidade') => {
     setActiveTab(tab);
@@ -110,7 +145,7 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
   }
 
   return (
-    <div className={`min-h-screen bg-[#FAF7F2] ${className || ''}`}>
+    <div className={`min-h-screen bg-[#f4ede0] ${className || ''}`}>
       {/* Header */}
       <Header 
         setMenuOpen={setMenuOpen}
@@ -125,71 +160,101 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
       />
 
       {/* Main Content */}
-      <main className="w-full py-6">
-        <div className="max-w-5xl mx-auto px-4">
+      <main className="w-full py-6 bg-[#f4ede0]">
+        <div className="w-full max-w-none px-0">
           {/* Navigation Tabs */}
           <NavigationTab activeTab={activeTab} changeTab={changeTab} />
           
           {/* Content Card */}
-          <div className="bg-[#FEFCF8] rounded-xl shadow-sm ring-1 ring-[#A0958A]/20 p-6">
-            {activeTab === 'historia' && historia && (
+          <div className="bg-[#FEFCF8] rounded-xl shadow-sm ring-1 ring-[#A0958A]/20 p-2 sm:p-3 lg:p-0">
+            {activeTab === 'historia' && (
               <>
-                {/* Historia Content */}
-                <div className="mb-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="text-sm text-[#A0958A] font-medium">
-                      {rua?.nome && (
-                        <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#F5F1EB] text-[#6B5B4F] mr-2">
-                          <i className="fas fa-road mr-2 text-[#CD853F]"></i>
-                          {rua.nome}
-                        </span>
-                      )}
-                      {cidade?.nome && (
-                        <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#F5F1EB] text-[#6B5B4F]">
-                          <i className="fas fa-map-marker-alt mr-2 text-[#CD853F]"></i>
-                          {cidade.nome}
-                        </span>
-                      )}
-                    </div>
+                {/* Feed Header and Controls */}
+                <div className="mb-4 flex items-center justify-between">
+                  <div className="text-sm text-[#A0958A] font-medium">
+                    {rua?.nome && (
+                      <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#F5F1EB] text-[#6B5B4F] mr-2">
+                        <i className="fas fa-road mr-2 text-[#CD853F]"></i>
+                        {rua.nome}
+                      </span>
+                    )}
+                    {cidade?.nome && (
+                      <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#F5F1EB] text-[#6B5B4F]">
+                        <i className="fas fa-map-marker-alt mr-2 text-[#CD853F]"></i>
+                        {cidade.nome}
+                      </span>
+                    )}
                   </div>
-                  
-                  <h1 className="text-2xl sm:text-3xl font-bold mb-4 text-[#4A3F35]">{historia.titulo}</h1>
-                  
-                  <div className="prose max-w-none mb-6">
-                    <p className="text-[#6B5B4F] leading-relaxed text-base">{historia.descricao}</p>
-                  </div>
-                  
-                  {historia.ano && (
-                    <div className="mb-6 inline-flex items-center px-3 py-1 rounded-full bg-[#F5F1EB] text-sm text-[#6B5B4F] font-medium">
-                      <i className="fas fa-calendar-alt mr-2 text-[#CD853F]"></i>
-                      Ano: {historia.ano}
-                    </div>
+                  {/* <div className="flex items-center gap-2">
+                    <label htmlFor="sortOrder" className="text-sm text-[#6B5B4F]">Ordenar:</label>
+                    <select
+                      id="sortOrder"
+                      value={sortOrder}
+                      onChange={(e) => setSortOrder(e.target.value as 'asc' | 'desc')}
+                      className="text-sm bg-[#F5F1EB] text-[#4A3F35] border border-[#E6D3B4] rounded px-2 py-1"
+                    >
+                       <option value="asc">Antigas</option>
+                      <option value="desc">Recentes</option> 
+                    </select>
+                  </div> */}
+                </div>
+
+                {/* Historia Feed */}
+                <div className="flex flex-col gap-8 bg-[#f4ede0]">
+                  {sortedHistorias.length === 0 && (
+                    <div className="text-center py-8 text-[#6B5B4F]">Nenhuma história para esta rua.</div>
                   )}
-                  
-                  {/* Image Gallery */}
-                  {historia.fotos && historia.fotos.length > 0 && (
-                    <div className="mt-6">
-                      <h3 className="text-lg font-medium text-[#4A3F35] mb-4">
-                        <i className="fas fa-images mr-2 text-[#CD853F]"></i>
-                        Galeria de Imagens
-                      </h3>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {historia.fotos.map((foto, index) => (
-                          <div key={index} className="group cursor-pointer">
-                            <img
-                              src={foto}
-                              alt={`${historia.titulo} - Imagem ${index + 1}`}
-                              className="w-full h-48 object-cover rounded-lg shadow-sm group-hover:shadow-md transition-all duration-300 group-hover:scale-105"
-                              onClick={() => {
-                                // TODO: Add lightbox/modal for full-size viewing
-                                window.open(foto, '_blank');
-                              }}
-                            />
-                          </div>
-                        ))}
+
+                  {sortedHistorias.map((h) => (
+                    <div
+                      key={h.id}
+                      id={`historia-${h.id}`}
+                      className="rounded-xl bg-[#FFFDF9] odd:bg-[#FEFBF5] ring-1 ring-[#E6D3B4]/60 shadow-sm p-5 transition-shadow hover:shadow-md"
+                    >
+                      {h.ano && (
+                        <div className="mb-2 text-[#4A3F35]">
+                          <span className="inline-flex items-center gap-2">
+                            <i className="fas fa-calendar-alt text-[#CD853F]"></i>
+                            <span className="text-3xl sm:text-4xl font-extrabold leading-tight">{h.ano}</span>
+                          </span>
+                        </div>
+                      )}
+                      <h2 className="text-xl sm:text-2xl font-bold mb-4 text-[#4A3F35]">{h.titulo}</h2>
+
+                      {/* Divider between header (year/title) and content */}
+                      <div className="h-px bg-[#EADCCD] mb-4"></div>
+
+                      {/* Scrollable text container first */}
+                      <div className="prose max-w-none bg-[#FDFBF7] border border-[#F0E8DC] border-l-4 border-l-[#CD853F] rounded-lg p-4 max-h-64 overflow-y-auto mb-4 shadow-inner">
+                        <p className="text-[#6B5B4F] leading-relaxed text-base">{h.descricao}</p>
                       </div>
+
+                      {/* Divider between text and images */}
+                      <div className="h-px bg-[#F0E8DC] mb-4"></div>
+
+                      {/* Images below */}
+                      {h.fotos && h.fotos.length > 0 && (
+                        <div className="mt-2">
+                          <h3 className="text-lg font-medium text-[#4A3F35] mb-3">
+                            <i className="fas fa-images mr-2 text-[#CD853F]"></i>
+                            Imagens
+                          </h3>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                            {h.fotos.map((foto, index) => (
+                              <div key={index} className="group cursor-pointer">
+                                <img
+                                  src={foto}
+                                  alt={`${h.titulo} - Imagem ${index + 1}`}
+                                  className="w-full h-48 object-cover rounded-lg shadow-sm group-hover:shadow-md transition-all duration-300 group-hover:scale-105"
+                                  onClick={() => window.open(foto, '_blank')}
+                                />
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
-                  )}
+                  ))}
                 </div>
               </>
             )}
@@ -211,7 +276,7 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
                   
                   <h1 className="text-2xl sm:text-3xl font-bold mb-4 text-[#4A3F35]">{rua.nome}</h1>
                   
-                  <div className="prose max-w-none mb-6">
+                  <div className="prose max-w-none bg-[#FDFBF7] border border-[#F0E8DC] border-l-4 border-l-[#CD853F] rounded-lg p-4 mb-6 shadow-inner">
                     <p className="text-[#6B5B4F] leading-relaxed text-base">{rua.descricao}</p>
                   </div>
                   
@@ -248,7 +313,7 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
                 <div className="mb-6">
                   <h1 className="text-2xl sm:text-3xl font-bold mb-4 text-[#4A3F35]">{cidade.nome}</h1>
                   
-                  <div className="prose max-w-none mb-6">
+                  <div className="prose max-w-none bg-[#FDFBF7] border border-[#F0E8DC] border-l-4 border-l-[#CD853F] rounded-lg p-4 mb-6 shadow-inner">
                     <p className="text-[#6B5B4F] leading-relaxed text-base">{cidade.descricao}</p>
                   </div>
                   
