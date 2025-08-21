@@ -13,7 +13,11 @@ return (
         onClick={() => handleRuaClick(rua)}
       >
         <img
-          src={rua.fotos}
+          src={
+            Array.isArray(rua.fotos)
+              ? (rua.fotos[0] || 'https://placehold.co/600x400?text=Sem+foto')
+              : (rua.fotos as unknown as string) || 'https://placehold.co/600x400?text=Sem+foto'
+          }
           alt={rua.nome}
           className="w-full h-48 object-cover"
         />

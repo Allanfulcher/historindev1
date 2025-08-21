@@ -1557,6 +1557,119 @@ Na oficina, Ernesto fazia de tudo: de consertos simples à fabricação completa
 Com a compra de uma locomotiva sucateada em São Paulo, iniciou-se o processo de restauração. Em dezembro de 1999, chegou o grande momento: erguer as 38 toneladas de ferro. Dois guindastes, uma multidão de espectadores e um sonho suspenso no ar marcaram o nascimento de um dos cartões-postais mais emblemáticos de Canela.`,
     coordenadas: [-29.361410732232496, -50.8346716150922],
     orgId: 4
+  },
+  {
+    id: 171,
+    rua_id: 4,
+    criador: 'Eduardo da Silva Weber',
+    fotos: [
+      {
+        url: '/images/historias/banco-brasil.jpg',
+        credito: 'Eduardo da Silva Weber'
+      }
+    ],
+    titulo: 'Tradição e Modernidade no Banco do Brasil',
+    ano: 1989,
+    descricao: `Vemos a agência do Banco do Brasil na esquina da Rua Garibaldi com a Rua Madre Verônica, inaugurada em 1972. A fisionomia atual ainda é muito semelhante à da foto. Esse foi um dos primeiros prédios públicos levantados ou repaginados com traços da arquitetura bávara alemã da mansão de Oscar Knorr, construída em Gramado no início da década de 1940. Era o mesmo estilo que foi sendo adotado em construções públicas e privadas, principalmente a partir da década de 1970 e que desde então começou a representar a identidade arquitetônica local. As suas principais características são a alternância entre concreto e detalhes em madeira, visível nas sacadas e, sobretudo, na parte superior do prédio, onde os lambrequins adornam o telhado coberto por telhas de barro. Ademais, merecem destaque as janelas arredondadas rodeadas de tijolos maciços. No exterior, tanto a calçada, embelezada por canteiros com árvores e flores quanto as plantas ornamentais dos jardins refletem a tradição local de paisagismo iniciada antes mesmo de Gramado se tornar município. Uma luminária, do tipo “colonial”, presente em uma das fachadas, conferia sofisticação e um toque retrô ao lugar. Já na outra fachada, defronte à Rua Madre Verônica, no mesmo lado em que depois se construiu a Rua Coberta, o nome da agência escrito em caracteres góticos Old English reforçava o efeito nostálgico. Assim, percebe-se que o prédio como um todo visava trazer uma ideia de modernidade ancorada na tradição, algo típico da arquitetura pós-modernista. Ao lado da agência existia uma residência de madeira com cobertura de telhas de barro, evidenciando que nas últimas décadas do século XX uma quantidade considerável de moradias populares originais ainda coexistia com prédios públicos e privados no centro da cidade. Por fim, também se observa que a porta de uma das fachadas não existe mais. Assim, fica o convite para visitar o local e fotografá-lo no mesmo ângulo, a fim de perceber todas as mudanças e permanências.`,
+    coordenadas: [-29.378281328671793, -50.87249074437022],
+    orgId: 4
+  },
+  {
+    id: 172,
+    rua_id: 1,
+    criador: 'Eduardo da Silva Weber',
+    fotos: [
+      {
+        url: '/images/historias/segundaigrejametodista.jpg',
+        credito: 'Eduardo da Silva Weber'
+      }
+    ],
+    titulo: 'Segunda Igreja Metodista de Gramado: uma arquitetura compartilhada',
+    ano: 1987,
+    descricao: `A foto é da segunda Igreja Metodista da história de Gramado, cuja construção data de 1932. Ali estava anteriormente a primeira igreja, que fora desmontada e trazida da Linha Nova para esse terreno em 1913, no momento da transferência da sede do então 5° Distrito de Taquara daquela localidade para “o Gramado”. A que vemos na foto era de madeira e estava erigida sobre uma base de pedra-ferro (basalto), abundante na região. Seu telhado possuía duas águas pouco inclinadas e cobertas com telhas de zinco, material bastante utilizado na cobertura das construções a partir da década de 1920. No período, o templo religioso estava cercado por um muro baixo também de pedra basáltica, que não existia inicialmente. Havia dois portões de ferro retangulares que davam acesso ao terreno, sendo que o menor ficava defronte à porta principal e o maior dava para o estacionamento. Acima da porta de entrada existia uma pequena janela redonda, que lembra as rosáceas das catedrais medievais. Muitas igrejas católicas e não católicas foram edificadas nesse estilo arquitetônico, seja em Gramado, seja em outros lugares, igualmente colonizados por imigrantes alemães e italianos. Esta, por exemplo, se parece muito com o templo religioso católico dedicado a Nossa Senhora de Caravaggio, presente na localidade de Moleque, ao sul do município. As semelhanças ocorriam porque, muitas vezes, os construtores existentes eram poucos e as mesmas pessoas acabavam construindo tanto igrejas católicas quanto não católicas.
+`,
+    coordenadas: [-29.37732952416751, -50.87475496964195],
+    orgId: 4
+  },
+  {
+    id: 173,
+    rua_id: 8,
+    criador: 'Eduardo da Silva Weber',
+    fotos: [
+      {
+        url: '/images/historias/avenidadashortencias1957.jpg',
+        credito: 'Eduardo da Silva Weber'
+      }
+    ],
+    titulo: 'O asfalto substituindo os trilhos',
+    ano: 1957,
+    descricao: `A foto é de 1957. Vemos parte da atual Avenida das Hortênsias, que era chamada Avenida Coronel Diniz. O nome homenageava o intendente de Taquara, cargo equivalente ao de prefeito, e foi dado quando Gramado ainda era distrito desse município. Após a II Guerra Mundial (1939-1945) e, principalmente, com a desativação da ferrovia Porto Alegre–Canela no início da década de 1960, essa via urbana passou a integrar o principal trajeto rodoviário entre a capital e Gramado. Esse trajeto seguia em parte pela rodovia hoje conhecida como BR-116, depois passava por Nova Petrópolis, pela atual RS-235, cruzava o centro de Gramado e então continuava em direção a Canela. Na época do registro, a avenida havia sido recém-asfaltada. Nesse momento, o Brasil estava sob o governo de Juscelino Kubitschek (1956-1961), que intensificou os investimentos em rodovias já iniciados na Era Vargas (1930-1945), a exemplo da atual BR-116. No primeiro plano da imagem, à direita, vê-se a subida até o local onde foi construída a Igreja do Relógio, inaugurada em 1961. À esquerda, ainda não existia a rua que desce em direção ao bairro Piratini. Ao fundo, também à esquerda, aparece o prédio de dois andares que funcionou como estação rodoviária até meados dos anos 1980. No centro da cena, uma criança despreocupada anda de bicicleta no meio da rua praticamente deserta. Essa imagem simboliza uma Gramado que não existe mais, quando o centro era repleto de moradias populares, poucas construções elevadas e ainda possuía um tráfego tranquilo.`,
+    coordenadas: [-29.3808321560008, -50.87480818320929],
+    orgId: 4
+  },
+  {
+    id: 174,
+    rua_id: 4,
+    criador: 'Eduardo da Silva Weber',
+    fotos: [
+      {
+        url: '/images/historias/madreveronica1990.jpg',
+        credito: 'Eduardo da Silva Weber'
+      }
+    ],
+    titulo: 'Quando a Rua Coberta e os prédios não existiam',
+    ano: 1990,
+    descricao: `A foto é do início da década de 1990. Estávamos no período logo após a repaginação das fachadas e telhados dos prédios públicos para o estilo arquitetônico inspirado no bávaro alemão. No centro, ao fundo, vemos o Palácio dos Festivais já com arquitetura diferente daquela que possuía quando teve sua construção finalizada, no início da década de 1970. À sua frente, ainda não existia a Rua Coberta, cuja inauguração ocorreu em 31/12/1996. Também ao fundo, observa-se a torre da Igreja Matriz São Pedro, que havia sido inaugurada cerca de meio século antes. O prédio da Sociedade Recreio Gramadense, à esquerda da rua fotografada, ainda possuía dois andares e as fachadas retangulares anteriores à última reforma, além de seu telhado coberto de telhas de barro. Ao seu lado, na mesma quadra, estavam as canchas de bocha e bolão, que eram utilizadas pelos sócios desde sua inauguração em 1981, mas hoje não existem mais. Posteriormente, praticamente todo o lado esquerdo da rua foi sendo preenchido por prédios de quatro e cinco andares. Todos foram construídos no século XXI, quando se intensificou o processo de verticalização. O mesmo ocorreu no local onde estavam as canchas e também nas outras duas esquinas com a Rua Ricardo Sturmhofel, tanto naquela onde estavam os caminhões quanto na outra em frente a ela, onde estava estacionado o carro vermelho.`,
+    coordenadas: [-29.377487143024826, -50.87129127166002],
+    orgId: 4
+  },
+  {
+    id: 175,
+    rua_id: 4,
+    criador: 'Eduardo da Silva Weber',
+    fotos: [
+      {
+        url: '/images/historias/invernomadreveronica.jpg',
+        credito: 'Eduardo da Silva Weber'
+      }
+    ],
+    titulo: 'Fragmentos de final de inverno',
+    ano: 1985,
+    descricao: `A foto foi tirada em frente à agência do Banco do Brasil, cerca de dez anos antes da inauguração da Rua Coberta, que atualmente recobre por completo uma das três quadras da Rua Madre Verônica. A Sociedade Recreio Gramadense e suas canchas de bocha e bolão podem ser vistas ao fundo, na quadra seguinte. O prédio do banco foi outro dos edifícios públicos de Gramado que receberam, em meados da década de 1980, uma nova estética inspirada na mansão do alemão Oscar Knorr. Usada como modelo para a arquitetura gramadense desde então, essa residência possui raízes no estilo bávaro alemão e está preservada até hoje, na Avenida das Hortênsias, em direção à Canela. Na época do registro, a sede da tradicional sociedade tinha dois andares e seguia a arquitetura modernista. Até o início da década de 1980, estilo semelhante também podia ser visto na Prefeitura e no Cine Embaixador (atual Palácio dos Festivais). Esse prédio de alvenaria substituiu o anterior, de madeira, inaugurado em 1928. Os traços modernistas mantiveram-se até a última reforma, no final da década de 1990, que introduziu modificações em diversas partes da edificação. No andar superior, abaixo do letreiro, estava uma placa em comemoração aos 70 anos de fundação, detalhe que indica que o trecho da rua foi fotografado por volta de 1985. Ademais, estávamos em agosto ou setembro. Como sabemos? Há dois indícios: o céu nublado de final de inverno e as azaleias floridas, que aparecem no canto inferior esquerdo da cena, em frente à agência bancária.`,
+    coordenadas: [-29.37825187313228, -50.8725898292598],
+    orgId: 4
+  },
+  {
+    id: 176,
+    rua_id: 10,
+    criador: 'Eduardo da Silva Weber',
+    fotos: [
+      {
+        url: '/images/historias/incendio.jpg',
+        credito: 'Eduardo da Silva Weber'
+      }
+    ],
+    titulo: 'O Incêndio que Mudou o Vale do Bom Retiro',
+    ano: 1941,
+    descricao: `Quando foi registrado esse incêndio, a área que atualmente dá lugar ao Lago Negro e ao Parque Carriere era parte das terras pertencentes aos herdeiros dos irmãos Henrique e Luiz Bier. Elas foram adquiridas sobretudo ao longo da década de 1870 e registradas no início da década de 1880. Até então, eram possessões do capitão Francisco Alves dos Santos na região. Após a morte dos irmãos Bier, as terras foram sendo loteadas e vendidas, inicialmente, a imigrantes italianos, na década de 1910, e, depois, a partir do final da década de 1930, a veranistas de origem alemã, residentes principalmente em Porto Alegre. Mas, além do setor imobiliário, toda essa extensão geográfica também foi aproveitada no setor turístico, tanto pelos seus atrativos naturais, que incluíam vales, arroios, nascentes d’água, cascatas e vistas panorâmicas, quanto pela construção de atrativos artificiais, como parques, hotéis, lagos e praças. Nesse sentido, a parte das terras em que ocorreu o incêndio possuía um vale repleto de arroios e mata nativa, também atrativa. Era uma área mais afastada, e por isso recebeu o nome de Vale do Bom Retiro. Para aquele lado costumavam se “retirar” muitos dos visitantes que vinham a Gramado nas primeiras décadas do século XX para passear em meio à natureza. Tamanho conjunto geográfico e turístico era administrado por Leopoldo Rosenfeldt, também projetista de muitas dessas atrações turísticas. Ele depois adquiriu toda a área e, pouco antes de falecer, a doou à Prefeitura Municipal. Ainda durante o seu período de gestão, o Vale do Bom Retiro foi consumido pelas chamas ao longo de oito dias. Um incêndio florestal dessas proporções se explica pelo longo período de atividade do fenômeno El Niño entre os anos de 1939 e 1942, que impactou diversas regiões do Brasil com eventos climáticos extremos, que incluíram também secas, enchentes e nevascas. A solução encontrada pelo administrador foi escavar uma grande vala ao redor das chamas, de modo a impedir que se alastrassem ainda mais, e então atear fogo no interior dela. Surpreendentemente, o incêndio foi controlado. Essa técnica é hoje denominada pela Polícia Ambiental de “fogo contra fogo”. Na época, porém, a atitude quase ocasionou a prisão de Leopoldo Rosenfeldt pelo delegado local.`,
+    coordenadas: [-29.394375183090617, -50.87809554111067],
+    orgId: 4
+  },
+  {
+    id: 177,
+    rua_id: 4,
+    criador: 'Eduardo da Silva Weber',
+    fotos: [
+      {
+        url: '/images/historias/historia280725.jpg',
+        credito: 'Eduardo da Silva Weber'
+      }
+    ],
+    titulo: 'A transformação da Sociedade Recreio Gramadense',
+    ano: 2011,
+    descricao: `A foto mostra uma das esquinas formadas pela Rua Garibaldi e a Rua Madre Verônica. A sede da Sociedade Recreio Gramadense toma a cena. A sua arquitetura foi inteiramente transformada na reforma iniciada em 1995 e finalizada em 1999. Foram significativas as mudanças em relação à estética anterior, presente desde a inauguração do prédio em meados da década de 1950. Após a reforma, o lugar ganhou um terceiro andar, nova identidade visual e acréscimos estruturais. O antigo telhado de quatro águas com telhas francesas de barro e platibandas retas deu lugar a uma cobertura mais complexa, com telhas escuras contemporâneas, duas águas e três grandes mansardas embutidas, que integram a nova fachada. Esta passou a ter três telhados de duas águas com frontões decorados em madeira diagonal e janelas como nos chalés alpinos, formando um terceiro andar habitável. A inclinação é regular em dois volumes e irregular no que fica na extremidade, criando uma fachada híbrida, que mistura referenciais do passado e da contemporaneidade. A estética germânica alpina e a francesa das mansardas são históricas; já a inclinação incomum do telhado da extremidade remete à estética contemporânea, ligada à cultura de massas e ao universo de Hollywood. As janelas basculantes foram substituídas por grandes janelas de vidro. O pórtico de entrada com quatro colunas foi preservado, mas sua cor foi igualada à do restante da construção. A antiga sacada foi suprimida, dando lugar a paredes que ampliaram a extensão lateral do edifício, deixando-o com formato que lembra o bloco T do Jogo Tetris. As canchas de bocha e bolão foram demolidas, e um restaurante ocupava uma das laterais, evidenciando os novos usos urbanos da sede.`,
+    coordenadas: [-29.378147282209046, -50.87232882133208],
+    orgId: 4
   }
 
 ];
