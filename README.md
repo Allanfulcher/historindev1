@@ -13,11 +13,12 @@ Historin Dev
 - [x] Adcionar Pagina do Quiz
 - [x] Adcionar pins no mapa
 - [x] Migrar funcionalidade completa do mapa
+- [x] Adcionar selecionar ruas
+- [x] Adcionar selecionar cidades
+- [x] Adicionar Botao de Centralizar Mapa
 
 - [ ] Adcionar integracao com o formspree
 - [ ] Adcionar sistema de tags
-- [ ] Adcionar selecionar ruas
-- [ ] Adcionar selecionar cidades
 - [ ] Migrar Banco de dados para um tradicional
 - [ ] Criar Sistema de atualizacao de banco de dados
 - [ ] Simplificacao e organizacao de componentes

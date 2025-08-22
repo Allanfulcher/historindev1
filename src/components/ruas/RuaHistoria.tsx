@@ -9,6 +9,8 @@ import Header from '../Header';
 import Menu from '../Menu';
 import NavigationTab from './NavigationTab';
 import FeedbackPopup from '../popups/FeedbackPopup';
+import CitySelector from './CitySelector';
+import RuaSelector from './RuaSelector';
 
 interface RuaHistoriaProps {
   className?: string;
@@ -32,6 +34,7 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc'); // asc = oldest first
   const focusedHistoriaRef = useRef<HTMLDivElement | null>(null);
   const [showQuiz, setShowQuiz] = useState(false);
+  const [selectedCityId, setSelectedCityId] = useState<string>('1'); // Default to Gramado
 
   useEffect(() => {
     // Initialize database
@@ -45,6 +48,10 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
     if (ruaId) {
       const foundRua = legacyDb.getRuaById(ruaId);
       setRua(foundRua || null);
+      // Set selected city based on rua's city
+      if (foundRua?.cidade_id) {
+        setSelectedCityId(foundRua.cidade_id);
+      }
       // Load all historias for this rua
       const list = legacyDb.getHistoriasByRuaId(ruaId);
       setRuaHistorias(list || []);
@@ -165,6 +172,21 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
       {/* Main Content */}
       <main className="w-full py-6 bg-[#f4ede0]">
         <div className="w-full max-w-none px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 2xl:px-32 bg-[#f4ede0]">
+          {/* Selectors Section */}
+          <div className="mb-6 bg-white rounded-lg p-4 shadow-sm">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <CitySelector 
+                selectedCityId={selectedCityId}
+                onCityChange={setSelectedCityId}
+              />
+              <RuaSelector 
+                ruas={legacyDb.getRuas()}
+                selectedRuaId={ruaId || ''}
+                selectedCityId={selectedCityId}
+              />
+            </div>
+          </div>
+
           {/* Navigation Tabs */}
           <NavigationTab activeTab={activeTab} changeTab={changeTab} />
           
