@@ -77,7 +77,7 @@ const MapView: React.FC<MapViewProps> = ({
     if (!isClient || !L) return;
 
     // Initialize the map only once, centered on Gramado coordinates
-    mapRef.current = L.map('map').setView([-29.368110031921475, -50.83614840951764], 12);
+    mapRef.current = L.map('map', { zoomControl: false }).setView([-29.368110031921475, -50.83614840951764], 12);
     
     // Add OpenStreetMap tiles with proper attribution
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -124,6 +124,12 @@ const MapView: React.FC<MapViewProps> = ({
     }
   }, [selectedType, isClient, L]);
 
+  const recenterMap = () => {
+    if (mapRef.current) {
+      mapRef.current.setView([-29.368110031921475, -50.83614840951764], 12);
+    }
+  };
+
   const addMarkers = () => {
     if (!L || !mapRef.current) return;
 
@@ -155,22 +161,40 @@ const MapView: React.FC<MapViewProps> = ({
         ) {
           const marker = L.marker(rua.coordenadas, { icon: ruaIcon }).addTo(mapRef.current);
           marker.bindPopup(`
-            <b>${rua.nome}</b><br>
-            <a href="https://www.google.com/maps?q=${rua.coordenadas[0]},${rua.coordenadas[1]}" target="_blank">
-              Ver no Google Maps
-            </a>
+            <div style="text-align: center; padding: 8px;">
+              <h3 style="margin: 0 0 12px 0; font-size: 16px; font-weight: bold; color: #333;">${rua.nome}</h3>
+              <button 
+                onclick="window.location.href='/rua/${rua.id}'" 
+                style="
+                  background-color: #3b82f6; 
+                  color: white; 
+                  border: none; 
+                  padding: 8px 16px; 
+                  border-radius: 6px; 
+                  cursor: pointer; 
+                  font-size: 14px;
+                  margin-bottom: 8px;
+                  display: block;
+                  width: 100%;
+                "
+                onmouseover="this.style.backgroundColor='#2563eb'" 
+                onmouseout="this.style.backgroundColor='#3b82f6'"
+              >
+                Ver Página da Rua
+              </button>
+              <a 
+                href="https://www.google.com/maps?q=${rua.coordenadas[0]},${rua.coordenadas[1]}" 
+                target="_blank"
+                style="
+                  color: #6b7280; 
+                  text-decoration: none; 
+                  font-size: 12px;
+                "
+              >
+                Ver no Google Maps
+              </a>
+            </div>
           `);
-
-          marker.on('click', () => {
-            setSelectedRuaId(rua.id);
-            setPreviewContent({
-              type: 'rua',
-              title: rua.nome,
-              description: rua.descricao || '',
-              images: historias.filter(h => h.rua_id === rua.id).flatMap(h => h.fotos),
-              ruaId: rua.id,
-            });
-          });
 
           markersRef.current.push(marker);
         } else {
@@ -199,23 +223,40 @@ const MapView: React.FC<MapViewProps> = ({
         ) {
           const marker = L.marker(historia.coordenadas, { icon: historiaIcon }).addTo(mapRef.current);
           marker.bindPopup(`
-            <b>${historia.titulo}</b><br>
-            <a href="https://www.google.com/maps?q=${historia.coordenadas[0]},${historia.coordenadas[1]}" target="_blank">
-              Ver no Google Maps
-            </a>
+            <div style="text-align: center; padding: 8px;">
+              <h3 style="margin: 0 0 12px 0; font-size: 16px; font-weight: bold; color: #333;">${historia.titulo}</h3>
+              <button 
+                onclick="window.location.href='/rua/${historia.rua_id}#historia-${historia.id}'" 
+                style="
+                  background-color: #cb2940; 
+                  color: white; 
+                  border: none; 
+                  padding: 8px 16px; 
+                  border-radius: 6px; 
+                  cursor: pointer; 
+                  font-size: 14px;
+                  margin-bottom: 8px;
+                  display: block;
+                  width: 100%;
+                "
+                onmouseover="this.style.backgroundColor='#b91c1c'" 
+                onmouseout="this.style.backgroundColor='#cb2940'"
+              >
+                Ver História
+              </button>
+              <a 
+                href="https://www.google.com/maps?q=${historia.coordenadas[0]},${historia.coordenadas[1]}" 
+                target="_blank"
+                style="
+                  color: #6b7280; 
+                  text-decoration: none; 
+                  font-size: 12px;
+                "
+              >
+                Ver no Google Maps
+              </a>
+            </div>
           `);
-
-          marker.on('click', () => {
-            setSelectedRuaId(historia.rua_id);
-            setPreviewContent({
-              type: 'historia',
-              title: historia.titulo,
-              description: historia.descricao,
-              images: historia.fotos,
-              historiaId: historia.id,
-              ruaId: historia.rua_id,
-            });
-          });
 
           markersRef.current.push(marker);
         } else {
@@ -237,7 +278,7 @@ const MapView: React.FC<MapViewProps> = ({
   return (
     <div ref={mapContainerRef} className="map-container relative h-96 w-full z-0">
       {/* Buttons in the top left corner to toggle between street and story markers */}
-      <div className="absolute top-2 left-2">
+      <div className="absolute top-2 left-2 z-[1000]">
         <button
           onClick={() => setSelectedType('ruas')}
           className={`px-4 py-2 ${
@@ -255,6 +296,38 @@ const MapView: React.FC<MapViewProps> = ({
           Histórias
         </button>
       </div>
+      
+      {/* Recenter button in the top right corner */}
+      <div className="absolute top-2 right-2 z-[1000]">
+        <button
+          onClick={recenterMap}
+          className="px-3 py-2 bg-white text-gray-700 rounded-md border border-gray-300 hover:bg-gray-50 transition-colors duration-200 shadow-sm"
+          title="Recentrar mapa em Gramado"
+          style={{ zIndex: 1000 }}
+        >
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            className="h-5 w-5" 
+            fill="none" 
+            viewBox="0 0 24 24" 
+            stroke="currentColor"
+          >
+            <path 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              strokeWidth={2} 
+              d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" 
+            />
+            <path 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              strokeWidth={2} 
+              d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" 
+            />
+          </svg>
+        </button>
+      </div>
+      
       {/* Map div where the map will be rendered */}
       <div id="map" className="h-full w-full rounded-lg"></div>
     </div>

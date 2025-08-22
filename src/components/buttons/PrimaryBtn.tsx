@@ -7,9 +7,16 @@ interface PrimaryBtnProps {
 }
 
 const PrimaryBtn: React.FC<PrimaryBtnProps> = ({ children, onClick, disabled }) => {
+    const handleClick = () => {
+        console.log('PrimaryBtn clicked, onClick:', onClick);
+        if (onClick) {
+            onClick();
+        }
+    };
+
     return (
         <button
-            onClick={onClick}
+            onClick={handleClick}
             disabled={disabled}
             className="bg-[#8B4513] hover:bg-[#A0522D] text-white py-2 px-4 rounded whitespace-nowrap flex-shrink-0 text-sm sm:text-base transition-colors duration-200"
         >

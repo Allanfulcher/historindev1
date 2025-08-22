@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import PrimaryBtn from './buttons/PrimaryBtn';
 import TransparentBtn from './buttons/TransparentBtn';
@@ -8,13 +8,10 @@ import TransparentBtn from './buttons/TransparentBtn';
 interface HeaderProps {
   setMenuOpen: (open: boolean) => void;
   setShowFeedback: (show: boolean) => void;
+  setShowQuiz: (show: boolean) => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ setMenuOpen, setShowFeedback }) => {
-  const [showQuiz, setShowQuiz] = useState(false);
-  const [email, setEmail] = useState('');
-  const [emailSubmitted, setEmailSubmitted] = useState(false);
-  const [quizStarted, setQuizStarted] = useState(false);
+const Header: React.FC<HeaderProps> = ({ setMenuOpen, setShowFeedback, setShowQuiz }) => {
 
   // Share function
   const handleShare = async () => {
@@ -55,22 +52,6 @@ const Header: React.FC<HeaderProps> = ({ setMenuOpen, setShowFeedback }) => {
           <i className="fas fa-question-circle mr-2" />
           Quiz
         </PrimaryBtn>
-        
-        {/* Quiz Modal (conditionally rendered) */}
-        {showQuiz && typeof window !== 'undefined' && (window as any).QuizModal && (
-          <div>
-            {React.createElement((window as any).QuizModal, {
-              isOpen: showQuiz,
-              onClose: () => setShowQuiz(false),
-              email: email,
-              setEmail: setEmail,
-              emailSubmitted: emailSubmitted,
-              setEmailSubmitted: setEmailSubmitted,
-              quizStarted: quizStarted,
-              setQuizStarted: setQuizStarted
-            })}
-          </div>
-        )}
         
         {/* Share button */}
         <TransparentBtn

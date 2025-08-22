@@ -138,11 +138,18 @@ export function normalizeHistoria(legacyHistoria: LegacyHistoria): Historia {
 export function normalizeRua(legacyRua: LegacyRua): Rua {
   const normalizedFotos = Array.isArray(legacyRua.fotos) ? legacyRua.fotos[0] : legacyRua.fotos;
   
+  // Ensure coordenadas is a proper tuple
+  const normalizedCoordenadas: [number, number] | undefined = 
+    legacyRua.coordenadas && legacyRua.coordenadas.length >= 2
+      ? [legacyRua.coordenadas[0], legacyRua.coordenadas[1]]
+      : undefined;
+  
   return {
     id: legacyRua.id.toString(),
     nome: legacyRua.nome,
     descricao: legacyRua.descricao,
     fotos: normalizedFotos,
+    coordenadas: normalizedCoordenadas,
     cidade_id: legacyRua.cidade_id.toString()
   };
 }

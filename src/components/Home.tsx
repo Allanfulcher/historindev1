@@ -8,6 +8,7 @@ import Menu from './Menu';
 import MapView from './MapView';
 import LegadoAfricanoCard from './cards/LegadoAfricanoCard';
 import FeedbackPopup from './popups/FeedbackPopup';
+import QuizModal from './popups/QuizModal';
 import OnboardingPopup from './popups/OnboardingPopup';
 import DonationPopup from './popups/DonationPopup';
 import PopupCarrossel from './popups/PopupCarrossel';
@@ -45,24 +46,11 @@ const Home: React.FC<HomeProps> = ({ onPreviewOpen }) => {
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [showDonation, setShowDonation] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
+  const [showQuiz, setShowQuiz] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
 
   const handleRuaClick = (rua: Rua) => {
     window.location.href = `/rua/${rua.id}`;
-  };
-
-  const handleHistoriaClick = (historia: Historia) => {
-    onPreviewOpen({
-      type: 'historia',
-      title: historia.titulo,
-      content: historia.descricao,
-      image: historia.fotos[0]
-    });
-  };
-
-  const handleCityClick = (cidade: Cidade) => {
-    setSelectedCityId(cidade.id);
-    // You could add logic here to filter content by city
   };
 
   const handlePreviewContent = (content: PreviewContent) => {
@@ -80,6 +68,7 @@ const Home: React.FC<HomeProps> = ({ onPreviewOpen }) => {
       <Header 
         setMenuOpen={setMenuOpen}
         setShowFeedback={setShowFeedback}
+        setShowQuiz={setShowQuiz}
       />
 
       {/* Menu Component */}
@@ -145,6 +134,13 @@ const Home: React.FC<HomeProps> = ({ onPreviewOpen }) => {
         <FeedbackPopup
           isOpen={showFeedback}
           onClose={() => setShowFeedback(false)}
+        />
+      )}
+
+      {showQuiz && (
+        <QuizModal
+          isOpen={showQuiz}
+          onClose={() => setShowQuiz(false)}
         />
       )}
 

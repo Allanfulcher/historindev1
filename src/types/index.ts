@@ -5,6 +5,7 @@ export interface Rua {
   fotos: string;
   cidade_id?: string;
   descricao?: string;
+  coordenadas?: [number, number];
 }
 
 export interface Historia {

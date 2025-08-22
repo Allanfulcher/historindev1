@@ -31,6 +31,7 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
   const [ruaHistorias, setRuaHistorias] = useState<Historia[]>([]);
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc'); // asc = oldest first
   const focusedHistoriaRef = useRef<HTMLDivElement | null>(null);
+  const [showQuiz, setShowQuiz] = useState(false);
 
   useEffect(() => {
     // Initialize database
@@ -149,6 +150,7 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
     <div className={`min-h-screen bg-[#f4ede0] ${className || ''}`}>
       {/* Header */}
       <Header 
+        setShowQuiz={setShowQuiz}
         setMenuOpen={setMenuOpen}
         setShowFeedback={setShowFeedback}
       />
