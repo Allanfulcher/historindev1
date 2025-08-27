@@ -6,33 +6,63 @@ const Contribuir: React.FC = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState<{success: boolean; message: string} | null>(null);
 
-    const handleJoinSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    // Google Apps Script URL - you'll need to create a separate script for this form
+    const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwUpCZnKxIpknIGRWDJD2FaycKppB9ilt323dpZoBmEv8nRbgCpHDlNrTQwZD5Axkrhig/exec';
+
+    const handleJoinSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsSubmitting(true);
         setSubmitStatus(null);
         
-        try {
-            const formData = new FormData(e.currentTarget);
-            const formValues = Object.fromEntries(formData.entries());
-            
-            console.log('Form submitted:', formValues);
-            // Simulate API call
-            await new Promise(resolve => setTimeout(resolve, 1000));
+        const formElement = e.currentTarget;
+        const formData = new FormData(formElement);
+        const formValues = Object.fromEntries(formData.entries());
+        
+        // Create and submit form via hidden iframe (bypasses CORS)
+        const iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.name = 'contribuir-frame';
+        document.body.appendChild(iframe);
+
+        const form = document.createElement('form');
+        form.action = GOOGLE_APPS_SCRIPT_URL;
+        form.method = 'POST';
+        form.target = 'contribuir-frame';
+
+        // Add form fields
+        const fields = [
+            { name: 'nome', value: formValues.nome as string || '' },
+            { name: 'email', value: formValues.email as string || '' },
+            { name: 'mensagem', value: formValues.mensagem as string || '' }
+        ];
+
+        fields.forEach(field => {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = field.name;
+            input.value = field.value;
+            form.appendChild(input);
+        });
+
+        document.body.appendChild(form);
+        form.submit();
+
+        // Clean up and show success after submission
+        setTimeout(() => {
+            document.body.removeChild(form);
+            document.body.removeChild(iframe);
             
             setSubmitStatus({
                 success: true,
                 message: 'Obrigado por se inscrever! Entraremos em contato em breve.'
             });
-            e.currentTarget.reset();
-        } catch (error) {
-            console.error('Submission error:', error);
-            setSubmitStatus({
-                success: false,
-                message: 'Ocorreu um erro. Por favor, tente novamente mais tarde.'
-            });
-        } finally {
+            
+            // Reset form using stored reference
+            if (formElement) {
+                formElement.reset();
+            }
             setIsSubmitting(false);
-        }
+        }, 1000);
     };
 
     return (
