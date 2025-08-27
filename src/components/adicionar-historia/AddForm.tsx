@@ -9,6 +9,12 @@ interface FormData {
     historia: string;
 }
 
+interface SubmissionState {
+    isSubmitting: boolean;
+    isSuccess: boolean;
+    error: string | null;
+}
+
 const AddForm: React.FC = () => {
     const [formData, setFormData] = useState<FormData>({
         nome: '',
@@ -17,6 +23,15 @@ const AddForm: React.FC = () => {
         historia: ''
     });
 
+    const [submissionState, setSubmissionState] = useState<SubmissionState>({
+        isSubmitting: false,
+        isSuccess: false,
+        error: null
+    });
+
+    // Google Apps Script URL for story submissions
+    const GOOGLE_APPS_SCRIPT_URL = 'YOUR_ADD_HISTORIA_GOOGLE_APPS_SCRIPT_URL_HERE';
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { id, value } = e.target;
         setFormData({ ...formData, [id]: value });
@@ -24,10 +39,102 @@ const AddForm: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(formData);
+        
+        // Reset submission state
+        setSubmissionState({
+            isSubmitting: true,
+            isSuccess: false,
+            error: null
+        });
+
+        const formElement = e.currentTarget;
+
+        // Create and submit form via hidden iframe (bypasses CORS)
+        const iframe = document.createElement('iframe');
+        iframe.style.display = 'none';
+        iframe.name = 'add-historia-frame';
+        document.body.appendChild(iframe);
+
+        const form = document.createElement('form');
+        form.action = GOOGLE_APPS_SCRIPT_URL;
+        form.method = 'POST';
+        form.target = 'add-historia-frame';
+
+        // Add form fields
+        const fields = [
+            { name: 'nome', value: formData.nome },
+            { name: 'telefone', value: formData.telefone },
+            { name: 'local', value: formData.local },
+            { name: 'historia', value: formData.historia }
+        ];
+
+        fields.forEach(field => {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = field.name;
+            input.value = field.value;
+            form.appendChild(input);
+        });
+
+        document.body.appendChild(form);
+        form.submit();
+
+        // Clean up and show success after submission
+        setTimeout(() => {
+            document.body.removeChild(form);
+            document.body.removeChild(iframe);
+            
+            setSubmissionState({
+                isSubmitting: false,
+                isSuccess: true,
+                error: null
+            });
+
+            // Reset form data
+            setFormData({
+                nome: '',
+                telefone: '',
+                local: '',
+                historia: ''
+            });
+
+            // Reset form using stored reference
+            if (formElement) {
+                formElement.reset();
+            }
+
+            // Clear success message after 3 seconds
+            setTimeout(() => {
+                setSubmissionState({
+                    isSubmitting: false,
+                    isSuccess: false,
+                    error: null
+                });
+            }, 3000);
+        }, 1000);
     };
     return (
         <form onSubmit={handleSubmit}>
+          {/* Success Message */}
+          {submissionState.isSuccess && (
+            <div className="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
+              <div className="flex items-center">
+                <i className="fas fa-check-circle mr-2"></i>
+                História enviada com sucesso! Entraremos em contato para captar os materiais.
+              </div>
+            </div>
+          )}
+
+          {/* Error Message */}
+          {submissionState.error && (
+            <div className="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
+              <div className="flex items-center">
+                <i className="fas fa-exclamation-circle mr-2"></i>
+                {submissionState.error}
+              </div>
+            </div>
+          )}
+
           <div className="mb-4">
             <label className="block text-[#4A3F35] text-sm font-bold mb-2" htmlFor="nome">
               Nome:
@@ -39,6 +146,7 @@ const AddForm: React.FC = () => {
               placeholder="Seu nome"
               value={formData.nome}
               onChange={handleChange}
+              disabled={submissionState.isSubmitting}
               required
             />
           </div>
@@ -54,6 +162,7 @@ const AddForm: React.FC = () => {
               placeholder="Seu telefone"
               value={formData.telefone}
               onChange={handleChange}
+              disabled={submissionState.isSubmitting}
               required
             />
           </div>
@@ -69,6 +178,7 @@ const AddForm: React.FC = () => {
               placeholder="Local relacionado à história"
               value={formData.local}
               onChange={handleChange}
+              disabled={submissionState.isSubmitting}
               required
             />
           </div>
@@ -84,6 +194,7 @@ const AddForm: React.FC = () => {
               placeholder="Compartilhe uma história relacionada ao local ou à época descrita. Pode ser um acontecimento histórico, memórias pessoais ou contribuições culturais."
               value={formData.historia}
               onChange={handleChange}
+              disabled={submissionState.isSubmitting}
               required
             />
           </div>
@@ -97,10 +208,22 @@ const AddForm: React.FC = () => {
 
           <div className="flex items-center justify-center">
             <button
-              className="bg-[#8B4513] hover:bg-[#A0522D] text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-[#8B4513]/50 transition-colors duration-200"
               type="submit"
+              disabled={submissionState.isSubmitting}
+              className={`font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-[#8B4513]/50 transition-colors duration-200 ${
+                submissionState.isSubmitting
+                  ? 'bg-gray-400 cursor-not-allowed text-white'
+                  : 'bg-[#8B4513] hover:bg-[#A0522D] text-white'
+              }`}
             >
-              Enviar
+              {submissionState.isSubmitting ? (
+                <div className="flex items-center">
+                  <i className="fas fa-spinner fa-spin mr-2"></i>
+                  Enviando...
+                </div>
+              ) : (
+                'Enviar'
+              )}
             </button>
           </div>
         </form>

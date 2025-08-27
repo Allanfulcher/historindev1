@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
+import { trackHashRoute, trackUTMParameters } from '../lib/gtag';
 
 interface HashRouteHandlerProps {
   children: React.ReactNode;
@@ -17,9 +18,17 @@ const HashRouteHandler: React.FC<HashRouteHandlerProps> = ({ children }) => {
     const checkAndHandleHash = () => {
       const hash = window.location.hash;
       
+      // Track UTM parameters on initial load
+      if (isInitialLoad) {
+        trackUTMParameters();
+      }
+      
       if (hash && pathname === '/') {
         // We have a hash route on the home page, handle it
         const route = hash.substring(1);
+        
+        // Track the hash route
+        trackHashRoute(route);
         
         // Check if it matches our rua/historia pattern
         const ruaHistoriaMatch = route.match(/^\/rua\/(\d+)\/historia\/(\d+)$/);
