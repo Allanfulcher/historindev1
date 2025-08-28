@@ -30,7 +30,7 @@ const AddForm: React.FC = () => {
     });
 
     // Google Apps Script URL for story submissions
-    const GOOGLE_APPS_SCRIPT_URL = 'YOUR_ADD_HISTORIA_GOOGLE_APPS_SCRIPT_URL_HERE';
+    const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwN3qNr2dG5ijnCYnFHs5nzfiFZFlsyPzPuTLbjKqvwf8qwbjWvWm6PkZxCfKajgVnoKQ/exec';
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { id, value } = e.target;
