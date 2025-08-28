@@ -21,6 +21,7 @@ const Sobre: React.FC = () => {
   const [showJoinModal, setShowJoinModal] = useState(false);
   const searchParams = useSearchParams();
   const [showFeedback, setShowFeedback] = useState(false);
+  const [showQuiz, setShowQuiz] = useState(false);
 
   // Handle hash navigation for donation section
   useEffect(() => {
@@ -91,6 +92,7 @@ const Sobre: React.FC = () => {
       <Header 
         setMenuOpen={() => setMenuOpen(true)} 
         setShowFeedback={setShowFeedback} 
+        setShowQuiz={setShowQuiz}
       />
       <Menu 
         menuOpen={menuOpen} 

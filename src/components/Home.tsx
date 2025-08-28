@@ -15,6 +15,7 @@ import PopupCarrossel from './popups/PopupCarrossel';
 import SiteInfo from './cards/SiteInfo';
 import Footer from './extra/footer';
 import RecomendedStreets from './cards/RecomendedStreets';
+import WelcomeCard from './cards/WelcomeCard';
 
 interface HomeProps {
   data?: any; // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -95,12 +96,16 @@ const Home: React.FC<HomeProps> = ({ onPreviewOpen }) => {
           </div>
         )}
 
+        <div className="max-w-4xl mx-auto px-4 py-8">
+          <WelcomeCard />
+        </div>
+
         {/* Content Sections */}
         <div className="max-w-4xl mx-auto px-4 py-8">
           {/* Recommended Streets */}
           <section className="mb-12">
             <h2 className="text-2xl font-bold text-[#4A3F35] mb-6">Ruas Recomendadas</h2>
-            <RecomendedStreets ruas={ruas} handleRuaClick={handleRuaClick} />
+            <RecomendedStreets ruas={ruas} historias={historias} handleRuaClick={handleRuaClick} />
           </section>  
         </div>
 
