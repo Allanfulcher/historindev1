@@ -25,11 +25,6 @@ const SiteInfo = () => {
 
   return (
     <div className="flex flex-col md:flex-row items-center">
-      <img
-        src="https://i.imgur.com/nav9mZa.jpeg"
-        alt="Informações sobre a plataforma"
-        className="w-full md:w-1/3 rounded-lg mb-4 md:mb-0 md:mr-6 object-cover"
-      />
       <div className="flex-1">
         <h2 className="text-xl text-[#6B5B4F] font-bold mb-2">Apoio e Patrocínio</h2>
         <p className="text-[#6B5B4F] mb-4">Obrigado aos parceiros que tornam o Historin possível.</p>

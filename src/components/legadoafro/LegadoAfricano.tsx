@@ -138,7 +138,7 @@ const LegadoAfricano: React.FC<LegadoAfricanoProps> = ({ setShowDonation }) => {
         )}
 
         {/* Support Section */}
-        <section className="bg-[#FEFCF8] rounded-lg p-6 border border-[#F5F1EB] text-center">
+        {/*<section className="bg-[#FEFCF8] rounded-lg p-6 border border-[#F5F1EB] text-center">
           <h3 className="text-xl font-semibold text-[#4A3F35] mb-3">
             Apoie a Preservação da História
           </h3>
@@ -149,7 +149,7 @@ const LegadoAfricano: React.FC<LegadoAfricanoProps> = ({ setShowDonation }) => {
             <i className="fas fa-heart mr-2" />
             Fazer Doação
           </PrimaryBtn>
-        </section>
+        </section>*/}
       </div>
     </div>
   );
