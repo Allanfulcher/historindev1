@@ -24,3 +24,26 @@ Historin Dev
 - [ ] Simplificacao e organizacao de componentes
 
 
+- [ ] Home Page
+
+    - [ ] Make the map take the full width
+    - [ ] Remove stories from the map, keep only street icons
+    - [ ] On map click, show a photo preview of the location instead of opening Maps
+
+- [ ] Street / Story Page
+
+    - [ ] Show recommended places below the street (only from the selected city)
+    - [ ] Copy Instagram-style story display:
+        - [ ] Show the story image above the title, taking full screen width
+        - [ ] If multiple images exist, allow swiping like a carousel
+        - [ ] Show only the beginning of the story text with a "more" link to expand the full text (like Instagram)
+
+- [ ] Timeline view:
+
+    - [ ] Default to the Instagram-like timeline
+    - [ ] Add side timeline view
+
+- [ ] Quiz
+
+    - [ ] Add name and city fields to the form
+    - [ ] Separate questions by city or "general"
