@@ -38,13 +38,13 @@ Historin Dev
     - [ ] Show recommended places below the street (only from the selected city)
     - [ ] Copy Instagram-style story display:
         - [ ] Show the story image above the title, taking full screen width
-        - [ ] If multiple images exist, allow swiping like a carousel
-        - [ ] Show only the beginning of the story text with a "more" link to expand the full text (like Instagram)
+        - [x] If multiple images exist, allow swiping like a carousel
+        - [x] Show only the beginning of the story text with a "more" link to expand the full text (like Instagram)
 
 - [ ] Timeline view:
 
-    - [ ] Default to the Instagram-like timeline
-    - [ ] Add side timeline view
+    - [x] Default to the Instagram-like timeline
+    - [ ] Add side year timeline view
 
 - [ ] Quiz
 

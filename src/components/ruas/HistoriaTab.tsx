@@ -25,7 +25,7 @@ const HistoriaTab: React.FC<HistoriaTabProps> = ({
           {(rua?.nome || cidade?.nome) && (
             <span className="inline-flex items-center">
               {rua?.nome && cidade?.nome && (
-                <span className="mx-2 text-[#D6C7B6]">•</span>
+                <span className="mr-2 text-[#D6C7B6]"></span>
               )}
               {cidade?.nome && (
                 <span className="inline-flex items-center">

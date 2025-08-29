@@ -15,7 +15,7 @@ const HistoriaCard: React.FC<HistoriaCardProps> = ({ historia }) => {
   
   // Truncate text for preview (approximately 3 lines)
   const previewText = historia.descricao.length > 150 
-    ? historia.descricao.substring(0, 150) + '...' 
+    ? historia.descricao.substring(0, 150) + '.....' 
     : historia.descricao;
 
   const nextImage = () => {
@@ -103,7 +103,7 @@ const HistoriaCard: React.FC<HistoriaCardProps> = ({ historia }) => {
             {/* Show more/less button with horizontal spacing */}
             {historia.descricao.length > 150 && (
               <>
-                <span className="mx-2">•</span>
+                <span className="mx-2"></span>
                 <button
                   onClick={() => setShowFullText(!showFullText)}
                   className="text-[#CD853F] text-sm font-medium hover:text-[#B8763A] transition-colors"
