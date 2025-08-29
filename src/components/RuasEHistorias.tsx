@@ -4,7 +4,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { FiArrowLeft } from 'react-icons/fi';
 import { useLegacyData } from '../hooks/useLegacyData';
-import { Rua, Historia } from '../types';
+import { Rua, Historia, FotoWithCredit } from '../types';
 import Header from './Header';
 import Menu from './Menu';
 import SearchInput from './SearchInput';
@@ -27,6 +27,7 @@ const RuasEHistorias: React.FC = () => {
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [showMap, setShowMap] = useState(true); // For the Menu component
+  const [showQuiz, setShowQuiz] = useState(false);
 
   // Filter ruas and historias based on search term
   useEffect(() => {
@@ -40,13 +41,23 @@ const RuasEHistorias: React.FC = () => {
     }
   }, [searchTerm, ruas, historias]);
 
-  // Map filteredRuas to include a random photo from associated stories
+  // Map filteredRuas to include a deterministic photo from associated stories
   const filteredRuasWithImages = useMemo(() => {
     return filteredRuas.map(rua => {
       const historiasDaRua = historias.filter(historia => historia.rua_id === rua.id);
-      const fotos = historiasDaRua.flatMap(historia => historia.fotos);
-      const randomFoto = fotos.length > 0 ? fotos[Math.floor(Math.random() * fotos.length)] : null;
-      return { ...rua, fotos: randomFoto || 'https://placehold.co/300x200' };
+      const fotos = historiasDaRua.flatMap(historia => {
+        // Handle both string arrays and FotoWithCredit arrays
+        if (Array.isArray(historia.fotos)) {
+          return historia.fotos.map(foto => 
+            typeof foto === 'string' ? foto : foto.url
+          );
+        }
+        return [];
+      });
+      // Use deterministic selection based on rua.id to avoid hydration mismatch
+      const photoIndex = fotos.length > 0 ? parseInt(rua.id) % fotos.length : 0;
+      const selectedFoto = fotos.length > 0 ? fotos[photoIndex] : null;
+      return { ...rua, fotos: selectedFoto || 'https://placehold.co/300x200' };
     });
   }, [filteredRuas, historias]);
 
@@ -76,6 +87,7 @@ const RuasEHistorias: React.FC = () => {
         <Header 
           setMenuOpen={() => setMenuOpen(true)} 
           setShowFeedback={setShowFeedback} 
+          setShowQuiz={() => setShowQuiz(true)}
         />
       </div>
       

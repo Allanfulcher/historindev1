@@ -29,17 +29,12 @@ const nextConfig: NextConfig = {
     // Disable content security policy for SVG
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
-  // Completely disable all optimizations that use lightningcss
-  optimizeFonts: false,
-  // Disable SWC minification which can trigger lightningcss
-  swcMinify: false,
+  // Move serverComponentsExternalPackages to root level
+  serverExternalPackages: [],
   // Disable experimental features that may cause build issues
   experimental: {
     // Disable all CSS and font optimizations
     optimizeCss: false,
-    optimizePackageImports: [],
-    // Disable server components optimization
-    serverComponentsExternalPackages: [],
   },
   // Override webpack config to exclude lightningcss
   webpack: (config: any) => {

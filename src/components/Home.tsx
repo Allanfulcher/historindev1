@@ -85,12 +85,11 @@ const Home: React.FC<HomeProps> = ({ onPreviewOpen }) => {
         {/* Interactive Map Section */}
         {showMap && (
           <div className="bg-white shadow-sm">
-            <div className="max-w-6xl mx-auto px-4 py-6">
+            <div className="max-w-6xl mx-auto px-0 py-0">
               <MapView 
                 setSelectedRuaId={setSelectedRuaId}
                 setPreviewContent={handlePreviewContent}
                 ruas={ruas}
-                historias={historias}
               />
             </div>
           </div>

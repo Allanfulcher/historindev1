@@ -8,12 +8,17 @@ export interface Rua {
   coordenadas?: [number, number];
 }
 
+export interface FotoWithCredit {
+  url: string;
+  credito: string;
+}
+
 export interface Historia {
   id: string;
   rua_id: string;
   titulo: string;
   descricao: string;
-  fotos: string[];
+  fotos: string[] | FotoWithCredit[];
   coordenadas?: [number, number];
   ano?: string;
   personagens?: string[];

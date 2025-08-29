@@ -11,15 +11,6 @@ interface Rua {
   coordenadas?: [number, number];
 }
 
-interface Historia {
-  id: string;
-  rua_id: string;
-  titulo: string;
-  descricao: string;
-  fotos: string[];
-  coordenadas?: [number, number];
-}
-
 interface PreviewContent {
   type: 'rua' | 'historia';
   title: string;
@@ -33,16 +24,13 @@ interface MapViewProps {
   setSelectedRuaId: (id: string) => void;
   setPreviewContent: (content: PreviewContent) => void;
   ruas?: Rua[];
-  historias?: Historia[];
 }
 
 const MapView: React.FC<MapViewProps> = ({ 
   setSelectedRuaId, 
   setPreviewContent,
-  ruas = [],
-  historias = []
+  ruas = []
 }) => {
-  const [selectedType, setSelectedType] = useState<'ruas' | 'historias'>('ruas');
   const mapRef = useRef<any>(null);
   const markersRef = useRef<any[]>([]);
   const mapContainerRef = useRef<HTMLDivElement>(null);
@@ -118,11 +106,11 @@ const MapView: React.FC<MapViewProps> = ({
   }, [isClient, L]);
 
   useEffect(() => {
-    // Update markers whenever the selected type (ruas or historias) changes
+    // Update markers when component loads
     if (isClient && L && mapRef.current) {
       addMarkers();
     }
-  }, [selectedType, isClient, L]);
+  }, [isClient, L]);
 
   const recenterMap = () => {
     if (mapRef.current) {
@@ -139,131 +127,67 @@ const MapView: React.FC<MapViewProps> = ({
     });
     markersRef.current = [];
 
-    if (selectedType === 'ruas') {
-      // Icon for streets
-      const ruaIcon = L.icon({
-        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png',
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.4/images/marker-shadow.png',
-        shadowSize: [41, 41]
-      });
+    // Icon for streets
+    const ruaIcon = L.icon({
+      iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.4/images/marker-shadow.png',
+      shadowSize: [41, 41]
+    });
 
-      ruas.forEach(rua => {
-        // Validate coordinates
-        if (
-          rua.coordenadas &&
-          Array.isArray(rua.coordenadas) &&
-          rua.coordenadas.length === 2 &&
-          typeof rua.coordenadas[0] === 'number' &&
-          typeof rua.coordenadas[1] === 'number'
-        ) {
-          const marker = L.marker(rua.coordenadas, { icon: ruaIcon }).addTo(mapRef.current);
-          marker.bindPopup(`
-            <div style="text-align: center; padding: 8px;">
-              <h3 style="margin: 0 0 12px 0; font-size: 16px; font-weight: bold; color: #333;">${rua.nome}</h3>
-              <button 
-                onclick="window.location.href='/rua/${rua.id}'" 
-                style="
-                  background-color: #3b82f6; 
-                  color: white; 
-                  border: none; 
-                  padding: 8px 16px; 
-                  border-radius: 6px; 
-                  cursor: pointer; 
-                  font-size: 14px;
-                  margin-bottom: 8px;
-                  display: block;
-                  width: 100%;
-                "
-                onmouseover="this.style.backgroundColor='#2563eb'" 
-                onmouseout="this.style.backgroundColor='#3b82f6'"
-              >
-                Ver Página da Rua
-              </button>
-              <a 
-                href="https://www.google.com/maps?q=${rua.coordenadas[0]},${rua.coordenadas[1]}" 
-                target="_blank"
-                style="
-                  color: #6b7280; 
-                  text-decoration: none; 
-                  font-size: 12px;
-                "
-              >
-                Ver no Google Maps
-              </a>
-            </div>
-          `);
+    ruas.forEach(rua => {
+      // Validate coordinates
+      if (
+        rua.coordenadas &&
+        Array.isArray(rua.coordenadas) &&
+        rua.coordenadas.length === 2 &&
+        typeof rua.coordenadas[0] === 'number' &&
+        typeof rua.coordenadas[1] === 'number'
+      ) {
+        const marker = L.marker(rua.coordenadas, { icon: ruaIcon }).addTo(mapRef.current);
+        marker.bindPopup(`
+          <div style="text-align: center; padding: 8px;">
+            <h3 style="margin: 0 0 12px 0; font-size: 16px; font-weight: bold; color: #333;">${rua.nome}</h3>
+            <button 
+              onclick="window.location.href='/rua/${rua.id}'" 
+              style="
+                background-color: #3b82f6; 
+                color: white; 
+                border: none; 
+                padding: 8px 16px; 
+                border-radius: 6px; 
+                cursor: pointer; 
+                font-size: 14px;
+                margin-bottom: 8px;
+                display: block;
+                width: 100%;
+              "
+              onmouseover="this.style.backgroundColor='#2563eb'" 
+              onmouseout="this.style.backgroundColor='#3b82f6'"
+            >
+              Ver Página da Rua
+            </button>
+            <a 
+              href="https://www.google.com/maps?q=${rua.coordenadas[0]},${rua.coordenadas[1]}" 
+              target="_blank"
+              style="
+                color: #6b7280; 
+                text-decoration: none; 
+                font-size: 12px;
+              "
+            >
+              Ver no Google Maps
+            </a>
+          </div>
+        `);
 
-          markersRef.current.push(marker);
-        } else {
-          console.warn(`Rua "${rua.nome}" não possui coordenadas válidas e foi ignorada.`);
-        }
-      });
-    } else if (selectedType === 'historias') {
-      // Icon for stories
-      const historiaIcon = L.icon({
-        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.4/images/marker-shadow.png',
-        shadowSize: [41, 41]
-      });
-
-      historias.forEach(historia => {
-        // Validate coordinates
-        if (
-          historia.coordenadas &&
-          Array.isArray(historia.coordenadas) &&
-          historia.coordenadas.length === 2 &&
-          typeof historia.coordenadas[0] === 'number' &&
-          typeof historia.coordenadas[1] === 'number'
-        ) {
-          const marker = L.marker(historia.coordenadas, { icon: historiaIcon }).addTo(mapRef.current);
-          marker.bindPopup(`
-            <div style="text-align: center; padding: 8px;">
-              <h3 style="margin: 0 0 12px 0; font-size: 16px; font-weight: bold; color: #333;">${historia.titulo}</h3>
-              <button 
-                onclick="window.location.href='/rua/${historia.rua_id}#historia-${historia.id}'" 
-                style="
-                  background-color: #cb2940; 
-                  color: white; 
-                  border: none; 
-                  padding: 8px 16px; 
-                  border-radius: 6px; 
-                  cursor: pointer; 
-                  font-size: 14px;
-                  margin-bottom: 8px;
-                  display: block;
-                  width: 100%;
-                "
-                onmouseover="this.style.backgroundColor='#b91c1c'" 
-                onmouseout="this.style.backgroundColor='#cb2940'"
-              >
-                Ver História
-              </button>
-              <a 
-                href="https://www.google.com/maps?q=${historia.coordenadas[0]},${historia.coordenadas[1]}" 
-                target="_blank"
-                style="
-                  color: #6b7280; 
-                  text-decoration: none; 
-                  font-size: 12px;
-                "
-              >
-                Ver no Google Maps
-              </a>
-            </div>
-          `);
-
-          markersRef.current.push(marker);
-        } else {
-          console.warn(`História "${historia.titulo}" não possui coordenadas válidas e foi ignorada.`);
-        }
-      });
-    }
+        markersRef.current.push(marker);
+      } else {
+        console.warn(`Rua "${rua.nome}" não possui coordenadas válidas e foi ignorada.`);
+      }
+    });
   };
 
   // Don't render the map on server side
@@ -277,26 +201,6 @@ const MapView: React.FC<MapViewProps> = ({
 
   return (
     <div ref={mapContainerRef} className="map-container relative h-96 w-full z-0">
-      {/* Buttons in the top left corner to toggle between street and story markers */}
-      <div className="absolute top-2 left-2 z-[1000]">
-        <button
-          onClick={() => setSelectedType('ruas')}
-          className={`px-4 py-2 ${
-            selectedType === 'ruas' ? 'bg-blue-500 text-white' : 'bg-white text-black'
-          } rounded-l-md border border-gray-300 hover:bg-blue-100 transition-colors duration-200`}
-        >
-          Ruas
-        </button>
-        <button
-          onClick={() => setSelectedType('historias')}
-          className={`px-4 py-2 ${
-            selectedType === 'historias' ? 'bg-[#cb2940] text-white' : 'bg-white text-black'
-          } rounded-r-md border border-gray-300 hover:bg-red-100 transition-colors duration-200`}
-        >
-          Histórias
-        </button>
-      </div>
-      
       {/* Recenter button in the top right corner */}
       <div className="absolute top-2 right-2 z-[1000]">
         <button

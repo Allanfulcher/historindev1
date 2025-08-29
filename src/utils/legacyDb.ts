@@ -98,14 +98,13 @@ interface LegacyOrganizacao {
  * Normalizes legacy historia data to current system format
  */
 export function normalizeHistoria(legacyHistoria: LegacyHistoria): Historia {
-  // Handle different photo formats
-  let normalizedFotos: string[];
+  // Handle different photo formats - preserve original structure
+  let normalizedFotos: string[] | Array<{ url: string; credito: string }>;
   
   if (Array.isArray(legacyHistoria.fotos)) {
     if (legacyHistoria.fotos.length > 0 && typeof legacyHistoria.fotos[0] === 'object') {
-      // Array of objects with url and credito
-      normalizedFotos = (legacyHistoria.fotos as Array<{ url: string; credito: string }>)
-        .map(foto => foto.url);
+      // Array of objects with url and credito - preserve the structure
+      normalizedFotos = legacyHistoria.fotos as Array<{ url: string; credito: string }>;
     } else {
       // Array of strings
       normalizedFotos = legacyHistoria.fotos as string[];

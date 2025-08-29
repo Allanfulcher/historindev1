@@ -16,8 +16,11 @@ Historin Dev
 - [x] Adcionar selecionar ruas
 - [x] Adcionar selecionar cidades
 - [x] Adicionar Botao de Centralizar Mapa
+- [x] Adicionar formulario de feedback
+- [x] Adicionar funcionalidade de busca
+- [x] Adicionar funcionalidade de feedback
+- [x] Adicionar funcionalidade de add story
 
-- [ ] Adcionar integracao com o formspree
 - [ ] Adcionar sistema de tags
 - [ ] Migrar Banco de dados para um tradicional
 - [ ] Criar Sistema de atualizacao de banco de dados
@@ -26,8 +29,8 @@ Historin Dev
 
 - [ ] Home Page
 
-    - [ ] Make the map take the full width
-    - [ ] Remove stories from the map, keep only street icons
+    - [x] Make the map take the full width
+    - [x] Remove stories from the map, keep only street icons
     - [ ] On map click, show a photo preview of the location instead of opening Maps
 
 - [ ] Street / Story Page

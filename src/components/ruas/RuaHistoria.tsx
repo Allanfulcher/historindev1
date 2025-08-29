@@ -11,6 +11,12 @@ import NavigationTab from './NavigationTab';
 import FeedbackPopup from '../popups/FeedbackPopup';
 import CitySelector from './CitySelector';
 import RuaSelector from './RuaSelector';
+import LoadingSpinner from './LoadingSpinner';
+import ValidationError from './ValidationError';
+import HistoriaTab from './HistoriaTab';
+import RuaTab from './RuaTab';
+import CidadeTab from './CidadeTab';
+import NotFoundContent from './NotFoundContent';
 
 interface RuaHistoriaProps {
   className?: string;
@@ -123,34 +129,11 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
   };
 
   if (isLoading) {
-    return (
-      <div className="min-h-screen bg-[#FAF7F2] flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#8B4513] mx-auto mb-4"></div>
-          <p className="text-[#6B5B4F]">Carregando...</p>
-        </div>
-      </div>
-    );
+    return <LoadingSpinner />;
   }
 
   if (validationError) {
-    return (
-      <div className="min-h-screen bg-[#FAF7F2] flex items-center justify-center">
-        <div className="text-center max-w-md mx-auto p-6">
-          <div className="mb-4">
-            <i className="fas fa-exclamation-triangle text-4xl text-[#CD853F] mb-4"></i>
-          </div>
-          <h2 className="text-xl font-bold text-[#4A3F35] mb-2">Erro de Validação</h2>
-          <p className="text-[#6B5B4F] mb-6">{validationError}</p>
-          <button
-            onClick={() => router.push('/')}
-            className="bg-[#8B4513] hover:bg-[#A0522D] text-white py-2 px-4 rounded transition-colors duration-200"
-          >
-            Voltar ao Início
-          </button>
-        </div>
-      </div>
-    );
+    return <ValidationError error={validationError} />;
   }
 
   return (
@@ -171,7 +154,7 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
 
       {/* Main Content */}
       <main className="w-full py-6 bg-[#f4ede0]">
-        <div className="w-full max-w-none px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 2xl:px-32 bg-[#f4ede0]">
+        <div className="w-full max-w-4xl mx-auto px-0 sm:px-6 md:px-8 lg:px-16 xl:px-24 2xl:px-32 bg-[#f4ede0]">
           {/* Selectors Section */}
           <div className="mb-6 bg-white rounded-lg p-4 shadow-sm">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -191,247 +174,30 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
           <NavigationTab activeTab={activeTab} changeTab={changeTab} />
           
           {/* Content Card */}
-          <div className="bg-[#FEFCF8] rounded-xl shadow-sm p-2 sm:p-3 lg:p-0 bg-[#f4ede0]">
+          <div className="bg-[#FEFCF8] rounded-xl shadow-sm p-0 sm:p-3 lg:p-0 bg-[#f4ede0]">
             {activeTab === 'historia' && (
-              <>
-                {/* Feed Header and Controls */}
-                <div className="mb-3 flex items-center justify-between">
-                  <div className="text-xs sm:text-sm text-[#A0958A] font-medium pt-1.5">
-                    {(rua?.nome || cidade?.nome) && (
-                      <span className="inline-flex items-center">
-                        {rua?.nome && cidade?.nome && (
-                          <span className="mx-2 text-[#D6C7B6]">•</span>
-                        )}
-                        {cidade?.nome && (
-                          <span className="inline-flex items-center">
-                            <i className="fas fa-map-marker-alt mr-2 text-[#CD853F]"></i>
-                            <span>{cidade.nome}</span>
-                          </span>
-                        )}
-                      </span>
-                    )}
-                  </div>
-                  {/* <div className="flex items-center gap-2">
-                    <label htmlFor="sortOrder" className="text-sm text-[#6B5B4F]">Ordenar:</label>
-                    <select
-                      id="sortOrder"
-                      value={sortOrder}
-                      onChange={(e) => setSortOrder(e.target.value as 'asc' | 'desc')}
-                      className="text-sm bg-[#F5F1EB] text-[#4A3F35] border border-[#E6D3B4] rounded px-2 py-1"
-                    >
-                       <option value="asc">Antigas</option>
-                      <option value="desc">Recentes</option> 
-                    </select>
-                  </div> */}
-                </div>
-
-                {/* Prominent Rua Title */}
-                {rua?.nome && (
-                  <div className="mb-3 lg:px-6 xl:px-8">
-                    <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight tracking-normal text-[#4A3F35]">
-                      {rua.nome}
-                    </h1>
-                  </div>
-                )}
-                <div className="h-px bg-[#EADCCD] mb-5 lg:mx-6 xl:mx-8"></div>
-
-                {/* Historia Feed */}
-                <div className="flex flex-col gap-8 bg-[#f4ede0]">
-                  {sortedHistorias.length === 0 && (
-                    <div className="text-center py-8 text-[#6B5B4F]">Nenhuma história para esta rua.</div>
-                  )}
-
-                  {sortedHistorias.map((h) => (
-                    <div
-                      key={h.id}
-                      id={`historia-${h.id}`}
-                      className="rounded-xl bg-[#FFFDF9] odd:bg-[#FEFBF5] ring-1 ring-[#E6D3B4]/60 shadow-sm p-5 transition-shadow hover:shadow-md"
-                    >
-                      {h.ano && (
-                        <div className="mb-2 text-[#4A3F35]">
-                          <span className="inline-flex items-center gap-2">
-                            <i className="fas fa-calendar-alt text-[#CD853F]"></i>
-                            <span className="text-3xl sm:text-4xl font-extrabold leading-tight">{h.ano}</span>
-                          </span>
-                        </div>
-                      )}
-                      <h2 className="text-xl sm:text-2xl font-bold mb-4 text-[#4A3F35]">{h.titulo}</h2>
-
-                      {/* Divider between header (year/title) and content */}
-                      <div className="h-px bg-[#EADCCD] mb-4"></div>
-
-                      {/* Scrollable text container first */}
-                      <div className="prose max-w-none bg-[#FDFBF7] border border-[#F0E8DC] border-l-4 border-l-[#CD853F] rounded-lg p-4 max-h-64 overflow-y-auto mb-4 shadow-inner">
-                        <p className="text-[#6B5B4F] leading-relaxed text-base">{h.descricao}</p>
-                      </div>
-
-                      {/* Divider between text and images */}
-                      <div className="h-px bg-[#F0E8DC] mb-4"></div>
-
-                      {/* Images below */}
-                      {h.fotos && h.fotos.length > 0 && (
-                        <div className="mt-2">
-                          <h3 className="text-lg font-medium text-[#4A3F35] mb-3">
-                            <i className="fas fa-images mr-2 text-[#CD853F]"></i>
-                            Imagens
-                          </h3>
-                          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                            {h.fotos.map((foto, index) => (
-                              <div key={index} className="group cursor-pointer">
-                                <img
-                                  src={foto}
-                                  alt={`${h.titulo} - Imagem ${index + 1}`}
-                                  className="w-full h-48 object-cover rounded-lg shadow-sm group-hover:shadow-md transition-all duration-300 group-hover:scale-105"
-                                  onClick={() => window.open(foto, '_blank')}
-                                />
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </>
+              <HistoriaTab 
+                historias={sortedHistorias}
+                rua={rua}
+                cidade={cidade}
+                sortOrder={sortOrder}
+                setSortOrder={setSortOrder}
+              />
             )}
 
             {activeTab === 'rua' && rua && (
-              <>
-                {/* Rua Content */}
-                <div className="mb-6 p-4 sm:p-6 lg:p-8">
-                  {/* Breadcrumb line (match História) */}
-                  <div className="mb-3 flex items-center justify-between">
-                    <div className="text-xs sm:text-sm text-[#A0958A] font-medium pt-1.5">
-                      {(rua?.nome || cidade?.nome) && (
-                        <span className="inline-flex items-center">
-                          {rua?.nome && cidade?.nome && (
-                            <span className="mx-2 text-[#D6C7B6]">•</span>
-                          )}
-                          {cidade?.nome && (
-                            <span className="inline-flex items-center">
-                              <i className="fas fa-map-marker-alt mr-2 text-[#CD853F]"></i>
-                              <span>{cidade.nome}</span>
-                            </span>
-                          )}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Prominent Rua Title (match História) */}
-                  {rua?.nome && (
-                    <div className="mb-3 lg:px-6 xl:px-8">
-                      <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight tracking-normal text-[#4A3F35]">
-                        {rua.nome}
-                      </h1>
-                    </div>
-                  )}
-                  <div className="h-px bg-[#EADCCD] mb-5 lg:mx-6 xl:mx-8"></div>
-
-                  <div className="prose max-w-none bg-[#FDFBF7] border border-[#F0E8DC] border-l-4 border-l-[#CD853F] rounded-lg p-6 mb-8 shadow-inner">
-                    <p className="text-[#6B5B4F] leading-relaxed text-lg">{rua.descricao}</p>
-                  </div>
-                  
-                  {/* Image Gallery */}
-                  {rua.fotos && (
-                    <div className="mt-8">
-                      <h3 className="text-lg font-medium text-[#4A3F35] mb-4">
-                        <i className="fas fa-images mr-2 text-[#CD853F]"></i>
-                        Galeria de Imagens
-                      </h3>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {(Array.isArray(rua.fotos) ? rua.fotos : [rua.fotos]).map((foto, index) => (
-                          <div key={index} className="group cursor-pointer">
-                            <img
-                              src={foto}
-                              alt={`${rua.nome} - Imagem ${index + 1}`}
-                              className="w-full h-48 object-cover rounded-lg shadow-sm group-hover:shadow-md transition-all duration-300 group-hover:scale-105"
-                              onClick={() => {
-                                window.open(foto, '_blank');
-                              }}
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </>
+              <RuaTab rua={rua} cidade={cidade} />
             )}
 
             {activeTab === 'cidade' && cidade && (
-              <>
-                {/* Cidade Content */}
-                <div className="mb-6 p-4 sm:p-6 lg:p-8">
-                  <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-[#4A3F35]">{cidade.nome}</h1>
-                  
-                  <div className="prose max-w-none bg-[#FDFBF7] border border-[#F0E8DC] border-l-4 border-l-[#CD853F] rounded-lg p-6 mb-8 shadow-inner">
-                    <p className="text-[#6B5B4F] leading-relaxed text-lg">{cidade.descricao}</p>
-                  </div>
-                  
-                  <div className="mb-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div className="p-6 bg-[#F5F1EB] rounded-lg">
-                      <h3 className="text-base font-medium text-[#4A3F35] mb-2">Estado</h3>
-                      <p className="text-[#6B5B4F] text-lg">{cidade.estado}</p>
-                    </div>
-                    <div className="p-6 bg-[#F5F1EB] rounded-lg">
-                      <h3 className="text-base font-medium text-[#4A3F35] mb-2">População</h3>
-                      <p className="text-[#6B5B4F] text-lg">{cidade.populacao}</p>
-                    </div>
-                  </div>
-                  
-                  {/* Image Gallery */}
-                  {cidade.foto && (
-                    <div className="mt-8">
-                      <h3 className="text-xl font-medium text-[#4A3F35] mb-6">
-                        <i className="fas fa-images mr-2 text-[#CD853F]"></i>
-                        Galeria de Imagens
-                      </h3>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {(Array.isArray(cidade.foto) ? cidade.foto : [cidade.foto]).map((foto, index) => (
-                          <div key={index} className="group cursor-pointer">
-                            <img
-                              src={foto}
-                              alt={`${cidade.nome} - Imagem ${index + 1}`}
-                              className="w-full h-48 object-cover rounded-lg shadow-sm group-hover:shadow-md transition-all duration-300 group-hover:scale-105"
-                              onClick={() => {
-                                window.open(foto, '_blank');
-                              }}
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </>
+              <CidadeTab cidade={cidade} />
             )}
 
             {/* No content available */}
             {((activeTab === 'historia' && !historia) || 
               (activeTab === 'rua' && !rua) || 
               (activeTab === 'cidade' && !cidade)) && (
-              <div className="text-center py-12">
-                <div className="mb-4">
-                  <i className="fas fa-search text-4xl text-[#A0958A] mb-4"></i>
-                </div>
-                <h2 className="text-xl font-bold text-[#4A3F35] mb-2">
-                  {activeTab === 'historia' ? 'História não encontrada' : 
-                   activeTab === 'rua' ? 'Rua não encontrada' : 
-                   'Cidade não encontrada'}
-                </h2>
-                <p className="text-[#A0958A] text-lg">
-                  Não foi possível encontrar informações sobre {activeTab === 'historia' ? 'esta história' : activeTab === 'rua' ? 'esta rua' : 'esta cidade'}.
-                </p>
-                <div className="mt-6">
-                  <button
-                    onClick={() => window.history.back()}
-                    className="bg-[#8B4513] hover:bg-[#A0522D] text-white py-2 px-4 rounded transition-colors duration-200"
-                  >
-                    Voltar
-                  </button>
-                </div>
-              </div>
+              <NotFoundContent type={activeTab} />
             )}
           </div>
         </div>
