@@ -15,7 +15,7 @@ const HistoriaTab: React.FC<HistoriaTabProps> = ({
   rua, 
   cidade, 
   sortOrder, 
-  setSortOrder 
+  setSortOrder
 }) => {
   return (
     <>
@@ -69,7 +69,13 @@ const HistoriaTab: React.FC<HistoriaTabProps> = ({
         )}
 
         {historias.map((historia) => (
-          <HistoriaCard key={historia.id} historia={historia} />
+          <div 
+            key={historia.id} 
+            id={`historia-${historia.id}`}
+            className="scroll-mt-24"
+          >
+            <HistoriaCard historia={historia} />
+          </div>
         ))}
       </div>
     </>

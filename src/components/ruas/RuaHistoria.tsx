@@ -106,23 +106,36 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
     return copy;
   }, [ruaHistorias, sortOrder]);
 
-  // Only auto-scroll when the historiaId changes via client navigation, not on initial load
-  const prevHistoriaIdRef = useRef<string | null>(null);
+  // Auto-scroll to a specific historia on initial load and when the param changes
   useEffect(() => {
     if (!historiaId) return;
-    // Skip on initial mount
-    if (prevHistoriaIdRef.current === null) {
-      prevHistoriaIdRef.current = historiaId;
-      return;
+    // Ensure the Historia tab is active
+    if (activeTab !== 'historia') {
+      setActiveTab('historia');
     }
-    if (prevHistoriaIdRef.current !== historiaId) {
+
+    const headerOffset = 80; // approximate fixed header height
+    const tryScroll = (): boolean => {
       const el = document.getElementById(`historia-${historiaId}`);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-      prevHistoriaIdRef.current = historiaId;
+      if (!el) return false;
+      const rect = el.getBoundingClientRect();
+      const y = rect.top + window.scrollY - headerOffset;
+      window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+      return true;
+    };
+
+    // Try up to 3 times to account for async rendering/images
+    if (!tryScroll()) {
+      let attempts = 0;
+      const timer = setInterval(() => {
+        attempts += 1;
+        if (tryScroll() || attempts >= 3) {
+          clearInterval(timer);
+        }
+      }, 150);
+      return () => clearInterval(timer);
     }
-  }, [historiaId]);
+  }, [historiaId, sortedHistorias.length, activeTab]);
 
   const changeTab = (tab: 'historia' | 'rua' | 'cidade') => {
     setActiveTab(tab);
