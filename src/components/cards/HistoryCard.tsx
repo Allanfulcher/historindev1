@@ -1,24 +1,47 @@
 'use client'
 
 import { Historia } from '@/types';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 interface HistoryCardProps {
   historias: Historia[];
   className?: string;
+  onHistoriaClick?: (ruaId: string, historiaId: string) => void;
 }
 
-const HistoryCard = ({ historias, className = '' }: HistoryCardProps) => {
+const HistoryCard = ({ historias, className = '', onHistoriaClick }: HistoryCardProps) => {
+  const router = useRouter();
+
+  const handleHistoriaClick = (historia: Historia) => {
+    if (onHistoriaClick) {
+      onHistoriaClick(historia.rua_id, historia.id);
+    } else {
+      // Default behavior: navigate to street page without auto-scroll
+      router.push(`/rua/${historia.rua_id}`);
+    }
+  };
+
+  const getHistoriaImage = (historia: Historia): string => {
+    if (!historia.fotos || historia.fotos.length === 0) {
+      return '/images/historias/festa-hortensias.jpg'; // fallback image
+    }
+    
+    // Handle both string arrays and FotoWithCredit arrays
+    const firstPhoto = historia.fotos[0];
+    return typeof firstPhoto === 'string' ? firstPhoto : firstPhoto.url;
+  };
+
   return (
     <div className={`grid gap-4 ${className}`}>
       {historias.map((historia) => (
-        <Link
+        <button
           key={historia.id}
-          href={`/rua/${historia.rua_id}/historia/${historia.id}`}
-          className="group relative flex items-start gap-4 rounded-xl bg-white p-4 shadow-sm ring-1 ring-gray-900/5 transition-all hover:shadow-md hover:ring-1 hover:ring-blue-500/20"
+          onClick={() => handleHistoriaClick(historia)}
+          className="group relative flex items-start gap-4 rounded-xl bg-white p-4 shadow-sm ring-1 ring-gray-900/5 transition-all hover:shadow-md hover:ring-1 hover:ring-blue-500/20 text-left w-full"
         >
           <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-lg bg-gray-100">
             <img
+              src={getHistoriaImage(historia)}
               alt={historia.titulo}
               className="h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
               onError={(e) => {
@@ -43,7 +66,7 @@ const HistoryCard = ({ historias, className = '' }: HistoryCardProps) => {
               <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
             </svg>
           </div>
-        </Link>
+        </button>
       ))}
     </div>
   );

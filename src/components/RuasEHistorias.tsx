@@ -152,7 +152,13 @@ const RuasEHistorias: React.FC = () => {
             <h2 className="text-lg font-semibold text-gray-900">Todas as Histórias</h2>
           </div>
           {filteredHistorias.length > 0 ? (
-            <HistoryCard historias={filteredHistorias} />
+            <HistoryCard 
+              historias={filteredHistorias}
+              onHistoriaClick={(ruaId, historiaId) => {
+                // Navigate to street page and let the page handle auto-scroll
+                router.push(`/rua/${ruaId}/historia/${historiaId}`);
+              }}
+            />
           ) : (
             <div className="text-center py-8">
               <p className="text-gray-500">Nenhuma história encontrada para "{searchTerm}"</p>

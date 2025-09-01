@@ -20,9 +20,10 @@ import NotFoundContent from './NotFoundContent';
 
 interface RuaHistoriaProps {
   className?: string;
+  scrollToHistoriaId?: string; // Optional prop to trigger auto-scroll to specific historia
 }
 
-const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
+const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className, scrollToHistoriaId }) => {
   const params = useParams();
   const router = useRouter();
   const ruaId = Array.isArray(params?.ruaId) ? params.ruaId[0] : params?.ruaId;
@@ -41,6 +42,7 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
   const focusedHistoriaRef = useRef<HTMLDivElement | null>(null);
   const [showQuiz, setShowQuiz] = useState(false);
   const [selectedCityId, setSelectedCityId] = useState<string>('1'); // Default to Gramado
+  const [hasAutoSwitchedTab, setHasAutoSwitchedTab] = useState(false);
 
   useEffect(() => {
     // Initialize database
@@ -106,17 +108,22 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
     return copy;
   }, [ruaHistorias, sortOrder]);
 
-  // Auto-scroll to a specific historia on initial load and when the param changes
+  // Props-based auto-scroll - only scrolls when scrollToHistoriaId prop is provided
   useEffect(() => {
-    if (!historiaId) return;
-    // Ensure the Historia tab is active
+    if (!scrollToHistoriaId) return;
+    
+    // Verify the historia exists in the current rua's historias
+    const targetHistoria = sortedHistorias.find(h => h.id === scrollToHistoriaId);
+    if (!targetHistoria) return;
+    
+    // Switch to historia tab if not already active
     if (activeTab !== 'historia') {
       setActiveTab('historia');
     }
 
     const headerOffset = 80; // approximate fixed header height
     const tryScroll = (): boolean => {
-      const el = document.getElementById(`historia-${historiaId}`);
+      const el = document.getElementById(`historia-${scrollToHistoriaId}`);
       if (!el) return false;
       const rect = el.getBoundingClientRect();
       const y = rect.top + window.scrollY - headerOffset;
@@ -135,7 +142,7 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
       }, 150);
       return () => clearInterval(timer);
     }
-  }, [historiaId, sortedHistorias.length, activeTab]);
+  }, [scrollToHistoriaId, sortedHistorias, activeTab]);
 
   const changeTab = (tab: 'historia' | 'rua' | 'cidade') => {
     setActiveTab(tab);
