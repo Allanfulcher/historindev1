@@ -19,12 +19,11 @@ const HistoryCard = ({ historias, className = '' }: HistoryCardProps) => {
         >
           <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-lg bg-gray-100">
             <img
-              src={historia.fotos[0] || '/placeholder-history.jpg'}
               alt={historia.titulo}
               className="h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
-                target.src = '/placeholder-history.jpg';
+                target.src = '/images/historias/festa-hortensias.jpg';
               }}
             />
             <div className="absolute inset-0 rounded-lg ring-1 ring-inset ring-gray-900/5" />

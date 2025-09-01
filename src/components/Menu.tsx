@@ -25,7 +25,7 @@ const Menu: React.FC<MenuProps> = ({
   const handleSurpriseMe = () => {
     if (historias && historias.length > 0) {
       const randomHistoria = historias[Math.floor(Math.random() * historias.length)];
-      router.push(`/rua/${randomHistoria.rua_id}/historia/${randomHistoria.id}`);
+      router.push(`/rua/${String(randomHistoria.rua_id)}/historia/${String(randomHistoria.id)}`);
       setMenuOpen(false);
     } else {
       alert('Nenhuma história disponível.');
@@ -109,7 +109,7 @@ const Menu: React.FC<MenuProps> = ({
           </Link>
 
           <Link
-            href="/ruas-e-historias"
+            href="/ruasehistorias"
             className="px-4 py-3 hover:bg-[#F5F1EB] rounded-md transition-colors duration-200 border-b border-[#F5F1EB]"
             onClick={handleMenuItemClick}
           >

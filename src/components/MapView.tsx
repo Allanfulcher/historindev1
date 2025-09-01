@@ -2,14 +2,8 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import 'leaflet/dist/leaflet.css';
-
-// Define interfaces for the data structures
-interface Rua {
-  id: string;
-  nome: string;
-  descricao?: string;
-  coordenadas?: [number, number];
-}
+import { useHistorias } from '../hooks/useLegacyData';
+import { Historia, Rua as RuaType } from '../types';
 
 interface PreviewContent {
   type: 'rua' | 'historia';
@@ -23,19 +17,23 @@ interface PreviewContent {
 interface MapViewProps {
   setSelectedRuaId: (id: string) => void;
   setPreviewContent: (content: PreviewContent) => void;
-  ruas?: Rua[];
+  ruas?: RuaType[];
+  onStreetClick?: (rua: RuaType, historia?: Historia) => void;
 }
 
 const MapView: React.FC<MapViewProps> = ({ 
   setSelectedRuaId, 
   setPreviewContent,
-  ruas = []
+  ruas = [],
+  onStreetClick
 }) => {
   const mapRef = useRef<any>(null);
   const markersRef = useRef<any[]>([]);
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const [isClient, setIsClient] = useState(false);
   const [L, setL] = useState<any>(null);
+  
+  const { getByRuaId: getHistoriasByRuaId } = useHistorias();
 
   // Ensure we're on the client side and load Leaflet
   useEffect(() => {
@@ -147,41 +145,16 @@ const MapView: React.FC<MapViewProps> = ({
         typeof rua.coordenadas[1] === 'number'
       ) {
         const marker = L.marker(rua.coordenadas, { icon: ruaIcon }).addTo(mapRef.current);
-        marker.bindPopup(`
-          <div style="text-align: center; padding: 8px;">
-            <h3 style="margin: 0 0 12px 0; font-size: 16px; font-weight: bold; color: #333;">${rua.nome}</h3>
-            <button 
-              onclick="window.location.href='/rua/${rua.id}'" 
-              style="
-                background-color: #3b82f6; 
-                color: white; 
-                border: none; 
-                padding: 8px 16px; 
-                border-radius: 6px; 
-                cursor: pointer; 
-                font-size: 14px;
-                margin-bottom: 8px;
-                display: block;
-                width: 100%;
-              "
-              onmouseover="this.style.backgroundColor='#2563eb'" 
-              onmouseout="this.style.backgroundColor='#3b82f6'"
-            >
-              Ver Página da Rua
-            </button>
-            <a 
-              href="https://www.google.com/maps?q=${rua.coordenadas[0]},${rua.coordenadas[1]}" 
-              target="_blank"
-              style="
-                color: #6b7280; 
-                text-decoration: none; 
-                font-size: 12px;
-              "
-            >
-              Ver no Google Maps
-            </a>
-          </div>
-        `);
+        
+        // Add click event to trigger external popup
+        marker.on('click', () => {
+          const historias = getHistoriasByRuaId(rua.id);
+          const firstHistoria = historias.length > 0 ? historias[0] : undefined;
+          
+          if (onStreetClick) {
+            onStreetClick(rua, firstHistoria);
+          }
+        });
 
         markersRef.current.push(marker);
       } else {

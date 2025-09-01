@@ -48,7 +48,7 @@ const RuaSelector: React.FC<RuaSelectorProps> = ({ ruas, selectedRuaId, selected
   const handleRuaSelect = (ruaId: string) => {
     setIsOpen(false);
     setSearchTerm('');
-    router.push(`/rua/${ruaId}`);
+    router.push(`/rua/${String(ruaId)}`);
   };
 
   return (

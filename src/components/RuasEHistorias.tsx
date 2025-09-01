@@ -138,7 +138,7 @@ const RuasEHistorias: React.FC = () => {
             <h2 className="text-lg font-semibold text-gray-900">Todas as Ruas</h2>
           </div>
           {filteredRuasWithImages.length > 0 ? (
-            <StreetCard ruas={filteredRuasWithImages} handleRuaClick={(rua) => router.push(`/rua/${rua.id}`)} />
+            <StreetCard ruas={filteredRuasWithImages} handleRuaClick={(rua) => router.push(`/rua/${String(rua.id)}`)} />
           ) : (
             <div className="text-center py-8">
               <p className="text-gray-500">Nenhuma rua encontrada para "{searchTerm}"</p>

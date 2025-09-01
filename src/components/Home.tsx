@@ -1,11 +1,11 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Historia, Rua, Cidade } from '../types';
+import { Historia, Rua, Cidade, PreviewContent } from '../types';
 import { useLegacyData } from '../hooks/useLegacyData';
 import Header from './Header';
 import Menu from './Menu';
-import MapView from './MapView';
+import MapWithPreview from './MapWithPreview';
 import LegadoAfricanoCard from './cards/LegadoAfricanoCard';
 import FeedbackPopup from './popups/FeedbackPopup';
 import QuizModal from './popups/QuizModal';
@@ -22,14 +22,6 @@ interface HomeProps {
   onPreviewOpen: (content: any) => void; // eslint-disable-line @typescript-eslint/no-explicit-any
 }
 
-interface PreviewContent {
-  type: 'rua' | 'historia';
-  title: string;
-  description: string;
-  images: string[];
-  ruaId: string;
-  historiaId?: string;
-}
 
 const Home: React.FC<HomeProps> = ({ onPreviewOpen }) => {
   // Use legacy data hook
@@ -51,7 +43,8 @@ const Home: React.FC<HomeProps> = ({ onPreviewOpen }) => {
   const [showPopup, setShowPopup] = useState(false);
 
   const handleRuaClick = (rua: Rua) => {
-    window.location.href = `/rua/${rua.id}`;
+    const safeRuaId = String(rua.id);
+    window.location.href = `/rua/${safeRuaId}`;
   };
 
   const handlePreviewContent = (content: PreviewContent) => {
@@ -59,7 +52,7 @@ const Home: React.FC<HomeProps> = ({ onPreviewOpen }) => {
       type: content.type,
       title: content.title,
       content: content.description,
-      image: content.images[0]
+      image: content.images?.[0] || ''
     });
   };
 
@@ -86,10 +79,11 @@ const Home: React.FC<HomeProps> = ({ onPreviewOpen }) => {
         {showMap && (
           <div className="bg-white shadow-sm">
             <div className="max-w-6xl mx-auto px-0 py-0">
-              <MapView 
+              <MapWithPreview 
                 setSelectedRuaId={setSelectedRuaId}
                 setPreviewContent={handlePreviewContent}
                 ruas={ruas}
+                historias={historias}
               />
             </div>
           </div>
