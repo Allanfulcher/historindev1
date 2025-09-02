@@ -77,7 +77,7 @@ const YearNavigator: React.FC<YearNavigatorProps> = ({
       {/* Year Navigator Button */}
       <button
         onClick={handleButtonClick}
-        className="fixed left-0 top-1/2 transform -translate-y-1/2 z-40 bg-[#FEFCF8] hover:bg-[#F5F1EB] border border-[#E6D3B4] rounded-r-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 group"
+        className="fixed left-0 top-11/20 transform -translate-y-1/2 z-40 bg-[#FEFCF8] hover:bg-[#F5F1EB] border border-[#E6D3B4] rounded-r-lg p-3 shadow-md hover:shadow-lg transition-all duration-300 group"
         title="Navegar por anos"
       >
         <div className="relative">
@@ -100,7 +100,7 @@ const YearNavigator: React.FC<YearNavigatorProps> = ({
       {/* Compact Year List */}
       <div
         ref={containerRef}
-        className={`fixed left-0 top-1/2 transform -translate-y-1/2 z-50 transition-all duration-300 ease-out ${
+        className={`fixed left-0 top-11/20 transform -translate-y-1/2 z-50 transition-all duration-300 ease-out ${
           isOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4 pointer-events-none'
         } ${className || ''}`}
       >
