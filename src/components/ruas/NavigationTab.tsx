@@ -1,5 +1,7 @@
 'use client';
 
+import { useRouter, useSearchParams } from 'next/navigation';
+
 interface NavigationTabProps {
   activeTab: 'historia' | 'rua' | 'cidade';
   changeTab: (tab: 'historia' | 'rua' | 'cidade') => void;
@@ -7,6 +9,32 @@ interface NavigationTabProps {
 }
 
 const NavigationTab = ({ activeTab, changeTab, className = '' }: NavigationTabProps) => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  
+  const handleTabClick = (tabId: 'historia' | 'rua' | 'cidade') => {
+    // Check if scroll parameter exists
+    const shouldScroll = searchParams.get('scroll') === 'true';
+    
+    if (shouldScroll) {
+      // Remove scroll parameter immediately and synchronously update URL
+      const newSearchParams = new URLSearchParams(searchParams.toString());
+      newSearchParams.delete('scroll');
+      const newUrl = newSearchParams.toString() ? `?${newSearchParams.toString()}` : '';
+      
+      // Use window.history.replaceState for immediate synchronous URL update
+      window.history.replaceState(null, '', window.location.pathname + newUrl);
+      
+      // Force a re-render by triggering router refresh after URL is updated
+      setTimeout(() => {
+        changeTab(tabId);
+      }, 0);
+    } else {
+      // No scroll parameter, safe to change tab immediately
+      changeTab(tabId);
+    }
+  };
+
   const tabItems = [
     { id: 'historia', label: 'História', icon: 'fas fa-book-open', shortLabel: 'História' },
     { id: 'rua', label: 'Rua', icon: 'fas fa-road', shortLabel: 'Rua' },
@@ -23,7 +51,7 @@ const NavigationTab = ({ activeTab, changeTab, className = '' }: NavigationTabPr
               return (
                 <button
                   key={tab.id}
-                  onClick={() => changeTab(tab.id as any)}
+                  onClick={() => handleTabClick(tab.id as any)}
                   className={`
                     relative flex flex-col sm:flex-row items-center justify-center 
                     px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-medium rounded-lg 

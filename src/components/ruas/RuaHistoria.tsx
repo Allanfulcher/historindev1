@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
-import { useParams, useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams, useParams } from 'next/navigation';
 import { legacyDb } from '../../utils/legacyDb';
 import { legacyHistorias, legacyRuas, legacyCidades } from '../../data/legacyData';
 import type { Historia, Rua, Cidade } from '../../types';
@@ -91,7 +91,6 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
   useEffect(() => {
     if (!shouldScroll || !historiaId) return;
     
-    // Verify the historia exists in the current rua's historias
     const targetHistoria = sortedHistorias.find(h => h.id === historiaId);
     if (!targetHistoria) return;
     
@@ -101,7 +100,7 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
     }
 
     const headerOffset = 80; // approximate fixed header height
-    const tryScroll = (): boolean => {
+    const tryScroll = () => {
       const el = document.getElementById(`historia-${historiaId}`);
       if (!el) return false;
       const rect = el.getBoundingClientRect();
@@ -110,7 +109,6 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
       return true;
     };
 
-    // Try up to 3 times to account for async rendering/images
     if (!tryScroll()) {
       let attempts = 0;
       const timer = setInterval(() => {
@@ -119,11 +117,14 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
           clearInterval(timer);
         }
       }, 150);
+      
       return () => clearInterval(timer);
     }
+
   }, [shouldScroll, historiaId, sortedHistorias, activeTab]);
 
   const changeTab = (tab: 'historia' | 'rua' | 'cidade') => {
+    // Simply change the tab - URL cleanup is handled in NavigationTab component
     setActiveTab(tab);
   };
 
