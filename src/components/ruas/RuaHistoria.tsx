@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useMemo, useRef } from 'react';
+import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { legacyDb } from '../../utils/legacyDb';
 import { legacyHistorias, legacyRuas, legacyCidades } from '../../data/legacyData';
@@ -17,6 +17,7 @@ import HistoriaTab from './HistoriaTab';
 import RuaTab from './RuaTab';
 import CidadeTab from './CidadeTab';
 import NotFoundContent from './NotFoundContent';
+import YearNavigator from './YearNavigator';
 
 interface RuaHistoriaProps {
   className?: string;
@@ -126,6 +127,43 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
     setActiveTab(tab);
   };
 
+  // Handle year selection from YearNavigator
+  const handleYearSelect = useCallback((year: number) => {
+    // Switch to historia tab if not already active
+    if (activeTab !== 'historia') {
+      setActiveTab('historia');
+    }
+
+    // Find the first historia from the selected year
+    const firstHistoriaOfYear = sortedHistorias.find(h => 
+      parseInt(h.ano || '0', 10) === year
+    );
+
+    if (firstHistoriaOfYear) {
+      // Scroll to the first historia of that year
+      const headerOffset = 80;
+      const tryScroll = (): boolean => {
+        const el = document.getElementById(`historia-${firstHistoriaOfYear.id}`);
+        if (!el) return false;
+        const rect = el.getBoundingClientRect();
+        const y = rect.top + window.scrollY - headerOffset;
+        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+        return true;
+      };
+
+      // Try up to 3 times to account for async rendering
+      if (!tryScroll()) {
+        let attempts = 0;
+        const timer = setInterval(() => {
+          attempts += 1;
+          if (tryScroll() || attempts >= 3) {
+            clearInterval(timer);
+          }
+        }, 150);
+      }
+    }
+  }, [activeTab, sortedHistorias]);
+
   if (isLoading) {
     return <LoadingSpinner />;
   }
@@ -149,6 +187,14 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
         setMenuOpen={setMenuOpen}
         historias={legacyDb.getHistorias()}
       />
+
+      {/* Year Navigator - only show on historia tab */}
+      {activeTab === 'historia' && ruaHistorias.length > 0 && (
+        <YearNavigator 
+          historias={ruaHistorias}
+          onYearSelect={handleYearSelect}
+        />
+      )}
 
       {/* Main Content */}
       <main className="w-full py-6 bg-[#f4ede0]">
