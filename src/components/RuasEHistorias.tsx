@@ -155,8 +155,8 @@ const RuasEHistorias: React.FC = () => {
             <HistoryCard 
               historias={filteredHistorias}
               onHistoriaClick={(ruaId, historiaId) => {
-                // Navigate to street page and let the page handle auto-scroll
-                router.push(`/rua/${ruaId}/historia/${historiaId}`);
+                // Navigate with scroll query parameter to trigger auto-scroll
+                router.push(`/rua/${ruaId}/historia/${historiaId}?scroll=true`);
               }}
             />
           ) : (

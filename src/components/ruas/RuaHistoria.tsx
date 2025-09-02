@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
+import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { legacyDb } from '../../utils/legacyDb';
 import { legacyHistorias, legacyRuas, legacyCidades } from '../../data/legacyData';
 import type { Historia, Rua, Cidade } from '../../types';
@@ -20,14 +20,15 @@ import NotFoundContent from './NotFoundContent';
 
 interface RuaHistoriaProps {
   className?: string;
-  scrollToHistoriaId?: string; // Optional prop to trigger auto-scroll to specific historia
 }
 
-const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className, scrollToHistoriaId }) => {
+const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
   const params = useParams();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const ruaId = Array.isArray(params?.ruaId) ? params.ruaId[0] : params?.ruaId;
   const historiaId = Array.isArray(params?.historiaId) ? params.historiaId[0] : params?.historiaId;
+  const shouldScroll = searchParams.get('scroll') === 'true';
   
   const [rua, setRua] = useState<Rua | null>(null);
   const [historia, setHistoria] = useState<Historia | null>(null);
@@ -70,32 +71,9 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className, scrollToHistoriaId
       }
     }
 
-    if (historiaId) {
-      const foundHistoria = legacyDb.getHistoriaById(historiaId);
-      
-      // Validate that the historia belongs to the specified rua
-      if (foundHistoria && ruaId) {
-        if (foundHistoria.rua_id?.toString() !== ruaId) {
-          // Historia doesn't belong to this rua - find the correct rua and redirect
-          const correctRuaId = foundHistoria.rua_id?.toString();
-          if (correctRuaId) {
-            router.replace(`/rua/${correctRuaId}/historia/${historiaId}`);
-            return;
-          } else {
-            setValidationError('Esta história não está associada a nenhuma rua válida.');
-          }
-        } else {
-          setHistoria(foundHistoria);
-        }
-      } else if (foundHistoria) {
-        setHistoria(foundHistoria);
-      } else {
-        setHistoria(null);
-      }
-    }
-
+    // Remove URL-based historia loading - now handled via props-based auto-scroll
     setIsLoading(false);
-  }, [ruaId, historiaId, router]);
+  }, [ruaId, router]);
 
   // Compute sorted historias for feed
   const sortedHistorias = useMemo(() => {
@@ -108,12 +86,12 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className, scrollToHistoriaId
     return copy;
   }, [ruaHistorias, sortOrder]);
 
-  // Props-based auto-scroll - only scrolls when scrollToHistoriaId prop is provided
+  // URL query parameter-based auto-scroll - only scrolls when ?scroll=true is present
   useEffect(() => {
-    if (!scrollToHistoriaId) return;
+    if (!shouldScroll || !historiaId) return;
     
     // Verify the historia exists in the current rua's historias
-    const targetHistoria = sortedHistorias.find(h => h.id === scrollToHistoriaId);
+    const targetHistoria = sortedHistorias.find(h => h.id === historiaId);
     if (!targetHistoria) return;
     
     // Switch to historia tab if not already active
@@ -123,7 +101,7 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className, scrollToHistoriaId
 
     const headerOffset = 80; // approximate fixed header height
     const tryScroll = (): boolean => {
-      const el = document.getElementById(`historia-${scrollToHistoriaId}`);
+      const el = document.getElementById(`historia-${historiaId}`);
       if (!el) return false;
       const rect = el.getBoundingClientRect();
       const y = rect.top + window.scrollY - headerOffset;
@@ -142,7 +120,7 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className, scrollToHistoriaId
       }, 150);
       return () => clearInterval(timer);
     }
-  }, [scrollToHistoriaId, sortedHistorias, activeTab]);
+  }, [shouldScroll, historiaId, sortedHistorias, activeTab]);
 
   const changeTab = (tab: 'historia' | 'rua' | 'cidade') => {
     setActiveTab(tab);
