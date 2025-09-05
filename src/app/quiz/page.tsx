@@ -16,7 +16,9 @@ interface Question {
 }
 
 interface ScoreEntry {
+  name: string;
   email: string;
+  city: string;
   score: number;
   percentage: number;
 }
@@ -35,12 +37,16 @@ function getRandomQuestions(all: Question[], num: number): Question[] {
 }
 
 export default function QuizPage() {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [city, setCity] = useState('');
   const [quizStarted, setQuizStarted] = useState(false);
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmittingEmail, setIsSubmittingEmail] = useState(false);
   const [hasSubmittedBefore, setHasSubmittedBefore] = useState(false);
+  const [scoreSubmitted, setScoreSubmitted] = useState(false);
+  const [submissionError, setSubmissionError] = useState('');
 
   const [selectedQuestions, setSelectedQuestions] = useState<Question[]>([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -140,7 +146,9 @@ export default function QuizPage() {
       
       // Prepare form data for Google Apps Script
       const formData = new FormData();
+      formData.append('name', name);
       formData.append('email', email);
+      formData.append('city', city);
       formData.append('score', score.toString());
       formData.append('percentage', percentage.toString());
       formData.append('totalQuestions', selectedQuestions.length.toString());
@@ -154,10 +162,21 @@ export default function QuizPage() {
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       if (response.ok) {
+        const result = await response.json();
+        
+        if (result.status === 'error' && result.code === 'DUPLICATE_EMAIL') {
+          setSubmissionError('Este email já foi utilizado. Cada pessoa pode participar apenas uma vez.');
+          return;
+        }
+        
+        if (result.status === 'error') {
+          setSubmissionError('Erro ao salvar pontuação. Tente novamente.');
+          return;
+        }
         // Save score to localStorage
         if (typeof window !== 'undefined') {
           const stored = JSON.parse(localStorage.getItem('scoresList') || '[]');
-          const newScores = [...stored, { email, score, percentage }];
+          const newScores = [...stored, { name, email, city, score, percentage }];
           localStorage.setItem('scoresList', JSON.stringify(newScores));
           setScoresList(newScores);
           
@@ -166,19 +185,16 @@ export default function QuizPage() {
           setHasSubmittedBefore(true);
         }
         
-        // Clear quiz progress and reset
+        // Clear quiz progress but keep user on results page
         localStorage.removeItem('quizProgress');
-        setQuizCompleted(false);
-        setQuizStarted(false);
-        setScore(0);
-        setCurrentQuestion(0);
-        setSelectedQuestions([]);
-        setEmail('');
+        setSubmissionError('');
+        setScoreSubmitted(true);
       } else {
-        console.error('Falha ao enviar email');
+        setSubmissionError('Erro ao conectar com o servidor. Tente novamente.');
       }
     } catch (err) {
       console.error('Erro ao enviar email:', err);
+      setSubmissionError('Erro de conexão. Verifique sua internet e tente novamente.');
     } finally {
       setIsSubmittingEmail(false);
     }
@@ -305,20 +321,48 @@ export default function QuizPage() {
               {!hasSubmittedBefore ? (
                 <form onSubmit={handleEmailSubmit} className="flex flex-col mb-4">
                   <label className="block text-[#4A3F35] text-sm font-bold mb-2">
-                    Digite seu email para salvar sua pontuação:
+                    Preencha seus dados para salvar sua pontuação:
                   </label>
+                  
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                    className="shadow appearance-none border border-[#F5F1EB] rounded w-full py-2 px-3 text-[#6B5B4F] bg-[#FEFCF8] leading-tight focus:outline-none focus:ring-2 focus:ring-[#8B4513]/30 focus:border-[#8B4513] mb-3"
+                    placeholder="Seu nome completo"
+                  />
+                  
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="shadow appearance-none border border-[#F5F1EB] rounded w-full py-2 px-3 text-[#6B5B4F] bg-[#FEFCF8] leading-tight focus:outline-none focus:ring-2 focus:ring-[#8B4513]/30 focus:border-[#8B4513] mb-4"
+                    className="shadow appearance-none border border-[#F5F1EB] rounded w-full py-2 px-3 text-[#6B5B4F] bg-[#FEFCF8] leading-tight focus:outline-none focus:ring-2 focus:ring-[#8B4513]/30 focus:border-[#8B4513] mb-3"
                     placeholder="seu@email.com"
                   />
+                  
+                  <input
+                    type="text"
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                    required
+                    className="shadow appearance-none border border-[#F5F1EB] rounded w-full py-2 px-3 text-[#6B5B4F] bg-[#FEFCF8] leading-tight focus:outline-none focus:ring-2 focus:ring-[#8B4513]/30 focus:border-[#8B4513] mb-4"
+                    placeholder="Sua cidade de origem"
+                  />
+                  
+                  {submissionError && (
+                    <div className="mb-4 p-3 bg-[#DC2626]/10 border border-[#DC2626]/30 rounded-lg">
+                      <p className="text-[#DC2626] text-sm font-medium">
+                        ❌ {submissionError}
+                      </p>
+                    </div>
+                  )}
                   <button
                     type="submit"
                     disabled={isSubmittingEmail}
-                    className="bg-[#8B4513] hover:bg-[#A0522D] disabled:bg-[#A0958A] text-white py-2 px-4 rounded whitespace-nowrap w-full text-sm sm:text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#8B4513]/50 transform hover:scale-105 active:scale-95 disabled:scale-100 disabled:cursor-not-allowed mb-2"
+                    onClick={() => setSubmissionError('')}
+                    className="bg-[#16A34A] hover:bg-[#15803D] disabled:bg-[#A0958A] text-white py-2 px-4 rounded whitespace-nowrap w-full text-sm sm:text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#16A34A]/50 transform hover:scale-105 active:scale-95 disabled:scale-100 disabled:cursor-not-allowed mb-2"
                   >
                     {isSubmittingEmail ? (
                       <div className="flex items-center justify-center">
@@ -330,6 +374,15 @@ export default function QuizPage() {
                     )}
                   </button>
                 </form>
+              ) : scoreSubmitted ? (
+                <div className="mb-4 p-4 bg-[#16A34A]/10 border border-[#16A34A]/30 rounded-lg">
+                  <p className="text-[#15803D] text-sm font-medium mb-2">
+                    ✅ Pontuação salva com sucesso!
+                  </p>
+                  <p className="text-[#15803D] text-xs">
+                    Obrigado por participar do Quiz do Historin. Sua pontuação foi registrada.
+                  </p>
+                </div>
               ) : (
                 <div className="mb-4 p-4 bg-[#F59E0B]/10 border border-[#F59E0B]/30 rounded-lg">
                   <p className="text-[#92400E] text-sm font-medium mb-2">
@@ -341,31 +394,21 @@ export default function QuizPage() {
                 </div>
               )}
               
-              <h3 className="text-xl font-bold mb-2 text-[#4A3F35]">Ranking:</h3>
-              <ul className="mb-4">
-                {scoresList
-                  .sort((a, b) => (b.percentage || 0) - (a.percentage || 0))
-                  .slice(0, 5)
-                  .map((item, idx) => {
-                    const pct = item.percentage || Math.round((item.score / 100) * 100);
-                    return (
-                      <li
-                        key={idx}
-                        className="flex justify-between items-center py-2 px-4 bg-[#F5F1EB] rounded mb-2"
-                      >
-                        <span className="text-[#6B5B4F]">{idx + 1}. {item.email}</span>
-                        <span className="text-[#4A3F35] font-medium">{pct}%</span>
-                      </li>
-                    );
-                  })}
-              </ul>
-              
-              <button
-                onClick={startQuiz}
-                className="bg-[#6B8E23] hover:bg-[#556B2F] text-white py-2 px-4 rounded w-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#6B8E23]/50 mb-2 transform hover:scale-105 active:scale-95"
-              >
-                {hasSubmittedBefore ? 'Praticar Novamente' : 'Tentar Novamente'}
-              </button>
+              <div className="space-y-2">
+                <button
+                  onClick={startQuiz}
+                  className="bg-[#6B8E23] hover:bg-[#556B2F] text-white py-2 px-4 rounded w-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#6B8E23]/50 transform hover:scale-105 active:scale-95"
+                >
+                  {hasSubmittedBefore || scoreSubmitted ? 'Praticar Novamente' : 'Tentar Novamente'}
+                </button>
+                
+                <button
+                  onClick={() => window.location.href = '/'}
+                  className="bg-[#8B4513] hover:bg-[#A0522D] text-white py-2 px-4 rounded w-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#8B4513]/50 transform hover:scale-105 active:scale-95"
+                >
+                  Voltar ao Início
+                </button>
+              </div>
             </div>
           ) : (
             <div className="text-center">

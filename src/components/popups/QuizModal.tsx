@@ -51,11 +51,11 @@ const QuizModal: React.FC<QuizModalProps> = ({ isOpen, onClose }) => {
       >
         <h3 className="text-2xl md:text-3xl font-bold mb-4 text-center text-[#4A3F35]">Quiz do Historin</h3>
         <p className="text-base md:text-lg text-[#6B5B4F] mb-6 text-center">
-          Teste seus conhecimentos sobre o Historin!
+          Teste seus conhecimentos sobre a região!
         </p>
         <div className="text-[#6B5B4F] mb-8 space-y-3">
           <p>
-            • 10 perguntas aleatórias sobre a plataforma
+            • 10 perguntas aleatórias sobre as histórias
           </p>
           <p>
             • Pontuação baseada em acertos
