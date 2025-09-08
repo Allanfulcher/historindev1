@@ -13,6 +13,7 @@ interface Question {
   question: string;
   answers: string[];
   correct: number;
+  city?: number;
 }
 
 interface ScoreEntry {
@@ -26,9 +27,17 @@ interface ScoreEntry {
 // Use questions from legacy data
 const questions: Question[] = legacyQuestions;
 
-function getRandomQuestions(all: Question[], num: number): Question[] {
+function getRandomQuestions(all: Question[], num: number, cityFilter: number): Question[] {
+  // Filter questions based on city (0 = both cities, 1 = Gramado, 2 = Canela)
+  // Include questions without city property (treat as general questions)
+  const filtered = all.filter(q => 
+    q.city === 0 || 
+    q.city === cityFilter || 
+    q.city === undefined
+  );
+  
   // Fisher-Yates shuffle for proper randomization without repeats
-  const shuffled = [...all];
+  const shuffled = [...filtered];
   for (let i = shuffled.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
@@ -44,7 +53,6 @@ export default function QuizPage() {
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmittingEmail, setIsSubmittingEmail] = useState(false);
-  const [hasSubmittedBefore, setHasSubmittedBefore] = useState(false);
   const [scoreSubmitted, setScoreSubmitted] = useState(false);
   const [submissionError, setSubmissionError] = useState('');
 
@@ -57,24 +65,12 @@ export default function QuizPage() {
   const [showAnswerFeedback, setShowAnswerFeedback] = useState(false);
   const [feedbackMessage, setFeedbackMessage] = useState('');
   const [score, setScore] = useState(0);
-  const [scoresList, setScoresList] = useState<ScoreEntry[]>([]);
   const [menuOpen, setMenuOpen] = useState(false);
   const [showQuiz, setShowQuiz] = useState(false);
   // Modal feedback form state
   const [showFeedbackForm, setShowFeedbackForm] = useState(false);
   
 
-  // Load stored scores and check submission status
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const storedScores = JSON.parse(localStorage.getItem('scoresList') || '[]');
-      setScoresList(storedScores);
-      
-      // Check if user has submitted before (using a simple flag)
-      const hasSubmitted = localStorage.getItem('quizSubmitted') === 'true';
-      setHasSubmittedBefore(hasSubmitted);
-    }
-  }, []);
 
   // Persist progress
   useEffect(() => {
@@ -137,68 +133,6 @@ export default function QuizPage() {
     loadData();
   }, []);
 
-  const handleEmailSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmittingEmail(true);
-    
-    try {
-      const percentage = Math.round((score / (selectedQuestions.length * 10)) * 100);
-      
-      // Prepare form data for Google Apps Script
-      const formData = new FormData();
-      formData.append('name', name);
-      formData.append('email', email);
-      formData.append('city', city);
-      formData.append('score', score.toString());
-      formData.append('percentage', percentage.toString());
-      formData.append('totalQuestions', selectedQuestions.length.toString());
-      
-      const response = await fetch('https://script.google.com/macros/s/AKfycbzQvlJ-Sb4FhoLdWcbZv-NObK1T3K4ZVHn0nDX8Tg5j4mHBzei-dFjpWa0-wwwNvpZz3Q/exec', {
-        method: 'POST',
-        body: formData,
-      });
-      
-      // Add a small delay for better UX
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      if (response.ok) {
-        const result = await response.json();
-        
-        if (result.status === 'error' && result.code === 'DUPLICATE_EMAIL') {
-          setSubmissionError('Este email já foi utilizado. Cada pessoa pode participar apenas uma vez.');
-          return;
-        }
-        
-        if (result.status === 'error') {
-          setSubmissionError('Erro ao salvar pontuação. Tente novamente.');
-          return;
-        }
-        // Save score to localStorage
-        if (typeof window !== 'undefined') {
-          const stored = JSON.parse(localStorage.getItem('scoresList') || '[]');
-          const newScores = [...stored, { name, email, city, score, percentage }];
-          localStorage.setItem('scoresList', JSON.stringify(newScores));
-          setScoresList(newScores);
-          
-          // Mark as submitted to prevent future submissions
-          localStorage.setItem('quizSubmitted', 'true');
-          setHasSubmittedBefore(true);
-        }
-        
-        // Clear quiz progress but keep user on results page
-        localStorage.removeItem('quizProgress');
-        setSubmissionError('');
-        setScoreSubmitted(true);
-      } else {
-        setSubmissionError('Erro ao conectar com o servidor. Tente novamente.');
-      }
-    } catch (err) {
-      console.error('Erro ao enviar email:', err);
-      setSubmissionError('Erro de conexão. Verifique sua internet e tente novamente.');
-    } finally {
-      setIsSubmittingEmail(false);
-    }
-  };
 
   const handleAnswer = (idx: number) => {
     if (answersDisabled) return;
@@ -231,13 +165,68 @@ export default function QuizPage() {
     }
   }, [currentQuestion, selectedQuestions.length]);
 
+  const handleEmailSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmittingEmail(true);
+    
+    try {
+      const percentage = Math.round((score / (selectedQuestions.length * 10)) * 100);
+      
+      // Prepare form data for Google Apps Script
+      const formData = new FormData();
+      formData.append('name', name);
+      formData.append('email', email);
+      formData.append('city', city);
+      formData.append('score', score.toString());
+      formData.append('percentage', percentage.toString());
+      formData.append('totalQuestions', selectedQuestions.length.toString());
+      
+      const response = await fetch('https://script.google.com/macros/s/AKfycbzQvlJ-Sb4FhoLdWcbZv-NObK1T3K4ZVHn0nDX8Tg5j4mHBzei-dFjpWa0-wwwNvpZz3Q/exec', {
+        method: 'POST',
+        body: formData,
+      });
+      
+      // Add a small delay for better UX
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      if (response.ok) {
+        const result = await response.json();
+        
+        if (result.status === 'error') {
+          setSubmissionError('Erro ao salvar pontuação. Tente novamente.');
+          return;
+        }
+        
+        // Clear quiz progress but keep user on results page
+        localStorage.removeItem('quizProgress');
+        setSubmissionError('');
+        setScoreSubmitted(true);
+      } else {
+        setSubmissionError('Erro ao conectar com o servidor. Tente novamente.');
+      }
+    } catch (err) {
+      console.error('Erro ao enviar email:', err);
+      setSubmissionError('Erro de conexão. Verifique sua internet e tente novamente.');
+    } finally {
+      setIsSubmittingEmail(false);
+    }
+  };
+
   // Function to start quiz
   const startQuiz = () => {
+    if (!name || !email || !city) {
+      alert('Por favor, preencha todos os campos antes de começar o quiz.');
+      return;
+    }
+    
     setQuizStarted(true);
     setQuizCompleted(false);
     setScore(0);
     setCurrentQuestion(0);
-    setSelectedQuestions(getRandomQuestions(questions, 10));
+    
+    // Convert city name to number for filtering
+    const cityFilter = city === 'Gramado' ? 1 : city === 'Canela' ? 2 : 1;
+    setSelectedQuestions(getRandomQuestions(questions, 10, cityFilter));
   };
 
   if (isLoading) {
@@ -257,11 +246,48 @@ export default function QuizPage() {
             <div>
               <h1 className="text-2xl font-bold mb-4 text-center text-[#4A3F35]">Quiz do Historin</h1>
               <p className="text-base text-[#6B5B4F] mb-4 text-center">
-                Teste seus conhecimentos sobre a história de Gramado e região!
+                Teste seus conhecimentos sobre a história de Gramado e Canela!
               </p>
               <p className="text-sm text-[#6B5B4F] mb-6 text-center">
                 10 perguntas aleatórias sobre os locais históricos da cidade.
               </p>
+              
+              {/* User form moved to beginning */}
+              <div className="mb-6">
+                <label className="block text-[#4A3F35] text-sm font-bold mb-4 text-center">
+                  Preencha seus dados para começar:
+                </label>
+                
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                  className="shadow appearance-none border border-[#F5F1EB] rounded w-full py-2 px-3 text-[#6B5B4F] bg-[#FEFCF8] leading-tight focus:outline-none focus:ring-2 focus:ring-[#8B4513]/30 focus:border-[#8B4513] mb-3"
+                  placeholder="Seu nome completo"
+                />
+                
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="shadow appearance-none border border-[#F5F1EB] rounded w-full py-2 px-3 text-[#6B5B4F] bg-[#FEFCF8] leading-tight focus:outline-none focus:ring-2 focus:ring-[#8B4513]/30 focus:border-[#8B4513] mb-3"
+                  placeholder="seu@email.com"
+                />
+                
+                <select
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  required
+                  className="shadow appearance-none border border-[#F5F1EB] rounded w-full py-2 px-3 text-[#6B5B4F] bg-[#FEFCF8] leading-tight focus:outline-none focus:ring-2 focus:ring-[#8B4513]/30 focus:border-[#8B4513] mb-4"
+                >
+                  <option value="">Selecione sua cidade</option>
+                  <option value="Gramado">Gramado</option>
+                  <option value="Canela">Canela</option>
+                </select>
+              </div>
+              
               <button
                 onClick={startQuiz}
                 className="bg-[#8B4513] hover:bg-[#A0522D] text-white py-2 px-4 rounded whitespace-nowrap w-full text-sm sm:text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#8B4513]/50 transform hover:scale-105 active:scale-95"
@@ -318,78 +344,43 @@ export default function QuizPage() {
                 );
               })()}
               
-              {!hasSubmittedBefore ? (
-                <form onSubmit={handleEmailSubmit} className="flex flex-col mb-4">
-                  <label className="block text-[#4A3F35] text-sm font-bold mb-2">
-                    Preencha seus dados para salvar sua pontuação:
-                  </label>
-                  
-                  <input
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                    className="shadow appearance-none border border-[#F5F1EB] rounded w-full py-2 px-3 text-[#6B5B4F] bg-[#FEFCF8] leading-tight focus:outline-none focus:ring-2 focus:ring-[#8B4513]/30 focus:border-[#8B4513] mb-3"
-                    placeholder="Seu nome completo"
-                  />
-                  
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    className="shadow appearance-none border border-[#F5F1EB] rounded w-full py-2 px-3 text-[#6B5B4F] bg-[#FEFCF8] leading-tight focus:outline-none focus:ring-2 focus:ring-[#8B4513]/30 focus:border-[#8B4513] mb-3"
-                    placeholder="seu@email.com"
-                  />
-                  
-                  <input
-                    type="text"
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                    required
-                    className="shadow appearance-none border border-[#F5F1EB] rounded w-full py-2 px-3 text-[#6B5B4F] bg-[#FEFCF8] leading-tight focus:outline-none focus:ring-2 focus:ring-[#8B4513]/30 focus:border-[#8B4513] mb-4"
-                    placeholder="Sua cidade de origem"
-                  />
-                  
-                  {submissionError && (
-                    <div className="mb-4 p-3 bg-[#DC2626]/10 border border-[#DC2626]/30 rounded-lg">
-                      <p className="text-[#DC2626] text-sm font-medium">
-                        ❌ {submissionError}
-                      </p>
+              <form onSubmit={handleEmailSubmit} className="flex flex-col mb-4">
+                <label className="block text-[#4A3F35] text-sm font-bold mb-2 text-center">
+                  Salvar sua pontuação:
+                </label>
+                
+                {submissionError && (
+                  <div className="mb-4 p-3 bg-[#DC2626]/10 border border-[#DC2626]/30 rounded-lg">
+                    <p className="text-[#DC2626] text-sm font-medium">
+                      ❌ {submissionError}
+                    </p>
+                  </div>
+                )}
+                
+                <button
+                  type="submit"
+                  disabled={isSubmittingEmail}
+                  onClick={() => setSubmissionError('')}
+                  className="bg-[#16A34A] hover:bg-[#15803D] disabled:bg-[#A0958A] text-white py-2 px-4 rounded whitespace-nowrap w-full text-sm sm:text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#16A34A]/50 transform hover:scale-105 active:scale-95 disabled:scale-100 disabled:cursor-not-allowed mb-2"
+                >
+                  {isSubmittingEmail ? (
+                    <div className="flex items-center justify-center">
+                      <LoadingSpinner size="sm" color="white" text="" />
+                      <span className="ml-2">Salvando...</span>
                     </div>
+                  ) : (
+                    'Salvar Pontuação'
                   )}
-                  <button
-                    type="submit"
-                    disabled={isSubmittingEmail}
-                    onClick={() => setSubmissionError('')}
-                    className="bg-[#16A34A] hover:bg-[#15803D] disabled:bg-[#A0958A] text-white py-2 px-4 rounded whitespace-nowrap w-full text-sm sm:text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#16A34A]/50 transform hover:scale-105 active:scale-95 disabled:scale-100 disabled:cursor-not-allowed mb-2"
-                  >
-                    {isSubmittingEmail ? (
-                      <div className="flex items-center justify-center">
-                        <LoadingSpinner size="sm" color="white" text="" />
-                        <span className="ml-2">Salvando...</span>
-                      </div>
-                    ) : (
-                      'Salvar Pontuação'
-                    )}
-                  </button>
-                </form>
-              ) : scoreSubmitted ? (
+                </button>
+              </form>
+              
+              {scoreSubmitted && (
                 <div className="mb-4 p-4 bg-[#16A34A]/10 border border-[#16A34A]/30 rounded-lg">
                   <p className="text-[#15803D] text-sm font-medium mb-2">
                     ✅ Pontuação salva com sucesso!
                   </p>
                   <p className="text-[#15803D] text-xs">
                     Obrigado por participar do Quiz do Historin. Sua pontuação foi registrada.
-                  </p>
-                </div>
-              ) : (
-                <div className="mb-4 p-4 bg-[#F59E0B]/10 border border-[#F59E0B]/30 rounded-lg">
-                  <p className="text-[#92400E] text-sm font-medium mb-2">
-                    ⚠️ Você já enviou uma pontuação anteriormente
-                  </p>
-                  <p className="text-[#92400E] text-xs">
-                    Apenas uma submissão por pessoa é permitida. Você pode continuar praticando, mas não poderá salvar novas pontuações.
                   </p>
                 </div>
               )}
@@ -399,7 +390,7 @@ export default function QuizPage() {
                   onClick={startQuiz}
                   className="bg-[#6B8E23] hover:bg-[#556B2F] text-white py-2 px-4 rounded w-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#6B8E23]/50 transform hover:scale-105 active:scale-95"
                 >
-                  {hasSubmittedBefore || scoreSubmitted ? 'Praticar Novamente' : 'Tentar Novamente'}
+                  {scoreSubmitted ? 'Praticar Novamente' : 'Tentar Novamente'}
                 </button>
                 
                 <button

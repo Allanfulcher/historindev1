@@ -1965,6 +1965,7 @@ const questions = [{
   question: "Em que ano foi inaugurado o Lago Joaquina Rita Bier em Gramado?",
   answers: ["1938", "1960", "1970", "1990"],
   correct: 0,
+  city: 1,
 },
 {
   question: "Qual era o antigo nome da Praça das Etnias em Gramado?",
@@ -1975,11 +1976,13 @@ const questions = [{
     "Praça das Flores",
   ],
   correct: 0,
+  city: 1,
 },
 {
   question: "Em que ano foi inaugurada a nova rodoviária de Gramado?",
   answers: ["1984", "1985", "1986", "1987"],
   correct: 2,
+  city: 1,
 },
 {
   question: "O que existia no lugar onde hoje é o Banrisul em Gramado?",
@@ -1990,6 +1993,7 @@ const questions = [{
     "Parque Hotel",
   ],
   correct: 0,
+  city: 1,
 },
 {
   question: "Qual foi o primeiro cinema inaugurado em Gramado em 1929?",
@@ -2000,11 +2004,13 @@ const questions = [{
     "Palácio dos Festivais",
   ],
   correct: 1,
+  city: 1,
 },
 {
   question: "Em que ano foi inaugurado o Cine Embaixador?",
   answers: ["1967", "1972", "1984", "1990"],
   correct: 0,
+  city: 1,
 },
 {
   question: "Qual evento antecedeu o Natal Luz em Gramado?",
@@ -2025,11 +2031,13 @@ const questions = [{
     "Parque Knorr",
   ],
   correct: 0,
+  city: 1,
 },
 {
   question: "Em que ano ocorreu a construção da Rua Coberta em Gramado?",
   answers: ["1984", "1990", "1996", "2000"],
   correct: 2,
+  city: 1,
 },
 {
   question: "Quem inaugurou o Lago Negro em Gramado?",
@@ -2040,11 +2048,13 @@ const questions = [{
     "Allan Fulcher",
   ],
   correct: 1,
+  city: 1,
 },
 {
   question: "Qual era o nome original do Lago Negro antes do incêndio de 1942?",
   answers: ["Lago do Bom Jesus", "Lago Joaquina Rita Bier", "Vale do Bom Retiro", "Lago do Meio"],
   correct: 2,
+  city: 1,
 },
 {
   question: "Qual nome da praça central da cidade de Gramado?",
@@ -2055,6 +2065,7 @@ const questions = [{
     "Praça das Flores",
   ],
   correct: 0,
+  city: 1,
 },
 {
   question: "Qual hospital estava em construção em 1940, sendo muito esperado pela comunidade de Gramado?",
@@ -2065,11 +2076,13 @@ const questions = [{
     "Hospital Santa Terezinha",
   ],
   correct: 2,
+  city: 1,
 },
 {
   question: "Em que ano a Igreja São Pedro de Gramado foi finalizada?",
   answers: ["1920", "1930", "1942", "1950"],
   correct: 2,
+  city: 1,
 },
 {
   question: "Qual é o nome do famoso ponto turístico de Canela com uma queda d'água de 130 metros?",
@@ -2080,6 +2093,7 @@ const questions = [{
     "Cascata Véu de Noiva",
   ],
   correct: 0,
+  city: 2,
 },
 {
   question: "Qual local em Canela foi construído sem uso de pregos e é famoso por seu apfelstrudel?",
@@ -2090,6 +2104,7 @@ const questions = [{
     "Parque da Ferradura",
   ],
   correct: 0,
+  city: 2,
 },
 {
   question: "Qual avenida de Gramado Teve os cabos enterrados para melhorar o seu visual?",
@@ -2100,6 +2115,7 @@ const questions = [{
     "Rua São Pedro",
   ],
   correct: 1,
+  city: 1,
 },
 {
   question: "Quem foi o fundador da Famastil Ferramentas Ltda. em Gramado?",
@@ -2110,11 +2126,13 @@ const questions = [{
     "Eugênio Bertolucci",
   ],
   correct: 0,
+  city: 1,
 },
 {
   question: "Em que ano a Malharia Lucirene celebrou seus 15 anos de fundação?",
   answers: ["1980", "1988", "1990", "1995"],
   correct: 1,
+  city: 1,
 },
 {
   question: "Qual rua de Gramado é conhecida por abrigar a Rua Coberta e o Palácio dos Festivais?",
@@ -2125,11 +2143,13 @@ const questions = [{
     "Rua São Pedro",
   ],
   correct: 0,
+  city: 1,
 },
 {
   question: "Em que ano ocorreu a neve vista da praça em frente à Igreja Matriz de Canela?",
   answers: ["1984", "1990", "1994", "2000"],
   correct: 2,
+  city: 2,
 },
 {
   question: "Qual clube foi fundado em 1926 e é um marco em Canela?",
@@ -2140,6 +2160,7 @@ const questions = [{
     "Clube dos Amigos",
   ],
   correct: 0,
+  city: 2,
 },
 {
   question: "Qual foi a primeira sede da Sociedade Recreio Gramadense fundada em 1915?",
@@ -2150,6 +2171,7 @@ const questions = [{
     "Casa do Colono",
   ],
   correct: 0,
+  city: 1,
 },
 {
   question: "Qual prédio em Gramado foi transformado em Banrisul, anteriormente sendo uma escola?",
@@ -2160,6 +2182,7 @@ const questions = [{
     "Escola Municipal",
   ],
   correct: 0,
+  city: 1,
 },
 {
   question: "Qual hospital em Canela preserva sua característica original após ampliação?",
@@ -2170,11 +2193,13 @@ const questions = [{
     "Hospital Bom Jesus",
   ],
   correct: 0,
+  city: 2,
 },
 {
   question: "Em que ano foi Inaugurada a Estação Ferroviária de Canela?",
   answers: ["1922", "1934", "1940", "1950"],
   correct: 0,
+  city: 2,
 },
 {
   question: "Qual local em Canela é apreciado por católicos e tem sua festa tradicional em 26 de maio?",
@@ -2185,6 +2210,7 @@ const questions = [{
     "Capela Santa Terezinha",
   ],
   correct: 0,
+  city: 2,
 },
 {
   question: "Qual escola de Canela foi referência no estado e teve como primeira sede a casa de Carlos Wortmann?",
@@ -2195,6 +2221,7 @@ const questions = [{
     "Escola Municipal",
   ],
   correct: 0,
+  city: 2,
 },
 {
   question: "Qual foi o primeiro açougue de Gramado, substituído por uma loja de decorações?",
@@ -2205,211 +2232,253 @@ const questions = [{
     "Açougue Gramadense",
   ],
   correct: 1,
+  city: 1,
 },
 {
   question: "Qual avenida de Gramado é considerada o coração do comércio e turismo?",
   answers: ["Av. Borges de Medeiros", "Av. das Hortênsias", "Rua São Pedro", "Rua Coberta"],
-  correct: 0
+  correct: 0,
+  city: 1,
 },
 {
   question: "Quem foi homenageado com o nome da Rua Coronel João Corrêa?",
   answers: ["Fundador de Gramado", "Engenheiro de Canela", "Construtor da estrada de ferro", "Artista local"],
-  correct: 2
+  correct: 2,
+  city: 1,
 },
 {
   question: "Qual é o nome do lago em Gramado criado após um incêndio?",
   answers: ["Lago Negro", "Lago das Hortênsias", "Lago Azul", "Lago Verde"],
-  correct: 0
+  correct: 0,
+  city: 1,
 },
 {
   question: "Que figura histórica foi homenageada na Rua Garibaldi?",
   answers: ["Giuseppe Garibaldi", "Leopoldo Rosenfeld", "Júlio de Castilhos", "Nelson Dinebier"],
-  correct: 0
+  correct: 0,
+  city: 1,
 },
 {
   question: "Quem é homenageado na Av. dos Trabalhadores em Gramado?",
   answers: ["Os pioneiros da cidade", "Antigos ferroviários", "Pequenos comerciantes", "Artistas locais"],
-  correct: 1
+  correct: 1,
+  city: 1,
 },
 {
   question: "Qual avenida de Gramado liga a cidade a Canela?",
   answers: ["Av. dos Trabalhadores", "Av. das Hortênsias", "Av. Borges de Medeiros", "Rua Madre Verônica"],
-  correct: 1
+  correct: 1,
+  city: 1,
 },
 {
   question: "Em qual ano foi inaugurada a Rua Coberta em Gramado?",
   answers: ["1986", "1996", "2006", "2016"],
-  correct: 1
+  correct: 1,
+  city: 1,
 },
 {
   question: "Quem foi homenageado com a Rua Leopoldo Rosenfeld?",
   answers: ["Artista local", "Líder comunitário", "Vice-prefeito e desenvolvedor turístico", "Empresário local"],
-  correct: 2
+  correct: 2,
+  city: 1,
 },
 {
   question: "Qual rua é famosa por abrigar o Festival de Cinema de Gramado?",
   answers: ["Madre Verônica", "Rua Coronel João Corrêa", "Rua São Pedro", "Rua Borges de Medeiros"],
-  correct: 0
+  correct: 0,
+  city: 1,
 },
 {
   question: "Quem foi homenageado com o nome da Av. Júlio de Castilhos em Canela?",
   answers: ["Um líder religioso", "Diplomata brasileiro", "Governador gaúcho", "Prefeito de Canela"],
-  correct: 2
+  correct: 2,
+  city: 2,
 },
 {
   question: "Qual a importância da ERS-115 para Gramado?",
   answers: ["Acesso principal à Serra Gaúcha", "Ligação entre Gramado e Canela", "Rota histórica de tropeiros", "Rota para o litoral"],
-  correct: 0
+  correct: 0,
+  city: 1,
 },
 {
   question: "A quem a Rua São Pedro homenageia?",
   answers: ["Padroeiro da cidade", "Pioneiro local", "Artista de Gramado", "Comerciante tradicional"],
-  correct: 0
+  correct: 0,
+  city: 1,
 },
 {
   question: "Qual é o principal propósito da plataforma Historin?",
   answers: ["Preservar histórias locais", "Oferecer roteiros turísticos", "Criar eventos culturais", "Proporcionar guias de compras"],
-  correct: 0
+  correct: 0,
+  city: 0,
 },
 {
   question: "Quem foi homenageado com a Rua Tenente Manoel Corrêa em Canela?",
   answers: ["Militar", "Líder comunitário", "Esportista famoso", "Diplomata"],
-  correct: 0
+  correct: 0,
+  city: 2,
 },
 {
   question: "Qual avenida em Canela homenageia um diplomata gaúcho famoso?",
   answers: ["Av. Júlio de Castilhos", "Av. Oswaldo Aranha", "Av. das Hortênsias", "Rua Coronel João Corrêa"],
-  correct: 1
+  correct: 1,
+  city: 2,
 },
 {
   question: "Qual é o nome do lago cercado por hortênsias em Gramado?",
   answers: ["Lago Negro", "Lago das Hortênsias", "Lago Verde", "Lago da Serra"],
-  correct: 0
+  correct: 0,
+  city: 1,
 },
 {
   question: "A Rua Melvin Jones em Canela homenageia o fundador de qual organização?",
   answers: ["Rotary Club", "Lions Clubs International", "Cruz Vermelha", "Escoteiros"],
-  correct: 1
+  correct: 1,
+  city: 2,
 },
 {
   question: "Qual rua em Gramado homenageia um herói italiano?",
   answers: ["Rua Garibaldi", "Rua Leopoldo Rosenfeld", "Rua São Pedro", "Av. das Hortênsias"],
-  correct: 0
+  correct: 0,
+  city: 1,
 },
 {
   question: "Qual o nome do fundador do Lago Negro?",
   answers: ["Leopoldo Rosenfeld", "Nelson Dinebier", "Júlio de Castilhos", "Antônio Borges"],
-  correct: 0
+  correct: 0,
+  city: 1,
 },
 {
   question: "Qual figura é homenageada na Rua Dona Carlinda em Canela?",
   answers: ["Fundadora de Canela", "Figura histórica local", "Governador gaúcho", "Artista regional"],
-  correct: 1
+  correct: 1,
+  city: 2,
 },
 {
   question: "Qual avenida de Canela conecta diversos pontos turísticos?",
   answers: ["Av. Júlio de Castilhos", "Av. Oswaldo Aranha", "Av. das Hortênsias", "Rua Felisberto Soares"],
-  correct: 1
+  correct: 1,
+  city: 2,
 },
 {
   question: "Quem fundou a sociedade recreio gramadense?",
   answers: ["Manuel Becharra", "Leopoldo Rosenfeld", "Giuseppe Garibaldi", "Mateus Canova"],
-  correct: 0
+  correct: 0,
+  city: 1,
 },
 {
   question: "Qual o nome da famosa igreja localizada em Canela?",
   answers: ["Igreja São Pedro", "Catedral de Pedra", "Igreja das Hortênsias", "Igreja de São Francisco"],
-  correct: 1
+  correct: 1,
+  city: 2,
 },
 {
   question: "Qual é o símbolo da diversidade cultural de Gramado?",
   answers: ["Rótula das Bandeiras", "Praça Major Nicoletti", "Rua Coberta", "Praça das Etnias"],
-  correct: 3
+  correct: 3,
+  city: 1,
 },
 {
   question: "Em que rua de Gramado foi inaugurado o primeiro cinema?",
   answers: ["Rua São Pedro", "Rua Coronel João Corrêa", "Rua Garibaldi", "Av. Borges de Medeiros"],
-  correct: 3
+  correct: 3,
+  city: 1,
 },
 {
   question: "Qual figura religiosa é homenageada na Av. Cônego João Marchesi?",
   answers: ["Bispo local", "Cônego João Marchesi", "Padre Antônio Vieira", "Papa Francisco"],
-  correct: 1
+  correct: 1,
+  city: 2,
 },
 {
   question: "Que festival ocorre no Palácio dos Festivais em Gramado?",
   answers: ["Festival de Cinema", "Festa da Colônia", "Natal Luz", "Festival de Música"],
-  correct: 0
+  correct: 0,
+  city: 1,
 },
 {
   question: "Qual rua homenageia uma figura religiosa em Gramado?",
   answers: ["Rua Madre Verônica", "Rua São Pedro", "Rua Dona Carlinda", "Rua Leopoldo Rosenfeld"],
-  correct: 0
+  correct: 0,
+  city: 1,
 },
 {
   question: "Quem é homenageado na Rua Augusto Pestana em Canela?",
   answers: ["Engenheiro ferroviário", "Artista local", "Político gaúcho", "Diplomata internacional"],
-  correct: 0
+  correct: 0,
+  city: 2,
 },
 {
   question: "Qual o nome da rua que homenageia o padroeiro de Gramado?",
   answers: ["Rua Garibaldi", "Rua São Pedro", "Rua Coronel João Corrêa", "Rua Leopoldo Rosenfeld"],
-  correct: 1
+  correct: 1,
+  city: 1,
 },
 {
   question: "Qual rua de Canela homenageia um engenheiro republicano?",
   answers: ["Rua Augusto Pestana", "Rua Garibaldi", "Rua Leopoldo Rosenfeld", "Av. Júlio de Castilhos"],
-  correct: 0
+  correct: 0,
+  city: 2,
 },
 {
   question: "Em que ano foi fundado o recreio gramadense?",
   answers: ["1910", "1915", "1920", "1925"],
-  correct: 1
+  correct: 1,
+  city: 1,
 },
 {
   question: "Que figura histórica foi homenageada na Av. Oswaldo Aranha?",
   answers: ["Governador gaúcho", "Diplomata brasileiro", "Político local", "Artista famoso"],
-  correct: 1
+  correct: 1,
+  city: 2,
 },
 {
   question: "Qual é a famosa rua de pedestres em Gramado?",
   answers: ["Rua Garibaldi", "Rua São Pedro", "Rua Coberta", "Av. Borges de Medeiros"],
-  correct: 2
+  correct: 2,
+  city: 1,
 },
 {
   question: "Que figura religiosa é homenageada na rua com acesso à Igreja São Pedro?",
   answers: ["São Pedro Apóstolo", "Madre Verônica", "Cônego João Marchesi", "Papa João Paulo II"],
-  correct: 0
+  correct: 0,
+  city: 1,
 },
 {
   question: "Qual rua de Canela é uma das mais importantes vias comerciais?",
   answers: ["Rua Melvin Jones", "Rua Martinho Lutero", "Rua Dona Carlinda", "Av. Júlio de Castilhos"],
-  correct: 3
+  correct: 3,
+  city: 2,
 },
 {
   question: "Quem foi homenageado na Rua Visconde de Mauá em Canela?",
   answers: ["Engenheiro ferroviário", "Político republicano", "Empresário brasileiro", "Governador do RS"],
-  correct: 2
+  correct: 2,
+  city: 2,
 },
 {
   question: "Qual é o símbolo do turismo em Canela?",
   answers: ["Catedral de Pedra", "Rua Coberta", "Rua Garibaldi", "Praça Major Nicoletti"],
-  correct: 0
+  correct: 0,
+  city: 2,
 },
 {
   question: "Quem foi homenageado na Rua Ignácio Saturnino de Moraes?",
   answers: ["Engenheiro local", "Prefeito de Gramado", "Líder comunitário", "Figura de Canela"],
-  correct: 3
+  correct: 3,
+  city: 2,
 },
 {
   question: "Qual é o principal símbolo da cultura alemã em Canela?",
   answers: ["Rua Torta", "Rua Felisberto Soares", "Rua Melvin Jones", "Catedral de Pedra"],
-  correct: 3
+  correct: 3,
+  city: 2,
 },
 {
   question: "Qual avenida de Canela conecta a cidade ao Parque Caracol?",
   answers: ["Rod. Guilherme Wasem", "Av. Júlio de Castilhos", "Rua Leopoldo Rosenfeld", "Av. Cônego João Marchesi"],
-  correct: 0
+  correct: 0,
+  city: 2,
 },
 ];
 
