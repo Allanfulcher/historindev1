@@ -72,63 +72,13 @@ export default function QuizPage() {
   
 
 
-  // Persist progress
-  useEffect(() => {
-    if (quizStarted && typeof window !== 'undefined') {
-      const quizData = {
-        quizStarted,
-        quizCompleted,
-        score,
-        currentQuestion,
-        selectedAnswerIndex,
-        answersDisabled,
-        showAnswerFeedback,
-        feedbackMessage,
-        isCorrect,
-        selectedQuestions,
-      };
-      localStorage.setItem('quizProgress', JSON.stringify(quizData));
-    }
-  }, [
-    quizStarted,
-    quizCompleted,
-    currentQuestion,
-    score,
-    selectedAnswerIndex,
-    answersDisabled,
-    showAnswerFeedback,
-    feedbackMessage,
-    isCorrect,
-    selectedQuestions,
-  ]);
 
-  // Load progress when page mounts
+  // Simple loading effect
   useEffect(() => {
     const loadData = async () => {
-      if (typeof window !== 'undefined') {
-        // Simulate loading time for better UX
-        await new Promise(resolve => setTimeout(resolve, 800));
-        
-        const saved = localStorage.getItem('quizProgress');
-        if (saved) {
-          const data = JSON.parse(saved);
-          setQuizStarted(data.quizStarted || false);
-          setQuizCompleted(data.quizCompleted || false);
-          setScore(data.score || 0);
-          setCurrentQuestion(data.currentQuestion || 0);
-          setSelectedAnswerIndex(
-            data.selectedAnswerIndex !== null ? data.selectedAnswerIndex : null
-          );
-          setAnswersDisabled(data.answersDisabled || false);
-          // Backward compatibility: support old key name `showFeedback`
-          const savedInline = (data.showAnswerFeedback ?? data.showFeedback) || false;
-          setShowAnswerFeedback(savedInline);
-          setFeedbackMessage(data.feedbackMessage || '');
-          setIsCorrect(data.isCorrect ?? null);
-          setSelectedQuestions(data.selectedQuestions || []);
-        }
-        setIsLoading(false);
-      }
+      // Simulate loading time for better UX
+      await new Promise(resolve => setTimeout(resolve, 800));
+      setIsLoading(false);
     };
     loadData();
   }, []);
@@ -197,8 +147,6 @@ export default function QuizPage() {
           return;
         }
         
-        // Clear quiz progress but keep user on results page
-        localStorage.removeItem('quizProgress');
         setSubmissionError('');
         setScoreSubmitted(true);
       } else {
@@ -227,6 +175,25 @@ export default function QuizPage() {
     // Convert city name to number for filtering
     const cityFilter = city === 'Gramado' ? 1 : city === 'Canela' ? 2 : 1;
     setSelectedQuestions(getRandomQuestions(questions, 10, cityFilter));
+  };
+
+  // Function to reset quiz completely
+  const resetQuiz = () => {
+    setName('');
+    setEmail('');
+    setCity('');
+    setQuizStarted(false);
+    setQuizCompleted(false);
+    setScore(0);
+    setCurrentQuestion(0);
+    setSelectedQuestions([]);
+    setScoreSubmitted(false);
+    setSubmissionError('');
+    setAnswersDisabled(false);
+    setSelectedAnswerIndex(null);
+    setIsCorrect(null);
+    setShowAnswerFeedback(false);
+    setFeedbackMessage('');
   };
 
   if (isLoading) {
@@ -387,10 +354,10 @@ export default function QuizPage() {
               
               <div className="space-y-2">
                 <button
-                  onClick={startQuiz}
+                  onClick={resetQuiz}
                   className="bg-[#6B8E23] hover:bg-[#556B2F] text-white py-2 px-4 rounded w-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#6B8E23]/50 transform hover:scale-105 active:scale-95"
                 >
-                  {scoreSubmitted ? 'Praticar Novamente' : 'Tentar Novamente'}
+                  Tentar Novamente
                 </button>
                 
                 <button
