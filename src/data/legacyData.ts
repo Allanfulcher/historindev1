@@ -1564,7 +1564,7 @@ Com a compra de uma locomotiva sucateada em São Paulo, iniciou-se o processo de
     criador: 'Eduardo da Silva Weber',
     fotos: [
       {
-        url: '/images/historias/banco-brasil.jpg',
+        url: '/images/historias/bancobrasil.jpg',
         credito: 'Eduardo da Silva Weber'
       }
     ],
@@ -1597,7 +1597,7 @@ Com a compra de uma locomotiva sucateada em São Paulo, iniciou-se o processo de
     criador: 'Eduardo da Silva Weber',
     fotos: [
       {
-        url: '/images/historias/avenidadashortencias1957.jpg',
+        url: '/images/historias/avenidahortencias1957.jpg',
         credito: 'Eduardo da Silva Weber'
       }
     ],
@@ -1613,7 +1613,7 @@ Com a compra de uma locomotiva sucateada em São Paulo, iniciou-se o processo de
     criador: 'Eduardo da Silva Weber',
     fotos: [
       {
-        url: '/images/historias/madreveronica1990.jpg',
+        url: '/images/historias/madreveronicadecada1990.jpg',
         credito: 'Eduardo da Silva Weber'
       }
     ],
