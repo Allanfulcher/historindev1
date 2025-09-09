@@ -8,6 +8,7 @@ interface HistoriaTabProps {
   cidade?: Cidade | null;
   sortOrder: 'asc' | 'desc';
   setSortOrder: (order: 'asc' | 'desc') => void;
+  isReady?: boolean;
 }
 
 const HistoriaTab: React.FC<HistoriaTabProps> = ({ 
@@ -15,7 +16,8 @@ const HistoriaTab: React.FC<HistoriaTabProps> = ({
   rua, 
   cidade, 
   sortOrder, 
-  setSortOrder
+  setSortOrder,
+  isReady = true
 }) => {
   return (
     <>
@@ -64,19 +66,20 @@ const HistoriaTab: React.FC<HistoriaTabProps> = ({
 
       {/* Historia Feed */}
       <div className="flex flex-col gap-8 bg-[#f4ede0]">
-        {historias.length === 0 && (
+        {historias.length > 0 && (
+          historias.map((historia) => (
+            <div
+              key={historia.id}
+              id={`historia-${historia.id}`}
+              className="scroll-mt-24"
+            >
+              <HistoriaCard historia={historia} />
+            </div>
+          ))
+        )}
+        {isReady && historias.length === 0 && (
           <div className="text-center py-8 text-[#6B5B4F]">Nenhuma história para esta rua.</div>
         )}
-
-        {historias.map((historia) => (
-          <div 
-            key={historia.id} 
-            id={`historia-${historia.id}`}
-            className="scroll-mt-24"
-          >
-            <HistoriaCard historia={historia} />
-          </div>
-        ))}
       </div>
     </>
   );

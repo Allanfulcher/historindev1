@@ -227,6 +227,7 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
                 cidade={cidade}
                 sortOrder={sortOrder}
                 setSortOrder={setSortOrder}
+                isReady={!isLoading}
               />
             )}
 
@@ -239,9 +240,9 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
             )}
 
             {/* No content available */}
-            {((activeTab === 'historia' && !historia) || 
-              (activeTab === 'rua' && !rua) || 
-              (activeTab === 'cidade' && !cidade)) && (
+            {(((activeTab === 'historia') && !isLoading && sortedHistorias.length === 0) ||
+              ((activeTab === 'rua') && !rua) ||
+              ((activeTab === 'cidade') && !cidade)) && (
               <NotFoundContent type={activeTab} />
             )}
           </div>
