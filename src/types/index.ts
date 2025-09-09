@@ -21,6 +21,7 @@ export interface Historia {
   fotos: string[] | FotoWithCredit[];
   coordenadas?: [number, number];
   ano?: string;
+  criador?: string;
   personagens?: string[];
   orgId?: string;
 }

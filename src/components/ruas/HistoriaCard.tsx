@@ -3,6 +3,7 @@ import { Historia } from '@/types';
 
 interface HistoriaCardProps {
   historia: Historia;
+  
 }
 
 const HistoriaCard: React.FC<HistoriaCardProps> = ({ historia }) => {
@@ -116,11 +117,9 @@ const HistoriaCard: React.FC<HistoriaCardProps> = ({ historia }) => {
         </div>
 
         {/* Image credit if available */}
-        {hasImages && typeof images[currentImageIndex] === 'object' && (images[currentImageIndex] as any).credit && (
-          <p className="text-xs text-[#8B7355] italic mt-2">
-            Crédito: {(images[currentImageIndex] as any).credit}
-          </p>
-        )}
+        <p className="text-xs text-[#8B7355] italic mt-2">
+          Crédito: {historia.criador}
+        </p>
       </div>
     </div>
   );

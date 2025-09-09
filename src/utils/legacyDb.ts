@@ -127,6 +127,7 @@ export function normalizeHistoria(legacyHistoria: LegacyHistoria): Historia {
     fotos: normalizedFotos,
     coordenadas: normalizedCoordenadas,
     ano: legacyHistoria.ano.toString(),
+    criador: legacyHistoria.criador,
     orgId: legacyHistoria.orgId?.toString()
   };
 }
