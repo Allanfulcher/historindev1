@@ -1670,6 +1670,37 @@ Com a compra de uma locomotiva sucateada em São Paulo, iniciou-se o processo de
     descricao: `A foto mostra uma das esquinas formadas pela Rua Garibaldi e a Rua Madre Verônica. A sede da Sociedade Recreio Gramadense toma a cena. A sua arquitetura foi inteiramente transformada na reforma iniciada em 1995 e finalizada em 1999. Foram significativas as mudanças em relação à estética anterior, presente desde a inauguração do prédio em meados da década de 1950. Após a reforma, o lugar ganhou um terceiro andar, nova identidade visual e acréscimos estruturais. O antigo telhado de quatro águas com telhas francesas de barro e platibandas retas deu lugar a uma cobertura mais complexa, com telhas escuras contemporâneas, duas águas e três grandes mansardas embutidas, que integram a nova fachada. Esta passou a ter três telhados de duas águas com frontões decorados em madeira diagonal e janelas como nos chalés alpinos, formando um terceiro andar habitável. A inclinação é regular em dois volumes e irregular no que fica na extremidade, criando uma fachada híbrida, que mistura referenciais do passado e da contemporaneidade. A estética germânica alpina e a francesa das mansardas são históricas; já a inclinação incomum do telhado da extremidade remete à estética contemporânea, ligada à cultura de massas e ao universo de Hollywood. As janelas basculantes foram substituídas por grandes janelas de vidro. O pórtico de entrada com quatro colunas foi preservado, mas sua cor foi igualada à do restante da construção. A antiga sacada foi suprimida, dando lugar a paredes que ampliaram a extensão lateral do edifício, deixando-o com formato que lembra o bloco T do Jogo Tetris. As canchas de bocha e bolão foram demolidas, e um restaurante ocupava uma das laterais, evidenciando os novos usos urbanos da sede.`,
     coordenadas: [-29.378147282209046, -50.87232882133208],
     orgId: 4
+  },
+  {
+    id: 178,
+    rua_id: 8,
+    criador: 'Família Urbani',
+    fotos: [
+      {
+        url: '/images/historias/urbani1997.png',
+        credito: 'Família Urbani'
+      }
+    ],
+	titulo: 'Irmãos Urbani com Locomóvel restaurada',
+	ano: 1997,
+	descricao: 'Irmãos Urbani em frente a uma locomóvel restaurada por eles, na sua antiga oficina. As locomóveis foram o coração pulsante do passado da Serra Gaúcha. Máquinas versáteis, não se encontravam nos grandes centros urbanos, mas sim nos cantos mais remotos do mundo. Interior do Canadá, da África do Sul, do outback australiano, do oeste americano e, é claro, aqui no sul do Brasil. Onde a infraestrutura era escassa, lá estavam elas: firmes, úteis e incansáveis. Bastava água, carvão ou lenha. Foram feitas para durar. E, mais do que tudo, eram motores sobre rodas. Podiam ser rebocadas por bois ou cavalos de um ponto ao outro, ou adaptadas conforme a necessidade — viravam tratores, rolos compressores, geradores, bombas d’água. Aqui em Canela e em toda a serra, elas foram fundamentais para mover serrarias, impulsionar indústrias e alimentar sonhos. Foi uma dessas máquinas que acendeu a faísca da paixão nos irmãos Omar, Hermes e Benito Urbani, fundadores do Mundo a Vapor. Eles cresceram observando o pai consertar locomóveis como essa, ouvindo o sopro quente do vapor e o assobio do apito cortando o ar frio da serra. Anos depois, numa oficina antiga, Omar decidiu colocar uma delas para funcionar, ali mesmo, ao ar livre. O barulho, a fumaça e a dança daquele motor girando atraíram a curiosidade de quem passava. E foi dessa cena, simples e poderosa, que nasceu a ideia. Benito contou que foi ali, naquele momento, que a centelha do Mundo a Vapor começou a tomar forma.',
+	coordenadas: [-29.361316371362243, -50.834693071164104],
+	orgId: 4
+  },
+  {
+	id: 179,
+	rua_id: 8,
+	criador: 'Família Urbani',
+	fotos: [
+	  {
+		url: '/images/historias/urbani1991.png',
+		credito: 'Família Urbani'
+	}],
+	titulo: 'Primeira fachada do Mundo a Vapor',
+	ano: 1991,
+	descricao: 'Em 1991, Benito Urbani realizava um sonho: inaugurava o Mundo a Vapor. Antes da icônica fachada com a locomotiva descarrilada, o cartão de visitas do parque era uma locomóvel a vapor, posicionada com orgulho na entrada. Na imagem, vemos Benito acompanhando de perto a instalação da máquina, um gesto que selava, com ferro e vapor, o início de uma jornada pioneira.',
+	coordenadas: [-29.36146891945309, -50.83470841799351],
+	orgId: 4
   }
 
 ];
@@ -1891,15 +1922,23 @@ const cidades = [{
   'nome': 'Gramado',
   'descricao': 'Cidade turística da Serra Gaúcha conhecida por sua arquitetura europeia.',
   'fotos': 'https://i.imgur.com/gramado.png',
-  'coordenadas': [-29.3788, -50.8755] as [number, number]
-}];
+  'coordenadas': [-29.37887673767563, -50.873569311457175] as [number, number]
+},
+{
+  'id': 2,
+  'nome': 'Canela',
+  'descricao': 'Cidade turística da Serra Gaúcha conhecida por sua arquitetura europeia.',
+  'fotos': 'https://blog.blablacar.com.br/wp-content/uploads/2023/12/catedral-de-canela-rs-2.jpg',
+  'coordenadas': [-29.363814053223745, -50.8099842141411] as [number, number]
+}
+];
 
 // Negocios data
 const negocios = [{
   id: 1,
   titulo: 'Museu do trem',
   segmento: 'Museu',
-  foto: 'https://static.wixstatic.com/media/4f54af_970a18bb978348bf9060d6486e4580b7~mv2.jpg/v1/fill/w_980,h_653,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/4f54af_970a18bb978348bf9060d6486e4580b7~mv2.jpg',
+  foto: '',
   link: 'https://maps.app.goo.gl/dPoE7c1UxxQtVYaQA'
 },
 {

@@ -36,7 +36,7 @@ Historin Dev
 - [ ] Street / Story Page
 
     - [ ] Show recommended places below the street (only from the selected city)
-    - [ ] Copy Instagram-style story display:
+    - [X] Copy Instagram-style story display:
         - [x] Show the story image above the title, taking full screen width
         - [x] If multiple images exist, allow swiping like a carousel
         - [x] Show only the beginning of the story text with a "more" link to expand the full text (like Instagram)
@@ -46,7 +46,7 @@ Historin Dev
     - [x] Default to the Instagram-like timeline
     - [x] Add side year timeline view
 
-- [ ] Quiz
+- [X] Quiz
 
-    - [ ] Add name and city fields to the form
-    - [ ] Separate questions by city or "general"
+    - [X] Add name and city fields to the form
+    - [X] Separate questions by city or "general"
