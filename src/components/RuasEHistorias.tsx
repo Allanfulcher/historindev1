@@ -12,6 +12,7 @@ import ViewMap from './buttons/ViewMap';
 import StreetCard from './cards/StreetCard';
 import HistoryCard from './cards/HistoryCard';
 import FeedbackPopup from './popups/FeedbackPopup';
+import QuizModal from './popups/QuizModal';
 
 const RuasEHistorias: React.FC = () => {
   // Use legacy data hook
@@ -170,6 +171,12 @@ const RuasEHistorias: React.FC = () => {
             <FeedbackPopup  
                 isOpen={showFeedback}
                 onClose={() => setShowFeedback(false)}
+            />
+        )}
+      {showQuiz && (
+            <QuizModal 
+                isOpen={showQuiz}
+                onClose={() => setShowQuiz(false)}
             />
         )}
     </div>

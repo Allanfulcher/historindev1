@@ -6,6 +6,7 @@ import Header from '../Header';
 import Menu from '../Menu';
 import AddForm from './AddForm';
 import FeedbackPopup from '../popups/FeedbackPopup';
+import QuizModal from '../popups/QuizModal';
 
 interface FormData {
   nome: string;
@@ -17,6 +18,7 @@ interface FormData {
 const AdicionarHistoria: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
+  const [showQuiz, setShowQuiz] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     nome: '',
     telefone: '',
@@ -72,6 +74,7 @@ const AdicionarHistoria: React.FC = () => {
       <Header 
         setMenuOpen={() => setMenuOpen(true)} 
         setShowFeedback={setShowFeedback}
+        setShowQuiz={setShowQuiz}
       />
       <Menu 
         menuOpen={menuOpen} 
@@ -111,6 +114,12 @@ const AdicionarHistoria: React.FC = () => {
               <FeedbackPopup  
                 isOpen={showFeedback}
                 onClose={() => setShowFeedback(false)}
+              />
+            )}
+        {showQuiz && (
+              <QuizModal  
+                isOpen={showQuiz}
+                onClose={() => setShowQuiz(false)}
               />
             )}
     </div>

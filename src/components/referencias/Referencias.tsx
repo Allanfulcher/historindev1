@@ -12,6 +12,7 @@ import DropDown from '../buttons/DropDown';
 import { useLegacyData } from '../../hooks/useLegacyData';
 import { Organizacao, Autor, Obra, Site } from '../../types';
 import FeedbackPopup from '../popups/FeedbackPopup';
+import QuizModal from '../popups/QuizModal';
 
 type SectionType = 'orgs' | 'autores' | 'obras' | 'sites' | null;
 
@@ -19,6 +20,7 @@ const Referencias: React.FC = () => {
   const [activeSection, setActiveSection] = useState<SectionType>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
+  const [showQuiz, setShowQuiz] = useState(false);
   
   // Use legacy data hook
   const { data } = useLegacyData();
@@ -41,7 +43,7 @@ const Referencias: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#f4ede0]">
       {/* Header */}
-      <Header setMenuOpen={setMenuOpen} setShowFeedback={setShowFeedback} />
+      <Header setMenuOpen={setMenuOpen} setShowFeedback={setShowFeedback} setShowQuiz={setShowQuiz} />
       
       {/* Side Menu */}
       <Menu 
@@ -216,8 +218,12 @@ const Referencias: React.FC = () => {
               onClose={() => setShowFeedback(false)}
             />
           )}
+          {showQuiz && (
+            <QuizModal isOpen={showQuiz} onClose={() => setShowQuiz(false)} />
+          )}
       </div>
   );
 };
 
 export default Referencias;
+

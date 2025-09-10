@@ -18,6 +18,7 @@ import RuaTab from './RuaTab';
 import CidadeTab from './CidadeTab';
 import NotFoundContent from './NotFoundContent';
 import YearNavigator from './YearNavigator';
+import QuizModal from '../popups/QuizModal';
 
 interface RuaHistoriaProps {
   className?: string;
@@ -252,6 +253,12 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
         <FeedbackPopup
           isOpen={showFeedback}
           onClose={() => setShowFeedback(false)}
+        />
+      )}
+      {showQuiz && (
+        <QuizModal
+          isOpen={showQuiz}
+          onClose={() => setShowQuiz(false)}
         />
       )}
     </div>

@@ -1916,12 +1916,64 @@ const ruas = [{
 	'cidade_id': 2
 }];
 
-// Example cidades data (add your actual data here)
-const cidades = [{
-  'id': 1,
-  'nome': 'Gramado',
-  'descricao': 'Cidade turística da Serra Gaúcha conhecida por sua arquitetura europeia.',
-  'fotos': 'https://i.imgur.com/gramado.png',
+const cidades = [
+  {
+    'id': 1,
+    'nome': 'Gramado',
+    'descricao': `
+		<div class="text-[#4A3F35] leading-relaxed">
+			<h1 class="text-2xl font-bold mb-4">História de Gramado</h1>
+			<p class="mb-4">
+			Localizada na Serra Gaúcha, Gramado possui uma história rica que remonta ao século XIX. Inicialmente habitada por indígenas caingangues, a região começou a ser desbravada por tropeiros descendentes de açorianos nos séculos XVIII e XIX, que utilizavam o local como ponto de descanso durante suas jornadas.
+			</p>
+
+			<h2 class="text-xl font-semibold mt-6 mb-3">Colonização e Formação Cultural</h2>
+			<p class="mb-4">
+			Em 1875, imigrantes portugueses estabeleceram-se na área, seguidos por alemães em 1880 e italianos em 1913, vindos de Caxias do Sul. Esses grupos contribuíram significativamente para a formação cultural de Gramado, influenciando sua arquitetura, culinária e tradições.
+			</p>
+
+			<h2 class="text-xl font-semibold mt-6 mb-3">Origem do Nome</h2>
+			<p class="mb-4">
+			O nome "Gramado" originou-se de um pequeno campo de grama macia que servia como local de repouso para tropeiros e viajantes.
+			</p>
+
+			<h2 class="text-xl font-semibold mt-6 mb-3">Marcos Históricos</h2>
+		<ul class="list-disc pl-6 space-y-1 mb-4">
+		<li>9 de abril de 1904 - Ato Municipal 72 do município de Taquara, cria o 3º Distrito de Taquara, com sede em Linha Nova;</li>
+		<li>10 de novembro de 1904 - Ato Municipal nº 80A, do município de Taquara, cria o 5º Distrito de Taquara, com sede na Linha Nova, anulando o ato anterior, e ampliando a área territorial do Distrito;</li>
+		<li>17 de janeiro de 1913 - Ato Municipal 139, do município de Taquara, transfere a sede do 5º Distrito para a localidade denominada Gramado. O documento foi assinado pelo coronel Diniz Martins Rangel, intendente de Taquara. O documento batizou oficialmente a localidade.</li>
+		<li>31 de março de 1938 - Lei estadual 7.199 elevou o povoado de Gramado à categoria de Vila;</li>
+		<li>1948 – Ocorreu o primeiro movimento emancipacionista;</li>
+		<li>20 de dezembro de 1953 – Segundo movimento emancipacionista consagra-se vitorioso. Em plebiscito, foram registrados 873 votantes e 854 votos a favor e 12 contra a emancipação;</li>
+		<li>7 de dezembro de 1954 - Projeto de lei 383/54, processo 1.369, autoriza a criação do município;</li>
+		<li>15 de dezembro de 1954 – A lei estadual 2.522 cria o novo município de Gramado, emancipado de Taquara;</li>
+		<li>22 de fevereiro de 1955 – Ocorreram as primeiras eleições municipais em Gramado;</li>
+		<li>28 de fevereiro de 1955 – Ocorreram os atos de posse da primeira legislatura e primeiro prefeito de Gramado.</li>
+		</ul>
+
+		
+			<h2 class="text-xl font-semibold mt-6 mb-3">Gramado Hoje</h2>
+			<p class="mb-4">
+			Ao longo dos anos, Gramado transformou-se em um dos principais destinos turísticos do Brasil, preservando suas raízes culturais e oferecendo uma infraestrutura acolhedora. 
+			Eventos como o Festival de Cinema, o Natal Luz e a Festa da Colônia celebram a diversidade cultural e atraem visitantes de todo o mundo.
+			</p>
+
+			<h2 class="text-xl font-semibold mt-6 mb-3">Atrações e Cultura</h2>
+			<p class="mb-4">
+			A cidade destaca-se por suas belezas naturais, como o Lago Negro, e pela arquitetura de estilo europeu, refletindo a herança de seus colonizadores. A produção de chocolate artesanal e a rica gastronomia, que mescla tradições alemãs, italianas e gaúchas, são marcas registradas de Gramado.
+			</p>
+
+			<div class="text-center my-4">
+			<img class="inline-block rounded-md shadow max-w-full h-auto" src="https://conteudo.imguol.com.br/c/entretenimento/3f/2022/10/31/vista-aerea-da-catedral-de-gramado-iluminada-para-as-celebracoes-de-natal-1667228775226_v2_900x506.jpg" alt="Vista panorâmica de Gramado">
+			<p class="text-sm text-[#6B5B4F] mt-2">Foto: Vista aérea do centro de Gramado.</p>
+			</div>
+
+			<p class="mt-6">
+			Gramado continua a encantar moradores e visitantes, mantendo viva a memória de seu passado e celebrando as influências que moldaram sua identidade única.
+			</p>
+		</div>
+  	`,
+  'fotos': 'https://revistaanamaria.com.br/wp-content/uploads/2024/12/Rio-grande-do-sul_1734320224031.jpg',
   'coordenadas': [-29.37887673767563, -50.873569311457175] as [number, number]
 },
 {

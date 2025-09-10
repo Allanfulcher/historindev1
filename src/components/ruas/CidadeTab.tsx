@@ -7,17 +7,11 @@ interface CidadeTabProps {
 
 const CidadeTab: React.FC<CidadeTabProps> = ({ cidade }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [showFullText, setShowFullText] = useState(false);
   
   const images = Array.isArray(cidade.foto) ? cidade.foto : cidade.foto ? [cidade.foto] : [];
   const hasImages = images.length > 0;
   const hasMultipleImages = images.length > 1;
   const descricao = cidade.descricao ?? '';
-  
-  // Truncate text for preview (approximately 3 lines)
-  const previewText = descricao.length > 150 
-    ? descricao.substring(0, 150) + '......' 
-    : descricao;
 
   const nextImage = () => {
     setCurrentImageIndex((prev) => (prev + 1) % images.length);
@@ -90,35 +84,16 @@ const CidadeTab: React.FC<CidadeTabProps> = ({ cidade }) => {
 
       {/* Content */}
       <div className="px-4 pb-4">
-        {/* Description */}
-        <div className="mb-4">
-          <p className="text-[#4A3F35] leading-relaxed text-sm">
-            {showFullText ? descricao : previewText}
-            {/* Show more/less button with horizontal spacing */}
-            {descricao.length > 150 && (
-              <>
-                <span className="mr-2"></span>
-                <button
-                  onClick={() => setShowFullText(!showFullText)}
-                  className="text-[#CD853F] text-sm font-medium hover:text-[#B8763A] transition-colors"
-                >
-                  {showFullText ? 'mostrar menos' : 'mostrar mais'}
-                </button>
-              </>
-            )}
-          </p>
-        </div>
+        {/* Description rendered as HTML */}
+        {descricao && (
+          <div
+            className="prose prose-amber max-w-none text-[#4A3F35] leading-relaxed text-sm"
+            dangerouslySetInnerHTML={{ __html: descricao }}
+          />
+        )}
         
         {/* City Info Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div className="p-4 bg-[#F5F1EB] rounded-lg">
-            <h3 className="text-sm font-medium text-[#4A3F35] mb-1">Estado</h3>
-            <p className="text-[#6B5B4F] text-sm">{cidade.estado}</p>
-          </div>
-          <div className="p-4 bg-[#F5F1EB] rounded-lg">
-            <h3 className="text-sm font-medium text-[#4A3F35] mb-1">População</h3>
-            <p className="text-[#6B5B4F] text-sm">{cidade.populacao}</p>
-          </div>
         </div>
       </div>
     </div>

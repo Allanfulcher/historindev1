@@ -8,6 +8,7 @@ import Menu from '../Menu';
 import Header from '../Header';
 import DropDown from '../buttons/DropDown';
 import FeedbackPopup from '../popups/FeedbackPopup';
+import QuizModal from '../popups/QuizModal';
 
 interface TeamMember {
   name: string;
@@ -323,6 +324,12 @@ const Sobre: React.FC = () => {
               <FeedbackPopup  
                 isOpen={showFeedback}
                 onClose={() => setShowFeedback(false)}
+              />
+            )}
+    {showQuiz && (
+              <QuizModal 
+                isOpen={showQuiz}
+                onClose={() => setShowQuiz(false)}
               />
             )}
     </div>
