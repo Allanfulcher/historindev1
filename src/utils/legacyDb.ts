@@ -161,8 +161,8 @@ export function normalizeCidade(legacyCidade: LegacyCidade): Cidade {
   return {
     id: legacyCidade.id.toString(),
     nome: legacyCidade.nome,
-    estado: 'RS', // Default for Gramado
-    populacao: '35000', // Approximate
+    estado: 'RS', // Default
+    populacao: '35000', //Placeholder
     descricao: legacyCidade.descricao,
     foto: legacyCidade.fotos
   };
