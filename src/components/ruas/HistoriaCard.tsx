@@ -3,17 +3,20 @@ import { Historia } from '@/types';
 
 interface HistoriaCardProps {
   historia: Historia;
-  
 }
 
 const HistoriaCard: React.FC<HistoriaCardProps> = ({ historia }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showFullText, setShowFullText] = useState(false);
-  
+  // Touch/swipe state
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+  const [touchStartY, setTouchStartY] = useState<number | null>(null);
+  const [isSwiping, setIsSwiping] = useState(false);
+
   const images = historia.fotos || [];
   const hasImages = images.length > 0;
   const hasMultipleImages = images.length > 1;
-  
+
   // Truncate text for preview (approximately 3 lines)
   const previewText = historia.descricao.length > 150 
     ? historia.descricao.substring(0, 150) + '.....' 
@@ -27,12 +30,60 @@ const HistoriaCard: React.FC<HistoriaCardProps> = ({ historia }) => {
     setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
   };
 
+  // Touch handlers for swipe navigation
+  const SWIPE_THRESHOLD = 50; // px
+  const handleTouchStart: React.TouchEventHandler<HTMLDivElement> = (e) => {
+    if (!hasMultipleImages) return;
+    const touch = e.touches[0];
+    setTouchStartX(touch.clientX);
+    setTouchStartY(touch.clientY);
+    setIsSwiping(false);
+  };
+
+  const handleTouchMove: React.TouchEventHandler<HTMLDivElement> = (e) => {
+    if (!hasMultipleImages || touchStartX === null || touchStartY === null) return;
+    const touch = e.touches[0];
+    const dx = touch.clientX - touchStartX;
+    const dy = touch.clientY - touchStartY;
+    // Only consider horizontal intent
+    if (!isSwiping && Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 10) {
+      setIsSwiping(true);
+    }
+    if (isSwiping) {
+      // Prevent vertical page scroll while swiping horizontally
+      e.preventDefault();
+    }
+  };
+
+  const handleTouchEnd: React.TouchEventHandler<HTMLDivElement> = (e) => {
+    if (!hasMultipleImages || touchStartX === null || touchStartY === null) return;
+    const touch = e.changedTouches[0];
+    const dx = touch.clientX - touchStartX;
+    const dy = touch.clientY - touchStartY;
+
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > SWIPE_THRESHOLD) {
+      if (dx < 0) {
+        nextImage();
+      } else {
+        prevImage();
+      }
+    }
+    setTouchStartX(null);
+    setTouchStartY(null);
+    setIsSwiping(false);
+  };
+
   return (
     <div className="bg-white rounded-lg shadow-sm border border-[#F0E8DC] mb-6 overflow-hidden hover:shadow-md transition-shadow duration-300">
       {/* Image Carousel - Now at the top and full width */}
       {hasImages && (
         <div className="relative bg-black -mx-3 -mt-3">
-          <div className="aspect-square relative overflow-hidden">
+          <div
+            className="aspect-square relative overflow-hidden touch-pan-y"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
             <img
               src={typeof images[currentImageIndex] === 'string' 
                 ? images[currentImageIndex] as string

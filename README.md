@@ -41,7 +41,7 @@ Historin Dev
         - [x] If multiple images exist, allow swiping like a carousel
         - [x] Show only the beginning of the story text with a "more" link to expand the full text (like Instagram)
 
-- [ ] Timeline view:
+- [x] Timeline view:
 
     - [x] Default to the Instagram-like timeline
     - [x] Add side year timeline view
