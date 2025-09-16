@@ -54,7 +54,7 @@ const Contribuir: React.FC = () => {
             
             setSubmitStatus({
                 success: true,
-                message: 'Obrigado por se inscrever! Entraremos em contato em breve.'
+                message: 'Obrigado por se inscrever! Entraremos em contato.'
             });
             
             // Reset form using stored reference
