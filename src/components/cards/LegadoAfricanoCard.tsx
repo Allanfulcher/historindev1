@@ -13,7 +13,7 @@ const LegadoAfricanoCard: React.FC = () => {
       >
         <div className="flex flex-col md:flex-row items-center">
           <img 
-            src="images/pages/legadoafricano.png" 
+            src="images/pages/legadoafricano.webp" 
             alt="Legado Africano" 
             className="w-56 h-32 object-cover rounded-lg mb-4 md:mb-0 md:mr-4" 
           />
