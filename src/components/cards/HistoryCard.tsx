@@ -23,7 +23,7 @@ const HistoryCard = ({ historias, className = '', onHistoriaClick }: HistoryCard
 
   const getHistoriaImage = (historia: Historia): string => {
     if (!historia.fotos || historia.fotos.length === 0) {
-      return '/images/historias/festa-hortensias.jpg'; // fallback image
+      return '/images/historias/festa-hortensias.webp'; // fallback image
     }
     
     // Handle both string arrays and FotoWithCredit arrays
@@ -46,7 +46,7 @@ const HistoryCard = ({ historias, className = '', onHistoriaClick }: HistoryCard
               className="h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
-                target.src = '/images/historias/festa-hortensias.jpg';
+                target.src = '/images/historias/festa-hortensias.webp';
               }}
             />
             <div className="absolute inset-0 rounded-lg ring-1 ring-inset ring-gray-900/5" />

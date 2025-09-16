@@ -19,19 +19,19 @@ const PopupCarrossel: React.FC<PopupCarrosselProps> = ({ onClose }) => {
   
   const slides: Slide[] = [
     { 
-      image: 'fotos/criadores-historin-gramado.jpeg', 
+      image: 'fotos/criadores-historin-gramado.webp', 
       text: 'Conheça mais sobre nós', 
       buttonText: 'Ver agora', 
       link: '/sobre' 
     },
     { 
-      image: 'fotos/legado-africano-gramado.png', 
+      image: 'fotos/legado-africano-gramado.webp', 
       text: 'Conheça o legado africano em Gramado', 
       buttonText: 'Saiba Mais!', 
       link: '/legado-africano' 
     },
     { 
-      image: 'fotos/comprar-ingressos.png', 
+      image: 'fotos/comprar-ingressos.webp', 
       text: 'Ingressos para essa semana em Promoção', 
       buttonText: 'Comprar agora', 
       link: 'https://parksnet.com.br/ingressos/?bookingAgency=2818' 

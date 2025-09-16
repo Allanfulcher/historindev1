@@ -554,7 +554,7 @@ const historias = [{
 	'id': 60,
 	'rua_id': 5,
 	'criador': 'Allan',
-	'fotos': ['/images/historias/1917-vila.jpg'],
+	'fotos': ['/images/historias/1917-vila.webp'],
 	'titulo': 'O Crescimento da Vila de Gramado',
 	'descricao': 'Esta imagem capturada em 1917 oferece uma vista parcial da pequena vila de Gramado, que começava a se expandir. A fotografia foi tirada do Morro do Tristão, atualmente conhecido como Morro Nelz. Destacam-se, à esquerda, a capela e a casa canônica, além do prédio escuro de Pedro Benetti. À direita, a casa do Dr. Stürmhoeffel, com seus característicos dois ciprestes na frente e um telhado único, diferente da tradicional arquitetura italiana predominante na época. Tudo era construído em madeira, refletindo a simplicidade e os recursos disponíveis no início do desenvolvimento da vila. Ao fundo, pode-se ver a área que pertencia à família Lorenzoni, onde hoje se encontra o Hotel Serrano. Esta imagem marca um momento crucial da história de Gramado, quando a cidade começava a crescer e tomar forma.',
 	'ano': 1917,
@@ -563,7 +563,7 @@ const historias = [{
 	'id': 61,
 	'rua_id': 1,
 	'criador': 'Allan',
-	'fotos': ['/images/historias/1918-borges.jpg'],
+	'fotos': ['/images/historias/1918-borges.webp'],
 	'titulo': 'A Simplicidade da Avenida Borges de Medeiros',
 	'descricao': 'Em 1918, a cidade de Gramado ainda exalava a simplicidade de uma vila em crescimento. Esta imagem histórica, capturada na Avenida Borges de Medeiros, retrata as ruas de terra e as modestas construções de madeira que abrigavam os estabelecimentos locais. À direita, destaca-se a "Casa Prinz", uma das lojas tradicionais da época, já movimentada com cavalos amarrados em frente, revelando o cotidiano dos moradores e comerciantes. Ao longo da avenida, o crescimento e a urbanização eram visíveis, mas o ambiente tranquilo da pequena cidade interiorana ainda prevalecia. Essa cena encapsula um momento crucial na formação da identidade de Gramado, com suas ruas ainda em desenvolvimento e o comércio local em expansão.',
 	'ano': 1918,
@@ -572,7 +572,7 @@ const historias = [{
 	'id': 62,
 	'rua_id': 1,
 	'criador': 'Allan',
-	'fotos': ['/images/historias/1917-igreja.jpg', '/images/historias/1917-igreja2.jpg'],
+	'fotos': ['/images/historias/1917-igreja.webp', '/images/historias/1917-igreja2.webp'],
 	'titulo': 'O Encontro Dominical em Frente à Igreja de Gramado',
 	'descricao': 'Em 1917, a cidade de Gramado era palco de encontros comunitários aos domingos pela manhã. Nesta foto histórica, uma multidão de moradores se reúne em frente à antiga igreja da cidade, no centro de Gramado. A simplicidade da arquitetura, toda em madeira, reflete a humildade e o caráter acolhedor da comunidade local. Ao lado da igreja, pode-se ver o prédio que abrigava o "Tiro de Guerra", uma instituição importante para a formação dos jovens da época. Esses encontros dominicais reforçavam os laços sociais e religiosos em uma vila que ainda estava em seus primeiros estágios de desenvolvimento. A foto captura o espírito comunitário e religioso que moldou Gramado nos primórdios de sua história.',
 	'ano': 1917,
@@ -581,7 +581,7 @@ const historias = [{
 	'id': 63,
 	'rua_id': 5,
 	'criador': 'Allan',
-	'fotos': ['/images/historias/tiro-guerra.jpg', '/images/historias/tiro-guerra-gramado.jpg'],
+	'fotos': ['/images/historias/tiro-guerra.webp', '/images/historias/tiro-guerra-gramado.webp'],
 	'titulo': 'A Primeira Turma do Tiro de Guerra de Gramado',
 	'descricao': 'Em 1918, a cidade de Gramado formava a sua primeira turma do Tiro de Guerra, uma instituição militar que treinava jovens para o serviço de defesa local. A fotografia histórica, tirada em frente à casa do Tiro de Guerra, mostra o Major Nicoletti, subintendente da época, cercado pelos recrutas e membros da comunidade. Este edifício, localizado na esquina das ruas Garibaldi e Madre Verônica, foi um marco na formação dos jovens gramadenses, contribuindo para o fortalecimento do civismo e da ordem na região. A imagem também revela o orgulho da população local, com suas roupas formais, chapéus e expressões de seriedade, refletindo a importância dessa ocasião para a vila.',
 	'ano': 1918,
@@ -590,7 +590,7 @@ const historias = [{
 	'id': 64,
 	'rua_id': 1,
 	'criador': 'Allan',
-	'fotos': ['/images/historias/comissio.jpg'],
+	'fotos': ['/images/historias/comissio.webp'],
 	'titulo': 'O Comício do Partido Libertador em Gramado',
 	'descricao': 'Esta fotografia, datada entre 1920 e 1925, registra um comício do extinto Partido Libertador, realizado na Avenida Borges de Medeiros, em Gramado. Na imagem, é possível ver uma grande cavalgada de participantes e apoiadores, todos com lenços vermelhos no pescoço, um símbolo característico do partido na época. As ruas de terra e as construções de madeira refletem o início do desenvolvimento urbano de Gramado. Este evento político mostra como as pequenas cidades do interior também estavam conectadas aos movimentos políticos nacionais, e como a população participava ativamente, demonstrando o seu engajamento cívico. Essa fotografia não apenas captura um momento específico da história política de Gramado, mas também a atmosfera comunitária que cercava os acontecimentos públicos.',
 	'ano': 1920,
@@ -599,7 +599,7 @@ const historias = [{
 	'id': 65,
 	'rua_id': 1,
 	'criador': 'Allan',
-	'fotos': ['/images/historias/desfile-1920.jpg'],
+	'fotos': ['/images/historias/desfile-1920.webp'],
 	'titulo': 'Parada Cívica de 7 de Setembro em Gramado',
 	'descricao': 'Esta fotografia, tirada no dia 7 de setembro de 1920, registra a concentração de crianças e soldados do Tiro de Guerra em frente à Igreja São Pedro, em Gramado, após uma parada cívica em comemoração ao Dia da Independência. À direita, em terno escuro, estão Oscar Fisch e Rodolfo Schlieper, personalidades influentes da época. A icônica Igreja São Pedro, em madeira, domina a cena, com a casa do padre ("canônica") ao lado direito e, à esquerda, a pensão dos Manéias, tradicional estabelecimento local. O evento cívico, uma demonstração de patriotismo e união, envolvia toda a comunidade, simbolizando o espírito de coesão e respeito às tradições nacionais que marcou a história de Gramado nos anos iniciais de seu desenvolvimento.',
 	'ano': 1920,
@@ -608,7 +608,7 @@ const historias = [{
 	'id': 66,
 	'rua_id': 7,
 	'criador': 'Allan',
-	'fotos': ['/images/historias/primeiro-carro-gramado.jpg', '/images/historias/oferecimento-carro-major.jpg'],
+	'fotos': ['/images/historias/primeiro-carro-gramado.webp', '/images/historias/oferecimento-carro-major.webp'],
 	'titulo': 'O primeiro carro de Gramado foi uma doação da comunidade',
 	'descricao': 'Em 1925, a comunidade de Gramado se reuniu em uma grande celebração para presentear o Major Nicoletti com um carro, um símbolo de gratidão por sua dedicação à cidade. A fotografia captura o momento em que o Major, ao lado de sua família, recebe o presente de todos os gramadenses. O evento foi repleto de emoção, com a multidão celebrando ao redor do carro e acenando com chapéus, mostrando o respeito e a admiração da população local. Este carro, fruto da colaboração de toda a comunidade, se tornou um marco na história da cidade, representando o espírito de união e reconhecimento ao Major Nicoletti, uma figura influente no desenvolvimento de Gramado.',
 	'ano': 1925,
@@ -617,7 +617,7 @@ const historias = [{
 	'id': 67,
 	'rua_id': 1,
 	'criador': 'Allan',
-	'fotos': ['/images/historias/borges-gramado-1924.jpg'],
+	'fotos': ['/images/historias/borges-gramado-1924.webp'],
 	'titulo': 'A Avenida Borges de Medeiros com um Ar de Faroest',
 	'descricao': 'Esta foto, tirada em 1924 na Avenida Borges de Medeiros, em Gramado, destaca o aspecto de uma vila em desenvolvimento, com suas ruas de terra e edificações de madeira, que conferem um ar de faroeste à cena. Na época, Gramado ainda era uma pequena vila, com uma população muito reduzida. Até os anos 1920, a cidade tinha poucas centenas de habitantes, majoritariamente descendentes de colonos alemães e italianos. O crescimento demográfico começou a se intensificar apenas nas décadas seguintes, especialmente com o desenvolvimento do turismo na região\u200b',
 	'ano': 1924,
@@ -626,7 +626,7 @@ const historias = [{
 	'id': 68,
 	'rua_id': 1,
 	'criador': 'Allan',
-	'fotos': ['/images/historias/casa-comercio.jpg', '/images/historias/arraialantigamente.jpg'],
+	'fotos': ['/images/historias/casa-comercio.webp', '/images/historias/arraialantigamente.webp'],
 	'titulo': 'A Casa do Dr. Ricardo Stürmhoeffel: De Residência a Ponto Comercia',
 	'descricao': 'Estas fotografias, tirada em 1928, mostra a casa do Dr. Ricardo Stürmhoeffel, localizada na esquina da Avenida Borges de Medeiros com a Rua Augusto Zatti. A construção, em madeira, é um reflexo da arquitetura simples e funcional da época. Inicialmente uma residência familiar, a casa passou por transformações ao longo dos anos. Posteriormente, foi ocupada pela loja de Iracy de Fries dos Santos, e atualmente é conhecida como Arraial, um ponto comercial tradicional na cidade. Esse imóvel é uma testemunha da evolução urbana de Gramado, desde os tempos em que as ruas de terra e as poucas construções caracterizavam a paisagem da cidade.',
 	'ano': 1928,
@@ -635,7 +635,7 @@ const historias = [{
 	'id': 71,
 	'rua_id': 7,
 	'criador': 'Allan',
-	'fotos': ['/images/historias/vista-morro-serrano.jpg'],
+	'fotos': ['/images/historias/vista-morro-serrano.webp'],
 	'titulo': 'O Crescimento de Gramado e Seus Primeiros Hotéis',
 	'descricao': 'Esta fotografia, tirada no final da década de 1920, mostra a evolução de Gramado com os primeiros hotéis da cidade já em funcionamento: os hotéis Fisch, Candiago e Bertolucci. A imagem foi capturada a partir do Morro dos Lorenzoni, onde atualmente se localiza o Hotel Serrano, com vista para a Avenida Borges de Medeiros. Ao fundo, pode-se observar o "mato dos Nelz", ainda pertencente à família de Tristão de Oliveira naquela época. Em primeiro plano, destaca-se o prédio da empresa de Eugênio Bertolucci. A cidade, ainda em seus primeiros passos de urbanização, já começava a se consolidar como um destino acolhedor e promissor para turistas, com seus estabelecimentos hoteleiros se tornando marcos importantes.',
 	'ano': 1929,
@@ -644,7 +644,7 @@ const historias = [{
 	'id': 73,
 	'rua_id': 1,
 	'criador': 'Allan',
-	'fotos': ['/images/historias/estacao-gramado.jpg', '/images/historias/estacao-trem-borges.jpg'],
+	'fotos': ['/images/historias/estacao-gramado.webp', '/images/historias/estacao-trem-borges.webp'],
 	'titulo': 'A Estação de Trem de Gramado nos Anos 1920',
 	'descricao': 'Esta fotografia, tirada nos anos 1920, retrata a Estação de Trem de Gramado, um marco importante na história da cidade. A chegada do trem em 1921 marcou o início de uma nova era de desenvolvimento para Gramado, conectando a cidade a outras regiões e impulsionando a economia local. Na imagem, é possível ver os trilhos e os vagões de carga estacionados, além das construções de madeira que cercavam a estação. Este ponto foi fundamental para o crescimento da cidade, facilitando o transporte de mercadorias e pessoas, e simboliza a transformação de Gramado em um importante destino turístico e comercial.',
 	'ano': 1922,
@@ -653,7 +653,7 @@ const historias = [{
 	'id': 78,
 	'rua_id': 8,
 	'criador': 'Allan',
-	'fotos': ['/images/historias/vista-centro-gramado.jpg'],
+	'fotos': ['/images/historias/vista-centro-gramado.webp'],
 	'titulo': 'O Centro de Gramado e Seus Primeiros Marcos',
 	'descricao': 'Nesta imagem do centro de Gramado, podemos observar dois marcos importantes da cidade: a antiga Igreja São Pedro, à esquerda, e a Escola Santa Terezinha ao fundo. A Igreja São Pedro, construída originalmente em madeira, foi o ponto de encontro da comunidade religiosa, desempenhando um papel crucial na vida dos moradores da época. Já a Escola Santa Terezinha, dirigida pelas freiras, foi responsável por formar gerações de estudantes, consolidando-se como um centro de ensino de referência. Ao redor desses ícones, podemos ver as primeiras casas de madeira que compunham o pequeno e crescente vilarejo, caracterizando a simplicidade e o ritmo de vida da época.',
 	'ano': 1934,
@@ -662,7 +662,7 @@ const historias = [{
 	'id': 79,
 	'rua_id': 1,
 	'criador': 'Allan',
-	'fotos': ['/images/historias/igreja-sao-pedro-madeira.jpg'],
+	'fotos': ['/images/historias/igreja-sao-pedro-madeira.webp'],
 	'titulo': 'A Antiga Igreja São Pedro e a Festa de Santa Terezinha',
 	'descricao': 'Em 1932, a antiga Igreja São Pedro, toda construída em madeira, foi ricamente ornamentada para celebrar a festa de Santa Terezinha, um evento organizado pela Escola das Irmãs do Imaculado Coração de Maria. A imagem da igreja decorada foi registrada por Zefiro Minghelli, que também a utilizou como um cartão postal enviado à irmã Irma Lied no aniversário dela, em 1935. A Igreja São Pedro, fundada como uma capela de madeira em 1917, era o centro das atividades religiosas da cidade, e a Festa de Santa Terezinha era um marco importante para os moradores de Gramado. Essa tradição não só envolvia os fiéis, mas também a comunidade escolar, unindo educação e religião em uma celebração que marcou época. O evento demonstrava a profunda devoção da comunidade e a importância do ensino religioso oferecido pela Escola Santa Terezinha.',
 	'ano': 1932,
@@ -671,7 +671,7 @@ const historias = [{
 	'id': 80,
 	'rua_id': 9,
 	'criador': 'Allan',
-	'fotos': ['/images/historias/cascata-caracol-antigamente.jpg'],
+	'fotos': ['/images/historias/cascata-caracol-antigamente.webp'],
 	'titulo': 'A Beleza Intocada da Cascata do Caracol em 1932',
 	'descricao': 'Esta foto da icônica Cascata do Caracol, localizada em Canela, foi tirada por Zephiro Minghelli em 1932. A cascata, com uma queda de aproximadamente 130 metros, é uma das mais famosas atrações naturais da Serra Gaúcha. Na época em que a imagem foi capturada, o local ainda estava rodeado por uma vasta vegetação intocada, e as visitas ao Caracol não tinham a infraestrutura turística que conhecemos hoje. A beleza selvagem da região atraía fotógrafos e visitantes que desejavam contemplar suas águas caudalosas e a serenidade das matas ao redor. A Cascata do Caracol continua sendo um dos principais pontos turísticos da região, conectando passado e presente através de sua grandiosidade natural.',
 	'ano': 1932,
@@ -761,7 +761,7 @@ const historias = [{
 	'id': 99,
 	'rua_id': 11,
 	'criador': 'Allan Fulcher',
-	'fotos': ['/images/historias/famastil.png'],
+	'fotos': ['/images/historias/famastil.webp'],
 	'titulo': 'Famastil 35 anos',
 	'descricao': 'A história da Famastil Feramentas Ltda. é marcada por uma trajetória de sucesso, perseverança e inovação. Fundada em 17 de agosto de 1953 pelos irmãos Tissot, a empresa iniciou suas atividades de forma humilde, como uma pequena oficina na década de 50, produzindo ferraduras e consertando armas. No entanto, foi ao longo dos anos que a Famastil se consolidou como uma das mais respeitadas fabricantes de ferramentas no Brasil.\n\nEm 1988, celebrando 35 anos de atuação, a Famastil já havia alcançado patamares impressionantes. Produzindo 20 mil peças diariamente, a empresa atendia aos mercados de jardinagem, agricultura e construção civil, com presença internacional em 42 países nos cinco continentes, além de abastecer todo o mercado nacional. Esse crescimento notável foi impulsionado pela visão estratégica da família Tissot, que apostou em investimentos em tecnologia, na capacitação dos recursos humanos e na inovação de processos, como o pioneiro sistema de microempresa, que se mostrou um diferencial no mercado.\n\nA Famastil chegou a ser a vice-líder nacional em seu setor, conquistando reconhecimento e respeito em todo o país. Seus 35 anos foram celebrados como um marco de trabalho árduo, dedicação familiar e uma capacidade única de adaptação às mudanças do mercado. Embora a fábrica tenha fechado suas portas posteriormente, a história da Famastil permanece como um exemplo de sucesso e empreendedorismo para Gramado e além.',
 	'ano': 1988,
@@ -770,7 +770,7 @@ const historias = [{
 	'id': 100,
 	'rua_id': 12,
 	'criador': 'Allan Fulcher',
-	'fotos': ['/images/historias/lucirene-malhas.png'],
+	'fotos': ['/images/historias/lucirene-malhas.webp'],
 	'titulo': 'Malharia Lucirene 15 anos',
 	'descricao': 'A Malharia Lucirene nasceu de forma simples e familiar em 1973, graças às economias de Dona Irene Libardi Preto e ao incentivo de seu genro, Gentil Bonato. Inicialmente, as primeiras malhas feitas por Dona Irene em casa, com uma máquina Lanofix, visavam pagar a Previdência Social. Com a qualidade de suas peças ganhando destaque, Gentil propôs a abertura de uma malharia.\n\nO empreendimento começou ocupando um dos quartos da casa de Irene, mas o sucesso logo levou à abertura de um ponto de venda na Rua Senador Salgado Filho. Em 1975, a empresa adquiriu novas máquinas e construiu uma fábrica de 70 metros quadrados, que logo foi ampliada para 200 metros, chegando aos 2 mil metros quadrados anos depois.\n\nA Lucirene, ao longo dos anos, tornou-se uma das cinco maiores malharias do Estado, chegando a abrir um escritório na 5ª Avenida, em Nova York, para entrar no competitivo mercado norte-americano. A empresa também investiu em projetos culturais, como a Torre Café Colonial, um espaço para exposições e lançamentos de livros.\n\nA imagem histórica que marca os 15 anos da Lucirene retrata a equipe em frente à fábrica, localizada onde hoje está a Unopar, um símbolo do sucesso e do legado da empresa.',
 	'ano': 1988,
@@ -779,7 +779,7 @@ const historias = [{
 	'id': 102,
 	'rua_id': 13,
 	'criador': 'Mateus Canova',
-	'fotos': ['/images/historias/Igreja-pedra-1932.png'],
+	'fotos': ['/images/historias/Igreja-pedra-1932.webp'],
 	'titulo': 'Fachada Igreja de pedra',
 	'descricao': 'Fachada original da igreja matriz, com inicio da construção em setembro de 1926 e finalizada em 1932.',
 	'ano': 1932,
@@ -788,7 +788,7 @@ const historias = [{
 	'id': 103,
 	'rua_id': 13,
 	'criador': 'Mateus Canova',
-	'fotos': ['/images/historias/praça-igreja-matriz-1950.png'],
+	'fotos': ['/images/historias/praça-igreja-matriz-1950.webp'],
 	'titulo': 'Praça da Igreja matriz',
 	'descricao': 'Praça da igreja antiga, juntamente com o colégio aauxiliadora e seu salão de festas de madeira ao fundo',
 	'ano': 1950,
@@ -797,7 +797,7 @@ const historias = [{
 	'id': 104,
 	'rua_id': 13,
 	'criador': 'Mateus Canova',
-	'fotos': ['/images/historias/nevada-igreja-1994.png'],
+	'fotos': ['/images/historias/nevada-igreja-1994.webp'],
 	'titulo': 'Neve na cidade',
 	'descricao': 'Neve vista da praça em frente da igreja matriz na grande nevasca de 1994',
 	'ano': 1994,
@@ -806,7 +806,7 @@ const historias = [{
 	'id': 105,
 	'rua_id': 14,
 	'criador': 'Mateus Canova',
-	'fotos': ['/images/historias/vista-area-felisberto-1961.png'],
+	'fotos': ['/images/historias/vista-area-felisberto-1961.webp'],
 	'titulo': 'Vista aerea ',
 	'descricao': 'Vista aerea da rua felisberto soares, ponto de vista da torre na igreja de pedra',
 	'ano': 1961,
@@ -815,7 +815,7 @@ const historias = [{
 	'id': 106,
 	'rua_id': 14,
 	'criador': 'Mateus Canova',
-	'fotos': ['/images/historias/circulo-operario-1960.png'],
+	'fotos': ['/images/historias/circulo-operario-1960.webp'],
 	'titulo': 'Círculo operário de Canela',
 	'descricao': 'Círculo operário de Canela criado em 1944, ficava na esquina da rua dona carlinda, atualmente se localiza a caxa economica federal',
 	'ano': 1960,
@@ -824,7 +824,7 @@ const historias = [{
 	'id': 107,
 	'rua_id': 14,
 	'criador': 'Mateus Canova',
-	'fotos': ['/images/historias/madeireira-agricola-1962.png'],
+	'fotos': ['/images/historias/madeireira-agricola-1962.webp'],
 	'titulo': 'Madeireira Agrícola',
 	'descricao': 'Na foto vemos a madeireira agrícola, com caminhões carregados prontoss para a saída, atualmente este predio com diversos estabelicimentos',
 	'ano': 1962,
@@ -833,7 +833,7 @@ const historias = [{
 	'id': 108,
 	'rua_id': 14,
 	'criador': 'Mateus Canova',
-	'fotos': ['/images/historias/sorveteria-prater-1935.png'],
+	'fotos': ['/images/historias/sorveteria-prater-1935.webp'],
 	'titulo': 'Sorveteria prater',
 	'descricao': 'a sorveteria prater era muito conhecida por todos, localizada bem no centro da igreja, atualmete no mesmo local se encontra uma lancheria tambem bastante conhecida na cidade',
 	'ano': 1935,
@@ -842,7 +842,7 @@ const historias = [{
 	'id': 109,
 	'rua_id': 14,
 	'criador': 'Mateus Canova',
-	'fotos': ['/images/historias/aerea-praca-1980.png'],
+	'fotos': ['/images/historias/aerea-praca-1980.webp'],
 	'titulo': 'Vista aérea praça João Corrêa',
 	'descricao': 'Vista aérea da praça João Corrêa, a direita o Cine Marabá, aos fundos a estação ferroviária e seu antigo trajeto',
 	'ano': 1980,
@@ -851,7 +851,7 @@ const historias = [{
 	'id': 110,
 	'rua_id': 15,
 	'criador': 'Mateus Canova',
-	'fotos': ['/images/historias/rodoviaria-antiga-1961.png'],
+	'fotos': ['/images/historias/rodoviaria-antiga-1961.webp'],
 	'titulo': 'Antiga Estação rodoviária',
 	'descricao': 'Antiga Estação Rodoviária de canela em frente a praça João corrêa',
 	'ano': 1961,
@@ -860,7 +860,7 @@ const historias = [{
 	'id': 111,
 	'rua_id': 16,
 	'criador': 'Mateus Canova',
-	'fotos': ['/images/historias/estaçao-ferroviaria-1934.png'],
+	'fotos': ['/images/historias/estaçao-ferroviaria-1934.webp'],
 	'titulo': 'Estação Ferroviária ',
 	'descricao': 'Construida em 1922, era um dos grandes icones da cidade, com a chegada do trem vieram novas perspectivas de progresso a cidade, atulamente ainda há pontos revitaalizados deste importante marco a cidade.',
 	'ano': 1934,
@@ -869,7 +869,7 @@ const historias = [{
 	'id': 112,
 	'rua_id': 15,
 	'criador': 'Mateus Canova',
-	'fotos': ['/images/historias/cine-maraba-1960.png'],
+	'fotos': ['/images/historias/cine-maraba-1960.webp'],
 	'titulo': 'Cine Marabá',
 	'descricao': 'Em frente a praça João Corrêa ficava o Cine Marabá, com capaciade para 1.100 pessoas, era muito visitado por todas na cidade',
 	'ano': 1960,
@@ -878,7 +878,7 @@ const historias = [{
 	'id': 113,
 	'rua_id': 17,
 	'criador': 'Mateus Canova',
-	'fotos': ['/images/historias/desfile-civico-1958.png'],
+	'fotos': ['/images/historias/desfile-civico-1958.webp'],
 	'titulo': 'Desfile 7 de setembro',
 	'descricao': 'O desfile de 7 de setembro de 1958 na Av. Osvaldo Aranha, reunia centenas de pessoas para acompanhar o desfile civico da cidade',
 	'ano': 1958,
@@ -887,7 +887,7 @@ const historias = [{
 	'id': 114,
 	'rua_id': 17,
 	'criador': 'Mateus Canova',
-	'fotos': ['/images/historias/oficina-caminhao-1940.png'],
+	'fotos': ['/images/historias/oficina-caminhao-1940.webp'],
 	'titulo': 'Oficina Mecânica de caminhões ',
 	'descricao': 'Primeiro predio da oficina mecânica de caminhões na av osvaldo aranha, atualmente no mesmo local contem uma sucessão de salas de comerciais',
 	'ano': 1940,
@@ -896,7 +896,7 @@ const historias = [{
 	'id': 115,
 	'rua_id': 17,
 	'criador': 'Mateus Canova',
-	'fotos': ['/images/historias/osvaldo-aranha-1970.png'],
+	'fotos': ['/images/historias/osvaldo-aranha-1970.webp'],
 	'titulo': 'Avenida Osvaldo Aranha',
 	'descricao': 'Vista da cidade em sentido a igrejaa matriz, com bastante comercios pela avenida central da cidade',
 	'ano': 1970,
@@ -905,7 +905,7 @@ const historias = [{
 	'id': 116,
 	'rua_id': 17,
 	'criador': 'Mateus Canova',
-	'fotos': ['/images/historias/revenda-ford-1950.png'],
+	'fotos': ['/images/historias/revenda-ford-1950.webp'],
 	'titulo': 'Antiga revenda da Ford',
 	'descricao': 'Antiga revenda da Ford e posto de gasolina da esso, atualmente se localiza o posto da rede SIM, e aos fundos Star Video locadora',
 	'ano': 1950,
@@ -914,7 +914,7 @@ const historias = [{
 	'id': 117,
 	'rua_id': 17,
 	'criador': 'Mateus Canova',
-	'fotos': ['/images/historias/hote-bella-vista-1958.png'],
+	'fotos': ['/images/historias/hote-bella-vista-1958.webp'],
 	'titulo': 'Hotel Bella Vista',
 	'descricao': 'O antigo Hotel Bella Vista, muito frequentado na época por visitantes e veranistas',
 	'ano': 1958,
@@ -923,7 +923,7 @@ const historias = [{
 	'id': 118,
 	'rua_id': 18,
 	'criador': 'Mateus Canova',
-	'fotos': ['/images/historias/grande-hotel-canela-1930.png'],
+	'fotos': ['/images/historias/grande-hotel-canela-1930.webp'],
 	'titulo': 'Grande Hotel Canela',
 	'descricao': 'Infraestrutura do Hotel, com o salão principal um dos primeiros predios construidos no local, existente até hoje',
 	'ano': 1930,
@@ -932,7 +932,7 @@ const historias = [{
 	'id': 119,
 	'rua_id': 20,
 	'criador': 'Mateus Canova',
-	'fotos': ['/images/historias/banco-nacional-1961.png'],
+	'fotos': ['/images/historias/banco-nacional-1961.webp'],
 	'titulo': 'Banco Nacional do Comércio',
 	'descricao': 'Na Avenida Julio de Castilhos, esquina com Rua Augusto Pestana, localizava-se o icônico edifício do Banco Nacional do Comércio, na foto tambem vemos o primeiro ônibus urbano de Canela',
 	'ano': 1961,
@@ -941,7 +941,7 @@ const historias = [{
 	'id': 120,
 	'rua_id': 21,
 	'criador': 'Mateus Canova',
-	'fotos': ['/images/historias/desfile-7-setembro-1960.png'],
+	'fotos': ['/images/historias/desfile-7-setembro-1960.webp'],
 	'titulo': 'Desfile 7 de Setembro',
 	'descricao': 'Desfile civico ocorrido em 1960 na Rua Augusto Pestana',
 	'ano': 1960,
@@ -950,7 +950,7 @@ const historias = [{
 	'id': 121,
 	'rua_id': 21,
 	'criador': 'Mateus Canova',
-	'fotos': ['/images/historias/7-setembro-1972.png'],
+	'fotos': ['/images/historias/7-setembro-1972.webp'],
 	'titulo': 'Desfile Civico',
 	'descricao': 'Desfile de 7 de setembro de 1972 na Rua Dona Carlinda, atualmente nesta rua se localiza a prefeitura de Canela e o Forúm da cidade',
 	'ano': 1972,
@@ -959,7 +959,7 @@ const historias = [{
 	'id': 122,
 	'rua_id': 19,
 	'criador': 'Mateus Canova',
-	'fotos': ['/images/historias/revenda-dodge-1950.png'],
+	'fotos': ['/images/historias/revenda-dodge-1950.webp'],
 	'titulo': 'Revanda Dodge',
 	'descricao': 'Revenda Dodge de Canela em frente a bomba de gasolina',
 	'ano': 1950,
@@ -968,7 +968,7 @@ const historias = [{
 	'id': 123,
 	'rua_id': 22,
 	'criador': 'Mateus Canova',
-	'fotos': ['/images/historias/vista-martinho-1936.png'],
+	'fotos': ['/images/historias/vista-martinho-1936.webp'],
 	'titulo': 'Vista aerea Rua Martinho Lutero',
 	'descricao': 'Vista aerea de Canela em 1936, Ponto de vista da Igreja Evangélica São João, com a antiga igreja matriz ao fundo',
 	'ano': 1936,
@@ -977,7 +977,7 @@ const historias = [{
 	'id': 124,
 	'rua_id': 22,
 	'criador': 'Mateus Canova',
-	'fotos': ['/images/historias/igreja-luterana-1945.png'],
+	'fotos': ['/images/historias/igreja-luterana-1945.webp'],
 	'titulo': 'Igreja Evangélica da Confissão Luterana',
 	'descricao': 'Igreja Evangélica da Confissão Luterana na época de sua inauguração em 1945, podemos ver na foto muitos fieis indo visita-lá',
 	'ano': 1945,
@@ -986,7 +986,7 @@ const historias = [{
 	'id': 125,
 	'rua_id': 22,
 	'criador': 'Mateus Canova',
-	'fotos': ['/images/historias/clube-serrano-1940.png'],
+	'fotos': ['/images/historias/clube-serrano-1940.webp'],
 	'titulo': 'Clube Serrano',
 	'descricao': 'Fachado do clube serrano em 1940, o local foi fundado em 1926 e atualmente se encontra no mesmo local com sua fachada ampliada',
 	'ano': 1940,
@@ -995,7 +995,7 @@ const historias = [{
 	'id': 126,
 	'rua_id': 23,
 	'criador': 'Mateus Canova',
-	'fotos': ['/images/historias/posto-texaco-1957.png'],
+	'fotos': ['/images/historias/posto-texaco-1957.webp'],
 	'titulo': 'Posto Texaco',
 	'descricao': 'Posto Texaco contruido em 1957 na Rua João Pessoa',
 	'ano': 1957,
@@ -1004,7 +1004,7 @@ const historias = [{
 	'id': 127,
 	'rua_id': 23,
 	'criador': 'Mateus Canova',
-	'fotos': ['/images/historias/acougue-bohrer-1980.png'],
+	'fotos': ['/images/historias/acougue-bohrer-1980.webp'],
 	'titulo': 'Açougue Bohrer',
 	'descricao': 'Antigo Açougue Bohrer, muito conhecida na cidade, a casa da direita ssem encontra até hoje no local',
 	'ano': 1980,
@@ -1013,7 +1013,7 @@ const historias = [{
 	'id': 128,
 	'rua_id': 23,
 	'criador': 'Mateus Canova',
-	'fotos': ['/images/historias/casa-raymundo-1986.png'],
+	'fotos': ['/images/historias/casa-raymundo-1986.webp'],
 	'titulo': 'Casa Raymundo',
 	'descricao': 'Antiga Casa Raymundo, armazém e loja de variedade, em torno ficava as casas da família, atualmente se localiza o Super Mercado Rissul',
 	'ano': 1986,
@@ -1022,7 +1022,7 @@ const historias = [{
 	'id': 129,
 	'rua_id': 23,
 	'criador': 'Mateus Canova',
-	'fotos': ['/images/historias/carretas-atoladas-1933.png'],
+	'fotos': ['/images/historias/carretas-atoladas-1933.webp'],
 	'titulo': 'Carretas Atoladas',
 	'descricao': 'Carretas atoladas na Rua João pessoa, indo em direção ao bairro Canelinha, a casa do meio viria a ser o antigo açougue fachin',
 	'ano': 1933,
@@ -1031,7 +1031,7 @@ const historias = [{
 	'id': 130,
 	'rua_id': 24,
 	'criador': 'Mateus Canova',
-	'fotos': [{url:'/images/historias/hospital-canela-1961.png'}],
+	'fotos': [{url:'/images/historias/hospital-canela-1961.webp'}],
 	'titulo': 'Hospital de Canela',
 	'descricao': 'Antigo prédio do Hospital de Canela, atualmente tem preservado boa parte da sua caracterísca, ampliando somente em infraestrutura',
 	'ano': 1961,
@@ -1040,7 +1040,7 @@ const historias = [{
 	'id': 131,
 	'rua_id': 25,
 	'criador': 'Mateus Canova',
-	'fotos': ['/images/historias/praça-lago-1992.png'],
+	'fotos': ['/images/historias/praça-lago-1992.webp'],
 	'titulo': 'Praça do Lago',
 	'descricao': 'Obras iniciais de contençaõ do lago, após a finalização o espaço busca trazer lazer a população',
 	'ano': 1992,
@@ -1049,7 +1049,7 @@ const historias = [{
 	'id': 132,
 	'rua_id': 26,
 	'criador': 'Mateus Canova',
-	'fotos': ['/images/historias/caravagio-1963.png'],
+	'fotos': ['/images/historias/caravagio-1963.webp'],
 	'titulo': 'Festa no Santúario Caravaggio',
 	'descricao': 'Local onde se encontra o Santúario Caravaggio no bairro Saiqui, apreciado por muitos católicos e sua tradicional festa em 26 de maio de 1963',
 	'ano': 1963,
@@ -1058,7 +1058,7 @@ const historias = [{
 	'id': 133,
 	'rua_id': 26,
 	'criador': 'Mateus Canova',
-	'fotos': ['/images/historias/casa-wortmann-1940.png'],
+	'fotos': ['/images/historias/casa-wortmann-1940.webp'],
 	'titulo': 'Casarão Wortmann',
 	'descricao': 'Antiga casado Professor Carlos Wortmann, primeira sede da atual escola Neusa Mari Pacheco, sendo referência no estado do Rio Grande do Sul',
 	'ano': 1940,
@@ -1067,7 +1067,7 @@ const historias = [{
 	'id': 134,
 	'rua_id': 9,
 	'criador': 'Mateus Canova',
-	'fotos': ['/images/historias/castelinho-caracol-1940.png'],
+	'fotos': ['/images/historias/castelinho-caracol-1940.webp'],
 	'titulo': 'Castelinho do Caracol',
 	'descricao': 'Castelinho do Caracol, casa construída sem uso de pregos, sua estrutura foi mantida intacta até hoje e abriga o Café Castelinho do Caracol, muito conhecido pelo seu applefell strudel tradicional torta alemã de maça',
 	'ano': 1940,
@@ -1076,7 +1076,7 @@ const historias = [{
 	'id': 135,
 	'rua_id': 9,
 	'criador': 'Mateus Canova',
-	'fotos': ['/images/historias/cascata-caracol-1961.png'],
+	'fotos': ['/images/historias/cascata-caracol-1961.webp'],
 	'titulo': 'Cascata do Caracol',
 	'descricao': 'A famosa Cascata do Caracol, muito visitada por todos, um dos principais pontos turisticos da cidade, conta com um ambiente preservado, e uma quedaa de 130m conforme medições atuais.',
 	'ano': 1961,
@@ -1086,7 +1086,7 @@ const historias = [{
     rua_id: 13,
     criador: 'Canela Fotos',
     fotos: [
-      '/images/historias/igreja-canela-74.jpg'
+      '/images/historias/igreja-canela-74.webp'
     ],
     titulo: 'Construção nova igreja de Canela',
     descricao: 'Em 1964 foram concluídas as paredes ao redor da antiga Igreja e então se deu a demolição da mesma.',
@@ -1098,8 +1098,8 @@ const historias = [{
     rua_id: 2,
     criador: 'Henrique Canova',
     fotos: [
-      '/images/historias/nova-rodoviaria83-2.jpg',
-      '/images/historias/nova-rodoviaria83.jpg'
+      '/images/historias/nova-rodoviaria83-2.webp',
+      '/images/historias/nova-rodoviaria83.webp'
     ],
     titulo: 'A Nova Porta de Entrada: A Inauguração da Rodoviária de Gramado',
     descricao: 'Em 1979, a charmosa cidade de Gramado estava prestes a dar mais um passo em sua jornada de desenvolvimento turístico. A antiga estação ferroviária, localizada na Avenida Borges de Medeiros, cederia lugar a uma moderna rodoviária, simbolizando a transição dos trilhos para as estradas. A aquisição do terreno, com 9.240 metros quadrados, pela Prefeitura Municipal, representava a realização de um antigo sonho da comunidade. O então prefeito, Nelson Dinnebier, assinou a escritura definitiva, expressando o desejo de iniciar as obras ainda em seu mandato. A nova rodoviária prometia ser uma das mais modernas do Estado, com capacidade para 14 ônibus simultaneamente, além de oferecer restaurante, lanchonete e até mesmo um hotel. Essa iniciativa não apenas modernizaria a infraestrutura da cidade, mas também reforçaria Gramado como um destino turístico de destaque, acolhendo visitantes com ainda mais conforto e eficiência.',
@@ -1111,7 +1111,7 @@ const historias = [{
     rua_id: 3,
     criador: 'Henrique Canova',
     fotos: [
-      '/images/historias/festa-hortensias.jpg'
+      '/images/historias/festa-hortensias.webp'
     ],
     titulo: 'A Festa das Hortênsias: O Florescer de uma Tradição em Gramado',
     descricao: 'Em dezembro de 1958, Gramado, a encantadora cidade da Serra Gaúcha, preparava-se para um evento que marcaria para sempre sua história: a primeira Festa das Hortênsias. Idealizada por visionários como Oscar Knorr e Walter Bertolucci, a celebração ocorreu nos dias 7 e 8 de dezembro, encantando moradores e visitantes com suas cores e aromas. \nSAFERRARI.BLOGSPOT.COM\n\nA festa não apenas exaltava a beleza das hortênsias que adornavam a cidade, mas também simbolizava o florescer de Gramado como um destino turístico de destaque. A programação incluiu apresentações de balé, danças gaúchas e a coroação da primeira Rainha das Hortênsias, Iraci Casagrande, acompanhada das princesas Rosalina Petersen e Irani Stürmer. \nILTONMULLER.COM.BR\n\nO sucesso do evento foi tão grande que ultrapassou as fronteiras do Rio Grande do Sul, projetando Gramado no cenário turístico nacional e plantando as sementes para futuras celebrações que se tornariam tradição na cidade. A Festa das Hortênsias floresceu por 12 edições, sendo a última realizada em 1986, ano que também marcou o nascimento do Natal Luz, outro evento icônico de Gramado. \nSAFERRARI.BLOGSPOT.COM\n\nAssim, a Festa das Hortênsias não apenas celebrou a flora local, mas também cultivou o espírito comunitário e a vocação turística de Gramado, deixando um legado que continua a inspirar eventos e festividades na cidade até os dias de hoje.',
@@ -1123,7 +1123,7 @@ const historias = [{
     rua_id: 10,
     criador: 'Henrique Canova',
     fotos: [
-      '/images/historias/cavalo-lago-negro.jpg'
+      '/images/historias/cavalo-lago-negro.webp'
     ],
     titulo: 'Cavalos e Hortênsias: A Harmonia do Lago Negro',
     descricao: 'Na década de 1970, o pitoresco Lago Negro de Gramado não era apenas um refúgio para amantes da natureza, mas também um ponto de encontro para entusiastas da equitação. Cavaleiros elegantemente trajados desfilavam ao redor do lago, compartilhando trilhas com pedestres que admiravam as deslumbrantes hortênsias em flor. Para garantir a convivência harmoniosa entre todos, a comunidade local propôs medidas como a disciplina do tráfego, a definição de limites de velocidade e a criação de áreas específicas para passeios a pé e a cavalo. Essas iniciativas visavam preservar a tranquilidade e a segurança do Lago Negro, assegurando que tanto cavaleiros quanto pedestres pudessem desfrutar plenamente da serenidade e beleza deste icônico ponto turístico de Gramado.',
@@ -1135,7 +1135,7 @@ const historias = [{
     rua_id: 8,
     criador: 'Henrique Canova',
     fotos: [
-      '/images/historias/1-radio-gramado.jpg'
+      '/images/historias/1-radio-gramado.webp'
     ],
     titulo: 'A Voz de Gramado: A Inauguração da Primeira Rádio da Cidade',
     descricao: 'Em 13 de outubro de 1978, Gramado celebrou um marco em sua história com a inauguração da Rádio Excelsior AM 1440. A cerimônia ocorreu no Cine Embaixador, onde artistas renomados, como o Conjunto Impacto de Porto Alegre, encantaram o público com apresentações vibrantes. No dia seguinte, 14 de outubro, a sede da emissora, situada na Avenida Costa e Silva, 78, foi oficialmente inaugurada, contando com a presença de autoridades locais e convidados ilustres. A Rádio Excelsior trouxe uma nova dinâmica à comunicação na cidade, oferecendo uma programação diversificada que incluía músicas típicas alemãs, programas interativos com ouvintes e noticiários regionais. Com um transmissor de 250 watts na frequência de 1510 kHz, a emissora rapidamente se tornou uma parte essencial da vida dos gramadenses, conectando a comunidade e dando voz aos moradores locais.',
@@ -1147,9 +1147,9 @@ const historias = [{
     rua_id: 8,
     criador: 'Henrique Canova',
     fotos: [
-      '/images/historias/laje-de-pedra-1.jpg',
-      '/images/historias/laje-de-pedra-2.jpg',
-      '/images/historias/laje-de-pedra-3.jpg'
+      '/images/historias/laje-de-pedra-1.webp',
+      '/images/historias/laje-de-pedra-2.webp',
+      '/images/historias/laje-de-pedra-3.webp'
     ],
     titulo: 'A Inauguração do Hotel Laje de Pedra e o Crescimento do Turismo em Canela',
     descricao: 'No dia 3 de dezembro de 1978, a Serra Gaúcha testemunhou um marco histórico com a inauguração do Hotel Laje de Pedra, em Canela. O evento, presidido pelo governador Sinval Guazzelli, contou com a presença de autoridades como o futuro governador Amaral de Souza e o presidente da Embratur, Said Farhat. Com uma estrutura moderna e localização privilegiada, o empreendimento fortaleceu a vocação turística da região, consolidando Canela como destino para grandes convenções e eventos, impulsionando o desenvolvimento econômico local.',
@@ -1161,7 +1161,7 @@ const historias = [{
     rua_id: 7,
     criador: 'Henrique Canova',
     fotos: [
-      '/images/historias/artesanto-gramado-historia.jpg'
+      '/images/historias/artesanto-gramado-historia.webp'
     ],
     titulo: 'A História do Artesanato de Gramado: Tradição e Criatividade na Serra Gaúcha',
     descricao: 'Localizada na Serra Gaúcha, no estado do Rio Grande do Sul, a cidade de Gramado se destaca não apenas por seu turismo, mas também por sua rica tradição artesanal. O artesanato local tem suas raízes no início do século XX, com pioneiros como Aldno Asem, mestre na produção de móveis e objetos de vime, e Elisabeth Rosenfeld, responsável por impulsionar o design e a comercialização de móveis da região. Com o tempo, a cidade se tornou um polo de referência, exportando sua produção para diversos países e consolidando eventos como a Feira Nacional do Artesanato. Hoje, Gramado mantém viva sua identidade artesanal, unindo tradição e inovação no cenário cultural e econômico da Serra Gaúcha. A história do artesanato de Gramado teve diferentes locais de desenvolvimento ao longo dos anos. Um dos marcos foi a fábrica de Elisabeth Rosenfeld, localizada na Rua São Pedro, que ajudou a impulsionar a produção e exportação de móveis artesanais. Além disso, a tradicional Feira Nacional do Artesanato ocorre em espaços como o Centro de Eventos ExpoGramado, situado na Avenida Borges de Medeiros, uma das principais vias da cidade.',
@@ -1173,7 +1173,7 @@ const historias = [{
     rua_id: 1,
     criador: 'Henrique Canova',
     fotos: [
-      '/images/historias/praça-major-nicoleti.jpg'
+      '/images/historias/praça-major-nicoleti.webp'
     ],
     titulo: 'Praça Major Nicoletti: Um Símbolo Histórico no Coração de Gramado',
     descricao: 'A Praça Major Nicoletti, inaugurada em 1936, é um dos marcos históricos de Gramado, situada no coração da cidade, em frente à Igreja Matriz São Pedro e ao Palácio dos Festivais. Nomeada em homenagem ao Major José Nicoletti Filho, primeiro subintendente local e figura central na fundação de Gramado, a praça tornou-se um ponto de encontro para moradores e visitantes ao longo das décadas. Após uma significativa reforma em 2003, o espaço foi revitalizado, mantendo seu charme original e reforçando sua importância como um dos cenários mais característicos da cidade. Atualmente, a Praça Major Nicoletti oferece aos visitantes uma vista privilegiada de outros pontos turísticos emblemáticos, como a Rua Coberta e a Avenida Borges de Medeiros. Além disso, abriga um coreto que serve como ponto de venda de produtos da grife oficial "Gramado Inesquecível", proporcionando uma experiência cultural e comercial única.',
@@ -1185,10 +1185,10 @@ const historias = [{
     rua_id: 1,
     criador: 'Henrique Canova',
     fotos: [
-      '/images/historias/centro-medico1.jpg',
-      '/images/historias/centro-medico2.jpg',
-      '/images/historias/centro-medico3.jpg',
-      '/images/historias/centro-medico4.jpg'
+      '/images/historias/centro-medico1.webp',
+      '/images/historias/centro-medico2.webp',
+      '/images/historias/centro-medico3.webp',
+      '/images/historias/centro-medico4.webp'
     ],
     titulo: 'Inauguração do Centro Médico e Odontológico de Gramado',
     descricao: 'A cidade de Gramado deu um importante passo na área da saúde com a inauguração do Centro Médico e Odontológico, localizado na Avenida Augusto Zatti. O novo complexo foi criado para atender à crescente demanda por serviços médicos especializados, tanto para os moradores locais quanto para os turistas. Com uma equipe multidisciplinar composta por clínicos gerais, ortopedistas, cardiologistas, psiquiatras, dentistas e outros especialistas, o centro trouxe mais comodidade para a população, reduzindo a necessidade de deslocamento para Porto Alegre ou Caxias do Sul.\n\nAlém do atendimento médico 24 horas, o espaço conta com pronto-socorro de urgência, serviço de fisioterapia, ambulância para remoções, centro cirúrgico e um laboratório de análises clínicas moderno. Anexo ao centro, foi inaugurada a Farmácia Real, oferecendo plantão 24 horas para garantir assistência contínua. O Centro Médico e Odontológico de Gramado representa um avanço significativo para a infraestrutura de saúde do município, consolidando-se como um serviço essencial para a comunidade.',
@@ -1200,8 +1200,8 @@ const historias = [{
     rua_id: 1,
     criador: 'Henrique Canova',
     fotos: [
-      '/images/historias/igreja-sao-pedro1.jpg',
-      '/images/historias/igreja-sao-pedro2.jpg'
+      '/images/historias/igreja-sao-pedro1.webp',
+      '/images/historias/igreja-sao-pedro2.webp'
     ],
     titulo: 'Igreja Matriz São Pedro: O Símbolo Religioso e Arquitetônico de Gramado',
     descricao: 'Localizada no coração de Gramado, a Igreja Matriz São Pedro é um dos monumentos mais icônicos da cidade e um dos cartões-postais da Serra Gaúcha. Sua construção teve início em 1917, inicialmente como uma capela de madeira, e em 1942 foi concluída a atual estrutura em pedra basáltica, inspirada no estilo arquitetônico romano. A imponência da igreja é complementada por sua torre de 46 metros de altura e seus belíssimos vitrais importados da Bélgica, que retratam passagens da vida do apóstolo São Pedro.\n\nA igreja está situada na Avenida Borges de Medeiros, em frente à Praça Major Nicoletti, e faz parte do cenário central de Gramado, ao lado do Palácio dos Festivais. Além de seu valor histórico e religioso, o local se tornou um importante ponto turístico, recebendo visitantes de todo o Brasil e do exterior. À sua frente, as estátuas dos 12 apóstolos formam um conjunto simbólico que reforça a identidade cristã da construção.\n\nA Igreja São Pedro não é apenas um local de fé e devoção, mas também um marco cultural e arquitetônico da cidade, sendo palco de celebrações tradicionais como o Natal Luz e a Páscoa em Gramado. Seu charme e imponência fazem dela um dos principais atrativos da região, destacando-se como um patrimônio que une história, arte e religiosidade.',
@@ -1213,8 +1213,8 @@ const historias = [{
     rua_id: 1,
     criador: 'Henrique Canova',
     fotos: [
-      '/images/historias/parque-knorr11.jpg',
-      '/images/historias/parque-knorr22.jpg'
+      '/images/historias/parque-knorr11.webp',
+      '/images/historias/parque-knorr22.webp'
     ],
     titulo: 'Parque Knorr: Um Refúgio Natural e Histórico em Gramado',
     descricao: 'O Parque Knorr é um dos mais encantadores refúgios naturais de Gramado, combinando história, beleza paisagística e cultura local. Criado pelo imigrante alemão Oscar João Knorr, o parque surgiu da visão de um homem apaixonado pela natureza, que transformou uma área privilegiada da cidade em um verdadeiro jardim alpino. Com sua localização privilegiada, próxima ao Centro de Gramado, o parque oferece uma vista deslumbrante do Vale do Quilombo, um dos mais belos cartões-postais da Serra Gaúcha.\n\nO espaço abriga uma rica vegetação composta por árvores nativas, coníferas e flores, sendo um ambiente ideal para contemplação e passeios tranquilos. Durante sua administração pela companhia aérea VARIG, o parque passou a ser um patrimônio público, tornando-se um dos principais pontos turísticos da cidade. Atualmente, o Parque Knorr também é conhecido por abrigar a Aldeia do Papai Noel, uma das atrações mais visitadas durante o Natal Luz.\n\nCom sua atmosfera nostálgica e romântica, o Parque Knorr se mantém como um símbolo da preservação ambiental e do amor à natureza. Ele não apenas representa a beleza natural de Gramado, mas também reforça o vínculo da cidade com suas tradições e com o legado de seus pioneiros.',
@@ -1226,7 +1226,7 @@ const historias = [{
     rua_id: 1,
     criador: 'Henrique Canova',
     fotos: [
-      '/images/historias/av-borges-neve.jpg'
+      '/images/historias/av-borges-neve.webp'
     ],
     titulo: 'Neve em Gramado: O Inverno Histórico de 1920',
     descricao: 'No rigoroso inverno de 1920, a cidade de Gramado – RS viveu um dos momentos mais marcantes de sua história climática: uma intensa nevasca cobriu suas ruas, transformando a paisagem em um cenário digno das regiões mais frias do mundo. A Avenida Borges de Medeiros, uma das principais vias da cidade, ficou totalmente coberta de neve, proporcionando um espetáculo natural raro e inesquecível para os moradores da época.\n\nA cena, registrada em fotografias históricas, mostra a altura da neve na região onde hoje se encontra a loja Iraci, evidenciando a magnitude do fenômeno. Esse episódio reforça o clima europeu característico da Serra Gaúcha, que, desde então, se consolidou como um dos grandes atrativos turísticos da cidade, despertando o encanto de visitantes que sonham em vivenciar a neve no Brasil.\n\nEste acontecimento integra o acervo cultural do Museu Histórico de Gramado, que preserva memórias da cidade e relembra momentos emblemáticos que ajudaram a moldar a identidade local. A neve de 1920 permanece como um dos grandes marcos climáticos de Gramado, tornando-se uma referência nostálgica e simbólica para a cidade e seus habitantes.',
@@ -1238,7 +1238,7 @@ const historias = [{
     rua_id: 5,
     criador: 'Henrique Canova',
     fotos: [
-      '/images/historias/rua-garibaldi.jpg'
+      '/images/historias/rua-garibaldi.webp'
     ],
     titulo: 'Expansão Urbana: Continuidade da Rua Garibaldi',
     descricao: 'A cidade de Gramado – RS passou por um importante processo de planejamento urbano com a implementação da Lei 457/75, parte do Plano Diretor Urbano do município. Dentro desse contexto, uma das mudanças significativas foi a continuidade da Rua Garibaldi até a Rua 7 de Setembro, promovendo uma melhor organização do crescimento territorial da cidade.\n\nEssa expansão visa não apenas a melhoria na mobilidade urbana, mas também o ordenamento do espaço público, garantindo que o desenvolvimento ocorra de forma planejada e sustentável. O Plano Diretor de Gramado tem como objetivo principal a preservação da identidade da cidade, conciliando o crescimento com a manutenção das características arquitetônicas e culturais que fazem da região um dos destinos turísticos mais procurados do país.\n\nA ampliação da Rua Garibaldi reflete a necessidade de adaptação da cidade ao seu crescimento populacional e turístico, proporcionando uma infraestrutura adequada para moradores e visitantes. Com diretrizes bem estabelecidas, a expansão busca harmonizar o progresso com a preservação do charme característico da Serra Gaúcha.',
@@ -1250,7 +1250,7 @@ const historias = [{
     rua_id: 5,
     criador: 'Henrique Canova',
     fotos: [
-      '/images/historias/banco-do-brasil-74.jpg'
+      '/images/historias/banco-do-brasil-74.webp'
     ],
     titulo: 'A Chegada do Primeiro Banco do Brasil em Gramado',
     descricao: 'A instalação do primeiro Banco do Brasil em Gramado – RS marcou um importante passo no desenvolvimento econômico e financeiro da cidade. Inaugurado em 15 de dezembro de 1981, o edifício foi construído em um estilo bávaro, harmonizando-se perfeitamente com a arquitetura característica da cidade Jardim das Hortênsias.\n\nLocalizado em uma esquina estratégica, o banco tornou-se uma referência visual e um símbolo do progresso local. Além de facilitar o acesso a serviços bancários para os moradores e empresários, sua presença impulsionou o setor comercial e turístico da região, fortalecendo a economia da cidade.\n\nO prédio, com seu design singular, é um dos poucos exemplos de arquitetura bávara aplicados a uma instituição financeira no Brasil. Essa particularidade reforça a identidade única de Gramado, uma cidade que sempre valorizou sua herança cultural e estética. A chegada do Banco do Brasil consolidou a cidade como um centro financeiro emergente na Serra Gaúcha, acompanhando o crescimento do turismo e o aumento das atividades empresariais na região.',
@@ -1262,7 +1262,7 @@ const historias = [{
     rua_id: 13,
     criador: 'Henrique Canova',
     fotos: [
-      '/images/historias/igreja-canela-74.jpg'
+      '/images/historias/igreja-canela-74.webp'
     ],
     titulo: 'A Igreja Matriz de Canela em 1974: Um Ícone da Serra Gaúcha',
     descricao: 'Em 1974, a Igreja Matriz de Canela, também conhecida como Catedral de Pedra, já se destacava como um dos principais cartões-postais da Serra Gaúcha. Localizada no coração de Canela, sua imponente estrutura em estilo gótico inglês e sua torre de 65 metros de altura tornavam-se símbolos de fé e beleza arquitetônica.\n\nConstruída com pedra basáltica, a catedral começou a ser erguida em 1953 e teve sua obra concluída nos anos seguintes, tornando-se um ponto turístico e religioso de grande relevância. Na década de 1970, a igreja já atraía visitantes e fiéis, consolidando-se como um dos monumentos mais importantes do Rio Grande do Sul.\n\nA Igreja Matriz de Canela não é apenas um local de culto, mas também um patrimônio cultural e histórico. Em 1974, sua presença já embelezava a cidade, e seu charme gótico seguia encantando moradores e turistas, reforçando sua importância para a identidade local e o desenvolvimento do turismo na região.',
@@ -1274,7 +1274,7 @@ const historias = [{
     rua_id: 17,
     criador: 'Henrique Canova',
     fotos: [
-      '/images/historias/1-cinema-de-canela.jpg'
+      '/images/historias/1-cinema-de-canela.webp'
     ],
     titulo: 'O Primeiro Cinema de Canela-RS: História e Reforma',
     descricao: 'O primeiro cinema de Canela, conhecido como Cine Ideal, foi inaugurado em 1930, situado na Rua Osvaldo Aranha, tornando-se um marco cultural e social para a comunidade. Inicialmente, o cinema enfrentou desafios operacionais devido à limitação dos equipamentos disponíveis na época. A exibição de filmes exigia constantes interrupções para a troca de rolos, uma vez que a projeção era feita com uma única máquina, o que gerava longos intervalos e insatisfação do público.\n\nEm 1934, Hugo Schmitt, vindo de Campo Bom, assumiu a administração do cinema e implementou uma transformação significativa, introduzindo o Cinema Sonoro, conhecido como "falado". O primeiro filme exibido com essa tecnologia foi "O Congresso Dança", uma opereta que gerou grande expectativa entre os moradores. Apesar das inovações e da publicidade bem elaborada, o cinema continuou a enfrentar desafios técnicos, como a falta de latas para armazenar os filmes emendados, o que levou a um incidente perigoso: um princípio de incêndio durante a exibição de "A Guerra das Valsas", causado pela combustão de uma fita pendurada na parede.\n\nCom o passar dos anos, a necessidade de modernização levou Pedro Oscar Selbach a realizar uma grande reforma no cinema. Foram instalados novos equipamentos de projeção KLANG-FILM, um assoalho inclinado para melhor visibilidade e melhorias estruturais que tornaram a experiência dos espectadores mais confortável. Durante a década de 1940, o cinema viveu seu auge, exibindo grandes clássicos e musicais que marcaram época.\n\nNo entanto, com o tempo, a popularização da televisão e novas formas de entretenimento impactaram a frequência ao cinema, levando à sua decadência. Eventualmente, o prédio foi demolido, restando apenas a lembrança do Cine Ideal como o primeiro espaço dedicado à sétima arte em Canela e um ponto de encontro essencial para a comunidade local. Seu anexo, o Café Ideal, também teve grande importância social, servindo como local de reuniões e debates entre amigos, esportistas, políticos e visitantes da cidade.\n\nA demolição do Cine Ideal marcou o fim de uma era para Canela, mas sua história continua viva na memória dos moradores e na evolução cultural da cidade.',
@@ -1286,7 +1286,7 @@ const historias = [{
     rua_id: 5,
     criador: 'Henrique Canova',
     fotos: [
-      '/images/historias/serra-azul-74.jpg'
+      '/images/historias/serra-azul-74.webp'
     ],
     titulo: 'Hotel Serra Azul: Um Ícone da Hospitalidade em Gramado',
     descricao: 'O Hotel Serra Azul, inaugurado em 1916, é um marco na história da hotelaria em Gramado, refletindo o crescimento do turismo na região. Com uma estrutura confortável e sofisticada para a época, tornou-se rapidamente um dos destinos preferidos para visitantes e veranistas.\n\nAdministrado atualmente pela Perini S.A. Hotéis, o hotel recebeu diversos prêmios e reconhecimentos, incluindo a Medalha de Melhor Hotel de Turismo do Interior e o Diploma de Honra ao Mérito por sua contribuição ao desenvolvimento turístico do estado. A visão empreendedora de seus administradores garantiu que, ao longo dos anos, o Serra Azul se mantivesse como referência em qualidade e atendimento.\n\nA tradição do Hotel Serra Azul segue viva, sendo um ponto de encontro para turistas e personalidades, preservando sua história e adaptando-se às novas demandas da hotelaria moderna. Com sua arquitetura charmosa e hospitalidade impecável, continua a encantar gerações de visitantes.',
@@ -1298,8 +1298,8 @@ const historias = [{
     rua_id: 1,
     criador: 'Henrique Canova',
     fotos: [
-      '/images/historias/25-anos-gramado.jpg',
-      '/images/historias/25-anos-gramado-2.jpg'
+      '/images/historias/25-anos-gramado.webp',
+      '/images/historias/25-anos-gramado-2.webp'
     ],
     titulo: '25 Anos de Gramado: Uma Trajetória de Crescimento',
     descricao: 'No dia 15 de dezembro de 1979, Gramado comemorou seus 25 anos de emancipação, marcando um importante momento na história da cidade. Diversos eventos e celebrações foram realizados para destacar essa conquista, refletindo o desenvolvimento e a transformação da pequena vila em um dos destinos turísticos mais reconhecidos do Brasil.\n\nA evolução de Gramado pode ser claramente observada ao compararmos imagens do passado. A cidade que antes possuía ruas simples, como a Avenida Borges de Medeiros ainda sem asfalto, tornou-se um modelo de planejamento urbano e referência em turismo. As mudanças ao longo dos anos revelam um crescimento sustentável e planejado, que impulsionou o município para o reconhecimento nacional e internacional.\n\nO jubileu de prata de Gramado não apenas celebrou a história e as conquistas da cidade, mas também reforçou seu papel como destino turístico de excelência, cuja tradição e inovação continuam a encantar visitantes de todas as partes.',
@@ -1311,8 +1311,8 @@ const historias = [{
     rua_id: 13,
     criador: 'Henrique Canova',
     fotos: [
-      '/images/historias/papa-canela1.jpg',
-      '/images/historias/papa-canela2.jpg'
+      '/images/historias/papa-canela1.webp',
+      '/images/historias/papa-canela2.webp'
     ],
     titulo: 'A Visita do Papa João Paulo II a Canela – 1980',
     descricao: 'No dia 5 de julho de 1980, Canela recebeu um dos momentos mais marcantes de sua história com a visita do Papa João Paulo II. A cidade se preparou intensamente para esse grande evento, e desde as primeiras horas da tarde, milhares de fiéis lotaram as ruas e os arredores da Catedral de Pedra, aguardando ansiosamente a chegada do Sumo Pontífice.\n\nPor volta das 15h, a movimentação já era intensa, com policiais organizando o público, repórteres e fotógrafos posicionando-se estrategicamente e bandeiras tremulando em meio a cânticos e saudações. Quando o anúncio foi feito pelos alto-falantes de que o avião papal havia pousado no Aeroporto Salgado Filho, em Porto Alegre, a emoção tomou conta da multidão. Minutos depois, João Paulo II surgiu diante da Catedral, sendo aclamado com entusiasmo e devoção pelo povo gaúcho.\n\nO Papa dirigiu palavras de fé, esperança e união à multidão, carregando uma cruz prateada que simbolizava a presença de Cristo para todos os povos. Sua mensagem enfatizou a necessidade de solidariedade, justiça e amor entre os homens, ecoando valores universais e espirituais. O evento foi um marco não apenas para a comunidade católica de Canela, mas para toda a região, reforçando a importância da paz e da fraternidade em tempos de desafios globais.\n\nA visita de João Paulo II permanece viva na memória dos moradores e na história de Canela, simbolizando um momento de grande espiritualidade e conexão entre a fé e a comunidade.',
@@ -1324,7 +1324,7 @@ const historias = [{
     rua_id: 8,
     criador: 'Henrique Canova',
     fotos: [
-      '/images/historias/neve-gramado-79.jpg'
+      '/images/historias/neve-gramado-79.webp'
     ],
     titulo: 'A Forte Nevasca de 1979 em Gramado',
     descricao: 'O inverno de 1979 ficou marcado na história de Gramado como um dos mais rigorosos já registrados na região. No dia 10 de agosto daquele ano, uma intensa nevasca cobriu a cidade, transformando suas paisagens em um verdadeiro cenário europeu. Com temperaturas abaixo de zero e uma espessa camada de neve cobrindo ruas, praças e telhados, o evento atraiu a atenção de moradores e visitantes, sendo lembrado até hoje como um fenômeno raro e memorável.\n\nA nevasca impactou significativamente a rotina da cidade, causando interrupções no tráfego e obrigando os habitantes a se adaptarem às condições extremas. Comerciantes e hoteleiros, no entanto, aproveitaram a ocasião para impulsionar o turismo, pois a beleza das paisagens cobertas de neve encantou turistas que lotaram hotéis e pousadas em busca da experiência única proporcionada pelo inverno rigoroso.\n\nAlém do impacto econômico e social, o evento também reforçou a fama de Gramado como um dos destinos mais charmosos do Brasil durante o inverno. As imagens da cidade coberta de neve foram amplamente divulgadas e contribuíram para consolidar ainda mais seu prestígio como um dos principais pontos turísticos da Serra Gaúcha. A forte nevasca de 1979 permanece como uma lembrança especial para aqueles que tiveram a oportunidade de presenciar esse espetáculo da natureza.',
@@ -1336,7 +1336,7 @@ const historias = [{
     rua_id: 10,
     criador: 'Henrique Canova',
     fotos: [
-      '/images/historias/lago-negro-79.jpg'
+      '/images/historias/lago-negro-79.webp'
     ],
     titulo: 'O Lago Negro em Gramado – 1979',
     descricao: 'Em 1979, o Lago Negro já era um dos principais cartões-postais de Gramado, encantando moradores e turistas com sua beleza singular. Criado artificialmente após um incêndio que devastou a vegetação local, o lago recebeu esse nome devido às árvores importadas da Floresta Negra, na Alemanha, que margeiam suas águas escuras e profundas.\n\nDurante esse ano, o Lago Negro continuou sendo um ponto de encontro para visitantes em busca de lazer e tranquilidade. Os tradicionais pedalinhos em formato de cisne eram uma atração à parte, permitindo que os turistas desfrutassem de um passeio sereno sobre suas águas. Além disso, o local servia como cenário para eventos culturais e atividades recreativas, fortalecendo ainda mais sua importância no turismo da cidade.\n\nA atmosfera romântica e o charme europeu do Lago Negro fizeram com que ele se consolidasse como um dos destinos mais procurados de Gramado. Sua vegetação densa, trilhas arborizadas e bancos estrategicamente posicionados tornavam o ambiente perfeito para caminhadas e momentos de contemplação. Até hoje, a história e a beleza desse icônico lago permanecem vivas na memória daqueles que o visitaram em 1979.',
@@ -1348,8 +1348,8 @@ const historias = [{
     rua_id: 17,
     criador: 'Henrique Canova',
     fotos: [
-      '/images/historias/desfile-militar1-79.jpg',
-      '/images/historias/desfile-militar2-79.jpg'
+      '/images/historias/desfile-militar1-79.webp',
+      '/images/historias/desfile-militar2-79.webp'
     ],
     titulo: 'Desfile Militar em Canela – 1979',
     descricao: 'O desfile cívico-militar de Canela em 1979 foi um evento marcante na Semana da Pátria, reunindo autoridades, instituições e a população em uma grande celebração do patriotismo. O Prefeito Municipal, Günther Siegfried Schlieper, acompanhado do Presidente dos Festejos da Semana da Pátria, Cel. Daniel Cruz da Costa, e do Presidente da Comissão do Desfile, Ten. Edy Saul Pütten, deu início à cerimônia após inspecionar as 57 entidades participantes.\n\nA abertura ficou por conta da Banda Militar da Base Aérea de Canoas, que encantou o público com sua apresentação musical. Em seguida, desfilaram escolas municipais, estaduais e rurais, além do Grupo de Escoteiros Abaetê e do Distrito de Bandeirantes Araucária. A segunda parte do evento foi marcada pela participação dos cavalarianos da Invernada Campeira do CTG Querência, trazendo a tradição gaúcha para o desfile.\n\nNa última etapa, o desfile motorizado destacou o moderno caminhão de bombeiros recentemente adquirido pela Prefeitura Municipal, além da participação de sindicatos, associações de bairros e um animado grupo de motoqueiros. O evento reforçou o espírito cívico da comunidade e consolidou-se como uma das principais manifestações de patriotismo da cidade, unindo diferentes setores da sociedade em homenagem à Pátria.',
@@ -1361,7 +1361,7 @@ const historias = [{
     rua_id: 8,
     criador: 'Henrique Canova',
     fotos: [
-      '/images/historias/neve-gramado-79.jpg'
+      '/images/historias/neve-gramado-79.webp'
     ],
     titulo: 'Gramado em 1979: Um Ano de Transformações',
     descricao: 'O ano de 1979 foi um período marcante para Gramado, consolidando-se cada vez mais como um dos principais destinos turísticos do Brasil. A cidade, conhecida por sua arquitetura europeia, clima frio e hospitalidade, passou por diversas transformações que contribuíram para seu crescimento econômico e cultural.\n\nNeste ano, Gramado recebeu um grande número de visitantes, impulsionado pelos festivais e eventos que começaram a ganhar notoriedade nacional. O turismo de inverno se fortaleceu ainda mais, com a ocorrência de uma das nevascas mais intensas da história da cidade, o que atraiu turistas em busca de uma experiência única no país.\n\nAlém do turismo, o desenvolvimento urbano e a infraestrutura da cidade também foram destaques. Melhorias nas vias públicas, ampliação da rede hoteleira e incentivo ao comércio local ajudaram a moldar a identidade que Gramado carrega até os dias de hoje.\n\nA foto de Elias Nery produz uma imagem muito curiosa e ainda inédita da área central de Gramado, como se ela fosse uma outra cidade, com inegáveis toques europeus e uma atmosfera quase de inverno. Foi capturada em uma manhã de domingo, quando a temperatura caiu para 10 graus centígrados, contrastando com o calor intenso do dia anterior, que chegou a assustar os gramadenses.\n\nGramado em 1979 não foi apenas um ano de crescimento, mas também de afirmação como um dos destinos turísticos mais encantadores da Serra Gaúcha. A combinação de tradição, cultura e modernização fez com que a cidade se tornasse referência em turismo e qualidade de vida, um legado que permanece forte até hoje.',
@@ -1373,7 +1373,7 @@ const historias = [{
     rua_id: 7,
     criador: 'Henrique Canova',
     fotos: [
-      '/images/historias/asfaltamento-sao-pedro.jpg'
+      '/images/historias/asfaltamento-sao-pedro.webp'
     ],
     titulo: 'Asfaltamento da Rua São Pedro – 1983',
     descricao: 'O asfaltamento da Rua São Pedro, realizado em 1983, representou um importante avanço na infraestrutura urbana de Gramado. A obra foi parte de um projeto de modernização liderado pela Prefeitura, que, até o final do primeiro semestre daquele ano, já havia entregue cerca de 4 quilômetros de vias asfaltadas. Segundo o Secretário de Obras e Viação, engenheiro Alemir Coletto, a pavimentação da Rua São Pedro conectou de forma mais eficiente a via à Borges de Medeiros, beneficiando moradores, comerciantes e turistas. Além dessa melhoria, diversas outras ruas, como Ernesto Volk, Tia Rita e Augusto Daros, também foram contempladas, consolidando um período de grande progresso na mobilidade urbana da cidade.',
@@ -1385,8 +1385,8 @@ const historias = [{
     rua_id: 1,
     criador: 'Henrique Canova',
     fotos: [
-      '/images/historias/nova-rodoviaria83.jpg',
-      '/images/historias/nova-rodoviaria83-2.jpg'
+      '/images/historias/nova-rodoviaria83.webp',
+      '/images/historias/nova-rodoviaria83-2.webp'
     ],
     titulo: 'Reforma da Rodoviária de Gramado – 1983',
     descricao: 'Em fevereiro de 1983, Gramado ganhou uma nova rodoviária, modernizada e construída dentro do estilo arquitetônico típico da cidade. Essa reforma atendeu a uma antiga aspiração da população, proporcionando instalações mais amplas e confortáveis para moradores e turistas. Além de melhorar a estrutura de atendimento aos passageiros, a nova rodoviária reforçou a identidade turística de Gramado, tornando-se um importante ponto de chegada para aqueles que visitam a cidade. Desde então, a edificação permanece como um marco na recepção dos viajantes, acompanhando o crescimento e a valorização do turismo local.',
@@ -1398,7 +1398,7 @@ const historias = [{
     rua_id: 10,
     criador: 'Henrique Canova',
     fotos: [
-      '/images/historias/lago-negro-57.jpg'
+      '/images/historias/lago-negro-57.webp'
     ],
     titulo: 'A Construção do Lago Negro',
     descricao: 'Em 1957, Gramado ganhou um de seus mais icônicos pontos turísticos: o Lago Negro. Construído por Leopoldo Rosenfeld, o lago nasceu da necessidade de revitalizar a área após um grande incêndio que devastou a vegetação local. Com um projeto ambicioso, Rosenfeld investiu recursos significativos para transformar o espaço em um refúgio natural. As margens foram decoradas com xaxins e receberam mudas importadas da Floresta Negra, na Alemanha, o que inspirou o nome do lago.\n\nDesde sua inauguração, o Lago Negro se tornou um dos cartões-postais mais visitados da cidade, oferecendo um ambiente encantador para passeios de pedalinho, caminhadas e momentos de contemplação. Sua beleza única e sua história de resiliência fazem dele um símbolo do crescimento e do cuidado ambiental em Gramado.',
@@ -1412,7 +1412,7 @@ const historias = [{
   criador: 'Família Urbani',
   fotos: [
     {
-      url: '/images/historias/mundo-a-vapor-inauguracao.jpg', // precisamos do caminho completo
+      url: '/images/historias/mundo-a-vapor-inauguracao.webp', // precisamos do caminho completo
       credito: 'Família Urbani'
     }
   ],
@@ -1433,7 +1433,7 @@ E o cenário segue crescendo: em 2024, ao lado desse cartão-postal, nasce a Rod
   criador: 'Eduardo da Silva Weber',
   fotos: [
     {
-      url: '/images/historias/Prefeituramunicipaldecada1970.jpg',
+      url: '/images/historias/Prefeituramunicipaldecada1970.webp',
       credito: null,
     }
   ],
@@ -1449,7 +1449,7 @@ E o cenário segue crescendo: em 2024, ao lado desse cartão-postal, nasce a Rod
   criador: 'Eduardo da Silva Weber',
   fotos: [
     {
-      url: '/images/historias/1985prefeituramunicipal.jpg',
+      url: '/images/historias/1985prefeituramunicipal.webp',
       credito: null,
     }
   ],
@@ -1465,7 +1465,7 @@ E o cenário segue crescendo: em 2024, ao lado desse cartão-postal, nasce a Rod
   criador: 'Eduardo da Silva Weber',
   fotos: [
     {
-      url: '/images/historias/esquinapedrobenetti.jpg',
+      url: '/images/historias/esquinapedrobenetti.webp',
       credito: 'Carlos Gilberto Drecksler',
     }
   ],
@@ -1480,7 +1480,7 @@ E o cenário segue crescendo: em 2024, ao lado desse cartão-postal, nasce a Rod
     criador: 'Brocker Turismo',
     fotos: [
       {
-        url: '/images/historias/primeira-sede-brocker-1995.jpg',
+        url: '/images/historias/primeira-sede-brocker-1995.webp',
         credito: 'Brocker Turismo'
       }
     ],
@@ -1496,7 +1496,7 @@ E o cenário segue crescendo: em 2024, ao lado desse cartão-postal, nasce a Rod
     criador: 'Brocker Turismo',
     fotos: [
       {
-        url: '/images/historias/segunda-sede-brocker-1998.jpg',
+        url: '/images/historias/segunda-sede-brocker-1998.webp',
         credito: 'Brocker Turismo'
       }
     ],
@@ -1512,7 +1512,7 @@ E o cenário segue crescendo: em 2024, ao lado desse cartão-postal, nasce a Rod
     criador: 'Brocker Turismo',
     fotos: [
       {
-        url: '/images/historias/metedodo-disney-2000.jpg',
+        url: '/images/historias/metedodo-disney-2000.webp',
         credito: 'Brocker Turismo'
       }
     ],
@@ -1528,7 +1528,7 @@ E o cenário segue crescendo: em 2024, ao lado desse cartão-postal, nasce a Rod
     criador: 'Família Urbani',
     fotos: [
       {
-        url: '/images/historias/oficina-mechanica-urbani.jpg',
+        url: '/images/historias/oficina-mechanica-urbani.webp',
         credito: 'Família Urbani'
       }
     ],
@@ -1546,7 +1546,7 @@ Na oficina, Ernesto fazia de tudo: de consertos simples à fabricação completa
     criador: 'Família Urbani',
     fotos: [
       {
-        url: '/images/historias/inauguracao-mundo-vapor.png',
+        url: '/images/historias/inauguracao-mundo-vapor.webp',
         credito: 'Família Urbani'
       }
     ],
@@ -1564,7 +1564,7 @@ Com a compra de uma locomotiva sucateada em São Paulo, iniciou-se o processo de
     criador: 'Eduardo da Silva Weber',
     fotos: [
       {
-        url: '/images/historias/bancobrasil.jpg',
+        url: '/images/historias/bancobrasil.webp',
         credito: 'Eduardo da Silva Weber'
       }
     ],
@@ -1580,7 +1580,7 @@ Com a compra de uma locomotiva sucateada em São Paulo, iniciou-se o processo de
     criador: 'Eduardo da Silva Weber',
     fotos: [
       {
-        url: '/images/historias/segundaigrejametodista.jpg',
+        url: '/images/historias/segundaigrejametodista.webp',
         credito: 'Eduardo da Silva Weber'
       }
     ],
@@ -1597,7 +1597,7 @@ Com a compra de uma locomotiva sucateada em São Paulo, iniciou-se o processo de
     criador: 'Eduardo da Silva Weber',
     fotos: [
       {
-        url: '/images/historias/avenidahortencias1957.jpg',
+        url: '/images/historias/avenidahortencias1957.webp',
         credito: 'Eduardo da Silva Weber'
       }
     ],
@@ -1613,7 +1613,7 @@ Com a compra de uma locomotiva sucateada em São Paulo, iniciou-se o processo de
     criador: 'Eduardo da Silva Weber',
     fotos: [
       {
-        url: '/images/historias/madreveronicadecada1990.jpg',
+        url: '/images/historias/madreveronicadecada1990.webp',
         credito: 'Eduardo da Silva Weber'
       }
     ],
@@ -1629,7 +1629,7 @@ Com a compra de uma locomotiva sucateada em São Paulo, iniciou-se o processo de
     criador: 'Eduardo da Silva Weber',
     fotos: [
       {
-        url: '/images/historias/invernomadreveronica.jpg',
+        url: '/images/historias/invernomadreveronica.webp',
         credito: 'Eduardo da Silva Weber'
       }
     ],
@@ -1645,7 +1645,7 @@ Com a compra de uma locomotiva sucateada em São Paulo, iniciou-se o processo de
     criador: 'Eduardo da Silva Weber',
     fotos: [
       {
-        url: '/images/historias/incendio.jpg',
+        url: '/images/historias/incendio.webp',
         credito: 'Eduardo da Silva Weber'
       }
     ],
@@ -1661,7 +1661,7 @@ Com a compra de uma locomotiva sucateada em São Paulo, iniciou-se o processo de
     criador: 'Eduardo da Silva Weber',
     fotos: [
       {
-        url: '/images/historias/historia280725.jpg',
+        url: '/images/historias/historia280725.webp',
         credito: 'Eduardo da Silva Weber'
       }
     ],
@@ -1677,7 +1677,7 @@ Com a compra de uma locomotiva sucateada em São Paulo, iniciou-se o processo de
     criador: 'Família Urbani',
     fotos: [
       {
-        url: '/images/historias/urbani1997.png',
+        url: '/images/historias/urbani1997.webp',
         credito: 'Família Urbani'
       }
     ],
@@ -1693,7 +1693,7 @@ Com a compra de uma locomotiva sucateada em São Paulo, iniciou-se o processo de
 	criador: 'Família Urbani',
 	fotos: [
 	  {
-		url: '/images/historias/urbani1991.png',
+		url: '/images/historias/urbani1991.webp',
 		credito: 'Família Urbani'
 	}],
 	titulo: 'Primeira fachada do Mundo a Vapor',
@@ -1766,7 +1766,7 @@ const ruas = [{
 	'id': 8,
 	'nome': 'Av. das Hortensias',
 	'descricao': 'A Avenida das Hortênsias é uma das vias mais icônicas de Gramado e desempenha um papel central na ligação entre Gramado e Canela, duas das cidades mais visitadas na Serra Gaúcha. Seu nome homenageia a flor que se tornou um dos símbolos mais reconhecidos da região, as hortênsias, que adornam a avenida durante os meses de primavera e verão, proporcionando uma paisagem exuberante que atrai turistas de todo o Brasil.\n\nA avenida é o principal eixo turístico e comercial de Gramado, onde se concentram diversos hotéis, restaurantes, lojas e atrações turísticas, como o famoso Mini Mundo e o Museu de Cera. Sua importância transcende o aspecto econômico, pois a Avenida das Hortênsias também carrega o charme arquitetônico característico da cidade, com influências alemãs e italianas, preservadas em seus prédios e estabelecimentos.\n\nAlém disso, a Avenida das Hortênsias conecta importantes pontos turísticos das cidades de Gramado e Canela, sendo um verdadeiro cartão-postal para quem chega à região. A avenida é conhecida por oferecer experiências gastronômicas únicas, com renomados restaurantes que refletem a rica culinária local e internacional, consolidando-se como uma parada obrigatória para os visitantes que buscam aproveitar o melhor da Serra Gaúcha.',
-	'fotos': ['fotos/ruas/av-hortensias-antigamente.jpg','fotos/ruas/av-hortensias-anosatras.jpg'],
+	'fotos': ['fotos/ruas/av-hortensias-antigamente.webp','fotos/ruas/av-hortensias-anosatras.webp'],
 	'relevancia': 5,
 	'coordenadas': [-29.36172554595249, -50.85596874625489],
 	'cidade_id': 1
@@ -1846,7 +1846,7 @@ const ruas = [{
 	'id': 18,
 	'nome': 'R. Ten. Manoel Corrêa',
 	'descricao': 'A Rua Tenente Manoel Corrêa, em Canela, é uma via situada na área central da cidade, caracterizada por seu movimento e pela presença de serviços, estabelecimentos comerciais e opções de hospedagem. Ela é conectada a várias outras ruas importantes, como a Avenida Osvaldo Aranha e a Rua João Manuel Corrêa, e serve como ponto de acesso para diversos locais turísticos e comerciais.\n\nA rua é próxima a pontos de interesse como o Grande Hotel Canela e o Museu do Automóvel, reforçando sua importância na infraestrutura turística de Canela. Além disso, ela abriga diversas pousadas e hotéis, tornando-a um local estratégico para visitantes que desejam explorar a cidade a pé e conhecer seus pontos turísticos',
-	'fotos': ['fotos/ruas/correas-canela.png'],
+	'fotos': ['fotos/ruas/correas-canela.webp'],
 	'relevancia': 5,
 	'coordenadas': [-29.359008848472353, -50.82095182756806],
 	'cidade_id': 2
@@ -2580,10 +2580,10 @@ const organizacoes = [
 	id: 1,
 	fantasia: "Memorial Canela",
 	link: "https://historin.com",
-	logo: "fotos/orgs/memorial.png",
+	logo: "fotos/orgs/memorial.webp",
 	cor: "#4a4b4d",
 	sobre: "Uma associação em canela com mais de 50 participantes que buscam através de palestras, encontros e ações resgatar a história da cidade",
-	foto: "/images/historin-equipe.jpg"
+	foto: "/images/historin-equipe.webp"
 },*/
   {
 	id: 1,
@@ -2592,7 +2592,7 @@ const organizacoes = [
 	logo: "https://www.gramado.rs.leg.br/logo.png",
 	cor: "#eeefef",
 	sobre: "A Câmara de Vereadores de Gramado é uma organização que sempre está presente na disseminação de notícias e conteúdo sobre a cidade.",
-	foto: "/images/historin-equipe.jpg"
+	foto: "/images/historin-equipe.webp"
 },
   {
 	id: 2,
@@ -2601,25 +2601,25 @@ const organizacoes = [
 	logo: "https://www.gramadoinesquecivel.tur.br/img/logo.png",
 	cor: "#7a0c33",
 	sobre: "Gramado inesquecível é a marca que a secretaria traz para promover a cidade. Com um site repleto de informações e novidades.",
-	foto: "/images/historin-equipe.jpg"
+	foto: "/images/historin-equipe.webp"
 },
   {
 	id: 3,
 	fantasia: "Grupo 'Gramado Era Assim'",
 	link: "https://www.facebook.com/groups/gramadoeraassim",
-	logo: "fotos/orgs/gramado-era-assim-grupo.png",
+	logo: "fotos/orgs/gramado-era-assim-grupo.webp",
 	cor: "#7a0c33",
 	sobre: "Um Grupo do Facebook voltado ao compartilhamento e comentários sobre a cidade e sua origem/desenvolvimento. Você é um convidado a entrar no grupo!",
-	foto: "/images/historin-equipe.jpg"
+	foto: "/images/historin-equipe.webp"
 },
   {
 	id: 4,
 	fantasia: "Mundo a Vapor",
 	link: "https://www.mundoavapor.com.br/",
-	logo: "fotos/orgs/logo-mundo-vapor.png",
+	logo: "fotos/orgs/logo-mundo-vapor.webp",
 	cor: "#7a0c33",
 	sobre: "Um parque voltado a história do uso do vapor como energia. Com diversas atrações e um museu, o parque é um dos principais pontos turísticos de Canela.",
-	foto: "/images/historin-equipe.jpg"
+	foto: "/images/historin-equipe.webp"
 },
   {
 	id: 5,
@@ -2628,7 +2628,7 @@ const organizacoes = [
 	logo: "https://brockerturismo.com.br/images/modulo/logo/brocker-turismo.svg",
 	cor: "#80b93f",
 	sobre: "Uma das maiores operadoras de turismo do Brasil, empresa com grande participação no resgate da história, a Brocker Turismo é uma referência em Gramado e Canela.",
-	foto: "/images/historin-equipe.jpg"
+	foto: "/images/historin-equipe.webp"
 },
 ];
 
@@ -2666,7 +2666,7 @@ const autores = [{
   nome: "Gildo Oppitz",
   bio: "Canelense nascido em 1931 muito trabalhador e apaixonado pela cidade trouxe suas historias no seu livro ",
   obras: [5],
-  foto: "fotos/autores/gildo-oppitz.jpg"
+  foto: "fotos/autores/gildo-oppitz.webp"
 },
 {
   id: 6,
@@ -2698,7 +2698,7 @@ const obras = [{
   id: 2,
   titulo: "Canela Passado a Limpo",
   descricao: "Olmiro Trás um livro em 4 cores, com muitas imagens com narrativas nostalgicas sobre a cidade",
-  capa: "fotos/obras/canela-passado-a-limpo.jpg",
+  capa: "fotos/obras/canela-passado-a-limpo.webp",
   pago: true,
   autorId: 1,
   link: "https://wa.me/555484212882"
@@ -2716,7 +2716,7 @@ const obras = [{
   id: 4,
   titulo: "Memórias Canela com Pimenta",
   descricao: "Mostrando as diferenças da cidade ontem e hoje.",
-  capa: "fotos/obras/memorias-canela-com-pimenta.jpg",
+  capa: "fotos/obras/memorias-canela-com-pimenta.webp",
   pago: true,
   autorId: 5,
   link: ""
@@ -2725,7 +2725,7 @@ const obras = [{
   id: 5,
   titulo: "Era Uma Vez...! Relatos de Gramado",
   descricao: "Por Iraci e Gilberto, Coletânea de histórias e memórias que retratam a evolução de Gramado",
-  capa: "fotos/obras/era-uma-vez-gramado-iraci-gilberto.jpg",
+  capa: "fotos/obras/era-uma-vez-gramado-iraci-gilberto.webp",
   pago: true,
   autorId: 5,
   link: "",
@@ -2734,7 +2734,7 @@ const obras = [{
   id: 6,
   titulo: "Raízes de Gramado: 40 Anos",
   descricao: "Por Marilia e Vera Lúcia A obra reúne contribuições de diferentes autores, proporcionando uma visão abrangente sobre as raízes e o desenvolvimento de Gramado ao longo de quatro décadas",
-  capa: "fotos/obras/raizes-de-gramado-40-anos.jpg",
+  capa: "fotos/obras/raizes-de-gramado-40-anos.webp",
   pago: true,
   autorId: 5,
   link: "",
@@ -2743,7 +2743,7 @@ const obras = [{
   id: 7,
   titulo: "Eterna Sociedade Recreio Gramadense",
   descricao: "por Iraci e Gilberto, a obra se debruça sobre a história da Sociedade Recreio Gramadense, uma das instituições sociais mais antigas e tradicionais de Gramado.",
-  capa: "fotos/obras/eterna-recreio-gramado.jpg",
+  capa: "fotos/obras/eterna-recreio-gramado.webp",
   pago: true,
   autorId: 5,
   link: "",
@@ -2752,7 +2752,7 @@ const obras = [{
   id: 8,
   titulo: "Gramado Contrastes",
   descricao: "O livro apresenta uma coletânea de fotografias e relatos que contrastam diferentes períodos da cidade, destacando as transformações ocorridas ao longo do tempo.",
-  capa: "fotos/obras/gramado-contrastes.jpg",
+  capa: "fotos/obras/gramado-contrastes.webp",
   pago: true,
   autorId: 5,
   link: "",
@@ -2761,7 +2761,7 @@ const obras = [{
   id: 9,
   titulo: "Gramado: O Lago, as Hortênsias e o Turismo",
   descricao: "Explora a história do bairro Planalto, do Lago Joaquina Rita Bier e o desenvolvimento do turismo em Gramado. O livro detalha como o turismo começou na cidade e destaca a participação da comunidade local na época.",
-  capa: "fotos/obras/gramado-lago-hortensias-turismo.jpg",
+  capa: "fotos/obras/gramado-lago-hortensias-turismo.webp",
   pago: true,
   autorId: 5,
   link: "",

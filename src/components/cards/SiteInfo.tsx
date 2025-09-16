@@ -7,7 +7,7 @@ import PrimaryBtn from '../buttons/PrimaryBtn';
 const SiteInfo = () => {
   const sponsors = [
     {
-      src: '/images/orgs/prefeituragramado.png',
+      src: '/images/orgs/prefeituragramado.webp',
       alt: 'Prefeitura de Gramado',
       label: 'Prefeitura de Gramado',
     },
@@ -17,7 +17,7 @@ const SiteInfo = () => {
       label: 'Feevale',
     },
     {
-      src: '/images/orgs/logo-mundo-vapor.png',
+      src: '/images/orgs/logo-mundo-vapor.webp',
       alt: 'Mundo a Vapor',
       label: 'Mundo a Vapor',
     },
