@@ -1701,8 +1701,111 @@ Com a compra de uma locomotiva sucateada em São Paulo, iniciou-se o processo de
 	descricao: 'Em 1991, Benito Urbani realizava um sonho: inaugurava o Mundo a Vapor. Antes da icônica fachada com a locomotiva descarrilada, o cartão de visitas do parque era uma locomóvel a vapor, posicionada com orgulho na entrada. Na imagem, vemos Benito acompanhando de perto a instalação da máquina, um gesto que selava, com ferro e vapor, o início de uma jornada pioneira.',
 	coordenadas: [-29.36146891945309, -50.83470841799351],
 	orgId: 4
-  }
+  },
+  {
+	id: 180,
+	rua_id: 8,
+	criador: 'Família Urbani',
+	fotos: [
+		{
+			url: '/images/historias/cartaopostalcanela.png',
+			credito: 'Família Urbani'
+		}
+	],
+	titulo: 'A inauguração de um cartão postal de Canela',
+	ano: 1990,
+	descricao: `Foi através de um pôster enviado por um amigo que Benito Urbani descobriu a história do célebre acidente ferroviário de 1895, em Paris. Na ocasião, um trem descarrilou e atravessou o segundo andar da estação Montparnasse, despencando espetacularmente para a rua. Foi uma cena tão dramática quanto icônica, registrada em fotos que rodaram o mundo.
+	Inspirado por essa imagem impressionante, Benito teve uma ideia ousada: recriar o acidente na fachada do Parque Mundo a Vapor. A intenção era clara: impactar, surpreender, atrair olhares já na entrada. Com a compra de uma locomotiva sucateada em São Paulo, teve início o processo de restauração. E em dezembro de 1999, chegou o grande momento: erguer as 38 toneladas de ferro.
+	Dois guindastes, uma multidão de espectadores e um sonho suspenso no ar — nascia ali, diante de todos, um dos cartões-postais mais emblemáticos de Canela.`,
+	coordenadas: [-29.36146891945309, -50.83470841799351],
+	orgId: 4	
+  },
+  {
+	id: 181,
+	rua_id: 3,
+	criador: 'Pablo Bervanger',
+	fotos: [
+		{
+			url: '/images/historias/joaquinaritabier1937.jpg',
+			credito: 'Acervo Histórico de Gramado (RS)/Doação de Carlos Lenger Filho'
+		}
+	],
+	titulo: 'Joaquina Rita Bier (Vila Planalto)',
+	descricao: `No fim do século XIX, os irmãos Henrique e Louis Bier, compraram do capitão Franscisco Alves dos Santos uma grande extensão de terras que incluíam parte do território que atualmente constitui a cidade de Gramado. Incluindo o atual Lago Joaquina Rita Bier.
+Mas afinal, quem foi Joaquina Rita Bier e porquê é homenageada com o nome deste belo ponto turístico?
+Segundo as pesquisas de Adelheid Emma Lengler ¹, esposa de um bisneto de Joaquina, Enno Lengler, Joaquina foi a filha caçula do Barão Friederich Wilhelm Von Schlabrendorff e da Baronesa Maria Anna Friederika Von Wrede que vieram ao Brasil para servir no Corpo de Estrangeiros no Rio de Janeiro, mas acabaram transferindo-se para o Rio Grande do Sul.
+Ainda segundo Adelheid, a 9 de novembro de 1828, em Porto Alegre, nasce Joaquina Rita Bier sendo a primeira nobre alemã a nascer no Rio Grande do Sul. Seus irmãos e irmãs nasceram na Alemanha.
+Joaquina casou-se em 1847 com Henrique Pedro Bier, este alemão de nascença e de uma família de comerciantes, efetuando principalmente a rota fluvial entre Porto Alegre e São Leopoldo pelo Rio dos Sinos. Juntos têm 9 filhos.
+Com o falecimento de Henrique e Joaquina em 1886 e 1916 seus foram herdados por seus filhos, que se cotizaram e fundaram a Sociedade Herdeiros da Vila Joaquina Rita Bier e Cia. Ltda. Responsável pelo projeto e urbanização da Vila Planalto (atual nome do bairro onde se localiza o Lago Joaquina).                                                                                                                Ainda têm mais… procure os outros códigos espalhados pelo Parque para saber mais dessa história.
+Aliás, antes de ser Vila Planalto, ela era conhecida por outro nome: “Vila Africana”                                                         ¹ LENGLER, Adelheid Emma. JOAQUINA RITA BIER in DAROS, Marilia; BARROSO, Vera Lucia Maciel. (Org.). Raízes de Gramado. 2 ed. Porto Alegre: EST, 2000. p. 76-80         `,
+	ano: 1937,
+	coordenadas: [-29.38674374370212, -50.87596629201309],
+	orgId: 4
+  },
+  {
+	id: 182,
+	rua_id: 3,
+	criador: 'Pablo Bervanger',
+	fotos: [
+		{
+			url: '/images/historias/joaquinaritabier1937-2.jpg',
+			credito: 'Acervo Histórico de Gramado (RS)/ Doação: família Rosenfeldt'
+		}
+	],
+	titulo: 'Joaquina Rita Bier (Vila Planalto)',
+	descricao: `Joaquina Rita Bier nunca conheceu o lago que recebe seu nome. A inauguração foi em 1937 e Joaquina já havia falecido em 1916.
+Este lago foi batizado em homenagem póstuma por seus descendentes, segundo as pesquisas de Adelheid Emma Lengler¹:
+“[A Vila Planalto] Desde o início foram delineados e reservados espaços na planta para praças, não sendo esquecido local para os cemitérios Municipal e Evangélico. Paralelamente a abertura das ruas (com pás, picaretas e carrinhos de mão), foi construído um lago em torno do qual foram recepcionados os convidados da imprensa e possíveis compradores de terrenos que vieram de Porto Alegre, em carro motor especialmente fretado pela firma da Viação Férrea do Rio Grande do Sul para a inauguração da Vila Planalto Gramado, em 24 de outubro de 1937. Retornaram no mesmo dia, exaustos, mas eufóricos e encantados. A este lago e parque ao seu redor, onde já naquela época sobressaía o grupo de pinheiros ainda hoje existentes, foi dado o nome Lago e Parque Joaquina Rita Bier”
 
+Uma homenagem dos descendentes de Joaquina, que faleceu aos 88 anos e certamente era muito querida por seus descendentes.
+
+
+Mas a história desse lago não acaba aqui não, este parque é grande, já foi hotel, agora é Centro Cultural… Procure mais algumas plaquinhas pra escanear e saber mais um pouquinho da história daqui.
+
+
+¹LENGLER, Adelheid Emma. JOAQUINA RITA BIER in DAROS, Marilia; BARROSO, Vera Lucia Maciel. (Org.). Raízes de Gramado. 2 ed. Porto Alegre: EST, 2000. p. 76-80`,
+	ano: 1937,
+	coordenadas: [-29.38674374370212, -50.87596629201309],
+	orgId: 4
+  },
+  {
+	id: 183,
+	rua_id: 3,
+	criador: 'Pablo Bervanger',
+	fotos: [
+		{
+			url: '/images/historias/parquehotel.jpg',
+			credito: 'Fotógrafo desconhecido'
+		}
+	],
+	titulo: 'O antigo Parque Hotel',
+	descricao: `
+Na época que o Lago Joaquina Rita Bier foi feito, Gramado ainda não estava emancipada como cidade, sendo ainda 5º distrito de Taquara, porém, desde as primeiras ocupações de tropeiros era conhecida como bom ponto de parada e descanso. Já apresentava potencial ao turismo.
+
+A sociedade “Herdeiros Joaquina Rita Bier” não conseguia administrar tamanha quantidade de terras da Vila Planalto (aproximadamente 196 hectares de área) e manter seus negócios em colônias e cidades já ocupadas por imigrantes a mais tempo, como São Leopoldo e Porto Alegre. 
+Em 1937, chega Leopoldo Rosenfeld da Alemanha, a convite da sociedade dos Herdeiros para administrar o projeto da Vila Planalto . Leopoldo trabalha para a sociedade, administra a construção do Parque Hotel, com o objetivo, claro, de receber os veranistas que já procuravam a região, mas também para prover alguma infraestrutura a Vila e conseguir vender os terrenos.
+
+Em 1939 compra o Parque Hotel, com lago e tudo, mas segue trabalhando para os “Herdeiros Joaquina Rita Bier”.
+Em 1947, compra o restante do imenso loteamento dos herdeiros e aluga o Parque Hotel Para Guilherme Nienaber Sobrinho.  
+
+Leopoldo falece em 1961.
+
+Estes nomes sempre são lembrados, porém, não podemos esquecer que ninguém faz nada sozinho, a maior parte das pessoas que também construíram esta paisagem podem não ter seus nomes registrados ou conhecidos, mas devem ser lembrados. 
+
+Aqui dentro do aplicativo mesmo tu pode ver outros recortes e perspectivas dessa história, como uma visão geral da pesquisa do professor Alex Müller neste mesmo local, que já se chamou Vila Africana.
+Pode ser só clicando nas histórias mesmo ou indo até nossas plaquinhas e lendo o Qr code, assim tu já aproveita pra passear e conhecer melhor o parque!
+
+ Referências:
+Müller, A., & De Souza Cavalcante, R. N. W. (2020). invisibilidade dos negros na história de Gramado/RS: Levantamento preliminar. Em Tempo de Histórias, 1(36). https://doi.org/10.26512/emtempos.v1i36.31760
+
+ZATTI, Joecy Lied. JOÃO LEOPOLDO LIED in KOPPE, Iraci. (Coord.). Raízes de Gramado. Porto Alegre: Metrópole, 1999. DAROS, Marilia;
+
+ LENGLER, Adelheid Emma. JOAQUINA RITA BIER in BARROSO, Vera Lucia Maciel. (Org.). Raízes de Gramado. 2 ed. Porto Alegre: EST, 2000.`,
+	ano: 1950,
+	coordenadas: [-29.386755224507414, -50.87570651703931],
+	orgId: 4
+  },
+	
 ];
 
 // Example ruas data (add your actual data here)
