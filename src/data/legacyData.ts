@@ -1114,7 +1114,7 @@ const historias = [{
       '/images/historias/festa-hortensias.webp'
     ],
     titulo: 'A Festa das Hortênsias: O Florescer de uma Tradição em Gramado',
-    descricao: 'Em dezembro de 1958, Gramado, a encantadora cidade da Serra Gaúcha, preparava-se para um evento que marcaria para sempre sua história: a primeira Festa das Hortênsias. Idealizada por visionários como Oscar Knorr e Walter Bertolucci, a celebração ocorreu nos dias 7 e 8 de dezembro, encantando moradores e visitantes com suas cores e aromas. \nSAFERRARI.BLOGSPOT.COM\n\nA festa não apenas exaltava a beleza das hortênsias que adornavam a cidade, mas também simbolizava o florescer de Gramado como um destino turístico de destaque. A programação incluiu apresentações de balé, danças gaúchas e a coroação da primeira Rainha das Hortênsias, Iraci Casagrande, acompanhada das princesas Rosalina Petersen e Irani Stürmer. \nILTONMULLER.COM.BR\n\nO sucesso do evento foi tão grande que ultrapassou as fronteiras do Rio Grande do Sul, projetando Gramado no cenário turístico nacional e plantando as sementes para futuras celebrações que se tornariam tradição na cidade. A Festa das Hortênsias floresceu por 12 edições, sendo a última realizada em 1986, ano que também marcou o nascimento do Natal Luz, outro evento icônico de Gramado. \nSAFERRARI.BLOGSPOT.COM\n\nAssim, a Festa das Hortênsias não apenas celebrou a flora local, mas também cultivou o espírito comunitário e a vocação turística de Gramado, deixando um legado que continua a inspirar eventos e festividades na cidade até os dias de hoje.',
+    descricao: 'Em dezembro de 1958, Gramado, a encantadora cidade da Serra Gaúcha, preparava-se para um evento que marcaria para sempre sua história: a primeira Festa das Hortênsias. Idealizada por visionários como Oscar Knorr e Walter Bertolucci, a celebração ocorreu nos dias 7 e 8 de dezembro, encantando moradores e visitantes com suas cores e aromas. \nA festa não apenas exaltava a beleza das hortênsias que adornavam a cidade, mas também simbolizava o florescer de Gramado como um destino turístico de destaque. A programação incluiu apresentações de balé, danças gaúchas e a coroação da primeira Rainha das Hortênsias, Iraci Casagrande, acompanhada das princesas Rosalina Petersen e Irani Stürmer.\nO sucesso do evento foi tão grande que ultrapassou as fronteiras do Rio Grande do Sul, projetando Gramado no cenário turístico nacional e plantando as sementes para futuras celebrações que se tornariam tradição na cidade. A Festa das Hortênsias floresceu por 12 edições, sendo a última realizada em 1986, ano que também marcou o nascimento do Natal Luz, outro evento icônico de Gramado. \nAssim, a Festa das Hortênsias não apenas celebrou a flora local, mas também cultivou o espírito comunitário e a vocação turística de Gramado, deixando um legado que continua a inspirar eventos e festividades na cidade até os dias de hoje.',
     ano: 1958,
     coordenadas: [-29.38645605666849, -50.87496676214851]
   },
@@ -1780,9 +1780,11 @@ Mas a história desse lago não acaba aqui não, este parque é grande, já foi 
 	],
 	titulo: 'O antigo Parque Hotel',
 	descricao: `
-Na época que o Lago Joaquina Rita Bier foi feito, Gramado ainda não estava emancipada como cidade, sendo ainda 5º distrito de Taquara, porém, desde as primeiras ocupações de tropeiros era conhecida como bom ponto de parada e descanso. Já apresentava potencial ao turismo.
+	**Texto negrito** _Texto italico_ DESTAQUE.	 
 
-A sociedade “Herdeiros Joaquina Rita Bier” não conseguia administrar tamanha quantidade de terras da Vila Planalto (aproximadamente 196 hectares de área) e manter seus negócios em colônias e cidades já ocupadas por imigrantes a mais tempo, como São Leopoldo e Porto Alegre. 
+Na época que o Lago Joaquina Rita Bier foi feito, Gramado ainda não estava emancipada como cidade, sendo ainda 5º distrito de Taquara, porém, desde as primeiras ocupações de tropeiros era conhecida como bom ponto de parada e descanso, já apresentava potencial ao turismo.
+
+A sociedade “Herdeiros Joaquina Rita Bier” não conseguia administrar tamanha quantidade de terras da Vila Planalto (aproximadamente 196 hectares de área) e manter seus negócios em colônias e cidades já ocupadas por imigrantes a mais tempo, como São Leopoldo e Porto Alegre.
 Em 1937, chega Leopoldo Rosenfeld da Alemanha, a convite da sociedade dos Herdeiros para administrar o projeto da Vila Planalto . Leopoldo trabalha para a sociedade, administra a construção do Parque Hotel, com o objetivo, claro, de receber os veranistas que já procuravam a região, mas também para prover alguma infraestrutura a Vila e conseguir vender os terrenos.
 
 Em 1939 compra o Parque Hotel, com lago e tudo, mas segue trabalhando para os “Herdeiros Joaquina Rita Bier”.
@@ -1805,10 +1807,28 @@ ZATTI, Joecy Lied. JOÃO LEOPOLDO LIED in KOPPE, Iraci. (Coord.). Raízes de Gra
 	coordenadas: [-29.386755224507414, -50.87570651703931],
 	orgId: 4
   },
+  {
+	id: 180,
+	rua_id: 8,
+	criador: 'Família Urbani',
+	fotos: [
+		{
+			url: '/images/historias/cartaopostalcanela.png',
+			credito: 'Família Urbani'
+		}
+	],
+	titulo: 'A inauguração de um cartão postal de Canela',
+	ano: 1990,
+	descricao: `Foi através de um pôster enviado por um amigo que Benito Urbani descobriu a história do célebre acidente ferroviário de 1895, em Paris. Na ocasião, um trem descarrilou e atravessou o segundo andar da estação Montparnasse, despencando espetacularmente para a rua. Foi uma cena tão dramática quanto icônica, registrada em fotos que rodaram o mundo.
+	Inspirado por essa imagem impressionante, Benito teve uma ideia ousada: recriar o acidente na fachada do Parque Mundo a Vapor. A intenção era clara: impactar, surpreender, atrair olhares já na entrada. Com a compra de uma locomotiva sucateada em São Paulo, teve início o processo de restauração. E em dezembro de 1999, chegou o grande momento: erguer as 38 toneladas de ferro.
+	Dois guindastes, uma multidão de espectadores e um sonho suspenso no ar — nascia ali, diante de todos, um dos cartões-postais mais emblemáticos de Canela.`,
+	coordenadas: [-29.36146891945309, -50.83470841799351],
+	orgId: 4	
+  },
 	
 ];
 
-// Example ruas data (add your actual data here)
+// street data
 const ruas = [{
 	'id': 1,
 	'nome': 'Av Borges de Medeiros',
