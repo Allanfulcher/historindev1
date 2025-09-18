@@ -18,6 +18,9 @@ import HashRouter from "../components/HashRouter";
 export const metadata: Metadata = {
   title: "Historin - Descubra as Histórias de Gramado",
   description: "Explore as fascinantes histórias das ruas de Gramado através de uma experiência interativa e imersiva.",
+  icons: {
+    icon: "/images/meta/historin.ico",
+  },
 };
 
 export default function RootLayout({
@@ -29,7 +32,6 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
       </head>
