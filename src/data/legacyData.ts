@@ -1780,7 +1780,6 @@ Mas a história desse lago não acaba aqui não, este parque é grande, já foi 
 	],
 	titulo: 'O antigo Parque Hotel',
 	descricao: `
-	**Texto negrito** _Texto italico_ DESTAQUE.	 
 
 Na época que o Lago Joaquina Rita Bier foi feito, Gramado ainda não estava emancipada como cidade, sendo ainda 5º distrito de Taquara, porém, desde as primeiras ocupações de tropeiros era conhecida como bom ponto de parada e descanso, já apresentava potencial ao turismo.
 
