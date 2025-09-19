@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Historia } from '@/types';
+import { useExpandableText } from '@/utils/textFormatter';
 
 interface HistoriaCardProps {
   historia: Historia;
@@ -7,7 +8,6 @@ interface HistoriaCardProps {
 
 const HistoriaCard: React.FC<HistoriaCardProps> = ({ historia }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [showFullText, setShowFullText] = useState(false);
   // Touch/swipe state
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
   const [touchStartY, setTouchStartY] = useState<number | null>(null);
@@ -17,10 +17,13 @@ const HistoriaCard: React.FC<HistoriaCardProps> = ({ historia }) => {
   const hasImages = images.length > 0;
   const hasMultipleImages = images.length > 1;
 
-  // Truncate text for preview (approximately 3 lines)
-  const previewText = historia.descricao.length > 150 
-    ? historia.descricao.substring(0, 150) + '.....' 
-    : historia.descricao;
+  // Use the new text formatting system
+  const { 
+    formattedText, 
+    isExpanded, 
+    needsExpansion, 
+    toggleExpanded 
+  } = useExpandableText(historia.descricao, 150);
 
   const nextImage = () => {
     setCurrentImageIndex((prev) => (prev + 1) % images.length);
@@ -150,21 +153,30 @@ const HistoriaCard: React.FC<HistoriaCardProps> = ({ historia }) => {
       <div className="px-4 pb-4">
         {/* Description */}
         <div className="mb-3">
-          <p className="text-[#4A3F35] leading-relaxed text-sm">
-            {showFullText ? historia.descricao : previewText}
+          <div className="text-[#4A3F35] leading-relaxed text-sm">
+            {formattedText}
             {/* Show more/less button with horizontal spacing */}
-            {historia.descricao.length > 150 && (
-              <>
-                <span className="mx-2"></span>
+            {needsExpansion && (
+              <div className="mt-2">
                 <button
-                  onClick={() => setShowFullText(!showFullText)}
-                  className="text-[#CD853F] text-sm font-medium hover:text-[#B8763A] transition-colors"
+                  onClick={toggleExpanded}
+                  className="text-[#CD853F] text-sm font-medium hover:text-[#B8763A] transition-colors inline-flex items-center gap-1"
                 >
-                  {showFullText ? 'mostrar menos' : 'mostrar mais'}
+                  {isExpanded ? (
+                    <>
+                      <span>mostrar menos</span>
+                      <i className="fas fa-chevron-up text-xs"></i>
+                    </>
+                  ) : (
+                    <>
+                      <span>mostrar mais</span>
+                      <i className="fas fa-chevron-down text-xs"></i>
+                    </>
+                  )}
                 </button>
-              </>
+              </div>
             )}
-          </p>
+          </div>
         </div>
 
         {/* Image credit if available */}
