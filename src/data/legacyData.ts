@@ -265,10 +265,10 @@ const historias = [{
 }, {
 	'id': 28,
 	'rua_id': 1,
-	'criador': 'Mateus Canova',
-	'fotos': ['https://i.imgur.com/oLwnqe8.png'],
-	'titulo': 'Surge o cinema na cidade',
-	'descricao': 'O Cine 3 de Outubro é inaugurado em 1929 e posteriormente renomeado para Cine Splendid.',
+	'criador': 'Eduardo da Silva Weber',
+	'fotos': ['/images/historias/cinesplendid.jpg'],
+	'titulo': 'Cine Splendid e Café Cacique',
+	'descricao': 'Antes mesmo do surgimento do município, havia em Gramado uma economia turística estabelecida, marcada por inúmeros estabelecimentos do ramo do comércio e serviços, que atendiam tanto moradores quanto visitantes. Dentre eles, podemos citar o cinema e o café, que estão na foto. O Cine Splendid está à esquerda e o Café Cacique, à direita. Eram duas construções em madeira com portas e janelas caracterizadas por possuírem vidro fixo acima e abertura dupla ou única embaixo. No cinema, havia um conjunto de aberturas formado por uma porta e oito janelas de diferentes tamanhos e formas. Elas estavam dispostas em três níveis no formato de pirâmide ou parábola, sendo cinco abaixo, três ao centro e uma no alto, o que proporcionava uma aparência simétrica e chamativa. Por fim, o conjunto era completado por um telhado rodeado por lambrequins. Tamanha riqueza de detalhes refletia uma preocupação com a estética das construções, que já se manifestava em Gramado desde antes mesmo da emancipação política. À frente, podiam ser vistas placas com os filmes em cartaz, que anunciavam as estreias e atraíam o público. Ambos os estabelecimentos pertenciam à família de Cláudio Pasqual, cuja atuação marcou uma fase importante da história econômica e cultural de Gramado. O cinema existia desde 1929, em outro endereço, com o nome de 3 de Outubro. No mesmo local da foto, foi reinaugurado no final da década de 1930 e funcionou até 1962. Já o Café Cacique durou mais tempo, até 1991, e teve sua sede original em madeira substituída por uma construção em alvenaria, adaptando-se às transformações da cidade. Depois de deixar de ser administrado pelos Pasqual, o café passou a ser alugado para inúmeros proprietários, mas manteve sua função social e comercial. Recentemente, reabriu no mesmo local, por iniciativa de um antigo garçom, com o nome de Cacique Steak Ember, reafirmando a importância histórica e afetiva do espaço na memória de Gramado.',
 	'ano': 1936,
 	'coordenadas': [-29.37886102023408, -50.873681725586366]
 }, {
@@ -1786,6 +1786,22 @@ ZATTI, Joecy Lied. JOÃO LEOPOLDO LIED in KOPPE, Iraci. (Coord.). Raízes de Gra
 	Inspirado por essa imagem impressionante, Benito teve uma ideia ousada: recriar o acidente na fachada do Parque Mundo a Vapor. A intenção era clara: impactar, surpreender, atrair olhares já na entrada. Com a compra de uma locomotiva sucateada em São Paulo, teve início o processo de restauração. E em dezembro de 1999, chegou o grande momento: erguer as 38 toneladas de ferro.
 	Dois guindastes, uma multidão de espectadores e um sonho suspenso no ar — nascia ali, diante de todos, um dos cartões-postais mais emblemáticos de Canela.`,
 	coordenadas: [-29.36146891945309, -50.83470841799351],
+	orgId: 4	
+  },
+  {
+	id: 184,
+	rua_id: 4,
+	criador: 'Eduardo da Silva Weber',
+	fotos: [
+		{
+			url: '/images/historias/cinema1980.jpg',
+			credito: 'DRECKSLER, Carlos Gilberto. Gramado Contrastes (1919-2012). Porto Alegre: Evangraf, 2012, p. 87'
+		}
+	],
+	titulo: 'Cinema na 8ª edição do Festival',
+	ano: 1980,
+	descricao: `A foto foi tirada em 1980, durante o 8º Festival de Cinema, quando ainda era realizado no início do ano, em março, na transição do verão para o outono. Conhecido na época como Cine Embaixador, o prédio do cinema constituía outro exemplo claro da arquitetura modernista presente na cidade, marcada por linhas retas e pelo uso predominante do concreto. O formato geométrico da construção assemelhava-se a um polígono retangular. Portas e janelas amplas com esquadrias metálicas e vidro completavam o conjunto, revelando a busca pela simplicidade funcional característica desse movimento arquitetônico. Décadas depois, o cinema da cidade preserva seu caráter imponente, mantido mesmo após as modificações exteriores que o aproximaram da estética bávara. Outro elemento de destaque na parte superior da edificação consistia em dois cartazes publicitários da edição, com a imagem do Kikito, símbolo do festival, um à esquerda e outro à direita da fachada. A presença do Kikito evidenciava a identidade do evento e o valor cultural que lhe era atribuído desde as primeiras edições. Contudo, a cena não pode ser dissociada de seu contexto político: o Brasil vivia sob o Regime Civil-Militar (1964–1985). Nesse momento, foi intensa a ocupação dos espaços públicos por símbolos cívicos. Não por acaso, na entrada do Cine Embaixador, à frente das janelas, tremulavam as bandeiras do Brasil, do RS e de Gramado. Posicionadas ali, elas funcionavam como marcas de poder, adicionando à cena uma carga ideológica, representativa de um período em que as práticas culturais foram disciplinadas e estiveram submetidas a valores patrióticos e institucionais. Abaixo das bandeiras, a cobertura de concreto em ziguezague, existente na entrada, permanece até hoje, mas com detalhes em madeira adicionados. Ademais, a paisagem urbana das últimas décadas do século XX, registrada pela fotografia, também revelava a coexistência entre estilos arquitetônicos distintos: de um lado a modernidade do concreto e de outro a permanência de tradições construtivas de inspiração europeia, comuns na região. Ao lado do cinema, a antiga casa de madeira de dois andares e telhado de duas águas com telhas de barro, semelhante a um chalé, também persiste atualmente com outros acréscimos estruturais. À época, a mesma residência já havia recebido detalhes enxaimel na fachada, inexistentes originalmente, e estava com uso comercial para uma extinta empresa de projetos arquitetônicos e construções, cujo letreiro com as iniciais p, H e b justapostas pode ser visto na lateral. Nos fundos, entre as duas construções, existia uma churrascaria, também extinta, para a qual duas placas apontavam. `,
+	coordenadas: [-29.37884151859491, -50.87369432699778],
 	orgId: 4	
   },
 	
