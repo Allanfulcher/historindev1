@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   title: "Historin - Descubra as Histórias de Gramado",
   description: "Explore as fascinantes histórias das ruas de Gramado através de uma experiência interativa e imersiva.",
   icons: {
-    icon: "/images/meta/historin.ico",
+    icon: "/favicon.ico",
   },
 };
 
@@ -44,3 +44,4 @@ export default function RootLayout({
     </html>
   );
 }
+

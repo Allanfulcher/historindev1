@@ -1541,24 +1541,6 @@ Na oficina, Ernesto fazia de tudo: de consertos simples à fabricação completa
     orgId: 4
   },
   {
-    id: 170,
-    rua_id: 8,
-    criador: 'Família Urbani',
-    fotos: [
-      {
-        url: '/images/historias/inauguracao-mundo-vapor.webp',
-        credito: 'Família Urbani'
-      }
-    ],
-    titulo: 'A inauguração de um cartão-postal de Canela',
-    ano: 1990,
-    descricao: `Foi através de um pôster enviado por um amigo que Benito Urbani descobriu a história do célebre acidente ferroviário de 1895, em Paris, quando um trem descarrilou e atravessou o segundo andar da estação Montparnasse, despencando para a rua. A imagem icônica inspirou Benito a recriar a cena na fachada do Parque Mundo a Vapor.
-
-Com a compra de uma locomotiva sucateada em São Paulo, iniciou-se o processo de restauração. Em dezembro de 1999, chegou o grande momento: erguer as 38 toneladas de ferro. Dois guindastes, uma multidão de espectadores e um sonho suspenso no ar marcaram o nascimento de um dos cartões-postais mais emblemáticos de Canela.`,
-    coordenadas: [-29.361410732232496, -50.8346716150922],
-    orgId: 4
-  },
-  {
     id: 171,
     rua_id: 4,
     criador: 'Eduardo da Silva Weber',
@@ -1701,24 +1683,6 @@ Com a compra de uma locomotiva sucateada em São Paulo, iniciou-se o processo de
 	descricao: 'Em 1991, Benito Urbani realizava um sonho: inaugurava o Mundo a Vapor. Antes da icônica fachada com a locomotiva descarrilada, o cartão de visitas do parque era uma locomóvel a vapor, posicionada com orgulho na entrada. Na imagem, vemos Benito acompanhando de perto a instalação da máquina, um gesto que selava, com ferro e vapor, o início de uma jornada pioneira.',
 	coordenadas: [-29.36146891945309, -50.83470841799351],
 	orgId: 4
-  },
-  {
-	id: 180,
-	rua_id: 8,
-	criador: 'Família Urbani',
-	fotos: [
-		{
-			url: '/images/historias/cartaopostalcanela.png',
-			credito: 'Família Urbani'
-		}
-	],
-	titulo: 'A inauguração de um cartão postal de Canela',
-	ano: 1990,
-	descricao: `Foi através de um pôster enviado por um amigo que Benito Urbani descobriu a história do célebre acidente ferroviário de 1895, em Paris. Na ocasião, um trem descarrilou e atravessou o segundo andar da estação Montparnasse, despencando espetacularmente para a rua. Foi uma cena tão dramática quanto icônica, registrada em fotos que rodaram o mundo.
-	Inspirado por essa imagem impressionante, Benito teve uma ideia ousada: recriar o acidente na fachada do Parque Mundo a Vapor. A intenção era clara: impactar, surpreender, atrair olhares já na entrada. Com a compra de uma locomotiva sucateada em São Paulo, teve início o processo de restauração. E em dezembro de 1999, chegou o grande momento: erguer as 38 toneladas de ferro.
-	Dois guindastes, uma multidão de espectadores e um sonho suspenso no ar — nascia ali, diante de todos, um dos cartões-postais mais emblemáticos de Canela.`,
-	coordenadas: [-29.36146891945309, -50.83470841799351],
-	orgId: 4	
   },
   {
 	id: 181,
