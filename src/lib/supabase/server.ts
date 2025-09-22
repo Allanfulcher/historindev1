@@ -8,8 +8,9 @@ import { cookies } from 'next/headers';
  * - Falls back to anon key for environments where service role isn't configured.
  * - Cookies set/remove are no-ops in route handlers to avoid runtime errors.
  */
-export function getSupabaseServerClient<TDatabase = any>(): SupabaseClient<TDatabase> {
-  const cookieStore = cookies();
+export async function getSupabaseServerClient<TDatabase = any>(): Promise<SupabaseClient<TDatabase>> {
+  // Next.js route handlers require awaiting cookies()
+  const cookieStore = await cookies();
 
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -26,13 +27,13 @@ export function getSupabaseServerClient<TDatabase = any>(): SupabaseClient<TData
     (serviceRoleKey || anonKey) as string,
     {
       cookies: {
-        get(name: string) {
+        async get(name: string) {
           return cookieStore.get(name)?.value;
         },
-        set(_name: string, _value: string, _options: CookieOptions) {
+        async set(_name: string, _value: string, _options: CookieOptions) {
           // noop for route handlers (avoid read-only headers error)
         },
-        remove(_name: string, _options: CookieOptions) {
+        async remove(_name: string, _options: CookieOptions) {
           // noop for route handlers (avoid read-only headers error)
         },
       },

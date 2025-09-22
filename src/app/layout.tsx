@@ -36,7 +36,7 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
       </head>
       <body
-        className="antialiased"
+        className="antialiased min-h-screen bg-[#f4ede0] text-[#6B5B4F]"
       >
         <HashRouter />
         {children}
