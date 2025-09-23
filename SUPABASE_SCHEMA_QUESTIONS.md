@@ -111,3 +111,166 @@ Notes:
   - `POST /api/admin/autores` with JSON `{ nome, bio, foto, link? }`
   - `PUT /api/admin/autores/:id` to edit any subset of fields
   - `DELETE /api/admin/autores/:id`
+
+---
+
+## Works (Admin > Obras)
+
+Admin works page and API expect a table `public.works` with foreign key to `public.authors(id)`.
+
+```sql
+-- Works table
+create table if not exists public.works (
+  id uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default now(),
+  titulo text not null,
+  descricao text not null,
+  capa text not null,
+  pago boolean not null default false,
+  autor_id uuid not null references public.authors(id) on delete restrict,
+  link text not null
+);
+
+-- Recommended indexes
+create index if not exists idx_works_titulo on public.works using gin (to_tsvector('simple', coalesce(titulo, '')));
+create index if not exists idx_works_autor_id on public.works(autor_id);
+```
+
+Notes:
+- `autor_id` is a foreign key to `authors`. Ensure an author exists before creating a work.
+- API endpoints expected by the admin UI:
+  - `GET /api/admin/obras` -> returns `{ data: Work[] }`
+  - `POST /api/admin/obras` with JSON `{ titulo, descricao, capa, pago, autorId(UUID), link }`
+  - `PUT /api/admin/obras/:id` to edit fields
+  - `DELETE /api/admin/obras/:id`
+
+---
+
+## Businesses (Admin > Negócios)
+
+Admin businesses page and API expect a table `public.businesses`.
+
+```sql
+-- Businesses table
+create table if not exists public.businesses (
+  id uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default now(),
+  nome text not null,
+  endereco text not null,
+  telefone text null,
+  categoria text not null
+);
+
+-- Recommended indexes
+create index if not exists idx_businesses_nome on public.businesses using gin (to_tsvector('simple', coalesce(nome, '')));
+create index if not exists idx_businesses_categoria on public.businesses using gin (to_tsvector('simple', coalesce(categoria, '')));
+```
+
+Notes:
+- `nome`, `endereco`, `categoria` are required. `telefone` is optional.
+- API endpoints expected by the admin UI:
+  - `GET /api/admin/negocios` -> returns `{ data: Business[] }`
+  - `POST /api/admin/negocios` with JSON `{ nome, endereco, telefone?, categoria }`
+  - `PUT /api/admin/negocios/:id` to edit fields
+  - `DELETE /api/admin/negocios/:id`
+
+---
+
+## Cities (Admin > Cidades)
+
+Admin cities page and API expect a table `public.cities` aligned with the `Cidade` shape.
+
+```sql
+-- Cities table
+create table if not exists public.cities (
+  id uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default now(),
+  nome text not null,
+  estado text not null,
+  populacao text not null,
+  descricao text null,
+  foto text null
+);
+
+-- Recommended indexes
+create index if not exists idx_cities_nome on public.cities using gin (to_tsvector('simple', coalesce(nome, '')));
+create index if not exists idx_cities_estado on public.cities using gin (to_tsvector('simple', coalesce(estado, '')));
+```
+
+Notes:
+- Minimal shape for now (`nome`, `estado`, `populacao` required) — we can extend columns later.
+- API endpoints expected by the admin UI:
+  - `GET /api/admin/cidades` -> returns `{ data: City[] }`
+  - `POST /api/admin/cidades` with JSON `{ nome, estado, populacao, descricao?, foto? }`
+  - `PUT /api/admin/cidades/:id` to edit fields
+  - `DELETE /api/admin/cidades/:id`
+
+---
+
+## Streets (Admin > Ruas)
+
+Admin streets page and API expect a table `public.streets`. Coordinates are stored in `lat` and `lng` numeric columns.
+
+```sql
+-- Streets table
+create table if not exists public.streets (
+  id uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default now(),
+  nome text not null,
+  fotos text null,
+  cidade_id uuid null references public.cities(id) on delete set null,
+  descricao text null,
+  lat double precision null,
+  lng double precision null
+);
+
+-- Recommended indexes
+create index if not exists idx_streets_nome on public.streets using gin (to_tsvector('simple', coalesce(nome, '')));
+create index if not exists idx_streets_cidade_id on public.streets(cidade_id);
+```
+
+Notes:
+- `cidade_id` links a street to a city but is optional.
+- API endpoints expected by the admin UI:
+  - `GET /api/admin/ruas` -> returns `{ data: Street[] }`
+  - `POST /api/admin/ruas` with JSON `{ nome, fotos?, cidadeId?, descricao?, coordenadas?[lat,lng] }`
+  - `PUT /api/admin/ruas/:id` to edit fields
+  - `DELETE /api/admin/ruas/:id`
+
+---
+
+## Stories (Admin > Histórias)
+
+Admin stories page and API expect a table `public.stories` with optional relations to `streets` and `organizations`. Arrays are stored as `text[]`.
+
+```sql
+-- Stories table
+create table if not exists public.stories (
+  id uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default now(),
+  rua_id uuid null references public.streets(id) on delete set null,
+  org_id uuid null references public.organizations(id) on delete set null,
+  titulo text not null,
+  descricao text not null,
+  fotos text[] null,
+  lat double precision null,
+  lng double precision null,
+  ano text null,
+  criador text null,
+  tags text[] null
+);
+
+-- Recommended indexes
+create index if not exists idx_stories_titulo on public.stories using gin (to_tsvector('simple', coalesce(titulo, '')));
+create index if not exists idx_stories_tags on public.stories using gin (tags);
+create index if not exists idx_stories_rua_id on public.stories(rua_id);
+create index if not exists idx_stories_org_id on public.stories(org_id);
+```
+
+Notes:
+- `tags` supports values like `Cinema`, `Festival`, `Festival de Cinema`.
+- API endpoints expected by the admin UI:
+  - `GET /api/admin/historias` -> returns `{ data: Story[] }`
+  - `POST /api/admin/historias` with JSON `{ ruaId?, orgId?, titulo, descricao, fotos?, coordenadas?, ano?, criador?, tags? }`
+  - `PUT /api/admin/historias/:id` to edit fields
+  - `DELETE /api/admin/historias/:id`

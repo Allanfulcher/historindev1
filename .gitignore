@@ -42,7 +42,4 @@ next-env.d.ts
 
 # supabase
 .env.local
-SUPABASE_SCHEMA_QUESTIONS.md
-docs/admin/ADMIN_CHECKLIST.md
-SUPABASE_SCHEMA_QUESTIONS.md
-SUPABASE_SCHEMA_QUESTIONS.md
+
