@@ -63,8 +63,7 @@ export default function AdminHome() {
           <h2 className="text-lg font-semibold text-[#4A3F35]">Sessão Ativa</h2>
           <p className="text-sm text-[#A0958A]">Você está logado. Auto-logout em {minutes}:{String(seconds).padStart(2, '0')}.</p>
           <div className="flex gap-3">
-            <Link className="px-4 py-2 rounded bg-[#8B4513] text-white hover:bg-[#A0522D] transition" href="/admin/questions">Quiz Perguntas</Link>
-            <button onClick={handleLogout} className="px-4 py-2 rounded bg-transparent hover:bg-[#F5F1EB] text-[#6B5B4F] border border-[#F5F1EB] transition">Logout</button>
+            <button onClick={handleLogout} className="px-4 py-2 rounded bg-transparent hover:bg-[#F5F1EB] text-[#6B5B4F] border border-[#8B4513] transition">Logout</button>
           </div>
         </div>
       )}
@@ -74,6 +73,30 @@ export default function AdminHome() {
         <ul className="list-disc list-inside">
           <li>
             <Link className="text-[#8B4513] hover:text-[#A0522D] underline" href="/admin/questions">Quiz Questions</Link>
+          </li>
+          <li>
+            <Link className="text-[#8B4513] hover:text-[#A0522D] underline" href="/admin/sites">Sites</Link>
+          </li>
+          <li>
+            <Link className="text-[#8B4513] hover:text-[#A0522D] underline" href="/admin/orgs">Organizations</Link>
+          </li>
+          <li>
+            <Link className="text-[#8B4513] hover:text-[#A0522D] underline" href="/admin/autores">Autores</Link>
+          </li>
+          <li>
+            <Link className="text-[#8B4513] hover:text-[#A0522D] underline" href="/admin/obras">Obras</Link>
+          </li>
+          <li>
+            <Link className="text-[#8B4513] hover:text-[#A0522D] underline" href="/admin/negocios">Negócios</Link>
+          </li>
+          <li>
+            <Link className="text-[#8B4513] hover:text-[#A0522D] underline" href="/admin/cidades">Cidades</Link>
+          </li>
+          <li>
+            <Link className="text-[#8B4513] hover:text-[#A0522D] underline" href="/admin/ruas">Ruas</Link>
+          </li>
+          <li>
+            <Link className="text-[#8B4513] hover:text-[#A0522D] underline" href="/admin/historias">Histórias</Link>
           </li>
         </ul>
       </nav>
