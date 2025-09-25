@@ -22,7 +22,7 @@ export interface Historia {
   coordenadas?: [number, number];
   ano?: string;
   criador?: string;
-  personagens?: string[];
+  tags?: string[];
   orgId?: string;
 }
 

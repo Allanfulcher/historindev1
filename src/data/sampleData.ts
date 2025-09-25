@@ -11,7 +11,6 @@ export const sampleData: AppData = {
       fotos: ['https://placehold.co/400x300'],
       coordenadas: [-29.3681, -50.8361],
       ano: '1950',
-      personagens: ['Arquiteto João Silva', 'Prefeito Pedro Santos']
     },
     { 
       id: '2', 
@@ -21,7 +20,6 @@ export const sampleData: AppData = {
       fotos: ['https://placehold.co/400x300'],
       coordenadas: [-29.3700, -50.8380],
       ano: '1930',
-      personagens: ['Dona Maria Flores', 'Jardineiro José']
     },
     { 
       id: '3', 
@@ -31,7 +29,6 @@ export const sampleData: AppData = {
       fotos: ['https://placehold.co/400x300'],
       coordenadas: [-29.3720, -50.8400],
       ano: '1920',
-      personagens: ['Borges de Medeiros', 'Coronel Diniz']
     }
   ],
 

@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.7.0",
+    "@supabase/supabase-js": "^2.57.4",
     "@types/react-router-dom": "^5.3.3",
     "framer-motion": "^12.23.12",
     "gtag": "^1.0.1",
