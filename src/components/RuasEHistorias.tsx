@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
-import { FiArrowLeft } from 'react-icons/fi';
+import { FiArrowLeft, FiTag } from 'react-icons/fi';
 import { useLegacyData } from '../hooks/useLegacyData';
 import { Rua, Historia, FotoWithCredit } from '../types';
 import Header from './Header';
@@ -29,6 +29,15 @@ const RuasEHistorias: React.FC = () => {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [showMap, setShowMap] = useState(true); // For the Menu component
   const [showQuiz, setShowQuiz] = useState(false);
+
+  // Helper: slugify tag names for URL
+  const slugify = (s: string) =>
+    s
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '');
 
   // Filter ruas and historias based on search term
   useEffect(() => {
@@ -133,6 +142,32 @@ const RuasEHistorias: React.FC = () => {
           <ViewMap />
         </div>
 
+        {/* Categories Section */}
+        <section className="mb-8">
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
+              <FiTag className="w-5 h-5 text-gray-700" />
+              Categorias
+            </h2>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            {['Igreja', 'Cinema', 'Eventos'].map((tag) => (
+              <button
+                key={tag}
+                onClick={() => router.push(`/rua/categoria/${slugify(tag)}`)}
+                className="group w-full rounded-lg bg-white border border-gray-200 p-3 shadow-sm hover:shadow-md transition-all text-left"
+                aria-label={`Ver histórias da categoria ${tag}`}
+              >
+                <div className="flex items-center gap-2">
+                  <FiTag className="w-4 h-4 text-gray-500 group-hover:text-gray-700" />
+                  <span className="text-sm font-medium text-gray-900">{tag}</span>
+                </div>
+              </button>
+            ))}
+          </div>
+        </section>
+        
+
         {/* All Streets Section */}
         <section className="mb-10">
           <div className="flex items-center justify-between mb-4">
@@ -187,4 +222,5 @@ const RuasEHistorias: React.FC = () => {
 RuasEHistorias.displayName = 'RuasEHistorias';
 
 export default RuasEHistorias;
+
 
