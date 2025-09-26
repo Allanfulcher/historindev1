@@ -8,8 +8,11 @@ import LoadingPage from '@/components/LoadingPage';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { legacyQuestions } from '@/data/legacyData';
 import React, { useEffect, useState } from 'react';
+import { supabaseBrowser } from '@/lib/supabase/client';
+import { submitQuiz } from '@/utils/quizApi';
 
 interface Question {
+  id?: string;
   question: string;
   answers: string[];
   correct: number;
@@ -24,8 +27,8 @@ interface ScoreEntry {
   percentage: number;
 }
 
-// Use questions from legacy data
-const questions: Question[] = legacyQuestions;
+// Use questions from legacy data (fallback)
+const legacyPool: Question[] = legacyQuestions;
 
 function getRandomQuestions(all: Question[], num: number, cityFilter: number): Question[] {
   // Filter questions based on city (0 = both cities, 1 = Gramado, 2 = Canela)
@@ -43,6 +46,31 @@ function getRandomQuestions(all: Question[], num: number, cityFilter: number): Q
     [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
   }
   return shuffled.slice(0, Math.min(num, shuffled.length));
+}
+
+async function fetchQuestionsFromSupabase(cityFilter: number, limit = 10): Promise<Question[]> {
+  // Try to fetch from DB; if anything fails, throw and caller can fallback
+  const { data, error } = await supabaseBrowser
+    .from('quiz_questions')
+    .select('id, city, question, options, answer')
+    .in('city', [0, cityFilter]);
+
+  if (error) throw error;
+  const mapped: Question[] = (data || []).map((q: any) => ({
+    id: q.id,
+    city: q.city,
+    question: q.question,
+    answers: q.options,
+    correct: (q.answer ?? 1) - 1, // DB is 1-based, UI uses 0-based
+  }));
+
+  // Shuffle and take limit
+  const shuffled = [...mapped];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled.slice(0, Math.min(limit, shuffled.length));
 }
 
 export default function QuizPage() {
@@ -69,6 +97,10 @@ export default function QuizPage() {
   const [showQuiz, setShowQuiz] = useState(false);
   // Modal feedback form state
   const [showFeedbackForm, setShowFeedbackForm] = useState(false);
+  // Track chosen answers for analytics/storage
+  const [answersGiven, setAnswersGiven] = useState<number[]>([]);
+  // Loading fetched questions
+  const [loadingQuestions, setLoadingQuestions] = useState(false);
   
 
 
@@ -97,6 +129,12 @@ export default function QuizPage() {
     } else {
       setFeedbackMessage('Incorreto!');
     }
+    // record chosen answer
+    setAnswersGiven((prev) => {
+      const next = [...prev];
+      next[currentQuestion] = idx;
+      return next;
+    });
     setShowAnswerFeedback(true);
     setTimeout(() => {
       setShowAnswerFeedback(false);
@@ -121,37 +159,34 @@ export default function QuizPage() {
     
     try {
       const percentage = Math.round((score / (selectedQuestions.length * 10)) * 100);
-      
-      // Prepare form data for Google Apps Script
-      const formData = new FormData();
-      formData.append('name', name);
-      formData.append('email', email);
-      formData.append('city', city);
-      formData.append('score', score.toString());
-      formData.append('percentage', percentage.toString());
-      formData.append('totalQuestions', selectedQuestions.length.toString());
-      
-      const response = await fetch('https://script.google.com/macros/s/AKfycbzQvlJ-Sb4FhoLdWcbZv-NObK1T3K4ZVHn0nDX8Tg5j4mHBzei-dFjpWa0-wwwNvpZz3Q/exec', {
-        method: 'POST',
-        body: formData,
+      // Build answers payload
+      const answersPayload = selectedQuestions.map((q, i) => ({
+        id: q.id || null,
+        question: q.question,
+        chosen: answersGiven[i] ?? null,
+        correct: q.correct,
+        options: q.answers,
+      }));
+
+      // Submit to our Supabase-backed API
+      await submitQuiz({
+        answers: answersPayload,
+        score,
+        meta: {
+          name,
+          email,
+          city,
+          percentage,
+          totalQuestions: selectedQuestions.length,
+          ts: new Date().toISOString(),
+        },
       });
-      
-      // Add a small delay for better UX
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      if (response.ok) {
-        const result = await response.json();
-        
-        if (result.status === 'error') {
-          setSubmissionError('Erro ao salvar pontuação. Tente novamente.');
-          return;
-        }
-        
-        setSubmissionError('');
-        setScoreSubmitted(true);
-      } else {
-        setSubmissionError('Erro ao conectar com o servidor. Tente novamente.');
-      }
+
+      // UX delay
+      await new Promise(resolve => setTimeout(resolve, 500));
+
+      setSubmissionError('');
+      setScoreSubmitted(true);
     } catch (err) {
       console.error('Erro ao enviar email:', err);
       setSubmissionError('Erro de conexão. Verifique sua internet e tente novamente.');
@@ -161,7 +196,7 @@ export default function QuizPage() {
   };
 
   // Function to start quiz
-  const startQuiz = () => {
+  const startQuiz = async () => {
     if (!name || !email || !city) {
       alert('Por favor, preencha todos os campos antes de começar o quiz.');
       return;
@@ -171,10 +206,25 @@ export default function QuizPage() {
     setQuizCompleted(false);
     setScore(0);
     setCurrentQuestion(0);
+    setAnswersGiven([]);
+    setLoadingQuestions(true);
     
     // Convert city name to number for filtering
     const cityFilter = city === 'Gramado' ? 1 : city === 'Canela' ? 2 : 1;
-    setSelectedQuestions(getRandomQuestions(questions, 10, cityFilter));
+    try {
+      const dbQuestions = await fetchQuestionsFromSupabase(cityFilter, 10);
+      if (dbQuestions.length > 0) {
+        setSelectedQuestions(dbQuestions);
+      } else {
+        // fallback to legacy content if no DB questions
+        setSelectedQuestions(getRandomQuestions(legacyPool, 10, cityFilter));
+      }
+    } catch (e) {
+      console.warn('Falha ao buscar perguntas no Supabase, usando legado:', e);
+      setSelectedQuestions(getRandomQuestions(legacyPool, 10, cityFilter));
+    } finally {
+      setLoadingQuestions(false);
+    }
   };
 
   // Function to reset quiz completely
@@ -261,6 +311,11 @@ export default function QuizPage() {
               >
                 Começar Quiz
               </button>
+            </div>
+          ) : quizStarted && loadingQuestions ? (
+            <div className="flex flex-col items-center justify-center py-10">
+              <LoadingSpinner size="md" color="#8B4513" text="" />
+              <p className="mt-3 text-[#6B5B4F] text-sm">Carregando perguntas...</p>
             </div>
           ) : quizStarted && selectedQuestions[currentQuestion] ? (
             <div>
