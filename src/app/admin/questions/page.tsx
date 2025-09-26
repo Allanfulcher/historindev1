@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { adminFetch } from "@/utils/adminApi";
+import { adminFetch, getAdminSession } from "@/utils/adminApi";
 import { isAdminAuthenticated } from "@/utils/adminApi";
 import { useRouter } from "next/navigation";
 import AdminHeader from "@/components/admin/AdminHeader";
@@ -106,6 +106,53 @@ export default function AdminQuestionsPage() {
     }
   }
 
+  // CSV Export/Import handlers
+  async function handleExportCSV() {
+    try {
+      const session = getAdminSession();
+      const qs = city !== "" ? `?city=${city}` : "";
+      const res = await fetch(`/api/admin/questions/csv${qs}`, {
+        headers: session?.token ? { "x-admin-token": session.token } : undefined,
+      });
+      if (!res.ok) {
+        const t = await res.text();
+        throw new Error(t || `Export failed ${res.status}`);
+      }
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "quiz_questions.csv";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    } catch (e: any) {
+      alert(e?.message || "Falha ao exportar CSV");
+    }
+  }
+
+  async function handleImportCSV(file: File) {
+    try {
+      const session = getAdminSession();
+      const form = new FormData();
+      form.append("file", file);
+      const res = await fetch(`/api/admin/questions/csv`, {
+        method: "POST",
+        headers: session?.token ? { "x-admin-token": session.token } : undefined,
+        body: form,
+      });
+      if (!res.ok) {
+        const t = await res.text();
+        throw new Error(t || `Import failed ${res.status}`);
+      }
+      await load();
+      alert("Importação concluída!");
+    } catch (e: any) {
+      alert(e?.message || "Falha ao importar CSV");
+    }
+  }
+
   return (
     <div className="p-6 max-w-5xl mx-auto space-y-8 text-[#6B5B4F]">
       <AdminHeader title="Perguntas Quiz" />
@@ -192,6 +239,8 @@ export default function AdminQuestionsPage() {
             { key: "answer", label: "Resposta" },
             { key: "actions", label: "" },
           ]}
+          onExportCSV={handleExportCSV}
+          onImportCSV={handleImportCSV}
         >
           {items.map((q, rowIdx) => (
             <tr key={q.id} className={rowIdx % 2 === 0 ? "bg-[#FEFCF8]" : "bg-[#FAF7F2]"}>

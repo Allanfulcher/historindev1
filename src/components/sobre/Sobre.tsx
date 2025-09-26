@@ -244,11 +244,11 @@ const Sobre: React.FC = () => {
 
           <div className="text-center">
             <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiUtFDFGcK3PvoitnOMwfhL_eXzF7ihu9Q_Q&s"
-              alt="Feevale"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Logo_UCS_Vertical_PNG.png/500px-Logo_UCS_Vertical_PNG.png"
+              alt="UCS"
               className="mx-auto mb-1 h-12 w-auto"
             />
-            <p className="text-sm">Feevale</p>
+            <p className="text-sm">Universidade de Caxias do Sul</p>
           </div>
 
           <div className="text-center">
@@ -259,6 +259,25 @@ const Sobre: React.FC = () => {
             />
             <p className="text-sm">Mundo a Vapor</p>
           </div>
+
+          <div className="text-center">
+            <img
+              src="https://lirp.cdn-website.com/6fcf29d3/dms3rep/multi/opt/01-aplicacao-principal-verde-c857a384-640w.png"
+              alt="Hotel Alpestre"
+              className="mx-auto mb-1 h-12 w-auto"
+            />
+            <p className="text-sm">Hotel Alpestre</p>
+          </div>
+
+          <div className="text-center">
+            <img
+              src="https://brockerturismo.com.br/images/modulo/logo/brocker-turismo.svg"
+              alt="Brocker Turismo"
+              className="mx-auto mb-1 h-12 w-auto"
+            />
+            <p className="text-sm">Brocker Turismo</p>
+          </div>
+          
         </div>
       </section>
 

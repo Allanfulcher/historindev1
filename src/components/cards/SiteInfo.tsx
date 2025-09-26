@@ -12,14 +12,24 @@ const SiteInfo = () => {
       label: 'Prefeitura de Gramado',
     },
     {
-      src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiUtFDFGcK3PvoitnOMwfhL_eXzF7ihu9Q_Q&s',
-      alt: 'Feevale',
-      label: 'Feevale',
+      src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Logo_UCS_Vertical_PNG.png/500px-Logo_UCS_Vertical_PNG.png',
+      alt: 'UCS',
+      label: 'Universidade de Caxias do Sul',
     },
     {
       src: '/images/orgs/logo-mundo-vapor.webp',
       alt: 'Mundo a Vapor',
       label: 'Mundo a Vapor',
+    },
+    {
+      src: 'https://brockerturismo.com.br/images/modulo/logo/brocker-turismo.svg',
+      alt: 'Brocker Turismo',
+      label: 'Brocker Turismo',
+    },
+    {
+      src: 'https://lirp.cdn-website.com/6fcf29d3/dms3rep/multi/opt/01-aplicacao-principal-verde-c857a384-640w.png',
+      alt: 'Hotel Alpestre',
+      label: 'Hotel Alpestre',
     },
   ];
 
