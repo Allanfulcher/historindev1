@@ -2215,6 +2215,7 @@ const questions = [{
     "Festa da Colônia",
   ],
   correct: 1,
+  city: 1,
 },
 {
   question: "Onde ficava o Grupo Escolar Santos Dumont em Gramado?",
@@ -2626,6 +2627,7 @@ const questions = [{
   correct: 1,
   city: 2,
 },
+// Parei aqui
 {
   question: "Qual é a famosa rua de pedestres em Gramado?",
   answers: ["Rua Garibaldi", "Rua São Pedro", "Rua Coberta", "Av. Borges de Medeiros"],
