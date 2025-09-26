@@ -174,7 +174,7 @@ export default function AdminQuestionsPage() {
       <AdminSection title="Criar Pergunta">
         <form onSubmit={handleCreate} className="space-y-4">
           <AdminInput
-            label="Cidade (0 = Gramado, 1 = Canela, 2 = Ambas)"
+            label="Cidade (1 = Gramado, 2 = Canela, 0 = Ambas)"
             type="number"
             value={form.city}
             onChange={(e) => setForm((f) => ({ ...f, city: e.target.value }))}
