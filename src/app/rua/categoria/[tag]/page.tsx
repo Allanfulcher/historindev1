@@ -5,7 +5,9 @@ import { useParams, useRouter } from "next/navigation";
 import { FiArrowLeft, FiTag } from "react-icons/fi";
 import Header from "@/components/Header";
 import Menu from "@/components/Menu";
-import HistoryCard from "@/components/cards/HistoryCard";
+import HistoriaCard from "@/components/ruas/HistoriaCard";
+import YearNavigator from "@/components/ruas/YearNavigator";
+import CitySelector from "@/components/ruas/CitySelector";
 import { supabaseBrowser } from "@/lib/supabase/client";
 import { Historia } from "@/types";
 
@@ -35,9 +37,8 @@ export default function CategoriaTagPage() {
   const [showFeedback, setShowFeedback] = React.useState(false);
   const [showQuiz, setShowQuiz] = React.useState(false);
   // Filters
-  const [cities, setCities] = React.useState<Array<{ id: string; nome: string }>>([]);
-  const [allTags, setAllTags] = React.useState<string[]>([]);
   const [selectedCityId, setSelectedCityId] = React.useState<string>("");
+  const [selectedYear, setSelectedYear] = React.useState<number | null>(null);
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -82,12 +83,11 @@ export default function CategoriaTagPage() {
         const realTag = slugToTag.get(tagSlug) || tagSlug;
         if (!isMounted) return;
         setResolvedTag(realTag);
-        setAllTags(Array.from(tagSet).sort((a, b) => a.localeCompare(b, "pt")));
 
         // Step 2: fetch stories containing the resolved tag
         const { data: rows, error: err } = await supabaseBrowser
           .from("stories")
-          .select("id, rua_id, titulo, descricao, fotos, tags")
+          .select("id, rua_id, titulo, descricao, fotos, tags, ano, criador")
           .contains("tags", [realTag])
           .limit(1000);
         if (err) throw err;
@@ -99,18 +99,13 @@ export default function CategoriaTagPage() {
           descricao: String(h.descricao ?? ""),
           fotos: Array.isArray(h.fotos) ? h.fotos : [],
           tags: Array.isArray(h.tags) ? h.tags : [],
+          ano: h.ano ? String(h.ano) : undefined,
+          criador: h.criador ? String(h.criador) : undefined,
         }));
         if (!isMounted) return;
         setHistorias(mapped);
 
-        // Step 3: load cities for filter
-        const { data: citiesRows, error: citiesErr } = await supabaseBrowser
-          .from("cities")
-          .select("id, nome")
-          .order("nome", { ascending: true });
-        if (citiesErr) throw citiesErr;
-        if (!isMounted) return;
-        setCities((citiesRows ?? []).map((c: any) => ({ id: String(c.id), nome: String(c.nome) })));
+        // No cities fetch needed (using static CitySelector)
       } catch (e: any) {
         if (!isMounted) return;
         setError(e?.message || "Erro ao carregar histórias da categoria");
@@ -152,9 +147,23 @@ export default function CategoriaTagPage() {
   }, [historias]);
 
   const filteredHistorias = React.useMemo(() => {
-    if (!selectedCityId) return historias;
-    return historias.filter((h) => (ruaToCity[h.rua_id] || "") === selectedCityId);
-  }, [historias, selectedCityId, ruaToCity]);
+    let list = historias;
+    if (selectedCityId) {
+      list = list.filter((h) => (ruaToCity[h.rua_id] || "") === selectedCityId);
+    }
+    if (selectedYear) {
+      list = list.filter((h) => parseInt(h.ano || "0", 10) === selectedYear);
+    }
+    return list;
+  }, [historias, selectedCityId, selectedYear, ruaToCity]);
+
+  // Refs to scroll to first historia of a selected year
+  const firstOfYearRef = React.useRef<HTMLDivElement | null>(null);
+  React.useEffect(() => {
+    if (selectedYear && firstOfYearRef.current) {
+      firstOfYearRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [selectedYear]);
 
   return (
     <div className="min-h-screen bg-[#f4ede0] relative">
@@ -180,52 +189,39 @@ export default function CategoriaTagPage() {
       />
 
       {/* Category Header Panel (mobile-first) */}
-      <div className="max-w-4xl mx-auto px-4 pt-24 pb-4">
+      <div className="max-w-2xl mx-auto px-4 pt-24 pb-4">
         <div className="rounded-xl bg-white shadow-sm ring-1 ring-gray-900/5 p-4 sm:p-5">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <h1 className="text-xl sm:text-2xl font-bold text-gray-900 flex items-center gap-2">
-                <span className="inline-flex items-center justify-center rounded-lg bg-blue-50 text-blue-700 w-8 h-8">
+              <h1 className="text-xl sm:text-2xl text-gray-900 flex items-center gap-3">
+                <span className="inline-flex items-center justify-center rounded-lg bg-blue-50 text-blue-700 w-8 h-8 shrink-0">
                   <FiTag className="w-5 h-5" />
                 </span>
-                <span>Categoria: <span className="text-blue-700">{resolvedTag ?? tagSlug}</span></span>
+                <div className="flex items-center gap-2">
+                  <span className="sr-only sm:not-sr-only sm:text-sm sm:text-gray-700">Categoria:</span>
+                  <span className="text-blue-700 text-2xl sm:text-3xl font-medium tracking-tight">
+                    {resolvedTag ?? tagSlug}
+                  </span>
+                </div>
               </h1>
-              <p className="mt-1 text-sm text-gray-600">Filtre por cidade ou mude de categoria.</p>
+              <p className="mt-1 text-sm text-gray-600">Veja todas as historias desta categoria.</p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-3">
-              <label className="sr-only" htmlFor="city-select">Filtrar por cidade</label>
-              <select
-                id="city-select"
-                className="rounded-lg border-gray-300 text-sm focus:ring-blue-500 focus:border-blue-500 px-3 py-2 bg-white"
-                value={selectedCityId}
-                onChange={(e) => setSelectedCityId(e.target.value)}
-                aria-label="Filtrar histórias por cidade"
-              >
-                <option value="">Todas as cidades</option>
-                {cities.map((c) => (
-                  <option key={c.id} value={c.id}>{c.nome}</option>
-                ))}
-              </select>
-
-              <label className="sr-only" htmlFor="tag-select">Selecionar outra categoria</label>
-              <select
-                id="tag-select"
-                className="rounded-lg border-gray-300 text-sm focus:ring-blue-500 focus:border-blue-500 px-3 py-2 bg-white"
-                value={resolvedTag ?? tagSlug}
-                onChange={(e) => router.push(`/rua/categoria/${slugify(e.target.value)}`)}
-                aria-label="Selecionar outra categoria"
-              >
-                {(resolvedTag ? [resolvedTag, ...allTags.filter((t) => t !== resolvedTag)] : allTags).map((t) => (
-                  <option key={t} value={t}>{t}</option>
-                ))}
-              </select>
+            {/* City selector with consistent styling */}
+            <div className="min-w-[200px]">
+              <CitySelector selectedCityId={selectedCityId} onCityChange={setSelectedCityId} />
             </div>
           </div>
         </div>
       </div>
 
-      <main className="max-w-4xl mx-auto px-4 pb-4">
+      {/* Year Navigator (floating) */}
+      <YearNavigator
+        historias={historias}
+        onYearSelect={(y) => setSelectedYear(y)}
+      />
+
+      <main className="max-w-2xl mx-auto px-4 pb-4">
         {/* Content */}
 
         {loading && (
@@ -242,12 +238,16 @@ export default function CategoriaTagPage() {
 
         <section className="mb-6">
           {filteredHistorias.length > 0 && !loading && !error ? (
-            <HistoryCard
-              historias={filteredHistorias}
-              onHistoriaClick={(ruaId, historiaId) => {
-                router.push(`/rua/${ruaId}/historia/${historiaId}?scroll=true`);
-              }}
-            />
+            <div>
+              {filteredHistorias.map((h, idx) => (
+                <div
+                  key={h.id}
+                  ref={idx === 0 ? firstOfYearRef : undefined}
+                >
+                  <HistoriaCard historia={h} />
+                </div>
+              ))}
+            </div>
           ) : (
             <div className="text-center py-8">
               {!loading && !error && (
