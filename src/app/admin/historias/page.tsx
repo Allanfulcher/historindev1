@@ -24,11 +24,23 @@ export type HistoriaAdmin = {
   tags?: string[];
 };
 
+type RuaLite = {
+  id: string;
+  nome: string;
+};
+
+type OrgLite = {
+  id: string;
+  fantasia: string;
+};
+
 export default function AdminHistoriasPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [items, setItems] = useState<HistoriaAdmin[]>([]);
+  const [ruas, setRuas] = useState<RuaLite[]>([]);
+  const [orgs, setOrgs] = useState<OrgLite[]>([]);
 
   const [form, setForm] = useState({
     ruaId: "",
@@ -60,12 +72,34 @@ export default function AdminHistoriasPage() {
     }
   }
 
+  async function loadRuas() {
+    try {
+      const res = await adminFetch<{ data: any[] }>(`/api/admin/ruas?limit=1000`);
+      const mapped = (res.data || []).map((r: any) => ({ id: r.id, nome: r.nome })) as RuaLite[];
+      setRuas(mapped);
+    } catch (e) {
+      // non-fatal
+    }
+  }
+
+  async function loadOrgs() {
+    try {
+      const res = await adminFetch<{ data: any[] }>(`/api/admin/orgs?limit=1000`);
+      const mapped = (res.data || []).map((o: any) => ({ id: o.id, fantasia: o.fantasia })) as OrgLite[];
+      setOrgs(mapped);
+    } catch (e) {
+      // non-fatal
+    }
+  }
+
   useEffect(() => {
     if (!isAdminAuthenticated()) {
       router.replace("/admin");
       return;
     }
     load();
+    loadRuas();
+    loadOrgs();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -126,20 +160,34 @@ export default function AdminHistoriasPage() {
 
       <AdminSection title="Criar História">
         <form onSubmit={handleCreate} className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <AdminInput
-            label="Rua ID (UUID opcional)"
-            type="text"
-            value={form.ruaId}
-            onChange={(e) => setForm((f) => ({ ...f, ruaId: e.target.value }))}
-            placeholder="rua uuid"
-          />
-          <AdminInput
-            label="Org ID (UUID opcional)"
-            type="text"
-            value={form.orgId}
-            onChange={(e) => setForm((f) => ({ ...f, orgId: e.target.value }))}
-            placeholder="organization uuid"
-          />
+          <div>
+            <label className="block text-sm font-medium text-[#6B5B4F] mb-1">Rua (selecionar)</label>
+            <select
+              className="w-full border border-[#E5DED3] rounded-md px-3 py-2 bg-white text-[#4A3F35] focus:outline-none focus:ring-2 focus:ring-[#D7C8B8]"
+              value={form.ruaId}
+              onChange={(e) => setForm((f) => ({ ...f, ruaId: e.target.value }))}
+            >
+              <option value="">— Sem rua —</option>
+              {ruas.map((r) => (
+                <option key={r.id} value={r.id}>{r.nome}</option>
+              ))}
+            </select>
+            <p className="text-[11px] text-[#A0958A] mt-1">Opcional. Usa o UUID da rua selecionada.</p>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-[#6B5B4F] mb-1">Organização (selecionar)</label>
+            <select
+              className="w-full border border-[#E5DED3] rounded-md px-3 py-2 bg-white text-[#4A3F35] focus:outline-none focus:ring-2 focus:ring-[#D7C8B8]"
+              value={form.orgId}
+              onChange={(e) => setForm((f) => ({ ...f, orgId: e.target.value }))}
+            >
+              <option value="">— Sem org —</option>
+              {orgs.map((o) => (
+                <option key={o.id} value={o.id}>{o.fantasia}</option>
+              ))}
+            </select>
+            <p className="text-[11px] text-[#A0958A] mt-1">Opcional. Usa o UUID da organização selecionada.</p>
+          </div>
           <AdminInput
             label="Título"
             type="text"

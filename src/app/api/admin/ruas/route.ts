@@ -4,20 +4,20 @@ import { adminSupabase, jsonBadRequest, jsonOk, jsonServerError, requireAdmin } 
 interface CreateStreetPayload {
   nome: string;
   fotos?: string;
-  cidadeId?: string; // uuid (optional)
+  cidadeId?: string; // integer id as string (optional)
   descricao?: string;
   coordenadas?: [number, number]; // [lat, lng]
 }
 
-function isUuid(v: string) {
-  return /^[0-9a-fA-F-]{36}$/.test(v);
+function isDigits(v: string) {
+  return /^\d+$/.test(v);
 }
 
 function parseCreate(body: unknown): { ok: true; value: CreateStreetPayload } | { ok: false; error: string } {
   if (typeof body !== 'object' || body === null) return { ok: false, error: 'Invalid JSON body' };
   const { nome, fotos, cidadeId, descricao, coordenadas } = body as any;
   if (typeof nome !== 'string' || !nome.trim()) return { ok: false, error: 'nome must be a non-empty string' };
-  if (cidadeId && (typeof cidadeId !== 'string' || !isUuid(cidadeId))) return { ok: false, error: 'cidadeId must be a UUID' };
+  if (cidadeId && (typeof cidadeId !== 'string' || !isDigits(cidadeId))) return { ok: false, error: 'cidadeId must be an integer string' };
   if (coordenadas) {
     if (!Array.isArray(coordenadas) || coordenadas.length !== 2) return { ok: false, error: 'coordenadas must be [lat, lng]' };
     const [lat, lng] = coordenadas;
