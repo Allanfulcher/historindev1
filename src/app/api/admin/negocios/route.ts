@@ -6,16 +6,54 @@ interface CreateBusinessPayload {
   endereco: string;
   telefone?: string;
   categoria: string;
+  descricao?: string;
+  foto?: string;
+  logo_url?: string;
+  website?: string;
+  instagram?: string;
+  facebook?: string;
+  email?: string;
 }
 
 function parseCreate(body: unknown): { ok: true; value: CreateBusinessPayload } | { ok: false; error: string } {
   if (typeof body !== 'object' || body === null) return { ok: false, error: 'Invalid JSON body' };
-  const { nome, endereco, telefone, categoria } = body as any;
+  const {
+    nome,
+    endereco,
+    telefone,
+    categoria,
+    descricao,
+    foto,
+    logo_url,
+    website,
+    instagram,
+    facebook,
+    email,
+  } = body as any;
+
   if (typeof nome !== 'string' || !nome.trim()) return { ok: false, error: 'nome must be a non-empty string' };
   if (typeof endereco !== 'string' || !endereco.trim()) return { ok: false, error: 'endereco must be a non-empty string' };
   if (typeof categoria !== 'string' || !categoria.trim()) return { ok: false, error: 'categoria must be a non-empty string' };
   if (telefone && typeof telefone !== 'string') return { ok: false, error: 'telefone must be a string' };
-  return { ok: true, value: { nome: nome.trim(), endereco: endereco.trim(), telefone: telefone?.trim(), categoria: categoria.trim() } };
+
+  const trimOpt = (v: any) => (typeof v === 'string' ? v.trim() : undefined);
+
+  return {
+    ok: true,
+    value: {
+      nome: nome.trim(),
+      endereco: endereco.trim(),
+      telefone: trimOpt(telefone),
+      categoria: categoria.trim(),
+      descricao: trimOpt(descricao),
+      foto: trimOpt(foto),
+      logo_url: trimOpt(logo_url),
+      website: trimOpt(website),
+      instagram: trimOpt(instagram),
+      facebook: trimOpt(facebook),
+      email: trimOpt(email),
+    },
+  };
 }
 
 // GET /api/admin/negocios

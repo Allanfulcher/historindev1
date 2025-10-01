@@ -14,7 +14,7 @@ export type HistoriaAdmin = {
   id: string;
   created_at: string;
   rua_id?: string;
-  org_id?: string;
+  negocio_id?: string;
   titulo: string;
   descricao: string;
   fotos?: string[];
@@ -24,15 +24,27 @@ export type HistoriaAdmin = {
   tags?: string[];
 };
 
+type RuaLite = {
+  id: string;
+  nome: string;
+};
+
+type NegocioLite = {
+  id: string;
+  nome: string;
+};
+
 export default function AdminHistoriasPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [items, setItems] = useState<HistoriaAdmin[]>([]);
+  const [ruas, setRuas] = useState<RuaLite[]>([]);
+  const [negocios, setNegocios] = useState<NegocioLite[]>([]);
 
   const [form, setForm] = useState({
     ruaId: "",
-    orgId: "",
+    negocioId: "",
     titulo: "",
     descricao: "",
     fotosCsv: "",
@@ -60,12 +72,34 @@ export default function AdminHistoriasPage() {
     }
   }
 
+  async function loadRuas() {
+    try {
+      const res = await adminFetch<{ data: any[] }>(`/api/admin/ruas?limit=1000`);
+      const mapped = (res.data || []).map((r: any) => ({ id: r.id, nome: r.nome })) as RuaLite[];
+      setRuas(mapped);
+    } catch (e) {
+      // non-fatal
+    }
+  }
+
+  async function loadNegocios() {
+    try {
+      const res = await adminFetch<{ data: any[] }>(`/api/admin/negocios?limit=1000`);
+      const mapped = (res.data || []).map((n: any) => ({ id: String(n.id), nome: String(n.nome) })) as NegocioLite[];
+      setNegocios(mapped);
+    } catch (e) {
+      // non-fatal
+    }
+  }
+
   useEffect(() => {
     if (!isAdminAuthenticated()) {
       router.replace("/admin");
       return;
     }
     load();
+    loadRuas();
+    loadNegocios();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -82,7 +116,7 @@ export default function AdminHistoriasPage() {
     try {
       const payload: any = {
         ruaId: form.ruaId.trim() || undefined,
-        orgId: form.orgId.trim() || undefined,
+        negocioId: form.negocioId.trim() || undefined,
         titulo: form.titulo.trim(),
         descricao: form.descricao.trim(),
         fotos: parseCsv(form.fotosCsv),
@@ -97,7 +131,7 @@ export default function AdminHistoriasPage() {
         method: "POST",
         body: JSON.stringify(payload),
       });
-      setForm({ ruaId: "", orgId: "", titulo: "", descricao: "", fotosCsv: "", lat: "", lng: "", ano: "", criador: "", tagsCsv: "" });
+      setForm({ ruaId: "", negocioId: "", titulo: "", descricao: "", fotosCsv: "", lat: "", lng: "", ano: "", criador: "", tagsCsv: "" });
       await load();
     } catch (e: any) {
       setError(e?.message || "Failed to create story");
@@ -126,20 +160,34 @@ export default function AdminHistoriasPage() {
 
       <AdminSection title="Criar História">
         <form onSubmit={handleCreate} className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <AdminInput
-            label="Rua ID (UUID opcional)"
-            type="text"
-            value={form.ruaId}
-            onChange={(e) => setForm((f) => ({ ...f, ruaId: e.target.value }))}
-            placeholder="rua uuid"
-          />
-          <AdminInput
-            label="Org ID (UUID opcional)"
-            type="text"
-            value={form.orgId}
-            onChange={(e) => setForm((f) => ({ ...f, orgId: e.target.value }))}
-            placeholder="organization uuid"
-          />
+          <div>
+            <label className="block text-sm font-medium text-[#6B5B4F] mb-1">Rua (selecionar)</label>
+            <select
+              className="w-full border border-[#E5DED3] rounded-md px-3 py-2 bg-white text-[#4A3F35] focus:outline-none focus:ring-2 focus:ring-[#D7C8B8]"
+              value={form.ruaId}
+              onChange={(e) => setForm((f) => ({ ...f, ruaId: e.target.value }))}
+            >
+              <option value="">— Sem rua —</option>
+              {ruas.map((r) => (
+                <option key={r.id} value={r.id}>{r.nome}</option>
+              ))}
+            </select>
+            <p className="text-[11px] text-[#A0958A] mt-1">Opcional. Usa o ID (bigint) da rua selecionada.</p>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-[#6B5B4F] mb-1">Negócio (selecionar)</label>
+            <select
+              className="w-full border border-[#E5DED3] rounded-md px-3 py-2 bg-white text-[#4A3F35] focus:outline-none focus:ring-2 focus:ring-[#D7C8B8]"
+              value={form.negocioId}
+              onChange={(e) => setForm((f) => ({ ...f, negocioId: e.target.value }))}
+            >
+              <option value="">— Sem negócio —</option>
+              {negocios.map((n) => (
+                <option key={n.id} value={n.id}>{n.nome}</option>
+              ))}
+            </select>
+            <p className="text-[11px] text-[#A0958A] mt-1">Opcional. Usa o ID (bigint) do negócio selecionado.</p>
+          </div>
           <AdminInput
             label="Título"
             type="text"
@@ -213,7 +261,7 @@ export default function AdminHistoriasPage() {
           columns={[
             { key: "titulo", label: "Título" },
             { key: "rua_id", label: "Rua" },
-            { key: "org_id", label: "Org" },
+            { key: "negocio_id", label: "Negócio" },
             { key: "ano", label: "Ano" },
             { key: "tags", label: "Tags" },
             { key: "actions", label: "" },
@@ -226,7 +274,7 @@ export default function AdminHistoriasPage() {
                 <div className="text-[11px] text-[#A0958A] mt-1">{new Date(h.created_at).toLocaleString()}</div>
               </td>
               <td className="py-3 pr-3 align-top">{h.rua_id || <span className="text-[#A0958A] text-xs">—</span>}</td>
-              <td className="py-3 pr-3 align-top">{h.org_id || <span className="text-[#A0958A] text-xs">—</span>}</td>
+              <td className="py-3 pr-3 align-top">{h.negocio_id || <span className="text-[#A0958A] text-xs">—</span>}</td>
               <td className="py-3 pr-3 align-top">{h.ano || <span className="text-[#A0958A] text-xs">—</span>}</td>
               <td className="py-3 pr-3 align-top">
                 {h.tags && h.tags.length ? (

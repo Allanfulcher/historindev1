@@ -78,6 +78,13 @@ create table if not exists public.businesses (
   id uuid primary key default gen_random_uuid(),
   created_at timestamptz not null default now(),
   nome text not null,
+  descricao text null,
+  foto text null,
+  logo_url text null,
+  website text null,
+  instagram text null,
+  facebook text null,
+  email text null,
   endereco text not null,
   telefone text null,
   categoria text not null

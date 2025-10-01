@@ -20,11 +20,18 @@ type Rua = {
   coordenadas?: [number, number];
 };
 
+type CidadeLite = {
+  id: string;
+  nome: string;
+  estado: string;
+};
+
 export default function AdminRuasPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [items, setItems] = useState<Rua[]>([]);
+  const [cities, setCities] = useState<CidadeLite[]>([]);
 
   const [form, setForm] = useState({
     nome: "",
@@ -52,12 +59,23 @@ export default function AdminRuasPage() {
     }
   }
 
+  async function loadCities() {
+    try {
+      const res = await adminFetch<{ data: any[] }>(`/api/admin/cidades?limit=1000`);
+      const mapped = (res.data || []).map((c: any) => ({ id: c.id, nome: c.nome, estado: c.estado })) as CidadeLite[];
+      setCities(mapped);
+    } catch (e) {
+      // non-fatal: keep cities empty
+    }
+  }
+
   useEffect(() => {
     if (!isAdminAuthenticated()) {
       router.replace("/admin");
       return;
     }
     load();
+    loadCities();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -116,13 +134,22 @@ export default function AdminRuasPage() {
             onChange={(e) => setForm((f) => ({ ...f, nome: e.target.value }))}
             required
           />
-          <AdminInput
-            label="Cidade ID (UUID opcional)"
-            type="text"
-            value={form.cidadeId}
-            onChange={(e) => setForm((f) => ({ ...f, cidadeId: e.target.value }))}
-            placeholder="ex: 550e8400-e29b-41d4-a716-446655440000"
-          />
+          <div>
+            <label className="block text-sm font-medium text-[#6B5B4F] mb-1">Cidade (selecionar)</label>
+            <select
+              className="w-full border border-[#E5DED3] rounded-md px-3 py-2 bg-white text-[#4A3F35] focus:outline-none focus:ring-2 focus:ring-[#D7C8B8]"
+              value={form.cidadeId}
+              onChange={(e) => setForm((f) => ({ ...f, cidadeId: e.target.value }))}
+            >
+              <option value="">— Sem cidade —</option>
+              {cities.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.nome} ({c.estado})
+                </option>
+              ))}
+            </select>
+            <p className="text-[11px] text-[#A0958A] mt-1">Opcional. Usa o UUID da cidade selecionada.</p>
+          </div>
           <AdminInput
             label="Fotos (texto)"
             type="text"

@@ -162,6 +162,7 @@ export default function AdminCidadesPage() {
         {!loading && items.length === 0 && <p className="text-[#A0958A]">Nenhuma cidade encontrada.</p>}
         <AdminTable
           columns={[
+            { key: "id", label: "ID (UUID)" },
             { key: "nome", label: "Nome" },
             { key: "estado", label: "Estado" },
             { key: "populacao", label: "População" },
@@ -172,6 +173,17 @@ export default function AdminCidadesPage() {
         >
           {items.map((c, rowIdx) => (
             <tr key={c.id} className={rowIdx % 2 === 0 ? "bg-[#FEFCF8]" : "bg-[#FAF7F2]"}>
+              <td className="py-3 pr-3 pl-3 align-top whitespace-nowrap text-xs">
+                <div className="font-mono break-all max-w-[220px]">{c.id}</div>
+                <button
+                  type="button"
+                  className="mt-1 text-[11px] text-blue-700 hover:underline"
+                  onClick={() => navigator.clipboard.writeText(c.id)}
+                  title="Copiar UUID"
+                >
+                  Copiar
+                </button>
+              </td>
               <td className="py-3 pr-3 pl-3 align-top">
                 <div className="font-medium">{c.nome}</div>
                 <div className="text-[11px] text-[#A0958A] mt-1">{new Date(c.created_at).toLocaleString()}</div>

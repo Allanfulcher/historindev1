@@ -31,6 +31,13 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
   if (typeof raw.endereco === 'string' && raw.endereco.trim()) patch.endereco = raw.endereco.trim();
   if (typeof raw.categoria === 'string' && raw.categoria.trim()) patch.categoria = raw.categoria.trim();
   if (typeof raw.telefone === 'string') patch.telefone = raw.telefone.trim();
+  if (typeof raw.descricao === 'string') patch.descricao = raw.descricao.trim();
+  if (typeof raw.foto === 'string') patch.foto = raw.foto.trim();
+  if (typeof raw.logo_url === 'string') patch.logo_url = raw.logo_url.trim();
+  if (typeof raw.website === 'string') patch.website = raw.website.trim();
+  if (typeof raw.instagram === 'string') patch.instagram = raw.instagram.trim();
+  if (typeof raw.facebook === 'string') patch.facebook = raw.facebook.trim();
+  if (typeof raw.email === 'string') patch.email = raw.email.trim();
   if (Object.keys(patch).length === 0) return jsonBadRequest('No valid fields to update');
 
   const supabase = await adminSupabase();

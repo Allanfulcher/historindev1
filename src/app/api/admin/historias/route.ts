@@ -2,8 +2,9 @@ import { NextRequest } from 'next/server';
 import { adminSupabase, jsonBadRequest, jsonOk, jsonServerError, requireAdmin } from '../_utils';
 
 interface CreateHistoriaPayload {
-  ruaId?: string; // uuid
-  orgId?: string; // uuid
+  id?: string; // optional custom id (ignored by DB if identity)
+  ruaId?: string; // integer id as string
+  negocioId?: string; // integer id as string
   titulo: string;
   descricao: string;
   fotos?: string[];
@@ -13,8 +14,8 @@ interface CreateHistoriaPayload {
   tags?: string[];
 }
 
-function isUuid(v: string) {
-  return /^[0-9a-fA-F-]{36}$/.test(v);
+function isDigits(v: string) {
+  return /^\d+$/.test(v);
 }
 
 function parseArray(v: any): string[] | undefined {
@@ -26,11 +27,14 @@ function parseArray(v: any): string[] | undefined {
 
 function parseCreate(body: unknown): { ok: true; value: CreateHistoriaPayload } | { ok: false; error: string } {
   if (typeof body !== 'object' || body === null) return { ok: false, error: 'Invalid JSON body' };
-  const { ruaId, orgId, titulo, descricao, fotos, coordenadas, ano, criador, tags } = body as any;
+  const { id, ruaId, negocioId, titulo, descricao, fotos, coordenadas, ano, criador, tags } = body as any;
   if (typeof titulo !== 'string' || !titulo.trim()) return { ok: false, error: 'titulo must be a non-empty string' };
   if (typeof descricao !== 'string' || !descricao.trim()) return { ok: false, error: 'descricao must be a non-empty string' };
-  if (ruaId && (typeof ruaId !== 'string' || !isUuid(ruaId))) return { ok: false, error: 'ruaId must be a UUID' };
-  if (orgId && (typeof orgId !== 'string' || !isUuid(orgId))) return { ok: false, error: 'orgId must be a UUID' };
+  if (id != null) {
+    if (typeof id !== 'string' || !isDigits(id)) return { ok: false, error: 'id must be an integer string' };
+  }
+  if (ruaId && (typeof ruaId !== 'string' || !isDigits(ruaId))) return { ok: false, error: 'ruaId must be an integer string' };
+  if (negocioId && (typeof negocioId !== 'string' || !isDigits(negocioId))) return { ok: false, error: 'negocioId must be an integer string' };
   if (coordenadas) {
     if (!Array.isArray(coordenadas) || coordenadas.length !== 2) return { ok: false, error: 'coordenadas must be [lat, lng]' };
     const [lat, lng] = coordenadas;
@@ -39,8 +43,9 @@ function parseCreate(body: unknown): { ok: true; value: CreateHistoriaPayload } 
   return {
     ok: true,
     value: {
+      id,
       ruaId,
-      orgId,
+      negocioId,
       titulo: titulo.trim(),
       descricao: descricao.trim(),
       fotos: parseArray(fotos),
@@ -64,7 +69,7 @@ export async function GET(req: NextRequest) {
   const supabase = await adminSupabase();
   const { data, error } = await supabase
     .from('stories')
-    .select('id, created_at, rua_id, org_id, titulo, descricao, fotos, lat, lng, ano, criador, tags')
+    .select('id, created_at, rua_id, negocio_id, titulo, descricao, fotos, lat, lng, ano, criador, tags')
     .order('created_at', { ascending: false })
     .range(offset, offset + Math.max(0, Math.min(limit, 500)) - 1);
 
@@ -74,7 +79,7 @@ export async function GET(req: NextRequest) {
     id: h.id,
     created_at: h.created_at,
     rua_id: h.rua_id ?? undefined,
-    org_id: h.org_id ?? undefined,
+    negocio_id: h.negocio_id ?? undefined,
     titulo: h.titulo,
     descricao: h.descricao,
     fotos: h.fotos ?? undefined,
@@ -99,7 +104,7 @@ export async function POST(req: NextRequest) {
   const supabase = await adminSupabase();
   const insert: any = {
     rua_id: parsed.value.ruaId ?? null,
-    org_id: parsed.value.orgId ?? null,
+    negocio_id: parsed.value.negocioId ?? null,
     titulo: parsed.value.titulo,
     descricao: parsed.value.descricao,
     fotos: parsed.value.fotos ?? null,
@@ -107,6 +112,7 @@ export async function POST(req: NextRequest) {
     criador: parsed.value.criador ?? null,
     tags: parsed.value.tags ?? null,
   };
+  if (parsed.value.id) insert.id = parsed.value.id;
   if (parsed.value.coordenadas) {
     insert.lat = parsed.value.coordenadas[0];
     insert.lng = parsed.value.coordenadas[1];
@@ -115,7 +121,7 @@ export async function POST(req: NextRequest) {
   const { data, error } = await supabase
     .from('stories')
     .insert([insert])
-    .select('id, created_at, rua_id, org_id, titulo, descricao, fotos, lat, lng, ano, criador, tags')
+    .select('id, created_at, rua_id, negocio_id, titulo, descricao, fotos, lat, lng, ano, criador, tags')
     .single();
 
   if (error) return jsonServerError(error.message);
@@ -124,7 +130,7 @@ export async function POST(req: NextRequest) {
     id: data.id,
     created_at: data.created_at,
     rua_id: data.rua_id ?? undefined,
-    org_id: data.org_id ?? undefined,
+    negocio_id: data.negocio_id ?? undefined,
     titulo: data.titulo,
     descricao: data.descricao,
     fotos: data.fotos ?? undefined,
