@@ -150,6 +150,7 @@ export default function AdminNegociosPage() {
         {!loading && items.length === 0 && <p className="text-[#A0958A]">Nenhum negócio encontrado.</p>}
         <AdminTable
           columns={[
+            { key: "id", label: "ID" },
             { key: "nome", label: "Nome" },
             { key: "categoria", label: "Categoria" },
             { key: "endereco", label: "Endereço" },
@@ -159,6 +160,7 @@ export default function AdminNegociosPage() {
         >
           {items.map((n, rowIdx) => (
             <tr key={n.id} className={rowIdx % 2 === 0 ? "bg-[#FEFCF8]" : "bg-[#FAF7F2]"}>
+              <td className="py-3 pr-3 pl-3 align-top whitespace-nowrap text-xs text-[#4A3F35]">{n.id}</td>
               <td className="py-3 pr-3 pl-3 align-top">
                 <div className="font-medium">{n.nome}</div>
                 <div className="text-[11px] text-[#A0958A] mt-1">{new Date(n.created_at).toLocaleString()}</div>

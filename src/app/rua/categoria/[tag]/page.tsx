@@ -7,7 +7,6 @@ import Header from "@/components/Header";
 import Menu from "@/components/Menu";
 import HistoriaCard from "@/components/ruas/HistoriaCard";
 import YearNavigator from "@/components/ruas/YearNavigator";
-import CitySelector from "@/components/ruas/CitySelector";
 import { supabaseBrowser } from "@/lib/supabase/client";
 import { Historia } from "@/types";
 
@@ -207,9 +206,30 @@ export default function CategoriaTagPage() {
               <p className="mt-1 text-sm text-gray-600">Veja todas as historias desta categoria.</p>
             </div>
 
-            {/* City selector with consistent styling */}
+            {/* Local city selector (only for Tags page) */}
             <div className="min-w-[200px]">
-              <CitySelector selectedCityId={selectedCityId} onCityChange={setSelectedCityId} />
+              <div className="mb-1">
+                <span className="block text-xs font-medium text-[#4A3F35]">Cidade</span>
+              </div>
+              <div className="flex gap-1 flex-wrap">
+                {[
+                  { id: '', name: 'Todas' },
+                  { id: '0', name: 'Gramado' },
+                  { id: '1', name: 'Canela' },
+                ].map((city) => (
+                  <button
+                    key={city.id || 'ambas'}
+                    onClick={() => setSelectedCityId(city.id)}
+                    className={`px-2 py-1 rounded-md text-sm font-medium transition-colors duration-200 ${
+                      selectedCityId === city.id
+                        ? 'bg-[#8B4513] text-white shadow-sm'
+                        : 'bg-white text-[#4A3F35] border border-[#D4C4A8] hover:bg-[#F5F1E8]'
+                    }`}
+                  >
+                    {city.name}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </div>
