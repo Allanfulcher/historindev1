@@ -193,12 +193,12 @@ export default function CategoriaTagPage() {
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
               <h1 className="text-xl sm:text-2xl text-gray-900 flex items-center gap-3">
-                <span className="inline-flex items-center justify-center rounded-lg bg-blue-50 text-blue-700 w-8 h-8 shrink-0">
-                  <FiTag className="w-5 h-5" />
+                <span className="inline-flex items-center justify-center rounded-lg bg-[#8B4513] text-white w-8 h-8 shrink-0">
+                  <FiTag className="w-5 h-5 " />
                 </span>
                 <div className="flex items-center gap-2">
                   <span className="sr-only sm:not-sr-only sm:text-sm sm:text-gray-700">Categoria:</span>
-                  <span className="text-blue-700 text-2xl sm:text-3xl font-medium tracking-tight">
+                  <span className="text-[#8B4513] font-bold text-2xl sm:text-3xl tracking-tight">
                     {resolvedTag ?? tagSlug}
                   </span>
                 </div>
