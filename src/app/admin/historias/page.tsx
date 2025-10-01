@@ -14,7 +14,7 @@ export type HistoriaAdmin = {
   id: string;
   created_at: string;
   rua_id?: string;
-  org_id?: string;
+  negocio_id?: string;
   titulo: string;
   descricao: string;
   fotos?: string[];
@@ -29,9 +29,9 @@ type RuaLite = {
   nome: string;
 };
 
-type OrgLite = {
+type NegocioLite = {
   id: string;
-  fantasia: string;
+  nome: string;
 };
 
 export default function AdminHistoriasPage() {
@@ -40,11 +40,11 @@ export default function AdminHistoriasPage() {
   const [error, setError] = useState<string | null>(null);
   const [items, setItems] = useState<HistoriaAdmin[]>([]);
   const [ruas, setRuas] = useState<RuaLite[]>([]);
-  const [orgs, setOrgs] = useState<OrgLite[]>([]);
+  const [negocios, setNegocios] = useState<NegocioLite[]>([]);
 
   const [form, setForm] = useState({
     ruaId: "",
-    orgId: "",
+    negocioId: "",
     titulo: "",
     descricao: "",
     fotosCsv: "",
@@ -82,11 +82,11 @@ export default function AdminHistoriasPage() {
     }
   }
 
-  async function loadOrgs() {
+  async function loadNegocios() {
     try {
-      const res = await adminFetch<{ data: any[] }>(`/api/admin/orgs?limit=1000`);
-      const mapped = (res.data || []).map((o: any) => ({ id: o.id, fantasia: o.fantasia })) as OrgLite[];
-      setOrgs(mapped);
+      const res = await adminFetch<{ data: any[] }>(`/api/admin/negocios?limit=1000`);
+      const mapped = (res.data || []).map((n: any) => ({ id: String(n.id), nome: String(n.nome) })) as NegocioLite[];
+      setNegocios(mapped);
     } catch (e) {
       // non-fatal
     }
@@ -99,7 +99,7 @@ export default function AdminHistoriasPage() {
     }
     load();
     loadRuas();
-    loadOrgs();
+    loadNegocios();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -116,7 +116,7 @@ export default function AdminHistoriasPage() {
     try {
       const payload: any = {
         ruaId: form.ruaId.trim() || undefined,
-        orgId: form.orgId.trim() || undefined,
+        negocioId: form.negocioId.trim() || undefined,
         titulo: form.titulo.trim(),
         descricao: form.descricao.trim(),
         fotos: parseCsv(form.fotosCsv),
@@ -131,7 +131,7 @@ export default function AdminHistoriasPage() {
         method: "POST",
         body: JSON.stringify(payload),
       });
-      setForm({ ruaId: "", orgId: "", titulo: "", descricao: "", fotosCsv: "", lat: "", lng: "", ano: "", criador: "", tagsCsv: "" });
+      setForm({ ruaId: "", negocioId: "", titulo: "", descricao: "", fotosCsv: "", lat: "", lng: "", ano: "", criador: "", tagsCsv: "" });
       await load();
     } catch (e: any) {
       setError(e?.message || "Failed to create story");
@@ -172,21 +172,21 @@ export default function AdminHistoriasPage() {
                 <option key={r.id} value={r.id}>{r.nome}</option>
               ))}
             </select>
-            <p className="text-[11px] text-[#A0958A] mt-1">Opcional. Usa o UUID da rua selecionada.</p>
+            <p className="text-[11px] text-[#A0958A] mt-1">Opcional. Usa o ID (bigint) da rua selecionada.</p>
           </div>
           <div>
-            <label className="block text-sm font-medium text-[#6B5B4F] mb-1">Organização (selecionar)</label>
+            <label className="block text-sm font-medium text-[#6B5B4F] mb-1">Negócio (selecionar)</label>
             <select
               className="w-full border border-[#E5DED3] rounded-md px-3 py-2 bg-white text-[#4A3F35] focus:outline-none focus:ring-2 focus:ring-[#D7C8B8]"
-              value={form.orgId}
-              onChange={(e) => setForm((f) => ({ ...f, orgId: e.target.value }))}
+              value={form.negocioId}
+              onChange={(e) => setForm((f) => ({ ...f, negocioId: e.target.value }))}
             >
-              <option value="">— Sem org —</option>
-              {orgs.map((o) => (
-                <option key={o.id} value={o.id}>{o.fantasia}</option>
+              <option value="">— Sem negócio —</option>
+              {negocios.map((n) => (
+                <option key={n.id} value={n.id}>{n.nome}</option>
               ))}
             </select>
-            <p className="text-[11px] text-[#A0958A] mt-1">Opcional. Usa o UUID da organização selecionada.</p>
+            <p className="text-[11px] text-[#A0958A] mt-1">Opcional. Usa o ID (bigint) do negócio selecionado.</p>
           </div>
           <AdminInput
             label="Título"
@@ -261,7 +261,7 @@ export default function AdminHistoriasPage() {
           columns={[
             { key: "titulo", label: "Título" },
             { key: "rua_id", label: "Rua" },
-            { key: "org_id", label: "Org" },
+            { key: "negocio_id", label: "Negócio" },
             { key: "ano", label: "Ano" },
             { key: "tags", label: "Tags" },
             { key: "actions", label: "" },
@@ -274,7 +274,7 @@ export default function AdminHistoriasPage() {
                 <div className="text-[11px] text-[#A0958A] mt-1">{new Date(h.created_at).toLocaleString()}</div>
               </td>
               <td className="py-3 pr-3 align-top">{h.rua_id || <span className="text-[#A0958A] text-xs">—</span>}</td>
-              <td className="py-3 pr-3 align-top">{h.org_id || <span className="text-[#A0958A] text-xs">—</span>}</td>
+              <td className="py-3 pr-3 align-top">{h.negocio_id || <span className="text-[#A0958A] text-xs">—</span>}</td>
               <td className="py-3 pr-3 align-top">{h.ano || <span className="text-[#A0958A] text-xs">—</span>}</td>
               <td className="py-3 pr-3 align-top">
                 {h.tags && h.tags.length ? (
