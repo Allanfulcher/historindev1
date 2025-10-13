@@ -15,7 +15,9 @@ import PopupCarrossel from './popups/PopupCarrossel';
 import SiteInfo from './cards/SiteInfo';
 import Footer from './extra/footer';
 import RecomendedStreets from './cards/RecomendedStreets';
+import RecomendedHistorias from './cards/RecomendedHistorias';
 import WelcomeCard from './cards/WelcomeCard';
+import DonationCard from './cards/DonationCard';
 
 interface HomeProps {
   data?: any; // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -100,6 +102,11 @@ const Home: React.FC<HomeProps> = ({ onPreviewOpen }) => {
             <h2 className="text-2xl font-bold text-[#4A3F35] mb-6">Ruas Recomendadas</h2>
             <RecomendedStreets ruas={ruas} historias={historias} handleRuaClick={handleRuaClick} />
           </section>  
+          {/* Recommended Historias (>= 1990) */}
+          <section className="mb-12">
+            <h2 className="text-2xl font-bold text-[#4A3F35] mb-6">Histórias Recomendadas</h2>
+            <RecomendedHistorias historias={historias} />
+          </section>
         </div>
 
         {/* African Legacy Card */}
@@ -112,6 +119,10 @@ const Home: React.FC<HomeProps> = ({ onPreviewOpen }) => {
           <div className="bg-white p-6 rounded-lg shadow-md">
             <SiteInfo />
           </div>
+        </section>
+
+        <section className="max-w-4xl mx-auto px-4 py-8">
+          <DonationCard/>
         </section>
       </div>
 

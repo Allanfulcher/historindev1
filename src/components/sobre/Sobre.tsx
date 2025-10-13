@@ -9,6 +9,7 @@ import Header from '../Header';
 import DropDown from '../buttons/DropDown';
 import FeedbackPopup from '../popups/FeedbackPopup';
 import QuizModal from '../popups/QuizModal';
+import DonationCard from '../cards/DonationCard';
 
 interface TeamMember {
   name: string;
@@ -50,11 +51,7 @@ const Sobre: React.FC = () => {
     },
   ];
 
-  const copyToClipboard = () => {
-    const pixKey = '00020101021126580014br.gov.bcb.pix01368eac1054-b957-4af2-88c7-046b743ece015204000053039865802BR5925allcom comercio e servico6009SAO PAULO622905251J87ZBFMDTY970D6AP39DEHSC6304FDFB';
-    navigator.clipboard.writeText(pixKey);
-    alert('Chave Pix copiada!');
-  };
+  // copyToClipboard moved into DonationCard component
 
   const handleJoinSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -281,24 +278,7 @@ const Sobre: React.FC = () => {
         </div>
       </section>
 
-      {/* Donation Section */}
-      <section id="doacao" className="mb-6">
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <h3 className="text-center text-xl font-bold mb-4">Faça sua Doação</h3>
-          <p className="text-center text-gray-600 mb-4">
-            Contamos com financiamento coletivo e patrocínios para manter o Historin.com. Apoie o Historin e nos ajude a cobrir os custos mensais da plataforma.
-          </p>
-          <div className="flex justify-center">
-            <button
-              className="bg-[#8A5A44] text-white px-6 py-3 rounded-md hover:bg-[#D8A568] flex items-center space-x-2 transition-transform transform hover:scale-105"
-              onClick={copyToClipboard}
-            >
-              <i className="fas fa-copy"></i>
-              <span>Copiar Chave Pix</span>
-            </button>
-          </div>
-        </div>
-      </section>
+      <DonationCard /> 
 
       {/* Contact Us Section */}
       <section className="mb-6">

@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import type { Historia, Rua, Cidade } from '../../types';
 import HistoriaCard from './HistoriaCard';
+import AdCard, { AdBusiness } from '../cards/AdCard';
+import type { Ad } from '@/types';
 
 interface HistoriaTabProps {
   historias: Historia[];
@@ -19,6 +21,62 @@ const HistoriaTab: React.FC<HistoriaTabProps> = ({
   setSortOrder,
   isReady = true
 }) => {
+  // --- Load ad from API ---
+  const [ad, setAd] = useState<Ad | null>(null);
+  const [adLoading, setAdLoading] = useState(false);
+  const [adError, setAdError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    async function fetchAd() {
+      setAdLoading(true);
+      setAdError(null);
+      try {
+        const qs = rua?.id ? `?ruaId=${encodeURIComponent(String(rua.id))}` : '';
+        const res = await fetch(`/api/ads${qs}`, { cache: 'no-store' });
+        if (!res.ok) throw new Error(`Failed to load ad (${res.status})`);
+        const json = await res.json();
+        if (!cancelled) setAd(json.data as Ad);
+      } catch (e: any) {
+        if (!cancelled) setAdError(e?.message || 'Failed to load ad');
+      } finally {
+        if (!cancelled) setAdLoading(false);
+      }
+    }
+    fetchAd();
+    return () => { cancelled = true; };
+  }, [rua?.id]);
+
+  // Determine match index using ad.match_keywords (if provided)
+  const matchIndex = useMemo(() => {
+    if (!ad || !ad.match_keywords || ad.match_keywords.length === 0) return -1;
+    const kws = ad.match_keywords.map((s) => (s || '').toLowerCase()).filter(Boolean);
+    if (kws.length === 0) return -1;
+    return historias.findIndex((h) => {
+      const t = (h.titulo || '').toLowerCase();
+      const d = (h.descricao || '').toLowerCase();
+      return kws.some((k) => t.includes(k) || d.includes(k));
+    });
+  }, [ad, historias]);
+
+  const shouldShowTopAd = useMemo(() => {
+    if (!ad) return false;
+    if (ad.placement === 'top') return true;
+    return matchIndex === -1;
+  }, [ad, matchIndex]);
+
+  const selectedBusiness: AdBusiness | null = useMemo(() => {
+    if (!ad) return null;
+    return {
+      id: ad.id,
+      name: ad.title,
+      description: ad.description,
+      image: ad.image_url,
+      link: ad.link_url,
+      tag: ad.tag || 'Patrocinado',
+    };
+  }, [ad]);
+
   return (
     <>
       {/* Feed Header and Controls */}
@@ -38,20 +96,6 @@ const HistoriaTab: React.FC<HistoriaTabProps> = ({
             </span>
           )}
         </div>
-        {/* Sort controls can be uncommented if needed
-        <div className="flex items-center gap-2">
-          <label htmlFor="sortOrder" className="text-sm text-[#6B5B4F]">Ordenar:</label>
-          <select
-            id="sortOrder"
-            value={sortOrder}
-            onChange={(e) => setSortOrder(e.target.value as 'asc' | 'desc')}
-            className="text-sm bg-[#F5F1EB] text-[#4A3F35] border border-[#E6D3B4] rounded px-2 py-1"
-          >
-            <option value="asc">Antigas</option>
-            <option value="desc">Recentes</option>
-          </select>
-        </div>
-        */}
       </div>
 
       {/* Prominent Rua Title */}
@@ -66,15 +110,34 @@ const HistoriaTab: React.FC<HistoriaTabProps> = ({
 
       {/* Historia Feed */}
       <div className="flex flex-col gap-8 bg-[#f4ede0]">
-        {historias.length > 0 && (
-          historias.map((historia) => (
-            <div
-              key={historia.id}
-              id={`historia-${historia.id}`}
-              className="scroll-mt-24"
-            >
-              <HistoriaCard historia={historia} />
+        {/* Top Ad when no matching historia exists */}
+        {shouldShowTopAd && selectedBusiness && (
+          <div className="px-0 sm:px-0 lg:px-6 xl:px-8">
+            <div className="max-w-md mx-auto w-full">
+              <AdCard business={selectedBusiness} />
             </div>
+          </div>
+        )}
+
+        {historias.length > 0 && (
+          historias.map((historia, idx) => (
+            <React.Fragment key={historia.id}>
+              <div
+                id={`historia-${historia.id}`}
+                className="scroll-mt-24"
+              >
+                <HistoriaCard historia={historia} />
+              </div>
+
+              {/* Insert Ad right after the first matching historia */}
+              {selectedBusiness && matchIndex !== -1 && idx === matchIndex && (
+                <div className="px-0 sm:px-0 lg:px-6 xl:px-8">
+                  <div className="max-w-md mx-auto w-full">
+                    <AdCard business={selectedBusiness} />
+                  </div>
+                </div>
+              )}
+            </React.Fragment>
           ))
         )}
         {isReady && historias.length === 0 && (

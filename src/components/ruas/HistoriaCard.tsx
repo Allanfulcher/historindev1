@@ -8,6 +8,7 @@ interface HistoriaCardProps {
 
 const HistoriaCard: React.FC<HistoriaCardProps> = ({ historia }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [copied, setCopied] = useState(false);
   // Touch/swipe state
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
   const [touchStartY, setTouchStartY] = useState<number | null>(null);
@@ -27,6 +28,42 @@ const HistoriaCard: React.FC<HistoriaCardProps> = ({ historia }) => {
 
   const nextImage = () => {
     setCurrentImageIndex((prev) => (prev + 1) % images.length);
+  };
+
+  // Build shareable URL with scroll and UTM parameters
+  const buildShareUrl = (): string => {
+    const origin = typeof window !== 'undefined' ? window.location.origin : '';
+    const ruaId = String(historia.rua_id);
+    const historiaId = String(historia.id);
+    const url = `${origin}/rua/${ruaId}/historia/${historiaId}?scroll=true&utm_source=share&utm_medium=app&utm_campaign=historia_share`;
+    return url;
+  };
+
+  const handleShare = async () => {
+    const shareUrl = buildShareUrl();
+    const shareData = {
+      title: `Historin • ${historia.titulo}`,
+      text: `Veja esta história (${historia.ano}): ${historia.titulo}`,
+      url: shareUrl,
+    };
+    try {
+      if (typeof navigator !== 'undefined' && (navigator as any).share) {
+        await (navigator as any).share(shareData);
+      } else if (typeof navigator !== 'undefined' && navigator.clipboard) {
+        await navigator.clipboard.writeText(shareUrl);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 1500);
+      }
+    } catch (_) {
+      // Fallback: try copy on error
+      try {
+        if (typeof navigator !== 'undefined' && navigator.clipboard) {
+          await navigator.clipboard.writeText(shareUrl);
+          setCopied(true);
+          setTimeout(() => setCopied(false), 1500);
+        }
+      } catch {}
+    }
   };
 
   const prevImage = () => {
@@ -146,6 +183,20 @@ const HistoriaCard: React.FC<HistoriaCardProps> = ({ historia }) => {
           <h2 className="text-lg font-bold text-[#4A3F35] leading-tight flex-1">
             {historia.titulo}
           </h2>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleShare}
+              className="inline-flex items-center gap-1 text-[#4A3F35] hover:text-[#2f261f] text-sm font-medium bg-[#F5F1EB] px-2.5 py-1.5 rounded-md border border-[#E6D3B4] transition-colors"
+              aria-label="Compartilhar história"
+              title="Compartilhar"
+            >
+              <i className="fas fa-share-alt text-xs"></i>
+              <span className="hidden sm:inline">Compartilhar</span>
+            </button>
+            {copied && (
+              <span className="text-xs text-[#6B5B4F]">Link copiado</span>
+            )}
+          </div>
         </div>
       </div>
 

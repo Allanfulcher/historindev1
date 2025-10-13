@@ -79,6 +79,27 @@ export interface Negocio {
   categoria: string;
 }
 
+// Ads
+export interface Ad {
+  id: string;
+  active: boolean;
+  title: string;
+  description: string;
+  image_url: string;
+  link_url: string;
+  tag?: string;
+  priority?: number;
+  placement?: 'top' | 'after_match';
+  match_keywords?: string[] | null;
+  rua_id?: string | null;
+  historia_id?: string | null;
+  negocio_id?: string | null;
+  start_at?: string | null;
+  end_at?: string | null;
+  created_at?: string;
+  updated_at?: string;
+}
+
 export interface PreviewContent {
   type: 'rua' | 'historia';
   title: string;
