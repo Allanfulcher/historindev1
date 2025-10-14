@@ -47,13 +47,13 @@
 
 Without these variables, the build will succeed but database features won't work.
 
-### Debugging
+### Troubleshooting
 
-See **[DEBUGGING.md](./DEBUGGING.md)** for:
-- Console logging details
-- Visual debug panel
-- Error troubleshooting
-- Common issues & solutions
+If deployment fails, see **[TROUBLESHOOTING.md](./TROUBLESHOOTING.md)** for:
+- Common build errors & solutions
+- Step-by-step debugging guide
+- Environment variable setup
+- What to check when builds fail
 
 ---
 

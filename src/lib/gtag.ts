@@ -46,6 +46,8 @@ export const trackUTMParameters = () => {
 
 // Track hash route changes
 export const trackHashRoute = (hashRoute: string) => {
+  if (typeof window === 'undefined') return;
+  
   const fullPath = `${window.location.pathname}${window.location.search}#${hashRoute}`;
   pageview(fullPath);
   

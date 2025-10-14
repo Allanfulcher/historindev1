@@ -27,7 +27,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const supabase = getSupabaseServerClient<Database>();
+    const supabase = await getSupabaseServerClient<Database>();
 
     const payload: QuizInsert = {
       answers: answers as any,
