@@ -34,11 +34,18 @@ const HistoriaTab: React.FC<HistoriaTabProps> = ({
       try {
         const qs = rua?.id ? `?ruaId=${encodeURIComponent(String(rua.id))}` : '';
         const res = await fetch(`/api/ads${qs}`, { cache: 'no-store' });
-        if (!res.ok) throw new Error(`Failed to load ad (${res.status})`);
+        if (!res.ok) {
+          console.warn('Ad API not available:', res.status);
+          if (!cancelled) setAd(null);
+          return;
+        }
         const json = await res.json();
-        if (!cancelled) setAd(json.data as Ad);
+        // If API returns null (table doesn't exist), silently skip
+        if (!cancelled) setAd(json.data || null);
       } catch (e: any) {
-        if (!cancelled) setAdError(e?.message || 'Failed to load ad');
+        // Silently fail if ads feature not available
+        console.warn('Ads feature not available:', e?.message);
+        if (!cancelled) setAd(null);
       } finally {
         if (!cancelled) setAdLoading(false);
       }

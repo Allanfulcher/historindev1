@@ -5,20 +5,33 @@ import { jsonBadRequest, jsonOk, jsonServerError } from '../admin/_utils';
 // GET /api/ads?ruaId=1
 // Returns a single best ad for the rua (or generic), honoring active/time window
 export async function GET(req: NextRequest) {
-  const { searchParams } = new URL(req.url);
-  const ruaId = searchParams.get('ruaId');
+  try {
+    const { searchParams } = new URL(req.url);
+    const ruaId = searchParams.get('ruaId');
 
-  const supabase = await getSupabaseServerClient();
+    const supabase = await getSupabaseServerClient();
 
-  // Base filter: active and within time window
-  let query = supabase
-    .from('ads')
-    .select('*')
-    .eq('active', true)
-    .lte('start_at', new Date().toISOString())
-    .or('start_at.is.null')
-    .gte('end_at', new Date().toISOString())
-    .or('end_at.is.null') as any;
+    // Check if ads table exists by attempting a simple query
+    const { error: tableCheckError } = await supabase
+      .from('ads')
+      .select('id')
+      .limit(1);
+    
+    // If table doesn't exist, return empty result gracefully
+    if (tableCheckError && tableCheckError.message.includes('relation')) {
+      console.warn('⚠️ Ads table does not exist in this Supabase project');
+      return jsonOk({ data: null });
+    }
+
+    // Base filter: active and within time window
+    let query = supabase
+      .from('ads')
+      .select('*')
+      .eq('active', true)
+      .lte('start_at', new Date().toISOString())
+      .or('start_at.is.null')
+      .gte('end_at', new Date().toISOString())
+      .or('end_at.is.null') as any;
 
   if (ruaId) {
     // Prefer rua-targeted ads first
@@ -49,6 +62,10 @@ export async function GET(req: NextRequest) {
     .limit(1);
 
   if (error) return jsonServerError(error.message);
-  if (!data || data.length === 0) return jsonBadRequest('No ad available');
+  if (!data || data.length === 0) return jsonOk({ data: null });
   return jsonOk({ data: data[0] });
+  } catch (err: any) {
+    console.error('Error fetching ads:', err);
+    return jsonOk({ data: null }); // Return null instead of failing
+  }
 }
