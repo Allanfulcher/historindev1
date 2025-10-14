@@ -33,7 +33,7 @@ const AdCard: React.FC<AdCardProps> = ({ business, className }) => {
           {business.image ? (
             <img src={business.image} alt={business.name} className="w-full h-full object-cover" />
           ) : (
-            <div className="text-[#A09082] text-xs">Sem imagem</div>
+            <div className="text-[#A09082] text-xs">Sem imagens</div>
           )}
         </div>
 
