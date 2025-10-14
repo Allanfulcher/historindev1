@@ -139,7 +139,7 @@ const Menu: React.FC<MenuProps> = ({
             onClick={handleMenuItemClick}
           >
             <span className="block text-lg font-semibold text-[#6B5B4F]">REFERÊNCIAS</span>
-            <span className="block text-sm font-medium text-[#A0958A]">+ conteúdo</span>
+            <span className="block text-sm font-medium text-[#A0958A]">e conteúdo</span>
           </Link>
 
           {/* Surprise Me Button (if historias are available) */}
