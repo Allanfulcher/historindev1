@@ -1,22 +1,7 @@
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": ".next",
-  "framework": "nextjs",
-  "installCommand": "npm install",
-  "env": {
-    "NEXT_FONT_GOOGLE_MOCKED_RESPONSES": "[]",
-    "DISABLE_ESLINT_PLUGIN": "true",
-    "SKIP_ENV_VALIDATION": "true"
-  },
   "build": {
     "env": {
-      "NODE_OPTIONS": "--max_old_space_size=4096",
-      "NEXT_TELEMETRY_DISABLED": "1"
-    }
-  },
-  "functions": {
-    "app/**": {
-      "maxDuration": 30
+      "NODE_OPTIONS": "--max_old_space_size=4096"
     }
   }
 }
