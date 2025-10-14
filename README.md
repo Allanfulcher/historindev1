@@ -1,4 +1,63 @@
-Historin Dev
+# Historin Dev
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js 18+ 
+- npm or pnpm
+- Supabase account (for database features)
+
+### Setup
+
+1. **Clone the repository**
+   ```bash
+   git clone <your-repo-url>
+   cd historindev
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Configure environment variables**
+   ```bash
+   cp .env.example .env
+   ```
+   
+   Edit `.env` and add your Supabase credentials:
+   - Get them from: https://app.supabase.com/project/_/settings/api
+   - `NEXT_PUBLIC_SUPABASE_URL` - Your project URL
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY` - Your anon/public key
+
+4. **Run development server**
+   ```bash
+   npm run dev
+   ```
+
+5. **Open** http://localhost:3000
+
+### Deployment (Vercel)
+
+**Important:** When deploying a fork, you must configure environment variables in Vercel:
+
+1. Go to your Vercel project → Settings → Environment Variables
+2. Add the same variables from `.env.example`
+3. Redeploy
+
+Without these variables, the build will succeed but database features won't work.
+
+### Debugging
+
+See **[DEBUGGING.md](./DEBUGGING.md)** for:
+- Console logging details
+- Visual debug panel
+- Error troubleshooting
+- Common issues & solutions
+
+---
+
+## 📋 Development Checklist
 
 - [x] Migrar Pagina de ruas e historias
 - [x] Migrar Pagina Referencias

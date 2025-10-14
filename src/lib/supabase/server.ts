@@ -12,14 +12,23 @@ export async function getSupabaseServerClient<TDatabase = any>(): Promise<Supaba
   // Next.js route handlers require awaiting cookies()
   const cookieStore = await cookies();
 
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co';
   const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder-anon-key';
 
-  if (!supabaseUrl || !(serviceRoleKey || anonKey)) {
-    throw new Error(
-      'Missing Supabase environment variables. Ensure NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY are set. For secure server operations, also set SUPABASE_SERVICE_ROLE_KEY.'
-    );
+  // Detailed logging for debugging (server-side)
+  const hasUrl = !!process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const hasServiceRole = !!serviceRoleKey;
+  const hasAnonKey = !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  
+  if (!hasUrl || (!hasServiceRole && !hasAnonKey)) {
+    console.group('🔧 Supabase Server Client Configuration');
+    console.log('NEXT_PUBLIC_SUPABASE_URL:', hasUrl ? '✅ Configured' : '❌ Missing (using placeholder)');
+    console.log('SUPABASE_SERVICE_ROLE_KEY:', hasServiceRole ? '✅ Configured' : '⚠️ Not set (using anon key)');
+    console.log('NEXT_PUBLIC_SUPABASE_ANON_KEY:', hasAnonKey ? '✅ Configured' : '❌ Missing (using placeholder)');
+    console.warn('⚠️ Supabase not fully configured. Database features will not work.');
+    console.log('📖 See DEPLOYMENT.md for setup instructions');
+    console.groupEnd();
   }
 
   return createServerClient<TDatabase>(
