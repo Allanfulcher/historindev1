@@ -1081,18 +1081,7 @@ const historias = [{
 	'descricao': 'A famosa Cascata do Caracol, muito visitada por todos, um dos principais pontos turisticos da cidade, conta com um ambiente preservado, e uma quedaa de 130m conforme medições atuais.',
 	'ano': 1961,
 	'coordenadas': [-29.31295260355406, -50.85195529552594]
-},     {
-    id: 136,
-    rua_id: 13,
-    criador: 'Canela Fotos',
-    fotos: [
-      '/images/historias/igreja-canela-74.webp'
-    ],
-    titulo: 'Construção nova igreja de Canela',
-    descricao: 'Em 1964 foram concluídas as paredes ao redor da antiga Igreja e então se deu a demolição da mesma.',
-    ano: 1964,
-    coordenadas: [-29.363275343461503, -50.81002083772186]
-  },
+},
   {
     id: 137,
     rua_id: 2,
