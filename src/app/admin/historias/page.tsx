@@ -42,6 +42,8 @@ export default function AdminHistoriasPage() {
   const [ruas, setRuas] = useState<RuaLite[]>([]);
   const [negocios, setNegocios] = useState<NegocioLite[]>([]);
 
+  const [editingId, setEditingId] = useState<string | null>(null);
+
   const [form, setForm] = useState({
     ruaId: "",
     negocioId: "",
@@ -108,7 +110,30 @@ export default function AdminHistoriasPage() {
     return arr.length ? arr : undefined;
     }
 
-  async function handleCreate(e: React.FormEvent) {
+  function handleEdit(historia: HistoriaAdmin) {
+    setEditingId(historia.id);
+    setForm({
+      ruaId: historia.rua_id || "",
+      negocioId: historia.negocio_id || "",
+      titulo: historia.titulo,
+      descricao: historia.descricao,
+      fotosCsv: historia.fotos?.join(", ") || "",
+      lat: historia.coordenadas?.[0]?.toString() || "",
+      lng: historia.coordenadas?.[1]?.toString() || "",
+      ano: historia.ano || "",
+      criador: historia.criador || "",
+      tagsCsv: historia.tags?.join(", ") || "",
+    });
+    // Scroll to form
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function handleCancelEdit() {
+    setEditingId(null);
+    setForm({ ruaId: "", negocioId: "", titulo: "", descricao: "", fotosCsv: "", lat: "", lng: "", ano: "", criador: "", tagsCsv: "" });
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!canSubmit) return;
     setLoading(true);
@@ -127,14 +152,26 @@ export default function AdminHistoriasPage() {
       if (form.lat.trim() && form.lng.trim()) {
         payload.coordenadas = [Number(form.lat), Number(form.lng)];
       }
-      await adminFetch(`/api/admin/historias`, {
-        method: "POST",
-        body: JSON.stringify(payload),
-      });
+
+      if (editingId) {
+        // Update existing historia
+        await adminFetch(`/api/admin/historias/${editingId}`, {
+          method: "PUT",
+          body: JSON.stringify(payload),
+        });
+      } else {
+        // Create new historia
+        await adminFetch(`/api/admin/historias`, {
+          method: "POST",
+          body: JSON.stringify(payload),
+        });
+      }
+
       setForm({ ruaId: "", negocioId: "", titulo: "", descricao: "", fotosCsv: "", lat: "", lng: "", ano: "", criador: "", tagsCsv: "" });
+      setEditingId(null);
       await load();
     } catch (e: any) {
-      setError(e?.message || "Failed to create story");
+      setError(e?.message || `Failed to ${editingId ? "update" : "create"} story`);
     } finally {
       setLoading(false);
     }
@@ -158,8 +195,22 @@ export default function AdminHistoriasPage() {
     <div className="p-6 max-w-6xl mx-auto space-y-8 text-[#6B5B4F]">
       <AdminHeader title="Histórias" />
 
-      <AdminSection title="Criar História">
-        <form onSubmit={handleCreate} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <AdminSection title={editingId ? "Editar História" : "Criar História"}>
+        {editingId && (
+          <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-md flex items-center justify-between">
+            <p className="text-sm text-blue-800">
+              <strong>Editando:</strong> ID {editingId}
+            </p>
+            <button
+              type="button"
+              onClick={handleCancelEdit}
+              className="text-sm text-blue-600 hover:text-blue-800 underline"
+            >
+              Cancelar edição
+            </button>
+          </div>
+        )}
+        <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-[#6B5B4F] mb-1">Rua (selecionar)</label>
             <select
@@ -245,10 +296,20 @@ export default function AdminHistoriasPage() {
               required
             />
           </div>
-          <div className="md:col-span-2">
+          <div className="md:col-span-2 flex gap-3">
             <PrimaryButton disabled={!canSubmit || loading} type="submit">
-              {loading ? "Salvando..." : "Criar"}
+              {loading ? "Salvando..." : editingId ? "Atualizar" : "Criar"}
             </PrimaryButton>
+            {editingId && (
+              <button
+                type="button"
+                onClick={handleCancelEdit}
+                className="px-4 py-2 border border-[#D7C8B8] text-[#6B5B4F] rounded-md hover:bg-[#F5F1EB] transition-colors"
+                disabled={loading}
+              >
+                Cancelar
+              </button>
+            )}
           </div>
         </form>
       </AdminSection>
@@ -288,7 +349,16 @@ export default function AdminHistoriasPage() {
                 )}
               </td>
               <td className="py-3 pr-3 align-top">
-                <DangerButton onClick={() => handleDelete(h.id)}>Delete</DangerButton>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => handleEdit(h)}
+                    className="px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+                    disabled={loading}
+                  >
+                    Editar
+                  </button>
+                  <DangerButton onClick={() => handleDelete(h.id)}>Delete</DangerButton>
+                </div>
               </td>
             </tr>
           ))}

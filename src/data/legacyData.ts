@@ -122,7 +122,7 @@ const historias = [{
 	'id': 12,
 	'rua_id': 1,
 	'criador': 'Mateus Canova',
-	'fotos': ['https://i.imgur.com/kkvMMP4.png.'],
+	'fotos': ['https://i.imgur.com/kkvMMP4.png'],
 	'titulo': 'Uma nova cara em tempos modernos',
 	'descricao': '20 anos depois, a mesma área mostra avanços modernos, destacando a beleza da cidade.',
 	'ano': 2010,

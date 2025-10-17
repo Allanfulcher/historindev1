@@ -42,12 +42,10 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
   if (typeof raw.titulo === 'string' && raw.titulo.trim()) patch.titulo = raw.titulo.trim();
   if (typeof raw.descricao === 'string' && raw.descricao.trim()) patch.descricao = raw.descricao.trim();
   if (typeof raw.ruaId === 'string' && raw.ruaId.trim()) {
-    if (!isUuid(raw.ruaId)) return jsonBadRequest('ruaId must be a UUID');
     patch.rua_id = raw.ruaId.trim();
   }
-  if (typeof raw.orgId === 'string' && raw.orgId.trim()) {
-    if (!isUuid(raw.orgId)) return jsonBadRequest('orgId must be a UUID');
-    patch.org_id = raw.orgId.trim();
+  if (typeof raw.negocioId === 'string' && raw.negocioId.trim()) {
+    patch.negocio_id = raw.negocioId.trim();
   }
   if (typeof raw.ano === 'string') patch.ano = raw.ano.trim() || null;
   if (typeof raw.criador === 'string') patch.criador = raw.criador.trim() || null;
@@ -72,7 +70,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
     .from('stories')
     .update(patch)
     .eq('id', id)
-    .select('id, created_at, rua_id, org_id, titulo, descricao, fotos, lat, lng, ano, criador, tags')
+    .select('id, created_at, rua_id, negocio_id, titulo, descricao, fotos, lat, lng, ano, criador, tags')
     .single();
 
   if (error) return jsonServerError(error.message);
@@ -81,7 +79,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
     id: data.id,
     created_at: data.created_at,
     rua_id: data.rua_id ?? undefined,
-    org_id: data.org_id ?? undefined,
+    negocio_id: data.negocio_id ?? undefined,
     titulo: data.titulo,
     descricao: data.descricao,
     fotos: data.fotos ?? undefined,
