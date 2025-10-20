@@ -151,7 +151,7 @@ const RuasEHistorias: React.FC = () => {
             </h2>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            {['Igreja', 'Cinema', 'Eventos'].map((tag) => (
+            {['Igrejas', 'Cinema', 'Eventos'].map((tag) => (
               <button
                 key={tag}
                 onClick={() => router.push(`/rua/categoria/${slugify(tag)}`)}
