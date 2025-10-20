@@ -153,7 +153,16 @@ export default function CategoriaTagPage() {
     if (selectedYear) {
       list = list.filter((h) => parseInt(h.ano || "0", 10) === selectedYear);
     }
-    return list;
+    // Sort by year: oldest to newest
+    return list.sort((a, b) => {
+      const yearA = parseInt(a.ano || "0", 10);
+      const yearB = parseInt(b.ano || "0", 10);
+      // Stories without year go to the end
+      if (yearA === 0 && yearB === 0) return 0;
+      if (yearA === 0) return 1;
+      if (yearB === 0) return -1;
+      return yearA - yearB; // ascending order (oldest first)
+    });
   }, [historias, selectedCityId, selectedYear, ruaToCity]);
 
   // Refs to scroll to first historia of a selected year
