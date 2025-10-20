@@ -37,10 +37,14 @@ type NegocioLite = {
 export default function AdminHistoriasPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [loadingMore, setLoadingMore] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [items, setItems] = useState<HistoriaAdmin[]>([]);
   const [ruas, setRuas] = useState<RuaLite[]>([]);
   const [negocios, setNegocios] = useState<NegocioLite[]>([]);
+  const [hasMore, setHasMore] = useState(true);
+  const [offset, setOffset] = useState(0);
+  const ITEMS_PER_PAGE = 50;
 
   const [editingId, setEditingId] = useState<string | null>(null);
 
@@ -61,16 +65,40 @@ export default function AdminHistoriasPage() {
     return form.titulo.trim().length > 0 && form.descricao.trim().length > 0;
   }, [form]);
 
-  async function load() {
-    setLoading(true);
+  async function load(reset = true) {
+    if (reset) {
+      setLoading(true);
+      setOffset(0);
+    } else {
+      setLoadingMore(true);
+    }
     setError(null);
     try {
-      const res = await adminFetch<{ data: HistoriaAdmin[] }>(`/api/admin/historias`);
-      setItems(res.data);
+      const currentOffset = reset ? 0 : offset;
+      const res = await adminFetch<{ data: HistoriaAdmin[] }>(
+        `/api/admin/historias?limit=${ITEMS_PER_PAGE}&offset=${currentOffset}`
+      );
+      
+      if (reset) {
+        setItems(res.data);
+      } else {
+        setItems(prev => [...prev, ...res.data]);
+      }
+      
+      // Check if there are more items to load
+      setHasMore(res.data.length === ITEMS_PER_PAGE);
+      setOffset(currentOffset + res.data.length);
     } catch (e: any) {
       setError(e?.message || "Failed to load stories");
     } finally {
       setLoading(false);
+      setLoadingMore(false);
+    }
+  }
+
+  async function loadMore() {
+    if (!loadingMore && hasMore) {
+      await load(false);
     }
   }
 
@@ -113,8 +141,8 @@ export default function AdminHistoriasPage() {
   function handleEdit(historia: HistoriaAdmin) {
     setEditingId(historia.id);
     setForm({
-      ruaId: historia.rua_id || "",
-      negocioId: historia.negocio_id || "",
+      ruaId: historia.rua_id ? String(historia.rua_id) : "",
+      negocioId: historia.negocio_id ? String(historia.negocio_id) : "",
       titulo: historia.titulo,
       descricao: historia.descricao,
       fotosCsv: historia.fotos?.join(", ") || "",
@@ -314,10 +342,11 @@ export default function AdminHistoriasPage() {
         </form>
       </AdminSection>
 
-      <AdminSection title={`Histórias (${items.length})`}>
+      <AdminSection title={`Histórias (${items.length}${hasMore ? '+' : ''})`}>
         {error && <p className="text-red-700 text-sm">{error}</p>}
         {loading && <p>Loading...</p>}
         {!loading && items.length === 0 && <p className="text-[#A0958A]">Nenhuma história encontrada.</p>}
+        {!loading && items.length > 0 && (
         <AdminTable
           columns={[
             { key: "titulo", label: "Título" },
@@ -363,6 +392,25 @@ export default function AdminHistoriasPage() {
             </tr>
           ))}
         </AdminTable>
+        )}
+        
+        {!loading && hasMore && items.length > 0 && (
+          <div className="mt-6 flex justify-center">
+            <button
+              onClick={loadMore}
+              disabled={loadingMore}
+              className="px-6 py-3 bg-[#3B82F6] text-white rounded-md hover:bg-[#2563EB] transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+            >
+              {loadingMore ? 'Carregando...' : `Carregar mais (${ITEMS_PER_PAGE} por vez)`}
+            </button>
+          </div>
+        )}
+        
+        {!loading && !hasMore && items.length > 0 && (
+          <div className="mt-6 text-center text-sm text-[#A0958A]">
+            Todas as histórias foram carregadas ({items.length} total)
+          </div>
+        )}
       </AdminSection>
     </div>
   );
