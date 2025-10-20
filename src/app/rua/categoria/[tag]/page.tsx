@@ -223,8 +223,8 @@ export default function CategoriaTagPage() {
               <div className="flex gap-1 flex-wrap">
                 {[
                   { id: '', name: 'Todas' },
-                  { id: '0', name: 'Gramado' },
-                  { id: '1', name: 'Canela' },
+                  { id: '1', name: 'Gramado' },
+                  { id: '2', name: 'Canela' },
                 ].map((city) => (
                   <button
                     key={city.id || 'ambas'}
