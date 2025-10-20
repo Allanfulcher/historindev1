@@ -32,6 +32,7 @@ export default function AdminRuasPage() {
   const [error, setError] = useState<string | null>(null);
   const [items, setItems] = useState<Rua[]>([]);
   const [cities, setCities] = useState<CidadeLite[]>([]);
+  const [editingId, setEditingId] = useState<string | null>(null);
 
   const [form, setForm] = useState({
     nome: "",
@@ -79,7 +80,26 @@ export default function AdminRuasPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  async function handleCreate(e: React.FormEvent) {
+  function handleEdit(rua: Rua) {
+    setEditingId(rua.id);
+    setForm({
+      nome: rua.nome,
+      fotos: rua.fotos || "",
+      cidadeId: rua.cidade_id ? String(rua.cidade_id) : "",
+      descricao: rua.descricao || "",
+      lat: rua.coordenadas?.[0]?.toString() || "",
+      lng: rua.coordenadas?.[1]?.toString() || "",
+    });
+    // Scroll to form
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function handleCancelEdit() {
+    setEditingId(null);
+    setForm({ nome: "", fotos: "", cidadeId: "", descricao: "", lat: "", lng: "" });
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!canSubmit) return;
     setLoading(true);
@@ -94,14 +114,26 @@ export default function AdminRuasPage() {
       if (form.lat.trim() && form.lng.trim()) {
         payload.coordenadas = [Number(form.lat), Number(form.lng)];
       }
-      await adminFetch(`/api/admin/ruas`, {
-        method: "POST",
-        body: JSON.stringify(payload),
-      });
+
+      if (editingId) {
+        // Update existing rua
+        await adminFetch(`/api/admin/ruas/${editingId}`, {
+          method: "PUT",
+          body: JSON.stringify(payload),
+        });
+      } else {
+        // Create new rua
+        await adminFetch(`/api/admin/ruas`, {
+          method: "POST",
+          body: JSON.stringify(payload),
+        });
+      }
+
       setForm({ nome: "", fotos: "", cidadeId: "", descricao: "", lat: "", lng: "" });
+      setEditingId(null);
       await load();
     } catch (e: any) {
-      setError(e?.message || "Failed to create street");
+      setError(e?.message || `Failed to ${editingId ? "update" : "create"} street`);
     } finally {
       setLoading(false);
     }
@@ -125,8 +157,22 @@ export default function AdminRuasPage() {
     <div className="p-6 max-w-6xl mx-auto space-y-8 text-[#6B5B4F]">
       <AdminHeader title="Ruas" />
 
-      <AdminSection title="Criar Rua">
-        <form onSubmit={handleCreate} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <AdminSection title={editingId ? "Editar Rua" : "Criar Rua"}>
+        {editingId && (
+          <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-md flex items-center justify-between">
+            <p className="text-sm text-blue-800">
+              <strong>Editando:</strong> ID {editingId}
+            </p>
+            <button
+              type="button"
+              onClick={handleCancelEdit}
+              className="text-sm text-blue-600 hover:text-blue-800 underline"
+            >
+              Cancelar edição
+            </button>
+          </div>
+        )}
+        <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <AdminInput
             label="Nome"
             type="text"
@@ -179,10 +225,20 @@ export default function AdminRuasPage() {
               rows={3}
             />
           </div>
-          <div className="md:col-span-2">
+          <div className="md:col-span-2 flex gap-3">
             <PrimaryButton disabled={!canSubmit || loading} type="submit">
-              {loading ? "Salvando..." : "Criar"}
+              {loading ? "Salvando..." : editingId ? "Atualizar" : "Criar"}
             </PrimaryButton>
+            {editingId && (
+              <button
+                type="button"
+                onClick={handleCancelEdit}
+                className="px-4 py-2 border border-[#D7C8B8] text-[#6B5B4F] rounded-md hover:bg-[#F5F1EB] transition-colors"
+                disabled={loading}
+              >
+                Cancelar
+              </button>
+            )}
           </div>
         </form>
       </AdminSection>
@@ -216,7 +272,16 @@ export default function AdminRuasPage() {
                 <div className="text-sm whitespace-pre-wrap line-clamp-3">{r.descricao || ""}</div>
               </td>
               <td className="py-3 pr-3 align-top">
-                <DangerButton onClick={() => handleDelete(r.id)}>Delete</DangerButton>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => handleEdit(r)}
+                    className="px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+                    disabled={loading}
+                  >
+                    Editar
+                  </button>
+                  <DangerButton onClick={() => handleDelete(r.id)}>Delete</DangerButton>
+                </div>
               </td>
             </tr>
           ))}
