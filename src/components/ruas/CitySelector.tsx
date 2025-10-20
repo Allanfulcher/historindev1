@@ -9,8 +9,8 @@ interface CitySelectorProps {
 
 const CitySelector: React.FC<CitySelectorProps> = ({ selectedCityId, onCityChange }) => {
   const cities = [
-    { id: '1', name: 'Gramado' },
-    { id: '2', name: 'Canela' }
+    { id: '0', name: 'Gramado' },
+    { id: '1', name: 'Canela' }
   ];
 
   return (
