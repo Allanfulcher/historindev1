@@ -9,7 +9,7 @@ const WelcomeCard: React.FC = () => {
         Bem-vindo ao Historin!
       </h2>
       <p className="text-sm sm:text-base text-[#6B5B4F] leading-relaxed">
-        Explore as incríveis histórias de Gramado e Canela pela geografia!
+        Explore as incríveis histórias de Gramado e Canela!
       </p>
     </section>
   );
