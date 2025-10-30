@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next';
-import { legacyRuas, legacyHistorias } from '@/data/legacyData';
+import { createClient } from '@supabase/supabase-js';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://historin.com';
@@ -25,16 +25,30 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: path === '' ? 1.0 : 0.7,
   }));
 
-  // Dynamic ruas
-  const ruaEntries: MetadataRoute.Sitemap = (legacyRuas || []).map((rua) => ({
+  // Create Supabase client for server-side data fetching
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  );
+
+  // Fetch dynamic ruas from Supabase
+  const { data: ruas } = await supabase
+    .from('streets')
+    .select('id');
+
+  const ruaEntries: MetadataRoute.Sitemap = (ruas || []).map((rua) => ({
     url: `${baseUrl}/rua/${rua.id}`,
     lastModified: now,
     changeFrequency: 'monthly',
     priority: 0.6,
   }));
 
-  // Dynamic historias
-  const historiaEntries: MetadataRoute.Sitemap = (legacyHistorias || []).map((h) => ({
+  // Fetch dynamic historias from Supabase
+  const { data: historias } = await supabase
+    .from('stories')
+    .select('id, rua_id');
+
+  const historiaEntries: MetadataRoute.Sitemap = (historias || []).map((h) => ({
     url: `${baseUrl}/rua/${h.rua_id}/historia/${h.id}`,
     lastModified: now,
     changeFrequency: 'monthly',

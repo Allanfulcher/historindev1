@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import RuaHistoria from '../../../../../components/ruas/RuaHistoria';
-import { legacyDb } from '../../../../../data/legacyData';
+import { supabaseBrowser } from '@/lib/supabase/client';
 
 type Props = {
   params: Promise<{ ruaId: string; historiaId: string }>;
@@ -11,8 +11,23 @@ export async function generateMetadata(
   { params }: Props
 ): Promise<Metadata> {
   const { ruaId, historiaId } = await params;
-  const historia = legacyDb.getHistoriaById(historiaId);
-  const rua = legacyDb.getRuaById(ruaId || (historia?.rua_id ?? ''));
+  
+  // Fetch historia from Supabase
+  const { data: historia } = await supabaseBrowser
+    .from('stories')
+    .select('id, rua_id, titulo, descricao, fotos')
+    .eq('id', historiaId)
+    .single();
+
+  // Fetch rua from Supabase
+  const targetRuaId = ruaId || historia?.rua_id;
+  const { data: rua } = targetRuaId
+    ? await supabaseBrowser
+        .from('streets')
+        .select('id, nome')
+        .eq('id', targetRuaId)
+        .single()
+    : { data: null };
 
   const title = historia?.titulo
     ? `${historia.titulo}`

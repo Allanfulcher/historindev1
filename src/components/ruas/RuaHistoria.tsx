@@ -2,8 +2,7 @@
 
 import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import { useRouter, useSearchParams, useParams } from 'next/navigation';
-import { legacyDb } from '../../utils/legacyDb';
-import { legacyHistorias, legacyRuas, legacyCidades } from '../../data/legacyData';
+import { supabaseBrowser } from '@/lib/supabase/client';
 import type { Historia, Rua, Cidade } from '../../types';
 import Header from '../Header';
 import Menu from '../Menu';
@@ -46,35 +45,147 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
   const [showQuiz, setShowQuiz] = useState(false);
   const [selectedCityId, setSelectedCityId] = useState<string>('1'); // Default to Gramado
   const [hasAutoSwitchedTab, setHasAutoSwitchedTab] = useState(false);
+  const [allRuas, setAllRuas] = useState<Rua[]>([]);
+  const [allHistorias, setAllHistorias] = useState<Historia[]>([]);
 
   useEffect(() => {
-    // Initialize database
-    legacyDb.loadData({
-      historias: legacyHistorias,
-      ruas: legacyRuas,
-      cidades: legacyCidades
-    });
+    let isMounted = true;
 
-    // Load data if IDs are provided
-    if (ruaId) {
-      const foundRua = legacyDb.getRuaById(ruaId);
-      setRua(foundRua || null);
-      // Set selected city based on rua's city
-      if (foundRua?.cidade_id) {
-        setSelectedCityId(foundRua.cidade_id);
-      }
-      // Load all historias for this rua
-      const list = legacyDb.getHistoriasByRuaId(ruaId);
-      setRuaHistorias(list || []);
-      
-      if (foundRua?.cidade_id) {
-        const foundCidade = legacyDb.getCidadeById(foundRua.cidade_id.toString());
-        setCidade(foundCidade || null);
+    async function loadData() {
+      try {
+        setIsLoading(true);
+
+        // Load data if IDs are provided
+        if (ruaId) {
+          // Fetch rua from Supabase
+          const { data: foundRua, error: ruaError } = await supabaseBrowser
+            .from('streets')
+            .select('id, nome, fotos, cidade_id, descricao, coordenadas')
+            .eq('id', ruaId)
+            .single();
+
+          if (ruaError) throw ruaError;
+
+          if (!isMounted) return;
+
+          if (foundRua) {
+            const normalizedRua: Rua = {
+              id: String(foundRua.id),
+              nome: foundRua.nome || '',
+              fotos: foundRua.fotos || '',
+              cidade_id: foundRua.cidade_id ? String(foundRua.cidade_id) : undefined,
+              descricao: foundRua.descricao || undefined,
+              coordenadas: foundRua.coordenadas || undefined,
+            };
+            setRua(normalizedRua);
+
+            // Set selected city based on rua's city
+            if (foundRua.cidade_id) {
+              setSelectedCityId(String(foundRua.cidade_id));
+            }
+
+            // Fetch cidade if available
+            if (foundRua.cidade_id) {
+              const { data: foundCidade } = await supabaseBrowser
+                .from('cities')
+                .select('id, nome, estado, populacao, descricao, foto')
+                .eq('id', foundRua.cidade_id)
+                .single();
+
+              if (foundCidade && isMounted) {
+                const normalizedCidade: Cidade = {
+                  id: String(foundCidade.id),
+                  nome: foundCidade.nome || '',
+                  estado: foundCidade.estado || '',
+                  populacao: foundCidade.populacao || '',
+                  descricao: foundCidade.descricao || undefined,
+                  foto: foundCidade.foto || undefined,
+                };
+                setCidade(normalizedCidade);
+              }
+            }
+          }
+
+          // Load all historias for this rua
+          const { data: historiasData, error: historiasError } = await supabaseBrowser
+            .from('stories')
+            .select('id, rua_id, titulo, descricao, fotos, coordenadas, ano, criador, tags, orgId')
+            .eq('rua_id', ruaId);
+
+          if (historiasError) throw historiasError;
+
+          if (!isMounted) return;
+
+          const normalizedHistorias: Historia[] = (historiasData || []).map((h: any) => ({
+            id: String(h.id),
+            rua_id: String(h.rua_id),
+            titulo: h.titulo || '',
+            descricao: h.descricao || '',
+            fotos: h.fotos || [],
+            coordenadas: h.coordenadas || undefined,
+            ano: h.ano ? String(h.ano) : undefined,
+            criador: h.criador || undefined,
+            tags: h.tags || undefined,
+            orgId: h.orgId || undefined,
+          }));
+
+          setRuaHistorias(normalizedHistorias);
+        }
+
+        // Fetch all ruas for the selector
+        const { data: ruasData } = await supabaseBrowser
+          .from('streets')
+          .select('id, nome, fotos, cidade_id, descricao, coordenadas');
+
+        if (ruasData && isMounted) {
+          const normalizedRuas: Rua[] = ruasData.map((r: any) => ({
+            id: String(r.id),
+            nome: r.nome || '',
+            fotos: r.fotos || '',
+            cidade_id: r.cidade_id ? String(r.cidade_id) : undefined,
+            descricao: r.descricao || undefined,
+            coordenadas: r.coordenadas || undefined,
+          }));
+          setAllRuas(normalizedRuas);
+        }
+
+        // Fetch all historias for the menu
+        const { data: allHistoriasData } = await supabaseBrowser
+          .from('stories')
+          .select('id, rua_id, titulo, descricao, fotos, coordenadas, ano, criador, tags, orgId');
+
+        if (allHistoriasData && isMounted) {
+          const normalizedAllHistorias: Historia[] = allHistoriasData.map((h: any) => ({
+            id: String(h.id),
+            rua_id: String(h.rua_id),
+            titulo: h.titulo || '',
+            descricao: h.descricao || '',
+            fotos: h.fotos || [],
+            coordenadas: h.coordenadas || undefined,
+            ano: h.ano ? String(h.ano) : undefined,
+            criador: h.criador || undefined,
+            tags: h.tags || undefined,
+            orgId: h.orgId || undefined,
+          }));
+          setAllHistorias(normalizedAllHistorias);
+        }
+      } catch (error) {
+        console.error('Error loading data from Supabase:', error);
+        if (isMounted) {
+          setValidationError('Erro ao carregar dados. Tente novamente mais tarde.');
+        }
+      } finally {
+        if (isMounted) {
+          setIsLoading(false);
+        }
       }
     }
 
-    // Remove URL-based historia loading - now handled via props-based auto-scroll
-    setIsLoading(false);
+    loadData();
+
+    return () => {
+      isMounted = false;
+    };
   }, [ruaId, router]);
 
   // Compute sorted historias for feed
@@ -187,7 +298,7 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
       <Menu 
         menuOpen={menuOpen}
         setMenuOpen={setMenuOpen}
-        historias={legacyDb.getHistorias()}
+        historias={allHistorias}
       />
 
       {/* Year Navigator - only show on historia tab */}
@@ -209,7 +320,7 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
                 onCityChange={setSelectedCityId}
               />
               <RuaSelector 
-                ruas={legacyDb.getRuas()}
+                ruas={allRuas}
                 selectedRuaId={ruaId || ''}
                 selectedCityId={selectedCityId}
               />
