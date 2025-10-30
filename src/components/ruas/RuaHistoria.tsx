@@ -60,7 +60,7 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
           // Fetch rua from Supabase
           const { data: foundRua, error: ruaError } = await supabaseBrowser
             .from('streets')
-            .select('id, nome, fotos, cidade_id, descricao, coordenadas')
+            .select('id, nome, fotos, cidade_id, descricao')
             .eq('id', ruaId)
             .single();
 
@@ -75,7 +75,6 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
               fotos: foundRua.fotos || '',
               cidade_id: foundRua.cidade_id ? String(foundRua.cidade_id) : undefined,
               descricao: foundRua.descricao || undefined,
-              coordenadas: foundRua.coordenadas || undefined,
             };
             setRua(normalizedRua);
 
@@ -109,7 +108,7 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
           // Load all historias for this rua
           const { data: historiasData, error: historiasError } = await supabaseBrowser
             .from('stories')
-            .select('id, rua_id, titulo, descricao, fotos, coordenadas, ano, criador, tags, orgId')
+            .select('id, rua_id, titulo, descricao, fotos, lat, lng, ano, criador, tags, negocio_id')
             .eq('rua_id', ruaId);
 
           if (historiasError) throw historiasError;
@@ -122,11 +121,11 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
             titulo: h.titulo || '',
             descricao: h.descricao || '',
             fotos: h.fotos || [],
-            coordenadas: h.coordenadas || undefined,
+            coordenadas: (h.lat && h.lng) ? [h.lat, h.lng] : undefined,
             ano: h.ano ? String(h.ano) : undefined,
             criador: h.criador || undefined,
             tags: h.tags || undefined,
-            orgId: h.orgId || undefined,
+            orgId: h.negocio_id || undefined,
           }));
 
           setRuaHistorias(normalizedHistorias);
@@ -135,7 +134,7 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
         // Fetch all ruas for the selector
         const { data: ruasData } = await supabaseBrowser
           .from('streets')
-          .select('id, nome, fotos, cidade_id, descricao, coordenadas');
+          .select('id, nome, fotos, cidade_id, descricao');
 
         if (ruasData && isMounted) {
           const normalizedRuas: Rua[] = ruasData.map((r: any) => ({
@@ -144,7 +143,6 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
             fotos: r.fotos || '',
             cidade_id: r.cidade_id ? String(r.cidade_id) : undefined,
             descricao: r.descricao || undefined,
-            coordenadas: r.coordenadas || undefined,
           }));
           setAllRuas(normalizedRuas);
         }
@@ -152,7 +150,7 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
         // Fetch all historias for the menu
         const { data: allHistoriasData } = await supabaseBrowser
           .from('stories')
-          .select('id, rua_id, titulo, descricao, fotos, coordenadas, ano, criador, tags, orgId');
+          .select('id, rua_id, titulo, descricao, fotos, lat, lng, ano, criador, tags, negocio_id');
 
         if (allHistoriasData && isMounted) {
           const normalizedAllHistorias: Historia[] = allHistoriasData.map((h: any) => ({
@@ -161,11 +159,11 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
             titulo: h.titulo || '',
             descricao: h.descricao || '',
             fotos: h.fotos || [],
-            coordenadas: h.coordenadas || undefined,
+            coordenadas: (h.lat && h.lng) ? [h.lat, h.lng] : undefined,
             ano: h.ano ? String(h.ano) : undefined,
             criador: h.criador || undefined,
             tags: h.tags || undefined,
-            orgId: h.orgId || undefined,
+            orgId: h.negocio_id || undefined,
           }));
           setAllHistorias(normalizedAllHistorias);
         }
