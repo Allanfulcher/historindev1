@@ -92,7 +92,7 @@ const Home: React.FC<HomeProps> = ({ onPreviewOpen }) => {
     async function fetchNegocios() {
       try {
         const { data: negociosData, error } = await supabaseBrowser
-          .from('negocios')
+          .from('businesses')
           .select('id, nome, endereco, categoria, descricao, foto, logo_url')
           .order('nome', { ascending: true })
           .limit(3); // Only fetch 3 for featured section
