@@ -92,7 +92,7 @@ const Menu: React.FC<MenuProps> = ({
         <div className="flex flex-col flex-grow px-6 space-y-2 mt-8">
           <Link
             href="/"
-            className="px-4 py-3 hover:bg-[#F5F1EB] rounded-md transition-colors duration-200 border-b border-[#F5F1EB]"
+            className="px-4 py-3 hover:bg-[#F5F1EB] rounded-md transition-all duration-300 border-b border-[#F5F1EB] cursor-pointer transform hover:scale-[1.02] active:scale-[0.98]"
             onClick={handleHomeClick}
           >
             <span className="block text-lg font-semibold text-[#6B5B4F]">INÍCIO</span>
@@ -101,7 +101,7 @@ const Menu: React.FC<MenuProps> = ({
 
           <Link
             href="/adicionar-historia"
-            className="px-4 py-3 hover:bg-[#F5F1EB] rounded-md transition-colors duration-200 border-b border-[#F5F1EB]"
+            className="px-4 py-3 hover:bg-[#F5F1EB] rounded-md transition-all duration-300 border-b border-[#F5F1EB] cursor-pointer transform hover:scale-[1.02] active:scale-[0.98]"
             onClick={handleMenuItemClick}
           >
             <span className="block text-sm font-medium text-[#A0958A]">Conte a sua</span>
@@ -110,7 +110,7 @@ const Menu: React.FC<MenuProps> = ({
 
           <Link
             href="/ruasehistorias"
-            className="px-4 py-3 hover:bg-[#F5F1EB] rounded-md transition-colors duration-200 border-b border-[#F5F1EB]"
+            className="px-4 py-3 hover:bg-[#F5F1EB] rounded-md transition-all duration-300 border-b border-[#F5F1EB] cursor-pointer transform hover:scale-[1.02] active:scale-[0.98]"
             onClick={handleMenuItemClick}
           >
             <span className="block text-lg font-semibold text-[#6B5B4F]">TODAS</span>
@@ -119,7 +119,7 @@ const Menu: React.FC<MenuProps> = ({
 
           <Link
             href="/sobre"
-            className="px-4 py-3 hover:bg-[#F5F1EB] rounded-md text-lg font-semibold text-[#6B5B4F] transition-colors duration-200 border-b border-[#F5F1EB]"
+            className="px-4 py-3 hover:bg-[#F5F1EB] rounded-md text-lg font-semibold text-[#6B5B4F] transition-all duration-300 border-b border-[#F5F1EB] cursor-pointer transform hover:scale-[1.02] active:scale-[0.98]"
             onClick={handleMenuItemClick}
           >
             SOBRE
@@ -127,7 +127,7 @@ const Menu: React.FC<MenuProps> = ({
 
           <Link
             href="/legado-africano"
-            className="px-4 py-3 hover:bg-[#F5F1EB] rounded-md text-lg font-semibold text-[#6B5B4F] transition-colors duration-200 border-b border-[#F5F1EB]"
+            className="px-4 py-3 hover:bg-[#F5F1EB] rounded-md text-lg font-semibold text-[#6B5B4F] transition-all duration-300 border-b border-[#F5F1EB] cursor-pointer transform hover:scale-[1.02] active:scale-[0.98]"
             onClick={handleMenuItemClick}
           >
             Legado Afro no RS
@@ -135,7 +135,7 @@ const Menu: React.FC<MenuProps> = ({
 
           <Link
             href="/referencias"
-            className="px-4 py-3 hover:bg-[#F5F1EB] rounded-md transition-colors duration-200 border-b border-[#F5F1EB]"
+            className="px-4 py-3 hover:bg-[#F5F1EB] rounded-md transition-all duration-300 border-b border-[#F5F1EB] cursor-pointer transform hover:scale-[1.02] active:scale-[0.98]"
             onClick={handleMenuItemClick}
           >
             <span className="block text-lg font-semibold text-[#6B5B4F]">REFERÊNCIAS</span>

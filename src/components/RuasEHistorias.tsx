@@ -116,7 +116,7 @@ const RuasEHistorias: React.FC = () => {
           <div className="flex items-center gap-3">
             <button 
               onClick={() => router.back()}
-              className="p-1.5 rounded-full hover:bg-gray-100 transition-colors"
+              className="p-1.5 rounded-full hover:bg-gray-100 transition-all duration-300 cursor-pointer transform hover:scale-110 active:scale-95"
               aria-label="Voltar"
             >
               <FiArrowLeft className="w-5 h-5 text-gray-600" />
@@ -155,7 +155,7 @@ const RuasEHistorias: React.FC = () => {
               <button
                 key={tag}
                 onClick={() => router.push(`/rua/categoria/${slugify(tag)}`)}
-                className="group w-full rounded-lg bg-white border border-gray-200 p-3 shadow-sm hover:shadow-md transition-all text-left"
+                className="group w-full rounded-lg bg-white border border-gray-200 p-3 shadow-sm hover:shadow-xl transition-all duration-300 text-left cursor-pointer transform hover:scale-[1.02] active:scale-[0.98]"
                 aria-label={`Ver histórias da categoria ${tag}`}
               >
                 <div className="flex items-center gap-2">

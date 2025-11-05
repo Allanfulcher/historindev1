@@ -37,7 +37,7 @@ const HistoryCard = ({ historias, className = '', onHistoriaClick }: HistoryCard
         <button
           key={historia.id}
           onClick={() => handleHistoriaClick(historia)}
-          className="group relative flex items-start gap-4 rounded-xl bg-white p-4 shadow-sm ring-1 ring-gray-900/5 transition-all hover:shadow-md hover:ring-1 hover:ring-blue-500/20 text-left w-full"
+          className="group relative flex items-start gap-4 rounded-xl bg-white p-4 shadow-sm ring-1 ring-gray-900/5 transition-all duration-300 hover:shadow-xl hover:ring-1 hover:ring-blue-500/20 text-left w-full cursor-pointer transform hover:scale-[1.02] active:scale-[0.98]"
         >
           <div className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-lg bg-gray-100">
             <img

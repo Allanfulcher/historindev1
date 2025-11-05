@@ -33,7 +33,7 @@ const DropDown = <T extends Record<string, any>>({
   renderItem,
   className = '',
   contentClassName = 'mt-4 grid gap-6 md:grid-cols-2 lg:grid-cols-3',
-  buttonClassName = 'flex items-center justify-between w-full px-6 py-4 text-xl font-semibold text-left text-[#6B5B4F] bg-[#FEFCF8] rounded-lg hover:bg-[#F5F1EB] focus:outline-none focus:ring-2 focus:ring-[#8B4513]/30 transition-colors duration-200 border border-[#F5F1EB]',
+  buttonClassName = 'flex items-center justify-between w-full px-6 py-4 text-xl font-semibold text-left text-[#6B5B4F] bg-[#FEFCF8] rounded-lg hover:bg-[#F5F1EB] focus:outline-none focus:ring-2 focus:ring-[#8B4513]/30 transition-all duration-300 border border-[#F5F1EB] shadow-sm hover:shadow-md transform hover:scale-[1.01] active:scale-[0.99]',
   defaultOpen = false,
   disabled = false,
 }: DropDownProps<T>) => {

@@ -34,7 +34,7 @@ const Header: React.FC<HeaderProps> = ({ setMenuOpen, setShowFeedback, setShowQu
     <header className="flex justify-between items-center p-4 bg-[#e6d3b4] border-b border-[#F5F1EB]">
       {/* Logo section */}
       <div className="flex items-center">
-        <Link href="/" className="mr-2">
+        <Link href="/" className="mr-2 cursor-pointer transform hover:scale-105 active:scale-95 transition-all duration-300">
           <img
             src="/images/meta/historin-logo.svg"
             alt="Historin"

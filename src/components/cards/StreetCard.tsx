@@ -9,7 +9,7 @@ return (
     {ruas.map((rua) => (
       <div
         key={rua.id}
-        className="bg-[#FEFCF8] rounded-lg shadow-sm overflow-hidden cursor-pointer hover:shadow-md transition-all duration-300 border border-[#F5F1EB] hover:border-[#E6D3B4]"
+        className="bg-[#FEFCF8] rounded-lg shadow-sm overflow-hidden cursor-pointer hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] border border-[#F5F1EB] hover:border-[#E6D3B4]"
         onClick={() => handleRuaClick(rua)}
       >
         <img

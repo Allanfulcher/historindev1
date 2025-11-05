@@ -11,7 +11,7 @@ const BrownBtn: React.FC<BrownBtnProps> = ({ children, onClick, disabled }) => {
         <button
         onClick={onClick}
         disabled={disabled}
-        className="px-4 py-3 hover:bg-[#F5F1EB] rounded-md text-lg font-semibold text-[#6B5B4F] transition-colors duration-200 text-left border-b border-[#F5F1EB]"
+        className="px-4 py-3 hover:bg-[#F5F1EB] rounded-md text-lg font-semibold text-[#6B5B4F] transition-all duration-300 text-left border-b border-[#F5F1EB] cursor-pointer transform hover:scale-[1.02] active:scale-[0.98]"
       >
         {children}
       </button>
