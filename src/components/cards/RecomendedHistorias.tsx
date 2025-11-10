@@ -51,25 +51,27 @@ const RecomendedHistorias: React.FC<RecomendedHistoriasProps> = ({ historias }) 
         return (
           <div
             key={h.id}
-            className="bg-[#FEFCF8] rounded-lg shadow-sm overflow-hidden cursor-pointer hover:shadow-md transition-all duration-300 border border-[#F5F1EB] hover:border-[#E6D3B4]"
+            className="group bg-white rounded-xl shadow-sm ring-1 ring-gray-900/5 overflow-hidden cursor-pointer hover:shadow-xl hover:ring-1 hover:ring-[#8B4513]/20 transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98]"
             onClick={() => {
               const target = `/rua/${String(h.rua_id)}`;
               if (typeof window !== 'undefined') window.location.href = target;
             }}
           >
-            {typeof imageSource === 'string' ? (
-              <img
-                src={imageSource}
-                alt={h.titulo}
-                className="w-full h-48 object-cover"
-              />
-            ) : (
-              <div className="w-full h-48 bg-[#F5F1EB] flex items-center justify-center text-[#A09082] text-sm">
-                Sem imagem
-              </div>
-            )}
+            <div className="relative overflow-hidden h-48">
+              {typeof imageSource === 'string' ? (
+                <img
+                  src={imageSource}
+                  alt={h.titulo}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+              ) : (
+                <div className="w-full h-full bg-[#F5F1EB] flex items-center justify-center text-[#A09082] text-sm">
+                  Sem imagem
+                </div>
+              )}
+            </div>
             <div className="p-5">
-              <h3 className="font-semibold text-[#4A3F35] text-lg mb-1">{h.titulo}</h3>
+              <h3 className="font-semibold text-[#4A3F35] text-lg mb-1 group-hover:text-[#8B4513] transition-colors">{h.titulo}</h3>
               <p className="text-xs text-[#6B5B4F] mb-2">{parseYear(h.ano) ?? ''}</p>
               <p className="text-sm text-[#6B5B4F] line-clamp-3">{h.descricao}</p>
             </div>
