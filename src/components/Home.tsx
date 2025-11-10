@@ -21,6 +21,7 @@ import RecomendedStreets from './cards/RecomendedStreets';
 import RecomendedHistorias from './cards/RecomendedHistorias';
 import WelcomeCard from './cards/WelcomeCard';
 import DonationCard from './cards/DonationCard';
+import BusinessCard from './cards/BusinessCard';
 
 interface HomeProps {
   data?: any; // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -32,10 +33,15 @@ interface Negocio {
   id: number;
   nome: string;
   endereco: string;
+  telefone?: string;
   categoria: string;
   descricao?: string;
   foto?: string;
   logo_url?: string;
+  website?: string;
+  instagram?: string;
+  facebook?: string;
+  email?: string;
 }
 
 const Home: React.FC<HomeProps> = ({ onPreviewOpen }) => {
@@ -93,7 +99,7 @@ const Home: React.FC<HomeProps> = ({ onPreviewOpen }) => {
       try {
         const { data: negociosData, error } = await supabaseBrowser
           .from('businesses')
-          .select('id, nome, endereco, categoria, descricao, foto, logo_url')
+          .select('id, nome, endereco, telefone, categoria, descricao, foto, logo_url, website, instagram, facebook, email')
           .order('nome', { ascending: true })
           .limit(3); // Only fetch 3 for featured section
 
@@ -257,26 +263,7 @@ const Home: React.FC<HomeProps> = ({ onPreviewOpen }) => {
                   Ver todos →
                 </button>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                {featuredNegocios.map((negocio) => (
-                  <button
-                    key={negocio.id}
-                    onClick={() => router.push(`/negocio/${negocio.id}`)}
-                    className="bg-white rounded-lg border-2 border-[#F5F1EB] hover:border-[#8B4513] p-4 shadow-sm hover:shadow-md transition-all duration-200 text-left group"
-                  >
-                    <div className="flex flex-col gap-2">
-                      <div className="flex items-center gap-2">
-                        <div className="bg-[#F5F1EB] group-hover:bg-[#8B4513]/10 p-2 rounded-lg transition-colors">
-                          <FiShoppingBag className="w-4 h-4 text-[#8B4513]" />
-                        </div>
-                        <span className="text-xs font-medium text-[#A0958A] uppercase tracking-wide">{negocio.categoria}</span>
-                      </div>
-                      <h3 className="text-base font-semibold text-[#4A3F35] line-clamp-2">{negocio.nome}</h3>
-                      <p className="text-xs text-[#6B5B4F]">{negocio.endereco}</p>
-                    </div>
-                  </button>
-                ))}
-              </div>
+              <BusinessCard negocios={featuredNegocios} />
             </section>
           )}
 
