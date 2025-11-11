@@ -14,7 +14,11 @@ const HistoriaCard: React.FC<HistoriaCardProps> = ({ historia }) => {
   const [touchStartY, setTouchStartY] = useState<number | null>(null);
   const [isSwiping, setIsSwiping] = useState(false);
 
-  const images = historia.fotos || [];
+  // Normalize images to a clean array of non-empty URLs
+  const rawImages = (historia.fotos || []) as any[];
+  const images = rawImages
+    .map((p) => (typeof p === 'string' ? p : p?.url))
+    .filter((u): u is string => typeof u === 'string' && u.trim().length > 0);
   const hasImages = images.length > 0;
   const hasMultipleImages = images.length > 1;
 
@@ -125,9 +129,7 @@ const HistoriaCard: React.FC<HistoriaCardProps> = ({ historia }) => {
             onTouchEnd={handleTouchEnd}
           >
             <img
-              src={typeof images[currentImageIndex] === 'string' 
-                ? images[currentImageIndex] as string
-                : (images[currentImageIndex] as any).url}
+              src={images[currentImageIndex]}
               alt={`${historia.titulo} - Imagem ${currentImageIndex + 1}`}
               className="w-full h-full object-cover"
             />
