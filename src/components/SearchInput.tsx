@@ -30,7 +30,7 @@ const SearchInput = ({
   };
 
   return (
-    <div className={`relative max-w-xl mx-auto ${className}`}>
+    <div className={`relative w-full max-w-full sm:max-w-xl mx-auto px-4 sm:px-0 min-w-0 ${className}`}>
       <div className="relative">
         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
           <svg 
