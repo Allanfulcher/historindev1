@@ -89,9 +89,9 @@ const RuasEHistorias: React.FC = () => {
   }, [lastScrollY]);
 
   return (
-    <div className="min-h-screen bg-[#f4ede0] relative">
+    <div className="min-h-screen bg-[#f4ede0] relative overflow-x-hidden">
       {/* Header */}
-      <div className={`fixed top-0 left-0 right-0 z-40 transition-transform duration-300 ${
+      <div className={`fixed top-0 left-0 right-0 z-40 transition-transform duration-300 overflow-x-hidden ${
         isHeaderVisible ? 'translate-y-0' : '-translate-y-full'
       }`}>
         <Header 
@@ -110,10 +110,10 @@ const RuasEHistorias: React.FC = () => {
       />
       
       {/* Sticky Search Bar */}
-      <div className="fixed top-0 left-0 right-0 z-40 bg-white border-b border-gray-200 shadow-sm transition-transform duration-300"
+      <div className="fixed top-0 left-0 right-0 z-40 bg-white border-b border-gray-200 shadow-sm transition-transform duration-300 overflow-x-hidden"
            style={{ transform: isHeaderVisible ? 'translateY(64px)' : 'translateY(0)' }}>
         <div className="max-w-4xl mx-auto px-4 py-3">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <button 
               onClick={() => router.back()}
               className="p-1.5 rounded-full hover:bg-gray-100 transition-all duration-300 cursor-pointer transform hover:scale-110 active:scale-95"
@@ -121,7 +121,7 @@ const RuasEHistorias: React.FC = () => {
             >
               <FiArrowLeft className="w-5 h-5 text-gray-600" />
             </button>
-            <div className="flex-1">
+            <div className="flex-1 min-w-0">
               <SearchInput 
                 placeholder="Buscar ruas e histórias..."
                 onSearch={setSearchTerm}
