@@ -49,6 +49,23 @@ export async function POST(req: Request) {
       );
     }
 
+    // If user is authenticated, also save to user_quiz_results table
+    if (user_id && meta && typeof meta === 'object') {
+      const metaObj = meta as any;
+      const city = metaObj.city || metaObj.cidade || 'Unknown';
+      const totalQuestions = metaObj.total || metaObj.totalQuestions || 10;
+      const percentage = metaObj.percentage || metaObj.porcentagem || 0;
+
+      await supabase.from('user_quiz_results').insert({
+        user_id,
+        city,
+        score: score ?? 0,
+        total_questions: totalQuestions,
+        percentage,
+        answers: answers as any,
+      });
+    }
+
     return NextResponse.json({ data }, { status: 201 });
   } catch (err: any) {
     return NextResponse.json(

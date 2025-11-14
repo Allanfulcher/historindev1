@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 // import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import HashRouter from "../components/HashRouter";
+import { AuthProvider } from "@/contexts/AuthContext";
 
 // Temporarily disabled to fix build issues
 // const geistSans = Geist({
@@ -106,8 +107,10 @@ export default function RootLayout({
       <body
         className="antialiased min-h-screen bg-[#f4ede0] text-[#6B5B4F]"
       >
-        <HashRouter />
-        {children}
+        <AuthProvider>
+          <HashRouter />
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );

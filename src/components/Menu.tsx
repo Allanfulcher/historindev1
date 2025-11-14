@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import AdFooter from './extra/AdFooter';
 import BrownBtn from './buttons/BrownBtn';
+import { useAuth } from '@/contexts/AuthContext';
 
 interface MenuProps {
   menuOpen: boolean;
@@ -21,6 +22,7 @@ const Menu: React.FC<MenuProps> = ({
   historias = [] 
 }) => {
   const router = useRouter();
+  const { user, signInWithGoogle, signOut } = useAuth();
 
   const handleSurpriseMe = () => {
     if (historias && historias.length > 0) {
@@ -141,6 +143,41 @@ const Menu: React.FC<MenuProps> = ({
             <span className="block text-lg font-semibold text-[#6B5B4F]">REFERÊNCIAS</span>
             <span className="block text-sm font-medium text-[#A0958A]">e conteúdo</span>
           </Link>
+
+          {/* Login/Profile Section */}
+          {user ? (
+            <>
+              <Link
+                href="/meus-resultados"
+                className="px-4 py-3 hover:bg-[#F5F1EB] rounded-md transition-all duration-300 border-b border-[#F5F1EB] cursor-pointer transform hover:scale-[1.02] active:scale-[0.98]"
+                onClick={handleMenuItemClick}
+              >
+                <span className="block text-lg font-semibold text-[#6B5B4F]">MEUS RESULTADOS</span>
+                <span className="block text-sm font-medium text-[#A0958A]">Quiz</span>
+              </Link>
+              <button
+                onClick={() => {
+                  signOut();
+                  setMenuOpen(false);
+                }}
+                className="w-full text-left px-4 py-3 hover:bg-[#F5F1EB] rounded-md transition-all duration-300 border-b border-[#F5F1EB] cursor-pointer transform hover:scale-[1.02] active:scale-[0.98]"
+              >
+                <span className="block text-lg font-semibold text-[#6B5B4F]">SAIR</span>
+                <span className="block text-sm font-medium text-[#A0958A]">{user.email}</span>
+              </button>
+            </>
+          ) : (
+            <button
+              onClick={() => {
+                signInWithGoogle();
+                setMenuOpen(false);
+              }}
+              className="w-full text-left px-4 py-3 hover:bg-[#F5F1EB] rounded-md transition-all duration-300 border-b border-[#F5F1EB] cursor-pointer transform hover:scale-[1.02] active:scale-[0.98]"
+            >
+              <span className="block text-lg font-semibold text-[#6B5B4F]">ENTRAR</span>
+              <span className="block text-sm font-medium text-[#A0958A]">com Google</span>
+            </button>
+          )}
 
           {/* Surprise Me Button (if historias are available) */}
           {historias.length > 0 && (
