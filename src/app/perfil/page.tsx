@@ -75,7 +75,7 @@ export default function PerfilPage() {
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Profile Header */}
         <div className="bg-[#FEFCF8] p-6 rounded-lg shadow-sm ring-1 ring-[#A0958A]/20 mb-6">
-          <div className="flex items-center gap-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
             {profile.avatar ? (
               <img 
                 src={profile.avatar} 
@@ -87,24 +87,26 @@ export default function PerfilPage() {
                 <i className="fas fa-user text-3xl text-[#6B5B4F]"></i>
               </div>
             )}
-            <div className="flex-1">
+            <div className="flex-1 min-w-0">
               <h1 className="text-2xl font-bold text-[#4A3F35] mb-1">
                 {profile.displayName}
               </h1>
-              <p className="text-sm text-[#6B5B4F]">
+              <p className="text-sm text-[#6B5B4F] break-words">
                 <i className="fas fa-envelope mr-2"></i>
                 {profile.email}
               </p>
             </div>
-            <button
-              onClick={handleSignOut}
-              className="px-4 py-2 bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 rounded-lg transition-colors text-sm font-medium inline-flex items-center gap-2"
-              title="Desconectar"
-            >
-              <i className="fas fa-sign-out-alt"></i>
-              Sair
-            </button>
           </div>
+          
+          {/* Sign Out Button - Full width on mobile, inline on desktop */}
+          <button
+            onClick={handleSignOut}
+            className="mt-4 w-full sm:w-auto px-4 py-2 bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 rounded-lg transition-colors text-sm font-medium inline-flex items-center justify-center gap-2"
+            title="Desconectar"
+          >
+            <i className="fas fa-sign-out-alt"></i>
+            Desconectar da Conta
+          </button>
         </div>
 
         {/* Quiz Scores - Small Section */}
