@@ -9,8 +9,7 @@ import LoadingSpinner from '@/components/LoadingSpinner';
 import { legacyQuestions } from '@/data/legacyData';
 import React, { useEffect, useState } from 'react';
 import { supabaseBrowser } from '@/lib/supabase/client';
-import { submitQuiz } from '@/utils/quizApi';
-import { useAuth } from '@/contexts/AuthContext';
+import { useUserQuiz, useUserData } from '@/hooks/useUserData';
 
 interface Question {
   id?: string;
@@ -75,10 +74,16 @@ async function fetchQuestionsFromSupabase(cityFilter: number, limit = 10): Promi
 }
 
 export default function QuizPage() {
-  const { user, signInWithGoogle } = useAuth();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [city, setCity] = useState('');
+  
+  // Use the new user utilities hook
+  const { saveQuiz: saveQuizToDb, isAuthenticated, stats } = useUserQuiz(city);
+  
+  // Also get user data for display and auth
+  const { user, profile, signIn } = useUserData({ autoLoadQuizData: false });
+  
   const [quizStarted, setQuizStarted] = useState(false);
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -170,20 +175,16 @@ export default function QuizPage() {
         options: q.answers,
       }));
 
-      // Submit to our Supabase-backed API
-      await submitQuiz({
-        answers: answersPayload,
-        score,
-        meta: {
-          name: user?.user_metadata?.full_name || name,
-          email: user?.email || email,
+      // Use the new saveQuiz utility for authenticated users
+      if (isAuthenticated && city) {
+        await saveQuizToDb({
           city,
-          percentage,
+          score,
           totalQuestions: selectedQuestions.length,
-          ts: new Date().toISOString(),
-        },
-        user_id: user?.id || null,
-      });
+          percentage,
+          answers: answersPayload,
+        });
+      }
 
       // UX delay
       await new Promise(resolve => setTimeout(resolve, 500));
@@ -191,7 +192,7 @@ export default function QuizPage() {
       setSubmissionError('');
       setScoreSubmitted(true);
     } catch (err) {
-      console.error('Erro ao enviar email:', err);
+      console.error('Erro ao enviar resultado:', err);
       setSubmissionError('Erro de conexão. Verifique sua internet e tente novamente.');
     } finally {
       setIsSubmittingEmail(false);
@@ -280,7 +281,7 @@ export default function QuizPage() {
                     Faça login para salvar seus resultados automaticamente!
                   </p>
                   <button
-                    onClick={signInWithGoogle}
+                    onClick={signIn}
                     className="w-full bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 py-2 px-4 rounded flex items-center justify-center gap-2 transition-colors"
                   >
                     <svg className="w-5 h-5" viewBox="0 0 24 24">
@@ -302,7 +303,7 @@ export default function QuizPage() {
                 <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
                   <p className="text-sm text-green-900 text-center">
                     <i className="fas fa-check-circle mr-2"></i>
-                    Logado como <strong>{user.email}</strong>
+                    Logado como <strong>{profile.displayName}</strong>
                   </p>
                   <p className="text-xs text-green-700 mt-1 text-center">
                     Seus resultados serão salvos automaticamente
