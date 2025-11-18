@@ -4,12 +4,12 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import Contribuir from './contribuir';
-import Menu from '../Menu';
-import Header from '../Header';
-import DropDown from '../buttons/DropDown';
-import FeedbackPopup from '../popups/FeedbackPopup';
-import QuizModal from '../popups/QuizModal';
-import DonationCard from '../cards/DonationCard';
+import Menu from '../../../components/Menu';
+import Header from '../../../components/Header';
+import DropDown from '../../../components/buttons/DropDown';
+import FeedbackPopup from '../../../components/popups/FeedbackPopup';
+import QuizModal from '../../../components/popups/QuizModal';
+import DonationCard from '../../../components/cards/DonationCard';
 
 interface TeamMember {
   name: string;

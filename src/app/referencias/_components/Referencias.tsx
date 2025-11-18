@@ -4,15 +4,15 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import YoutubeSection from './YoutubeSection';
-import Header from '../Header';
-import Menu from '../Menu';
-import TitleSubtitle from '../text/TitleSubtitle';
-import Paragraph from '../text/Paragraph';
-import DropDown from '../buttons/DropDown';
-import { useLegacyData } from '../../hooks/useLegacyData';
-import { Organizacao, Autor, Obra, Site } from '../../types';
-import FeedbackPopup from '../popups/FeedbackPopup';
-import QuizModal from '../popups/QuizModal';
+import Header from '../../../components/Header';
+import Menu from '../../../components/Menu';
+import TitleSubtitle from '../../../components/text/TitleSubtitle';
+import Paragraph from '../../../components/text/Paragraph';
+import DropDown from '../../../components/buttons/DropDown';
+import { useLegacyData } from '../../../hooks/useLegacyData';
+import { Organizacao, Autor, Obra, Site } from '../../../types';
+import FeedbackPopup from '../../../components/popups/FeedbackPopup';
+import QuizModal from '../../../components/popups/QuizModal';
 
 type SectionType = 'orgs' | 'autores' | 'obras' | 'sites' | null;
 

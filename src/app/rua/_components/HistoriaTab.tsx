@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import type { Historia, Rua, Cidade } from '../../types';
+import type { Historia, Rua, Cidade } from '../../../types';
 import HistoriaCard from './HistoriaCard';
-import AdCard, { AdBusiness } from '../cards/AdCard';
+import AdCard, { AdBusiness } from '../../../components/cards/AdCard';
 import type { Ad } from '@/types';
 
 interface HistoriaTabProps {

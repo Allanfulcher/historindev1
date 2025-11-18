@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import RuaHistoria from '../../../../../components/ruas/RuaHistoria';
+import RuaHistoria from '../../../_components/RuaHistoria';
 import { supabaseBrowser } from '@/lib/supabase/client';
 
 type Props = {

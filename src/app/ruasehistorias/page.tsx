@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import RuasEHistorias from '@/components/RuasEHistorias';
+import RuasEHistorias from './_components/RuasEHistorias';
 
 export const metadata: Metadata = {
   title: 'Ruas e Histórias de Gramado e Canela',

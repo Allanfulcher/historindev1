@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { FiArrowLeft, FiTag } from "react-icons/fi";
 import Header from "@/components/Header";
 import Menu from "@/components/Menu";
-import SearchInput from "@/components/SearchInput";
+import SearchInput from "@/app/ruasehistorias/_components/SearchInput";
 import { supabaseBrowser } from "@/lib/supabase/client";
 
 // Helper to create URL-friendly slugs

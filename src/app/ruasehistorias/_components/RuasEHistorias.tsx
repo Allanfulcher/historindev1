@@ -3,16 +3,16 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { FiArrowLeft, FiTag } from 'react-icons/fi';
-import { useLegacyData } from '../hooks/useLegacyData';
-import { Rua, Historia, FotoWithCredit } from '../types';
-import Header from './Header';
-import Menu from './Menu';
+import { useLegacyData } from '../../../hooks/useLegacyData';
+import { Rua, Historia } from '../../../types';
+import Header from '../../../components/Header';
+import Menu from '../../../components/Menu';
 import SearchInput from './SearchInput';
-import ViewMap from './buttons/ViewMap';
-import StreetCard from './cards/StreetCard';
-import HistoryCard from './cards/HistoryCard';
-import FeedbackPopup from './popups/FeedbackPopup';
-import QuizModal from './popups/QuizModal';
+import ViewMap from '../../../components/MapView';
+import StreetCard from '../../../components/cards/StreetCard';
+import HistoryCard from '../../../components/cards/HistoryCard';
+import FeedbackPopup from '../../../components/popups/FeedbackPopup';
+import QuizModal from '../../../components/popups/QuizModal';
 
 const RuasEHistorias: React.FC = () => {
   // Use legacy data hook
@@ -139,7 +139,11 @@ const RuasEHistorias: React.FC = () => {
         
         <div className="mb-3">
           <h1 className="text-xl font-bold text-gray-900 mb-4 pt-4">Ruas e Histórias</h1>
-          <ViewMap />
+          <ViewMap 
+            ruas={ruas}
+            setSelectedRuaId={(id: string) => router.push(`/rua/${String(id)}`)}
+            setPreviewContent={(_content) => {}}
+          />
         </div>
 
         {/* Categories Section */}

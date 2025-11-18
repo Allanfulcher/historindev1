@@ -4,11 +4,11 @@ import { useEffect, useMemo, useState } from "react";
 import { adminFetch, getAdminSession } from "@/utils/adminApi";
 import { isAdminAuthenticated } from "@/utils/adminApi";
 import { useRouter } from "next/navigation";
-import AdminHeader from "@/components/admin/AdminHeader";
-import AdminSection from "@/components/admin/AdminSection";
-import AdminTable from "@/components/admin/AdminTable";
-import { AdminInput, AdminTextarea, AdminSelect } from "@/components/admin/AdminField";
-import { PrimaryButton, SecondaryButton, DangerButton, ActionsBar } from "@/components/admin/AdminActions";
+import AdminHeader from "@/app/admin/_component/AdminHeader";
+import AdminSection from "@/app/admin/_component/AdminSection";
+import AdminTable from "@/app/admin/_component/AdminTable";
+import { AdminInput, AdminTextarea, AdminSelect } from "@/app/admin/_component/AdminField";
+import { PrimaryButton, SecondaryButton, DangerButton, ActionsBar } from "@/app/admin/_component/AdminActions";
 
 type Question = {
   id: string;

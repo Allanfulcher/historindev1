@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { Suspense } from 'react';
-import Sobre from '../../components/sobre/Sobre';
+import Sobre from './_components/Sobre';
 
 export const metadata: Metadata = {
   title: 'Sobre Nós - Historin',

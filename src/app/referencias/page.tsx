@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { Suspense } from "react";
 
-import Referencias from "../../components/referencias/Referencias";
+import Referencias from "./_components/Referencias";
 
 export const metadata: Metadata = {
     title: 'Referências - Historin',

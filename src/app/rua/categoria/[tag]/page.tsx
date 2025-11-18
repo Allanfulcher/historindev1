@@ -5,8 +5,8 @@ import { useParams, useRouter } from "next/navigation";
 import { FiArrowLeft, FiTag } from "react-icons/fi";
 import Header from "@/components/Header";
 import Menu from "@/components/Menu";
-import HistoriaCard from "@/components/ruas/HistoriaCard";
-import YearNavigator from "@/components/ruas/YearNavigator";
+import HistoriaCard from "../../_components/HistoriaCard";
+import YearNavigator from "../../_components/YearNavigator";
 import { supabaseBrowser } from "@/lib/supabase/client";
 import { Historia } from "@/types";
 

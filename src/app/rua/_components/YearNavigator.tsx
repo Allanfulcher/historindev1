@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import type { Historia } from '../../types';
+import type { Historia } from '../../../types';
 
 interface YearNavigatorProps {
   historias: Historia[];

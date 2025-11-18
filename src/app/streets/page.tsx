@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import RuasEHistorias from '../../components/RuasEHistorias';
+import RuasEHistorias from '../ruasehistorias/_components/RuasEHistorias';
 
 export const metadata: Metadata = {
   title: 'Ruas de Gramado - Explore o Historin',

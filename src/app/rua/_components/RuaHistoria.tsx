@@ -3,11 +3,11 @@
 import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import { useRouter, useSearchParams, useParams } from 'next/navigation';
 import { supabaseBrowser } from '@/lib/supabase/client';
-import type { Historia, Rua, Cidade } from '../../types';
-import Header from '../Header';
-import Menu from '../Menu';
+import type { Historia, Rua, Cidade } from '../../../types';
+import Header from '../../../components/Header';
+import Menu from '../../../components/Menu';
 import NavigationTab from './NavigationTab';
-import FeedbackPopup from '../popups/FeedbackPopup';
+import FeedbackPopup from '../../../components/popups/FeedbackPopup';
 import CitySelector from './CitySelector';
 import RuaSelector from './RuaSelector';
 import LoadingSpinner from './LoadingSpinner';
@@ -17,7 +17,7 @@ import RuaTab from './RuaTab';
 import CidadeTab from './CidadeTab';
 import NotFoundContent from './NotFoundContent';
 import YearNavigator from './YearNavigator';
-import QuizModal from '../popups/QuizModal';
+import QuizModal from '../../../components/popups/QuizModal';
 
 interface RuaHistoriaProps {
   className?: string;

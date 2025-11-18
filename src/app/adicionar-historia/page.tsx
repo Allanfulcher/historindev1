@@ -1,7 +1,5 @@
 import { Metadata } from 'next';
-import AdicionarHistoria from '../../components/adicionar-historia/AdicionarHistoria';
-import Header from '../../components/Header';
-import Menu from '../../components/Menu';
+import AdicionarHistoria from './_components/AdicionarHistoria';
 
 export const metadata: Metadata = {
   title: 'Compartilhe seu acervo - Historin',

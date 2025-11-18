@@ -4,7 +4,7 @@ import React from "react";
 import { useParams } from "next/navigation";
 import Header from "@/components/Header";
 import Menu from "@/components/Menu";
-import HistoriaCard from "@/components/ruas/HistoriaCard";
+import HistoriaCard from "@/app/rua/_components/HistoriaCard";
 import { supabaseBrowser } from "@/lib/supabase/client";
 import type { Historia } from "@/types";
 

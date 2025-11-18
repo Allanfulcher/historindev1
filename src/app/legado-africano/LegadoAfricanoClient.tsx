@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import LegadoAfricano from '@/components/legadoafro/LegadoAfricano';
+import LegadoAfricano from '@/app/legado-africano/_components/LegadoAfricano';
 import Header from '@/components/Header';
 import Menu from '@/components/Menu';
 import QuizModal from '@/components/popups/QuizModal';

@@ -3,11 +3,11 @@
 import { useEffect, useMemo, useState } from "react";
 import { adminFetch, isAdminAuthenticated } from "@/utils/adminApi";
 import { useRouter } from "next/navigation";
-import AdminHeader from "@/components/admin/AdminHeader";
-import AdminSection from "@/components/admin/AdminSection";
-import AdminTable from "@/components/admin/AdminTable";
-import { AdminInput } from "@/components/admin/AdminField";
-import { PrimaryButton, DangerButton, SecondaryButton } from "@/components/admin/AdminActions";
+import AdminHeader from "@/app/admin/_component/AdminHeader";
+import AdminSection from "@/app/admin/_component/AdminSection";
+import AdminTable from "@/app/admin/_component/AdminTable";
+import { AdminInput } from "@/app/admin/_component/AdminField";
+import { PrimaryButton, DangerButton, SecondaryButton } from "@/app/admin/_component/AdminActions";
 
 type Site = {
   id: string;

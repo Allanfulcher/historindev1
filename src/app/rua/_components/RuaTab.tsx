@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import type { Rua, Cidade } from '../../types';
+import type { Rua, Cidade } from '../../../types';
 
 interface RuaTabProps {
   rua: Rua;

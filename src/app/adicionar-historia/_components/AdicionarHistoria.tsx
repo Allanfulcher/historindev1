@@ -2,11 +2,11 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import Header from '../Header';
-import Menu from '../Menu';
+import Header from '../../../components/Header';
+import Menu from '../../../components/Menu';
 import AddForm from './AddForm';
-import FeedbackPopup from '../popups/FeedbackPopup';
-import QuizModal from '../popups/QuizModal';
+import FeedbackPopup from '../../../components/popups/FeedbackPopup';
+import QuizModal from '../../../components/popups/QuizModal';
 
 interface FormData {
   nome: string;
