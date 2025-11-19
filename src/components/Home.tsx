@@ -22,6 +22,7 @@ import RecomendedHistorias from './cards/RecomendedHistorias';
 import WelcomeCard from './cards/WelcomeCard';
 import DonationCard from './cards/DonationCard';
 import BusinessCard from './cards/BusinessCard';
+import QrHuntCard from './cards/QrHuntCard';
 
 interface HomeProps {
   data?: any; // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -186,6 +187,11 @@ const Home: React.FC<HomeProps> = ({ onPreviewOpen }) => {
                 <FiArrowRight className="w-5 h-5" />
               </div>
             </button>
+          </section>
+
+          {/* QR Hunt Card */}
+          <section className="mb-8">
+            <QrHuntCard />
           </section>
 
           {/* Categories Section */}

@@ -11,6 +11,7 @@
   "dependencies": {
     "@supabase/ssr": "^0.7.0",
     "@supabase/supabase-js": "^2.57.4",
+    "@yudiel/react-qr-scanner": "^2.4.1",
     "framer-motion": "^12.23.12",
     "gtag": "^1.0.1",
     "leaflet": "^1.9.4",

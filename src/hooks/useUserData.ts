@@ -21,6 +21,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { userService } from '@/services/user.service';
+import { qrService } from '@/services/qr.service';
 import type { Database } from '@/types/database.types';
 
 type UserProfile = Database['public']['Tables']['user_profiles']['Row'];
@@ -29,6 +30,13 @@ type QuizResult = Database['public']['Tables']['user_quiz_results']['Row'];
 interface UserQuizStats {
   gramado: number | null;
   canela: number | null;
+}
+
+interface QrHuntProgress {
+  scanned: number;
+  total: number;
+  percentage: number;
+  scannedIds: string[];
 }
 
 interface UserData {
@@ -50,6 +58,9 @@ interface UserData {
   quizStats: UserQuizStats | null;
   quizHistory: QuizResult[];
   
+  // QR Hunt data
+  qrHuntProgress: QrHuntProgress | null;
+  
   // Actions
   saveQuiz: (params: {
     city: string;
@@ -60,6 +71,7 @@ interface UserData {
   }) => Promise<QuizResult | null>;
   
   refreshQuizData: (city?: string) => Promise<void>;
+  refreshQrData: () => Promise<void>;
   signIn: () => Promise<void>;
   signOut: () => Promise<void>;
 }
@@ -72,6 +84,7 @@ export function useUserData(options?: { autoLoadQuizData?: boolean; city?: strin
   const [fullProfile, setFullProfile] = useState<UserProfile | null>(null);
   const [quizStats, setQuizStats] = useState<UserQuizStats | null>(null);
   const [quizHistory, setQuizHistory] = useState<QuizResult[]>([]);
+  const [qrHuntProgress, setQrHuntProgress] = useState<QrHuntProgress | null>(null);
   const [loading, setLoading] = useState(true);
 
   const { autoLoadQuizData = true, city } = options || {};
@@ -110,12 +123,36 @@ export function useUserData(options?: { autoLoadQuizData?: boolean; city?: strin
     }
   }, [user?.id, autoLoadQuizData, authLoading]);
 
+  // Load QR hunt data when user changes
+  useEffect(() => {
+    async function loadQrData() {
+      if (user?.id) {
+        const progress = await qrService.getUserProgress(user.id);
+        setQrHuntProgress(progress);
+      } else {
+        setQrHuntProgress(null);
+      }
+    }
+
+    if (!authLoading) {
+      loadQrData();
+    }
+  }, [user?.id, authLoading]);
+
   // Refresh quiz data manually
   const refreshQuizData = useCallback(async () => {
     if (!user?.id) return;
 
     const stats = await userService.getQuizStats(user.id);
     setQuizStats(stats);
+  }, [user?.id]);
+
+  // Refresh QR hunt data manually
+  const refreshQrData = useCallback(async () => {
+    if (!user?.id) return;
+
+    const progress = await qrService.getUserProgress(user.id);
+    setQrHuntProgress(progress);
   }, [user?.id]);
 
   // Save quiz result
@@ -163,9 +200,13 @@ export function useUserData(options?: { autoLoadQuizData?: boolean; city?: strin
     quizStats,
     quizHistory,
     
+    // QR Hunt data
+    qrHuntProgress,
+    
     // Actions
     saveQuiz,
     refreshQuizData,
+    refreshQrData,
     signIn: signInWithGoogle,
     signOut,
   };

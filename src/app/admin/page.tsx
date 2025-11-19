@@ -98,6 +98,9 @@ export default function AdminHome() {
           <li>
             <Link className="text-[#8B4513] hover:text-[#A0522D] underline" href="/admin/historias">Histórias</Link>
           </li>
+          <li>
+            <Link className="text-[#8B4513] hover:text-[#A0522D] underline" href="/admin/qr-codes">QR Codes (Caça ao QR)</Link>
+          </li>
         </ul>
       </nav>
     </div>

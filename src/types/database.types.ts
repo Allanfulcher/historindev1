@@ -169,6 +169,70 @@ export interface Database {
         };
         Relationships: [];
       };
+      qr_codes: {
+        Row: {
+          id: string;
+          rua_id: number;
+          name: string;
+          description: string | null;
+          coordinates: Json;
+          created_at: string;
+          active: boolean;
+        };
+        Insert: {
+          id: string;
+          rua_id: number;
+          name: string;
+          description?: string | null;
+          coordinates: Json;
+          created_at?: string;
+          active?: boolean;
+        };
+        Update: {
+          id?: string;
+          rua_id?: number;
+          name?: string;
+          description?: string | null;
+          coordinates?: Json;
+          created_at?: string;
+          active?: boolean;
+        };
+        Relationships: [];
+      };
+      user_qr_scans: {
+        Row: {
+          id: string;
+          user_id: string;
+          qr_code_id: string;
+          scanned_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          qr_code_id: string;
+          scanned_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          qr_code_id?: string;
+          scanned_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "user_qr_scans_user_id_fkey";
+            columns: ["user_id"];
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "user_qr_scans_qr_code_id_fkey";
+            columns: ["qr_code_id"];
+            referencedRelation: "qr_codes";
+            referencedColumns: ["id"];
+          }
+        ];
+      };
     };
     Views: {
       [_ in never]: never;
@@ -202,3 +266,11 @@ export type UserFavoriteUpdate = Database['public']['Tables']['user_favorites'][
 export type QuizQuestion = Database['public']['Tables']['quiz_questions']['Row'];
 export type QuizQuestionInsert = Database['public']['Tables']['quiz_questions']['Insert'];
 export type QuizQuestionUpdate = Database['public']['Tables']['quiz_questions']['Update'];
+
+export type QrCode = Database['public']['Tables']['qr_codes']['Row'];
+export type QrCodeInsert = Database['public']['Tables']['qr_codes']['Insert'];
+export type QrCodeUpdate = Database['public']['Tables']['qr_codes']['Update'];
+
+export type UserQrScan = Database['public']['Tables']['user_qr_scans']['Row'];
+export type UserQrScanInsert = Database['public']['Tables']['user_qr_scans']['Insert'];
+export type UserQrScanUpdate = Database['public']['Tables']['user_qr_scans']['Update'];

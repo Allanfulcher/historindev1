@@ -12,7 +12,8 @@ export default function PerfilPage() {
   const { 
     isAuthenticated, 
     profile, 
-    quizStats, 
+    quizStats,
+    qrHuntProgress,
     loading,
     signIn,
     signOut
@@ -109,7 +110,83 @@ export default function PerfilPage() {
           </button>
         </div>
 
-        {/* Quiz Scores - Small Section */}
+        {/* QR Hunt Progress - First Section */}
+        {qrHuntProgress && qrHuntProgress.total > 0 ? (
+          <div className="bg-[#FEFCF8] p-6 rounded-lg shadow-sm ring-1 ring-[#A0958A]/20 mb-6">
+            <h2 className="text-xl font-bold text-[#4A3F35] mb-4">
+              <i className="fas fa-qrcode mr-2"></i>
+              Caça ao QR Code
+            </h2>
+            
+            <div className="mb-4">
+              <div className="flex justify-between items-center mb-2">
+                <span className="text-sm text-[#6B5B4F]">
+                  {qrHuntProgress.scanned} de {qrHuntProgress.total} QR Codes encontrados
+                </span>
+                <span className="text-sm font-bold text-[#8B4513]">
+                  {qrHuntProgress.percentage}%
+                </span>
+              </div>
+              <div className="w-full bg-[#F5F1EB] rounded-full h-3 overflow-hidden">
+                <div
+                  className="bg-gradient-to-r from-[#8B4513] to-[#A0522D] h-3 rounded-full transition-all duration-500"
+                  style={{ width: `${qrHuntProgress.percentage}%` }}
+                />
+              </div>
+            </div>
+
+            {qrHuntProgress.percentage === 100 ? (
+              <div className="bg-green-50 border-2 border-green-500 rounded-lg p-4 mb-4">
+                <div className="flex items-center gap-3">
+                  <i className="fas fa-trophy text-3xl text-green-600"></i>
+                  <div>
+                    <p className="font-bold text-green-700 mb-1">
+                      🎉 Parabéns! Você completou a caça!
+                    </p>
+                    <p className="text-sm text-green-600">
+                      Você encontrou todos os QR Codes da cidade!
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="bg-[#F5F1EB] rounded-lg p-4 mb-4">
+                <p className="text-sm text-[#6B5B4F]">
+                  Continue explorando a cidade para encontrar mais QR Codes!
+                </p>
+              </div>
+            )}
+
+            <div className="pt-4 border-t border-[#F5F1EB]">
+              <Link
+                href="/caca-qr"
+                className="text-sm text-[#8B4513] hover:text-[#A0522D] transition-colors inline-flex items-center gap-2"
+              >
+                <i className="fas fa-camera"></i>
+                Continuar caça ao QR Code
+              </Link>
+            </div>
+          </div>
+        ) : (
+          <div className="bg-[#FEFCF8] p-6 rounded-lg shadow-sm ring-1 ring-[#A0958A]/20 mb-6">
+            <h2 className="text-xl font-bold text-[#4A3F35] mb-4">
+              <i className="fas fa-qrcode mr-2"></i>
+              Caça ao QR Code
+            </h2>
+            <p className="text-[#6B5B4F] mb-4">
+              Você ainda não começou a caça ao QR Code. Explore a cidade e encontre QR Codes escondidos!
+            </p>
+            <Link
+              href="/caca-qr"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-[#8B4513] to-[#A0522D] hover:from-[#A0522D] hover:to-[#8B4513] text-white py-2 px-4 rounded transition-all text-sm"
+            >
+              <i className="fas fa-camera"></i>
+              Começar Caça ao QR Code
+            </Link>
+          </div>
+        )}
+
+        {/* Quiz Scores - Second Section */}
         {quizStats && (quizStats.gramado !== null || quizStats.canela !== null) ? (
           <div className="bg-[#FEFCF8] p-6 rounded-lg shadow-sm ring-1 ring-[#A0958A]/20 mb-6">
             <h2 className="text-xl font-bold text-[#4A3F35] mb-4">

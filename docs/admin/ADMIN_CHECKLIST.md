@@ -41,6 +41,10 @@ This checklist is structured for step-by-step execution by an LLM. Each item inc
   - Title: Histórias (Stories) page
   - Path: `src/app/admin/historias/page.tsx`
   - Acceptance: List, create, edit, delete stories; manage photos.
+- [x] ID: PG-10
+  - Title: QR Codes page
+  - Path: `src/app/admin/qr-codes/page.tsx`
+  - Acceptance: List, create, edit, delete QR codes for the QR hunt feature; manage coordinates, rua associations, and active status.
 
 Notes:
 - All admin pages should use `AdminHeader` and Phase 1 shared components.
