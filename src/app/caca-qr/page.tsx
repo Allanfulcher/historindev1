@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Scanner } from '@yudiel/react-qr-scanner';
 import { FiCamera, FiMap, FiAward, FiX, FiCheck } from 'react-icons/fi';
@@ -21,7 +21,7 @@ const QrHuntMap = dynamic(() => import('./_components/QrHuntMap'), {
   ),
 });
 
-export default function QrHuntPage() {
+function QrHuntContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { user, signInWithGoogle } = useAuth();
@@ -420,5 +420,20 @@ export default function QrHuntPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function QrHuntPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-[#f4ede0] flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#8B4513] mx-auto mb-4"></div>
+          <p className="text-[#6B5B4F]">Carregando...</p>
+        </div>
+      </div>
+    }>
+      <QrHuntContent />
+    </Suspense>
   );
 }
