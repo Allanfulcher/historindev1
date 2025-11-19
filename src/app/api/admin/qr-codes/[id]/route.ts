@@ -5,13 +5,14 @@ interface UpdateQrCodePayload {
   name?: string;
   description?: string;
   coordinates?: { lat: number; lng: number };
+  valid_strings?: string[];
   active?: boolean;
   rua_id?: number;
 }
 
 function parseUpdate(body: unknown): { ok: true; value: UpdateQrCodePayload } | { ok: false; error: string } {
   if (typeof body !== 'object' || body === null) return { ok: false, error: 'Invalid JSON body' };
-  const { name, description, coordinates, active, rua_id } = body as any;
+  const { name, description, coordinates, valid_strings, active, rua_id } = body as any;
 
   const result: UpdateQrCodePayload = {};
 
@@ -33,6 +34,20 @@ function parseUpdate(body: unknown): { ok: true; value: UpdateQrCodePayload } | 
       return { ok: false, error: 'coordinates must have lat and lng as numbers' };
     }
     result.coordinates = { lat: coordinates.lat, lng: coordinates.lng };
+  }
+
+  if (valid_strings !== undefined) {
+    if (!Array.isArray(valid_strings) || valid_strings.length === 0) {
+      return { ok: false, error: 'valid_strings must be a non-empty array' };
+    }
+    const validStringsArray = valid_strings
+      .map(s => typeof s === 'string' ? s.trim() : '')
+      .filter(s => s.length > 0);
+    
+    if (validStringsArray.length === 0) {
+      return { ok: false, error: 'valid_strings must contain at least one non-empty string' };
+    }
+    result.valid_strings = validStringsArray;
   }
 
   if (active !== undefined) {

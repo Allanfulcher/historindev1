@@ -176,6 +176,7 @@ export interface Database {
           name: string;
           description: string | null;
           coordinates: Json;
+          valid_strings: string[];
           created_at: string;
           active: boolean;
         };
@@ -185,6 +186,7 @@ export interface Database {
           name: string;
           description?: string | null;
           coordinates: Json;
+          valid_strings: string[];
           created_at?: string;
           active?: boolean;
         };
@@ -194,6 +196,7 @@ export interface Database {
           name?: string;
           description?: string | null;
           coordinates?: Json;
+          valid_strings?: string[];
           created_at?: string;
           active?: boolean;
         };

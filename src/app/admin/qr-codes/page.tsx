@@ -16,6 +16,7 @@ type QrCode = {
   name: string;
   description: string | null;
   coordinates: { lat: number; lng: number };
+  valid_strings: string[];
   active: boolean;
 };
 
@@ -33,6 +34,7 @@ export default function AdminQrCodesPage() {
     description: "",
     lat: "",
     lng: "",
+    valid_strings: "",
     active: true,
   });
 
@@ -46,7 +48,8 @@ export default function AdminQrCodesPage() {
       form.lat.trim().length > 0 &&
       !isNaN(Number(form.lat)) &&
       form.lng.trim().length > 0 &&
-      !isNaN(Number(form.lng))
+      !isNaN(Number(form.lng)) &&
+      form.valid_strings.trim().length > 0
     );
   }, [form]);
 
@@ -78,6 +81,11 @@ export default function AdminQrCodesPage() {
     setLoading(true);
     setError(null);
     try {
+      const validStringsArray = form.valid_strings
+        .split(',')
+        .map(s => s.trim())
+        .filter(s => s.length > 0);
+
       const payload = {
         id: form.id.trim(),
         rua_id: Number(form.rua_id),
@@ -87,13 +95,14 @@ export default function AdminQrCodesPage() {
           lat: Number(form.lat),
           lng: Number(form.lng),
         },
+        valid_strings: validStringsArray,
         active: form.active,
       };
       await adminFetch(`/api/admin/qr-codes`, {
         method: "POST",
         body: JSON.stringify(payload),
       });
-      setForm({ id: "", rua_id: "", name: "", description: "", lat: "", lng: "", active: true });
+      setForm({ id: "", rua_id: "", name: "", description: "", lat: "", lng: "", valid_strings: "", active: true });
       await load();
     } catch (e: any) {
       setError(e?.message || "Failed to create QR code");
@@ -107,6 +116,11 @@ export default function AdminQrCodesPage() {
     setLoading(true);
     setError(null);
     try {
+      const validStringsArray = form.valid_strings
+        .split(',')
+        .map(s => s.trim())
+        .filter(s => s.length > 0);
+
       const payload = {
         rua_id: Number(form.rua_id),
         name: form.name.trim(),
@@ -115,6 +129,7 @@ export default function AdminQrCodesPage() {
           lat: Number(form.lat),
           lng: Number(form.lng),
         },
+        valid_strings: validStringsArray,
         active: form.active,
       };
       await adminFetch(`/api/admin/qr-codes/${qrId}`, {
@@ -122,7 +137,7 @@ export default function AdminQrCodesPage() {
         body: JSON.stringify(payload),
       });
       setEditingId(null);
-      setForm({ id: "", rua_id: "", name: "", description: "", lat: "", lng: "", active: true });
+      setForm({ id: "", rua_id: "", name: "", description: "", lat: "", lng: "", valid_strings: "", active: true });
       await load();
     } catch (e: any) {
       setError(e?.message || "Failed to update QR code");
@@ -170,13 +185,14 @@ export default function AdminQrCodesPage() {
       description: qr.description || "",
       lat: String(qr.coordinates.lat),
       lng: String(qr.coordinates.lng),
+      valid_strings: qr.valid_strings.join(', '),
       active: qr.active,
     });
   }
 
   function cancelEdit() {
     setEditingId(null);
-    setForm({ id: "", rua_id: "", name: "", description: "", lat: "", lng: "", active: true });
+    setForm({ id: "", rua_id: "", name: "", description: "", lat: "", lng: "", valid_strings: "", active: true });
   }
 
   return (
@@ -233,6 +249,19 @@ export default function AdminQrCodesPage() {
             placeholder="ex: -50.8361"
             required
           />
+          <div className="md:col-span-2">
+            <AdminInput
+              label="Strings Válidas (separadas por vírgula)"
+              type="text"
+              value={form.valid_strings}
+              onChange={(e) => setForm((f) => ({ ...f, valid_strings: e.target.value }))}
+              placeholder="ex: oi, https://historin.com/?utm_source=test#/rua/7/, texto-simples"
+              required
+            />
+            <p className="text-xs text-[#A0958A] mt-1">
+              Digite as strings que serão aceitas ao escanear este QR code, separadas por vírgula. Pode ser URLs completas, textos simples, ou qualquer string.
+            </p>
+          </div>
           <div className="flex items-center gap-2">
             <input
               type="checkbox"
@@ -273,6 +302,7 @@ export default function AdminQrCodesPage() {
             { key: "id", label: "ID" },
             { key: "name", label: "Nome" },
             { key: "rua_id", label: "Rua ID" },
+            { key: "valid_strings", label: "Strings Válidas" },
             { key: "description", label: "Descrição" },
             { key: "coordinates", label: "Coordenadas" },
             { key: "status", label: "Status" },
@@ -292,6 +322,15 @@ export default function AdminQrCodesPage() {
                 <span className="inline-block px-2 py-1 bg-[#E6D3B4] text-[#4A3F35] rounded text-xs font-medium">
                   {qr.rua_id}
                 </span>
+              </td>
+              <td className="py-3 pr-3 align-top">
+                <div className="flex flex-wrap gap-1">
+                  {qr.valid_strings.map((str, idx) => (
+                    <span key={idx} className="inline-block px-2 py-1 bg-blue-50 text-blue-700 rounded text-xs font-mono">
+                      {str}
+                    </span>
+                  ))}
+                </div>
               </td>
               <td className="py-3 pr-3 align-top">
                 <div className="text-sm text-[#6B5B4F] max-w-xs">
@@ -330,15 +369,30 @@ export default function AdminQrCodesPage() {
       {/* Info Section */}
       <AdminSection title="Informações">
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-sm text-blue-800">
-          <h4 className="font-bold mb-2">💡 Como usar:</h4>
+          <h4 className="font-bold mb-2">💡 Como usar o sistema de strings válidas:</h4>
           <ul className="list-disc list-inside space-y-1">
             <li>Crie QR codes com IDs únicos (ex: QR_RUA_1, QR_RUA_2)</li>
             <li>Associe cada QR code a uma rua específica usando o ID da rua</li>
-            <li>Defina as coordenadas GPS onde o QR code físico será colocado</li>
-            <li>Gere QR codes físicos com URLs: <code className="bg-blue-100 px-1 rounded">https://seusite.com/?qr=QR_RUA_1</code></li>
+            <li>Defina <strong>múltiplas strings válidas</strong> separadas por vírgula (ex: string1, string2, string3)</li>
+            <li>Quando um usuário escanear um QR code, o sistema verifica se o valor escaneado está na lista de strings válidas</li>
+            <li>Gere QR codes físicos com URLs: <code className="bg-blue-100 px-1 rounded">https://seusite.com/?qr=string1</code></li>
+            <li>Você pode ter vários QR codes físicos diferentes apontando para o mesmo local (usando strings diferentes)</li>
             <li>Usuários podem escanear com a câmera do celular ou pelo app</li>
             <li>Desative QR codes temporariamente sem deletá-los</li>
           </ul>
+          <div className="mt-3 p-3 bg-blue-100 rounded">
+            <p className="font-semibold mb-1">Exemplos práticos:</p>
+            <p className="text-xs mb-2">
+              <strong>Rua 7 - São Pedro:</strong><br/>
+              Strings válidas: <code>oi, https://www.historin.com/?utm_source=cafe-sao-pedro&utm_medium=qr&utm_campaign=rua-gramado#/rua/7/, saopedro</code>
+            </p>
+            <p className="text-xs">
+              ✅ QR code com texto "oi" → válido<br/>
+              ✅ QR code com URL completa → válido<br/>
+              ✅ QR code com "saopedro" → válido<br/>
+              Todos apontam para a mesma Rua 7!
+            </p>
+          </div>
         </div>
       </AdminSection>
     </div>

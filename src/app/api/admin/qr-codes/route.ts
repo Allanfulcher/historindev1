@@ -7,12 +7,13 @@ interface CreateQrCodePayload {
   name: string;
   description?: string;
   coordinates: { lat: number; lng: number };
+  valid_strings: string[];
   active: boolean;
 }
 
 function parseCreate(body: unknown): { ok: true; value: CreateQrCodePayload } | { ok: false; error: string } {
   if (typeof body !== 'object' || body === null) return { ok: false, error: 'Invalid JSON body' };
-  const { id, rua_id, name, description, coordinates, active } = body as any;
+  const { id, rua_id, name, description, coordinates, valid_strings, active } = body as any;
 
   if (typeof id !== 'string' || !id.trim()) return { ok: false, error: 'id must be a non-empty string' };
   if (typeof rua_id !== 'number' || rua_id <= 0) return { ok: false, error: 'rua_id must be a positive number' };
@@ -26,6 +27,18 @@ function parseCreate(body: unknown): { ok: true; value: CreateQrCodePayload } | 
     return { ok: false, error: 'coordinates must have lat and lng as numbers' };
   }
 
+  // Validate valid_strings
+  if (!Array.isArray(valid_strings) || valid_strings.length === 0) {
+    return { ok: false, error: 'valid_strings must be a non-empty array' };
+  }
+  const validStringsArray = valid_strings
+    .map(s => typeof s === 'string' ? s.trim() : '')
+    .filter(s => s.length > 0);
+  
+  if (validStringsArray.length === 0) {
+    return { ok: false, error: 'valid_strings must contain at least one non-empty string' };
+  }
+
   return {
     ok: true,
     value: {
@@ -34,6 +47,7 @@ function parseCreate(body: unknown): { ok: true; value: CreateQrCodePayload } | 
       name: name.trim(),
       description: typeof description === 'string' ? description.trim() : undefined,
       coordinates: { lat: coordinates.lat, lng: coordinates.lng },
+      valid_strings: validStringsArray,
       active: typeof active === 'boolean' ? active : true,
     },
   };

@@ -128,7 +128,7 @@ function QrHuntContent() {
       }
 
       // Check if already scanned
-      const alreadyScanned = await qrService.hasUserScanned(user.id, scannedValue);
+      const alreadyScanned = await qrService.hasUserScanned(user.id, qrCode.id);
       if (alreadyScanned) {
         setScanResult({
           success: false,
@@ -141,7 +141,7 @@ function QrHuntContent() {
       }
 
       // Save scan
-      const scan = await qrService.saveScan(user.id, scannedValue);
+      const scan = await qrService.saveScan(user.id, qrCode.id);
       if (scan) {
         setScanResult({
           success: true,

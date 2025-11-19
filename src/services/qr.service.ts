@@ -54,11 +54,26 @@ async function getQrCodeById(qrCodeId: string): Promise<QrCode | null> {
 
 /**
  * Validate if scanned string is a valid QR code
+ * Checks if the scanned value matches any of the valid strings for any QR code
  */
 async function validateQrCode(scannedValue: string): Promise<QrCode | null> {
-  // Check if the scanned value matches a QR code ID
-  const qrCode = await getQrCodeById(scannedValue);
-  return qrCode;
+  // Get all active QR codes
+  const { data, error } = await supabaseBrowser
+    .from('qr_codes')
+    .select('*')
+    .eq('active', true);
+
+  if (error || !data) {
+    console.error('Error fetching QR codes for validation:', error);
+    return null;
+  }
+
+  // Find QR code where scannedValue is in the valid_strings array
+  const qrCode = data.find(qr => 
+    qr.valid_strings && qr.valid_strings.includes(scannedValue)
+  );
+
+  return qrCode || null;
 }
 
 // ============================================================================
