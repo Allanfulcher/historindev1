@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, Suspense } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { Scanner } from '@yudiel/react-qr-scanner';
 import { FiCamera, FiMap, FiAward, FiX, FiCheck } from 'react-icons/fi';
 import { useAuth } from '@/contexts/AuthContext';
@@ -23,7 +23,6 @@ const QrHuntMap = dynamic(() => import('./_components/QrHuntMap'), {
 
 function QrHuntContent() {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const { user, signInWithGoogle } = useAuth();
   
   const [menuOpen, setMenuOpen] = useState(false);
@@ -39,20 +38,10 @@ function QrHuntContent() {
     qrCode?: QrCode;
   } | null>(null);
 
-  // Check if user came from external QR scan
-  const externalQrId = searchParams?.get('qr');
-
   // Load QR codes and user progress
   useEffect(() => {
     loadData();
   }, [user]);
-
-  // Handle external QR scan (from camera app)
-  useEffect(() => {
-    if (externalQrId && user) {
-      handleExternalScan(externalQrId);
-    }
-  }, [externalQrId, user]);
 
   const loadData = async () => {
     setLoading(true);
@@ -71,43 +60,6 @@ function QrHuntContent() {
     }
   };
 
-  const handleExternalScan = async (qrId: string) => {
-    if (!user) return;
-
-    try {
-      const qrCode = await qrService.validateQrCode(qrId);
-      if (!qrCode) {
-        setScanResult({
-          success: false,
-          message: 'QR Code inválido',
-        });
-        return;
-      }
-
-      const alreadyScanned = await qrService.hasUserScanned(user.id, qrId);
-      if (alreadyScanned) {
-        setScanResult({
-          success: false,
-          message: 'Você já escaneou este QR Code!',
-          qrCode,
-        });
-        return;
-      }
-
-      const scan = await qrService.saveScan(user.id, qrId);
-      if (scan) {
-        setScanResult({
-          success: true,
-          message: `Parabéns! Você escaneou: ${qrCode.name}`,
-          qrCode,
-        });
-        await loadData(); // Refresh progress
-      }
-    } catch (error) {
-      console.error('Error handling external scan:', error);
-    }
-  };
-
   const handleScan = async (result: any) => {
     if (scanning || !user) return;
 
@@ -122,6 +74,7 @@ function QrHuntContent() {
           success: false,
           message: 'QR Code inválido. Escaneie um QR Code do Historin!',
         });
+        setShowScanner(false); // Close camera
         setScanning(false);
         setTimeout(() => setScanResult(null), 3000);
         return;
@@ -135,6 +88,7 @@ function QrHuntContent() {
           message: 'Você já escaneou este QR Code!',
           qrCode,
         });
+        setShowScanner(false); // Close camera
         setScanning(false);
         setTimeout(() => setScanResult(null), 3000);
         return;
@@ -158,6 +112,9 @@ function QrHuntContent() {
         success: false,
         message: 'Erro ao processar QR Code. Tente novamente.',
       });
+      setShowScanner(false); // Close camera on error
+      setScanning(false);
+      setTimeout(() => setScanResult(null), 3000);
     } finally {
       setScanning(false);
     }

@@ -30,12 +30,38 @@ const HashRouteHandler: React.FC<HashRouteHandlerProps> = ({ children }) => {
         // Track the hash route
         trackHashRoute(route);
         
+        // Capture UTM parameters from URL before redirect
+        const urlParams = new URLSearchParams(window.location.search);
+        const utmSource = urlParams.get('utm_source');
+        const utmMedium = urlParams.get('utm_medium');
+        const utmCampaign = urlParams.get('utm_campaign');
+        
+        // Debug logging
+        if (utmMedium === 'qr') {
+          console.log('🎯 QR Code detected in HashRouteHandler:', {
+            utmSource,
+            utmMedium,
+            utmCampaign,
+            hash,
+            route
+          });
+        }
+        
+        // Build query string with UTM parameters
+        const buildQueryString = () => {
+          const params = new URLSearchParams();
+          if (utmSource) params.set('utm_source', utmSource);
+          if (utmMedium) params.set('utm_medium', utmMedium);
+          if (utmCampaign) params.set('utm_campaign', utmCampaign);
+          return params.toString() ? `?${params.toString()}` : '';
+        };
+        
         // Check if it matches our rua/historia pattern
         const ruaHistoriaMatch = route.match(/^\/rua\/(\d+)\/historia\/(\d+)$/);
         
         if (ruaHistoriaMatch) {
           const [, ruaId, historiaId] = ruaHistoriaMatch;
-          const nextjsRoute = `/rua/${ruaId}/historia/${historiaId}`;
+          const nextjsRoute = `/rua/${ruaId}/historia/${historiaId}${buildQueryString()}`;
           router.replace(nextjsRoute);
           return; // Don't render content, we're redirecting
         }
@@ -45,7 +71,7 @@ const HashRouteHandler: React.FC<HashRouteHandlerProps> = ({ children }) => {
         
         if (ruaMatch) {
           const [, ruaId] = ruaMatch;
-          const nextjsRoute = `/rua/${ruaId}/historia/1`;
+          const nextjsRoute = `/rua/${ruaId}${buildQueryString()}`;
           router.replace(nextjsRoute);
           return; // Don't render content, we're redirecting
         }

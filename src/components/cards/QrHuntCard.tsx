@@ -19,22 +19,14 @@ export default function QrHuntCard() {
         <FiAward className="w-6 h-6 text-yellow-300" />
       </div>
 
-      <h3 className="text-xl font-bold mb-2">Caça ao QR Code</h3>
+      <h3 className="text-xl font-bold mb-2">Leia todos os QR Codes!</h3>
       
       <p className="text-sm text-white/90 mb-4">
-        Explore a cidade, encontre QR Codes escondidos e ganhe prêmios! Uma aventura interativa pelas ruas históricas.
+        Explore a cidade e leia todos os QR Codes! 
       </p>
-
-      <div className="flex items-center gap-4 text-sm">
-        <div className="flex items-center gap-1">
-          <FiMap className="w-4 h-4" />
-          <span>Mapa interativo</span>
-        </div>
-        <div className="flex items-center gap-1">
-          <FiCamera className="w-4 h-4" />
-          <span>Scanner QR</span>
-        </div>
-      </div>
+      <p className="text-sm text-white/90 mb-4">
+        Veja o local de todos no nosso mapa interativo!
+      </p>
 
       <div className="mt-4 pt-4 border-t border-white/20 flex items-center justify-between">
         <span className="text-sm font-semibold">Começar agora</span>

@@ -10,6 +10,7 @@ import { legacyQuestions } from '@/data/legacyData';
 import React, { useEffect, useState } from 'react';
 import { supabaseBrowser } from '@/lib/supabase/client';
 import { useUserQuiz, useUserData } from '@/hooks/useUserData';
+import { InfoPopup, CustomContentPopup } from '@/components/ui';
 
 interface Question {
   id?: string;
@@ -109,6 +110,9 @@ export default function QuizPage() {
   // Loading fetched questions
   const [loadingQuestions, setLoadingQuestions] = useState(false);
   
+  // New popup system - show results popup
+  const [showResultsPopup, setShowResultsPopup] = useState(false);
+  
 
 
 
@@ -157,6 +161,10 @@ export default function QuizPage() {
     if (selectedQuestions.length > 0 && currentQuestion >= selectedQuestions.length) {
       setQuizCompleted(true);
       setQuizStarted(false);
+      // Show results popup after a short delay
+      setTimeout(() => {
+        setShowResultsPopup(true);
+      }, 500);
     }
   }, [currentQuestion, selectedQuestions.length]);
 
@@ -483,6 +491,123 @@ export default function QuizPage() {
           )}
         </div>
       </div>
+
+      {/* Results Popup - New Popup System */}
+      {quizCompleted && (
+        <CustomContentPopup
+          isOpen={showResultsPopup}
+          onClose={() => setShowResultsPopup(false)}
+          size="lg"
+          animation="scale"
+          header={
+            <div className="text-center">
+              <div className="mb-3">
+                {score / selectedQuestions.length >= 7 ? (
+                  <i className="fas fa-trophy text-5xl text-amber-500"></i>
+                ) : score / selectedQuestions.length >= 5 ? (
+                  <i className="fas fa-medal text-5xl text-[#8B4513]"></i>
+                ) : (
+                  <i className="fas fa-star text-5xl text-blue-500"></i>
+                )}
+              </div>
+              <h2 className="text-2xl font-bold text-[#4A3F35]">
+                Quiz Concluído!
+              </h2>
+              <p className="text-[#A0958A] mt-2">{city || 'Quiz'}</p>
+            </div>
+          }
+          footer={
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <button
+                onClick={() => {
+                  setShowResultsPopup(false);
+                  resetQuiz();
+                }}
+                className="px-6 py-2 bg-[#6B8E23] hover:bg-[#556B2F] text-white rounded transition-colors duration-200"
+              >
+                <i className="fas fa-redo mr-2"></i>
+                Tentar Novamente
+              </button>
+              <button 
+                onClick={() => {
+                  setShowResultsPopup(false);
+                  window.location.href = '/';
+                }}
+                className="px-6 py-2 bg-[#8B4513] hover:bg-[#A0522D] text-white rounded transition-colors duration-200"
+              >
+                <i className="fas fa-home mr-2"></i>
+                Voltar ao Início
+              </button>
+            </div>
+          }
+        >
+          <div className="space-y-6 py-4">
+            {/* Score Display */}
+            <div className="text-center">
+              <div className="text-6xl font-bold text-[#8B4513] mb-2">
+                {Math.round((score / (selectedQuestions.length * 10)) * 100)}%
+              </div>
+              <p className="text-[#6B5B4F] text-lg mb-4">
+                Você acertou {score / 10} de {selectedQuestions.length} questões!
+              </p>
+              
+              {/* Performance message */}
+              {score / selectedQuestions.length >= 8 ? (
+                <p className="text-green-600 font-medium">
+                  🎉 Excelente! Você domina a história da região!
+                </p>
+              ) : score / selectedQuestions.length >= 6 ? (
+                <p className="text-blue-600 font-medium">
+                  👍 Muito bom! Continue explorando nossa história!
+                </p>
+              ) : score / selectedQuestions.length >= 4 ? (
+                <p className="text-amber-600 font-medium">
+                  📚 Bom trabalho! Que tal conhecer mais histórias?
+                </p>
+              ) : (
+                <p className="text-[#6B5B4F] font-medium">
+                  💪 Continue tentando! Explore mais o Historin!
+                </p>
+              )}
+            </div>
+            
+            {/* Stats Grid */}
+            <div className="grid grid-cols-3 gap-4 text-center">
+              <div className="p-4 bg-[#F5F1EB] rounded-lg">
+                <div className="text-2xl font-bold text-green-600">{score / 10}</div>
+                <div className="text-sm text-[#A0958A]">Acertos</div>
+              </div>
+              <div className="p-4 bg-[#F5F1EB] rounded-lg">
+                <div className="text-2xl font-bold text-red-600">{selectedQuestions.length - (score / 10)}</div>
+                <div className="text-sm text-[#A0958A]">Erros</div>
+              </div>
+              <div className="p-4 bg-[#F5F1EB] rounded-lg">
+                <div className="text-2xl font-bold text-[#4A3F35]">{selectedQuestions.length}</div>
+                <div className="text-sm text-[#A0958A]">Total</div>
+              </div>
+            </div>
+
+            {/* Encouragement */}
+            {!user && (
+              <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg text-center">
+                <p className="text-sm text-blue-900 mb-2">
+                  <i className="fas fa-lightbulb mr-2"></i>
+                  <strong>Dica:</strong> Faça login para salvar seus resultados!
+                </p>
+                <button
+                  onClick={() => {
+                    setShowResultsPopup(false);
+                    signIn();
+                  }}
+                  className="text-blue-600 hover:text-blue-800 text-sm font-medium underline"
+                >
+                  Entrar com Google
+                </button>
+              </div>
+            )}
+          </div>
+        </CustomContentPopup>
+      )}
     </div>
   );
 }

@@ -15,6 +15,22 @@ export default function RuaPage() {
 
     async function findFirstHistoria() {
       try {
+        // Capture UTM parameters from URL before redirect
+        const urlParams = new URLSearchParams(window.location.search);
+        const utmSource = urlParams.get('utm_source');
+        const utmMedium = urlParams.get('utm_medium');
+        const utmCampaign = urlParams.get('utm_campaign');
+        
+        // Debug logging
+        if (utmMedium === 'qr') {
+          console.log('🎯 QR Code detected in RuaPage:', {
+            utmSource,
+            utmMedium,
+            utmCampaign,
+            ruaId
+          });
+        }
+
         // Find the first historia for this rua from Supabase
         const { data, error } = await supabaseBrowser
           .from('stories')
@@ -26,9 +42,21 @@ export default function RuaPage() {
         if (error) throw error;
 
         if (data && data.length > 0) {
-          // Redirect to the first historia for this rua
+          // Build redirect URL with preserved UTM parameters
           const firstHistoria = data[0];
-          router.replace(`/rua/${ruaId}/historia/${firstHistoria.id}`);
+          let redirectUrl = `/rua/${ruaId}/historia/${firstHistoria.id}`;
+          
+          // Preserve UTM parameters in the redirect
+          const redirectParams = new URLSearchParams();
+          if (utmSource) redirectParams.set('utm_source', utmSource);
+          if (utmMedium) redirectParams.set('utm_medium', utmMedium);
+          if (utmCampaign) redirectParams.set('utm_campaign', utmCampaign);
+          
+          if (redirectParams.toString()) {
+            redirectUrl += `?${redirectParams.toString()}`;
+          }
+          
+          router.replace(redirectUrl);
         } else {
           // No historias found for this rua, redirect to home
           router.replace('/');
