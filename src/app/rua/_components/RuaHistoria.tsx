@@ -18,7 +18,8 @@ import CidadeTab from './CidadeTab';
 import NotFoundContent from './NotFoundContent';
 import YearNavigator from './YearNavigator';
 import QuizModal from '../../../components/popups/QuizModal';
-import { InfoPopup } from '../../../components/ui';
+import { AdQuizPopup } from '../../../components/ui';
+import { popupAdService, type PopupAd } from '../../../services/popupAd.service';
 
 interface RuaHistoriaProps {
   className?: string;
@@ -51,6 +52,7 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
   
   // QR Code popup state
   const [showQrPopup, setShowQrPopup] = useState(false);
+  const [popupAd, setPopupAd] = useState<PopupAd | null>(null);
   const utmSource = searchParams.get('utm_source');
   const utmMedium = searchParams.get('utm_medium');
   const utmCampaign = searchParams.get('utm_campaign');
@@ -193,7 +195,7 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
     };
   }, [ruaId, router]);
 
-  // Check for QR code parameters, show popup, then clean URL
+  // Check for QR code parameters, load ad, show popup, then clean URL
   useEffect(() => {
     // Debug logging
     console.log('🔍 RuaHistoria UTM check:', {
@@ -201,15 +203,30 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
       utmMedium,
       utmCampaign,
       hasRua: !!rua,
-      ruaName: rua?.nome
+      ruaName: rua?.nome,
+      ruaId
     });
     
-    if (utmMedium === 'qr' && rua) {
-      console.log('✅ QR Code popup will show!');
-      // Show popup
-      const timer = setTimeout(() => {
-        setShowQrPopup(true);
-      }, 800);
+    if (utmMedium === 'qr' && rua && ruaId) {
+      console.log('✅ QR Code detected, loading ad...');
+      
+      // Load popup ad for this street
+      const loadAd = async () => {
+        const ad = await popupAdService.getAdForStreet(Number(ruaId));
+        if (ad) {
+          console.log('📢 Ad loaded:', ad.business_name);
+          setPopupAd(ad);
+        } else {
+          console.log('⚠️ No ad found for this street');
+        }
+        
+        // Show popup after loading (or show without ad if none found)
+        setTimeout(() => {
+          setShowQrPopup(true);
+        }, 500);
+      };
+      
+      loadAd();
       
       // Clean UTM parameters from URL after capturing them (like scroll=true)
       const cleanTimer = setTimeout(() => {
@@ -218,14 +235,13 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
         url.searchParams.delete('utm_medium');
         url.searchParams.delete('utm_campaign');
         window.history.replaceState({}, '', url.toString());
-      }, 1000);
+      }, 1500);
       
       return () => {
-        clearTimeout(timer);
         clearTimeout(cleanTimer);
       };
     }
-  }, [utmMedium, rua]);
+  }, [utmMedium, rua, ruaId]);
 
   // Compute sorted historias for feed
   const sortedHistorias = useMemo(() => {
@@ -412,57 +428,22 @@ const RuaHistoria: React.FC<RuaHistoriaProps> = ({ className }) => {
         />
       )}
 
-      {/* QR Code Popup */}
-      <InfoPopup
-        isOpen={showQrPopup}
-        onClose={() => setShowQrPopup(false)}
-        title="Bem-vindo via QR Code!"
-        message={
-          <div className="space-y-4">
-            <p className="text-[#6B5B4F]">
-              Você escaneou um QR Code e chegou até nós! 🎉
-            </p>
-            
-            {/* Street Info */}
-            {rua && (
-              <div className="p-4 bg-[#F5F1EB] rounded-lg">
-                <p className="text-sm text-[#A0958A] mb-1">Rua:</p>
-                <p className="font-semibold text-[#4A3F35]">{rua.nome}</p>
-              </div>
-            )}
-
-            {/* Debug Info */}
-            <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
-              <p className="text-xs font-mono text-blue-900 mb-2">
-                <strong>Debug Info:</strong>
-              </p>
-              <div className="space-y-1 text-xs font-mono text-blue-800">
-                <p>• Rua ID: {ruaId}</p>
-                <p>• UTM Source: {utmSource || 'N/A'}</p>
-                <p>• UTM Medium: {utmMedium || 'N/A'}</p>
-                <p>• UTM Campaign: {utmCampaign || 'N/A'}</p>
-              </div>
-            </div>
-
-            {/* Ad Space Placeholder */}
-            <div className="p-6 bg-gradient-to-br from-amber-50 to-orange-50 rounded-lg border-2 border-dashed border-amber-300">
-              <div className="text-center">
-                <i className="fas fa-store text-3xl text-amber-600 mb-2"></i>
-                <p className="text-sm font-semibold text-amber-900 mb-1">
-                  Espaço Publicitário
-                </p>
-                <p className="text-xs text-amber-700">
-                  Negócios locais próximos a esta rua
-                </p>
-              </div>
-            </div>
-          </div>
-        }
-        type="info"
-        icon={<i className="fas fa-qrcode text-4xl text-[#8B4513]"></i>}
-        actionText="Explorar Histórias"
-        onAction={() => setShowQrPopup(false)}
-      />
+      {/* QR Code Ad Popup */}
+      {popupAd && (
+        <AdQuizPopup
+          isOpen={showQrPopup}
+          onClose={() => setShowQrPopup(false)}
+          businessName={popupAd.business_name}
+          title={popupAd.title}
+          description={popupAd.description}
+          question={popupAd.question}
+          answers={popupAd.answers}
+          imageUrl={popupAd.image_url}
+          phone={popupAd.phone}
+          email={popupAd.email}
+          website={popupAd.website}
+        />
+      )}
     </div>
   );
 };

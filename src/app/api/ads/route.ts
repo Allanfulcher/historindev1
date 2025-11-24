@@ -4,6 +4,7 @@ import { jsonBadRequest, jsonOk, jsonServerError } from '../admin/_utils';
 
 // GET /api/ads?ruaId=1
 // Returns a single best ad for the rua (or generic), honoring active/time window
+// NOTE: This is the OLD ad system for in-feed ads. The NEW popup ad system uses popup_ads table.
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
@@ -18,8 +19,8 @@ export async function GET(req: NextRequest) {
       .limit(1);
     
     // If table doesn't exist, return empty result gracefully
-    if (tableCheckError && tableCheckError.message.includes('relation')) {
-      console.warn('⚠️ Ads table does not exist in this Supabase project');
+    if (tableCheckError) {
+      console.warn('⚠️ Ads table does not exist - returning null (this is expected if using popup_ads instead)');
       return jsonOk({ data: null });
     }
 

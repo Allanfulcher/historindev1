@@ -27,3 +27,7 @@ export type {
   LoadingPopupProps,
   LinkItem,
 } from './PopupVariants';
+
+// Ad Quiz Popup (Interactive Advertisement)
+export { AdQuizPopup } from './AdQuizPopup';
+export type { AdQuizPopupProps } from './AdQuizPopup';

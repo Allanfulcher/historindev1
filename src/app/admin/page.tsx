@@ -75,6 +75,12 @@ export default function AdminHome() {
             <Link className="text-[#8B4513] hover:text-[#A0522D] underline" href="/admin/questions">Quiz Questions</Link>
           </li>
           <li>
+            <Link className="text-[#8B4513] hover:text-[#A0522D] underline" href="/admin/quiz-results">Quiz Results</Link>
+          </li>
+          <li>
+            <Link className="text-[#8B4513] hover:text-[#A0522D] underline" href="/admin/popup-ads">Popup Ads (QR Codes)</Link>
+          </li>
+          <li>
             <Link className="text-[#8B4513] hover:text-[#A0522D] underline" href="/admin/sites">Sites</Link>
           </li>
           <li>

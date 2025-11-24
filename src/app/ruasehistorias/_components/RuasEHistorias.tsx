@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { FiArrowLeft, FiTag } from 'react-icons/fi';
-import { useLegacyData } from '../../../hooks/useLegacyData';
+import { supabaseBrowser } from '@/lib/supabase/client';
 import { Rua, Historia } from '../../../types';
 import Header from '../../../components/Header';
 import Menu from '../../../components/Menu';
@@ -15,20 +15,94 @@ import FeedbackPopup from '../../../components/popups/FeedbackPopup';
 import QuizModal from '../../../components/popups/QuizModal';
 
 const RuasEHistorias: React.FC = () => {
-  // Use legacy data hook
-  const { data } = useLegacyData();
-  const { ruas, historias } = data;
-  // Router and state management
-  const [showFeedback, setShowFeedback] = useState(false);
+  // State management
   const router = useRouter();
+  const [ruas, setRuas] = useState<Rua[]>([]);
+  const [historias, setHistorias] = useState<Historia[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [showFeedback, setShowFeedback] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-  const [filteredRuas, setFilteredRuas] = useState<Rua[]>(ruas);
-  const [filteredHistorias, setFilteredHistorias] = useState<Historia[]>(historias);
+  const [filteredRuas, setFilteredRuas] = useState<Rua[]>([]);
+  const [filteredHistorias, setFilteredHistorias] = useState<Historia[]>([]);
   const [menuOpen, setMenuOpen] = useState(false);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const [showMap, setShowMap] = useState(true); // For the Menu component
+  const [showMap, setShowMap] = useState(true);
   const [showQuiz, setShowQuiz] = useState(false);
+
+  // Load data from Supabase on mount
+  useEffect(() => {
+    let isMounted = true;
+
+    async function loadData() {
+      try {
+        setLoading(true);
+        setError(null);
+
+        // Fetch streets
+        const { data: streetsData, error: streetsError } = await supabaseBrowser
+          .from('streets')
+          .select('id, nome, fotos, cidade_id, descricao, lat, lng')
+          .order('nome', { ascending: true });
+
+        if (streetsError) throw streetsError;
+
+        // Fetch stories
+        const { data: storiesData, error: storiesError } = await supabaseBrowser
+          .from('stories')
+          .select('id, rua_id, titulo, descricao, fotos, lat, lng, ano, criador, tags, org_id')
+          .order('titulo', { ascending: true });
+
+        if (storiesError) throw storiesError;
+
+        if (isMounted) {
+          // Transform data to match expected types
+          const transformedRuas: Rua[] = (streetsData || []).map(street => ({
+            id: String(street.id),
+            nome: street.nome,
+            fotos: street.fotos || '',
+            cidade_id: street.cidade_id ? String(street.cidade_id) : undefined,
+            descricao: street.descricao || undefined,
+            coordenadas: (street.lat && street.lng) ? [street.lat, street.lng] : undefined,
+          }));
+
+          const transformedHistorias: Historia[] = (storiesData || []).map(story => ({
+            id: String(story.id),
+            rua_id: String(story.rua_id),
+            titulo: story.titulo,
+            descricao: story.descricao,
+            fotos: Array.isArray(story.fotos) ? story.fotos : [],
+            coordenadas: (story.lat && story.lng) ? [story.lat, story.lng] : undefined,
+            ano: story.ano || undefined,
+            criador: story.criador || undefined,
+            tags: story.tags || undefined,
+            orgId: story.org_id ? String(story.org_id) : undefined,
+          }));
+
+          setRuas(transformedRuas);
+          setHistorias(transformedHistorias);
+          setFilteredRuas(transformedRuas);
+          setFilteredHistorias(transformedHistorias);
+        }
+      } catch (err) {
+        console.error('Error loading data:', err);
+        if (isMounted) {
+          setError('Erro ao carregar dados. Por favor, tente novamente.');
+        }
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
+      }
+    }
+
+    loadData();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   // Helper: slugify tag names for URL
   const slugify = (s: string) =>
@@ -87,6 +161,37 @@ const RuasEHistorias: React.FC = () => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
+
+  // Show loading state
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#f4ede0] flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#8B4513] mx-auto mb-4"></div>
+          <p className="text-[#6B5B4F] font-medium">Carregando...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show error state
+  if (error) {
+    return (
+      <div className="min-h-screen bg-[#f4ede0] flex items-center justify-center p-4">
+        <div className="text-center max-w-md">
+          <div className="text-red-500 text-5xl mb-4">⚠️</div>
+          <h2 className="text-xl font-bold text-[#4A3F35] mb-2">Erro ao carregar</h2>
+          <p className="text-[#6B5B4F] mb-4">{error}</p>
+          <button
+            onClick={() => window.location.reload()}
+            className="px-6 py-2 bg-[#8B4513] text-white rounded-lg hover:bg-[#A0522D] transition"
+          >
+            Tentar Novamente
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#f4ede0] relative overflow-x-hidden">
