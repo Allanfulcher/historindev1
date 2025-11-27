@@ -189,11 +189,6 @@ const Home: React.FC<HomeProps> = ({ onPreviewOpen }) => {
             </button>
           </section>
 
-          {/* QR Hunt Card */}
-          <section className="mb-8">
-            <QrHuntCard />
-          </section>
-
           {/* Categories Section */}
           <section className="mb-10">
             <div className="flex items-center justify-between mb-4">
