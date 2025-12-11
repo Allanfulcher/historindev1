@@ -3,13 +3,14 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import { useRouter } from 'next/navigation';
 import { Scanner } from '@yudiel/react-qr-scanner';
-import { FiCamera, FiMap, FiAward, FiX, FiCheck } from 'react-icons/fi';
+import { FiCamera, FiMap, FiAward, FiX, FiCheck, FiClock } from 'react-icons/fi';
 import { useAuth } from '@/contexts/AuthContext';
 import { qrService } from '@/services/qr.service';
 import type { QrCode } from '@/types/database.types';
 import dynamic from 'next/dynamic';
 import Header from '@/components/Header';
 import Menu from '@/components/Menu';
+import { featureFlags } from '@/config/featureFlags';
 
 // Dynamically import map to avoid SSR issues with Leaflet
 const QrHuntMap = dynamic(() => import('./_components/QrHuntMap'), {
@@ -141,6 +142,40 @@ function QrHuntContent() {
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#8B4513] mx-auto mb-4"></div>
           <p className="text-[#6B5B4F]">Carregando...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show coming soon message if feature is disabled
+  if (!featureFlags.qrCodeHunt) {
+    return (
+      <div className="min-h-screen bg-[#f4ede0]">
+        <Header setMenuOpen={setMenuOpen} setShowFeedback={() => {}} setShowQuiz={() => {}} />
+        <Menu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+
+        <div className="bg-gradient-to-r from-[#8B4513] to-[#A0522D] text-white py-8 px-4 shadow-lg">
+          <div className="max-w-4xl mx-auto">
+            <h1 className="text-3xl font-bold mb-2">Caça ao QR Code</h1>
+            <p className="text-white/90">
+              Encontre e escaneie todos os QR Codes espalhados pela cidade!
+            </p>
+          </div>
+        </div>
+
+        <div className="max-w-4xl mx-auto p-4">
+          <div className="bg-white rounded-lg p-8 shadow-md text-center">
+            <FiClock className="w-16 h-16 text-[#8B4513] mx-auto mb-4" />
+            <h2 className="text-2xl font-bold text-[#4A3F35] mb-3">
+              Em Breve!
+            </h2>
+            <p className="text-[#6B5B4F] mb-4">
+              A Caça ao QR Code estará disponível em breve. Fique ligado para novidades!
+            </p>
+            <p className="text-sm text-[#A0958A]">
+              Enquanto isso, explore as histórias das ruas de Gramado e Canela.
+            </p>
+          </div>
         </div>
       </div>
     );

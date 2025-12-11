@@ -55,17 +55,8 @@ export default function QrHuntMap({ qrCodes, scannedIds }: QrHuntMapProps) {
       // Create custom icon based on scan status
       const iconHtml = isScanned
         ? `<div style="background-color: #10b981; width: 30px; height: 30px; border-radius: 50%; border: 3px solid white; display: flex; align-items: center; justify-center; box-shadow: 0 2px 4px rgba(0,0,0,0.3);">
-             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3">
-               <polyline points="20 6 9 17 4 12"></polyline>
-             </svg>
            </div>`
         : `<div style="background-color: #8B4513; width: 30px; height: 30px; border-radius: 50%; border: 3px solid white; display: flex; align-items: center; justify-center; box-shadow: 0 2px 4px rgba(0,0,0,0.3);">
-             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-               <rect x="3" y="3" width="7" height="7"></rect>
-               <rect x="14" y="3" width="7" height="7"></rect>
-               <rect x="14" y="14" width="7" height="7"></rect>
-               <rect x="3" y="14" width="7" height="7"></rect>
-             </svg>
            </div>`;
 
       const icon = L.divIcon({

@@ -16,6 +16,7 @@
 import { supabaseBrowser } from '@/lib/supabase/client';
 import type { User } from '@supabase/supabase-js';
 import type { Database } from '@/types/database.types';
+import { featureFlags } from '@/config/featureFlags';
 
 // Type aliases for cleaner code
 type UserProfile = Database['public']['Tables']['user_profiles']['Row'];
@@ -29,18 +30,28 @@ type QuizResult = Database['public']['Tables']['user_quiz_results']['Row'];
  * Get user profile by user ID
  */
 async function getUserProfile(userId: string): Promise<UserProfile | null> {
-  const { data, error } = await supabaseBrowser
-    .from('user_profiles')
-    .select('*')
-    .eq('id', userId)
-    .single();
-
-  if (error) {
-    console.error('Error fetching user profile:', error);
+  // Return null if profile feature is disabled
+  if (!featureFlags.userProfile) {
     return null;
   }
 
-  return data;
+  try {
+    const { data, error } = await supabaseBrowser
+      .from('user_profiles')
+      .select('*')
+      .eq('id', userId)
+      .single();
+
+    if (error) {
+      console.error('Error fetching user profile:', error);
+      return null;
+    }
+
+    return data;
+  } catch (err) {
+    console.error('User profile feature not available:', err);
+    return null;
+  }
 }
 
 /**
@@ -160,31 +171,47 @@ async function getUserQuizHistory(
  * Returns only the highest score for each city - they are independent
  */
 async function getUserQuizStats(userId: string) {
-  const { data, error } = await supabaseBrowser
-    .from('user_quiz_results')
-    .select('city, percentage')
-    .eq('user_id', userId);
-
-  if (error) {
-    console.error('Error fetching quiz stats:', error);
-    return null;
-  }
-
-  if (!data || data.length === 0) {
+  // Return empty stats if quiz saving is disabled
+  if (!featureFlags.quizSaving) {
     return {
       gramado: null,
       canela: null,
     };
   }
 
-  // Get best score for each city independently
-  const gramadoScores = data.filter(q => q.city === 'Gramado').map(q => q.percentage);
-  const canelaScores = data.filter(q => q.city === 'Canela').map(q => q.percentage);
+  try {
+    const { data, error } = await supabaseBrowser
+      .from('user_quiz_results')
+      .select('city, percentage')
+      .eq('user_id', userId);
 
-  return {
-    gramado: gramadoScores.length > 0 ? Math.max(...gramadoScores) : null,
-    canela: canelaScores.length > 0 ? Math.max(...canelaScores) : null,
-  };
+    if (error) {
+      console.error('Error fetching quiz stats:', error);
+      return null;
+    }
+
+    if (!data || data.length === 0) {
+      return {
+        gramado: null,
+        canela: null,
+      };
+    }
+
+    // Get best score for each city independently
+    const gramadoScores = data.filter(q => q.city === 'Gramado').map(q => q.percentage);
+    const canelaScores = data.filter(q => q.city === 'Canela').map(q => q.percentage);
+
+    return {
+      gramado: gramadoScores.length > 0 ? Math.max(...gramadoScores) : null,
+      canela: canelaScores.length > 0 ? Math.max(...canelaScores) : null,
+    };
+  } catch (err) {
+    console.error('Quiz stats feature not available:', err);
+    return {
+      gramado: null,
+      canela: null,
+    };
+  }
 }
 
 /**
@@ -222,25 +249,36 @@ async function saveQuizResult(params: {
   percentage: number;
   answers: any;
 }): Promise<QuizResult | null> {
-  const { data, error } = await supabaseBrowser
-    .from('user_quiz_results')
-    .insert({
-      user_id: params.userId,
-      city: params.city,
-      score: params.score,
-      total_questions: params.totalQuestions,
-      percentage: params.percentage,
-      answers: params.answers,
-    })
-    .select()
-    .single();
-
-  if (error) {
-    console.error('Error saving quiz result:', error);
+  // Skip saving if quiz saving is disabled
+  if (!featureFlags.quizSaving) {
+    console.log('Quiz saving is disabled');
     return null;
   }
 
-  return data;
+  try {
+    const { data, error } = await supabaseBrowser
+      .from('user_quiz_results')
+      .insert({
+        user_id: params.userId,
+        city: params.city,
+        score: params.score,
+        total_questions: params.totalQuestions,
+        percentage: params.percentage,
+        answers: params.answers,
+      })
+      .select()
+      .single();
+
+    if (error) {
+      console.error('Error saving quiz result:', error);
+      return null;
+    }
+
+    return data;
+  } catch (err) {
+    console.error('Quiz saving feature not available:', err);
+    return null;
+  }
 }
 
 /**

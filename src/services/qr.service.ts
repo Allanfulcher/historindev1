@@ -7,6 +7,7 @@
 
 import { supabaseBrowser } from '@/lib/supabase/client';
 import type { Database } from '@/types/database.types';
+import { featureFlags } from '@/config/featureFlags';
 
 type QrCode = Database['public']['Tables']['qr_codes']['Row'];
 type UserQrScan = Database['public']['Tables']['user_qr_scans']['Row'];
@@ -19,18 +20,28 @@ type UserQrScan = Database['public']['Tables']['user_qr_scans']['Row'];
  * Get all active QR codes
  */
 async function getAllQrCodes(): Promise<QrCode[]> {
-  const { data, error } = await supabaseBrowser
-    .from('qr_codes')
-    .select('*')
-    .eq('active', true)
-    .order('rua_id', { ascending: true });
-
-  if (error) {
-    console.error('Error fetching QR codes:', error);
+  // Return empty if feature is disabled
+  if (!featureFlags.qrCodeHunt) {
     return [];
   }
 
-  return data || [];
+  try {
+    const { data, error } = await supabaseBrowser
+      .from('qr_codes')
+      .select('*')
+      .eq('active', true)
+      .order('rua_id', { ascending: true });
+
+    if (error) {
+      console.error('Error fetching QR codes:', error);
+      return [];
+    }
+
+    return data || [];
+  } catch (err) {
+    console.error('QR Hunt feature not available:', err);
+    return [];
+  }
 }
 
 /**
@@ -84,18 +95,28 @@ async function validateQrCode(scannedValue: string): Promise<QrCode | null> {
  * Get user's scanned QR codes
  */
 async function getUserScans(userId: string): Promise<UserQrScan[]> {
-  const { data, error } = await supabaseBrowser
-    .from('user_qr_scans')
-    .select('*')
-    .eq('user_id', userId)
-    .order('scanned_at', { ascending: false });
-
-  if (error) {
-    console.error('Error fetching user scans:', error);
+  // Return empty if feature is disabled
+  if (!featureFlags.qrCodeHunt) {
     return [];
   }
 
-  return data || [];
+  try {
+    const { data, error } = await supabaseBrowser
+      .from('user_qr_scans')
+      .select('*')
+      .eq('user_id', userId)
+      .order('scanned_at', { ascending: false });
+
+    if (error) {
+      console.error('Error fetching user scans:', error);
+      return [];
+    }
+
+    return data || [];
+  } catch (err) {
+    console.error('QR Hunt feature not available:', err);
+    return [];
+  }
 }
 
 /**
@@ -121,6 +142,12 @@ async function hasUserScanned(userId: string, qrCodeId: string): Promise<boolean
  * Save a QR code scan for a user
  */
 async function saveScan(userId: string, qrCodeId: string): Promise<UserQrScan | null> {
+  // Return null if feature is disabled
+  if (!featureFlags.qrCodeHunt) {
+    console.log('QR Hunt feature is disabled');
+    return null;
+  }
+
   // Check if already scanned
   const alreadyScanned = await hasUserScanned(userId, qrCodeId);
   if (alreadyScanned) {
@@ -128,21 +155,26 @@ async function saveScan(userId: string, qrCodeId: string): Promise<UserQrScan | 
     return null;
   }
 
-  const { data, error } = await supabaseBrowser
-    .from('user_qr_scans')
-    .insert({
-      user_id: userId,
-      qr_code_id: qrCodeId,
-    })
-    .select()
-    .single();
+  try {
+    const { data, error } = await supabaseBrowser
+      .from('user_qr_scans')
+      .insert({
+        user_id: userId,
+        qr_code_id: qrCodeId,
+      })
+      .select()
+      .single();
 
-  if (error) {
-    console.error('Error saving scan:', error);
+    if (error) {
+      console.error('Error saving scan:', error);
+      return null;
+    }
+
+    return data;
+  } catch (err) {
+    console.error('QR Hunt feature not available:', err);
     return null;
   }
-
-  return data;
 }
 
 /**

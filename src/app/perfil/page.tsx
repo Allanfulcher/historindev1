@@ -7,6 +7,7 @@ import LoadingPage from '@/components/LoadingPage';
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { featureFlags } from '@/config/featureFlags';
 
 export default function PerfilPage() {
   const { 
@@ -29,6 +30,40 @@ export default function PerfilPage() {
 
   if (loading) {
     return <LoadingPage message="Carregando perfil..." />;
+  }
+
+  // Show coming soon if features are disabled
+  if (!featureFlags.userProfile || !featureFlags.googleAuth) {
+    return (
+      <div className="min-h-screen bg-[#f4ede0]">
+        <Header setMenuOpen={setMenuOpen} setShowFeedback={() => {}} setShowQuiz={() => {}} />
+        <Menu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+        
+        <div className="max-w-2xl mx-auto px-4 py-16">
+          <div className="bg-[#FEFCF8] p-8 rounded-lg shadow-sm ring-1 ring-[#A0958A]/20 text-center">
+            <div className="mb-6">
+              <i className="fas fa-clock text-6xl text-[#8B4513]"></i>
+            </div>
+            <h1 className="text-2xl font-bold mb-4 text-[#4A3F35]">
+              Em Breve!
+            </h1>
+            <p className="text-[#6B5B4F] mb-4">
+              O sistema de perfis estará disponível em breve.
+            </p>
+            <p className="text-sm text-[#A0958A] mb-6">
+              Enquanto isso, explore as histórias das ruas de Gramado e Canela.
+            </p>
+            <Link
+              href="/"
+              className="bg-[#8B4513] hover:bg-[#A0522D] text-white font-bold py-2 px-6 rounded transition-colors inline-flex items-center gap-2"
+            >
+              <i className="fas fa-home"></i>
+              Voltar ao Início
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   if (!isAuthenticated) {
