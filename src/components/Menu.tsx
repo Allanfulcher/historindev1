@@ -165,15 +165,6 @@ const Menu: React.FC<MenuProps> = ({
           </Link>
 
           <Link
-            href="/adicionar-historia"
-            className="px-4 py-3 hover:bg-[#F5F1EB] rounded-md transition-all duration-300 border-b border-[#F5F1EB] cursor-pointer transform hover:scale-[1.02] active:scale-[0.98]"
-            onClick={handleMenuItemClick}
-          >
-            <span className="block text-sm font-medium text-[#A0958A]">Conte a sua</span>
-            <span className="block text-lg font-semibold text-[#6B5B4F]">HISTÓRIA</span>
-          </Link>
-
-          <Link
             href="/ruasehistorias"
             className="px-4 py-3 hover:bg-[#F5F1EB] rounded-md transition-all duration-300 border-b border-[#F5F1EB] cursor-pointer transform hover:scale-[1.02] active:scale-[0.98]"
             onClick={handleMenuItemClick}
@@ -181,21 +172,23 @@ const Menu: React.FC<MenuProps> = ({
             <span className="block text-lg font-semibold text-[#6B5B4F]">TODAS</span>
             <span className="block text-sm font-medium text-[#A0958A]">Ruas e Histórias</span>
           </Link>
+          
+          <Link
+            href="/legado-africano"
+            className="px-4 py-3 hover:bg-[#F5F1EB] rounded-md text-lg font-semibold text-[#6B5B4F] transition-all duration-300 border-b border-[#F5F1EB] cursor-pointer transform hover:scale-[1.02] active:scale-[0.98]"
+            onClick={handleMenuItemClick}
+          >
+            <span className="block text-lg font-semibold text-[#6B5B4F]">LEGADO AFRICANO NO RS</span>
+            <span className="block text-sm font-medium text-[#A0958A]">A Importância da Inclusão Histórica</span>
+          </Link>
 
           <Link
             href="/sobre"
             className="px-4 py-3 hover:bg-[#F5F1EB] rounded-md text-lg font-semibold text-[#6B5B4F] transition-all duration-300 border-b border-[#F5F1EB] cursor-pointer transform hover:scale-[1.02] active:scale-[0.98]"
             onClick={handleMenuItemClick}
           >
-            SOBRE
-          </Link>
-
-          <Link
-            href="/legado-africano"
-            className="px-4 py-3 hover:bg-[#F5F1EB] rounded-md text-lg font-semibold text-[#6B5B4F] transition-all duration-300 border-b border-[#F5F1EB] cursor-pointer transform hover:scale-[1.02] active:scale-[0.98]"
-            onClick={handleMenuItemClick}
-          >
-            Legado Afro no RS
+            <span className="block text-lg font-semibold text-[#6B5B4F]">SOBRE</span>
+            <span className="block text-sm font-medium text-[#A0958A]">e equipe</span>
           </Link>
 
           <Link
@@ -205,6 +198,15 @@ const Menu: React.FC<MenuProps> = ({
           >
             <span className="block text-lg font-semibold text-[#6B5B4F]">REFERÊNCIAS</span>
             <span className="block text-sm font-medium text-[#A0958A]">e conteúdo</span>
+          </Link>
+          
+          <Link
+            href="/adicionar-historia"
+            className="px-4 py-3 hover:bg-[#F5F1EB] rounded-md transition-all duration-300 border-b border-[#F5F1EB] cursor-pointer transform hover:scale-[1.02] active:scale-[0.98]"
+            onClick={handleMenuItemClick}
+          >
+            <span className="block text-sm font-medium text-[#A0958A]">Conte a sua</span>
+            <span className="block text-lg font-semibold text-[#6B5B4F]">HISTÓRIA</span>
           </Link>
 
           {/* Surprise Me Button (if historias are available) */}
