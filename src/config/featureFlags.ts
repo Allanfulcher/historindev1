@@ -9,9 +9,9 @@
  */
 
 // ============================================================================
-// 🔴 MASTER SWITCH - Change to `true` when backend is ready
+// 🟢 MASTER SWITCH - All features enabled
 // ============================================================================
-const FEATURES_ENABLED = false;  // TODO: Set to true after backend setup
+const FEATURES_ENABLED = true;
 // ============================================================================
 
 export const featureFlags = {

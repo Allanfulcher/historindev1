@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
-import { FiArrowLeft, FiTag } from 'react-icons/fi';
+import { FiArrowLeft, FiTag, FiShuffle } from 'react-icons/fi';
 import { supabaseBrowser } from '@/lib/supabase/client';
 import { Rua, Historia } from '../../../types';
 import Header from '../../../components/Header';
@@ -250,6 +250,21 @@ const RuasEHistorias: React.FC = () => {
             setPreviewContent={(_content) => {}}
           />
         </div>
+
+        {/* Surpreenda-me Button */}
+        {historias.length > 0 && (
+          <button
+            onClick={() => {
+              const randomHistoria = historias[Math.floor(Math.random() * historias.length)];
+              router.push(`/rua/${randomHistoria.rua_id}/historia/${randomHistoria.id}?scroll=true`);
+            }}
+            className="w-full flex items-center justify-center gap-2 px-4 py-3 mb-6 bg-[#8B4513] hover:bg-[#A0522D] text-white font-semibold rounded-lg transition-all duration-300 cursor-pointer transform hover:scale-[1.02] active:scale-[0.98] shadow-md"
+            aria-label="Ir para uma história aleatória"
+          >
+            <FiShuffle className="w-5 h-5" />
+            <span>Surpreenda-me!</span>
+          </button>
+        )}
 
         {/* Categories Section */}
         <section className="mb-8">
