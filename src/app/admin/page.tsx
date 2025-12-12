@@ -10,6 +10,27 @@ export default function AdminHome() {
   const [password, setPassword] = useState("");
   const session = getAdminSession();
   const [remainingMs, setRemainingMs] = useState<number>(session?.remainingMs ?? 0);
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+
+  const supabaseRef = useMemo(() => {
+    if (!supabaseUrl) return null;
+    try {
+      const url = new URL(supabaseUrl);
+      const host = url.hostname; // e.g. abcd1234.supabase.co or db.abcd1234.supabase.co
+      const parts = host.split(".");
+
+      if (parts.length === 0) return null;
+
+      // Handle both abcd1234.supabase.co and db.abcd1234.supabase.co
+      if (parts[0] === "db" && parts.length > 1) {
+        return parts[1];
+      }
+
+      return parts[0];
+    } catch {
+      return null;
+    }
+  }, [supabaseUrl]);
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -109,6 +130,25 @@ export default function AdminHome() {
           </li>
         </ul>
       </nav>
+
+      {supabaseUrl && (
+        <div className="p-6 bg-[#FEFCF8] border border-[#F5F1EB] rounded-lg shadow-sm space-y-2">
+          <h2 className="text-lg font-semibold text-[#4A3F35]">Supabase Project Info</h2>
+          <p className="text-sm text-[#A0958A]">
+            Use isto para configurações locais ou gerar tipos com o CLI, sem precisar abrir o dashboard.
+          </p>
+          <div className="text-sm break-all">
+            <span className="font-semibold text-[#4A3F35]">URL:&nbsp;</span>
+            <span className="text-[#6B5B4F]">{supabaseUrl}</span>
+          </div>
+          {supabaseRef && (
+            <div className="text-sm">
+              <span className="font-semibold text-[#4A3F35]">Project ref / ID:&nbsp;</span>
+              <span className="text-[#6B5B4F]">{supabaseRef}</span>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
