@@ -168,7 +168,7 @@ const Home: React.FC<HomeProps> = ({ onPreviewOpen }) => {
         )}
 
         {/* Welcome Section */}
-        <div className="max-w-4xl mx-auto px-4 py-6 sm:py-8">
+        <div className="max-w-4xl mx-auto px-4 py-6 sm:py-8 mt-[70px] md:mt-0">
           <WelcomeCard />
         </div>
 

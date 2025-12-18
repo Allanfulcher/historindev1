@@ -166,7 +166,7 @@ const MapView: React.FC<MapViewProps> = ({
   // Don't render the map on server side
   if (!isClient) {
     return (
-      <div className="map-container relative h-64 md:h-96 bg-[#F5F1EB] flex items-center justify-center rounded-lg">
+      <div className="map-container relative h-full min-h-[16rem] md:min-h-[24rem] bg-[#F5F1EB] flex items-center justify-center rounded-lg">
         <div className="flex flex-col items-center gap-2 text-[#A0958A]">
           <i className="fas fa-map-marked-alt text-3xl animate-pulse"></i>
           <p className="text-sm">Carregando mapa...</p>
@@ -176,7 +176,7 @@ const MapView: React.FC<MapViewProps> = ({
   }
 
   return (
-    <div ref={mapContainerRef} className="map-container relative h-96 w-full z-0">
+    <div ref={mapContainerRef} className="map-container relative h-full min-h-[16rem] md:min-h-[24rem] w-full z-0">
       {/* Recenter button in the top right corner */}
       <div className="absolute top-2 right-2 z-[1000]">
         <button
