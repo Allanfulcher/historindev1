@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import Popup from './Popup';
 import type { PopupProps } from './Popup';
