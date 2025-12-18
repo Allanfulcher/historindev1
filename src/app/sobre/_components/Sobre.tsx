@@ -282,17 +282,20 @@ const Sobre: React.FC = () => {
 
       {/* Contact Us Section */}
       <section className="mb-6">
-        <h3 className="text-center text-xl font-bold mb-4">Entre em Contato Conosco</h3>
-        <div className="flex justify-around space-x-6">
+        <h3 className="text-center text-xl font-bold text-[#4A3F35] mb-6">Entre em Contato Conosco</h3>
+        <div className="grid grid-cols-3 gap-4 max-w-md mx-auto">
           {/* WhatsApp Link */}
           <a
             href="https://wa.me/54993264627"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex flex-col items-center text-green-500 hover:text-green-600 transition"
+            className="flex flex-col items-center p-4 bg-[#FEFCF8] rounded-xl shadow-sm ring-1 ring-[#A0958A]/20 hover:shadow-md transition-all group"
+            aria-label="Contato via WhatsApp"
           >
-            <i className="fab fa-whatsapp text-3xl"></i>
-            <span className="text-sm">WhatsApp</span>
+            <div className="w-12 h-12 rounded-full bg-[#25D366]/10 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+              <i className="fab fa-whatsapp text-2xl text-[#25D366]"></i>
+            </div>
+            <span className="text-sm font-medium text-[#4A3F35]">WhatsApp</span>
           </a>
 
           {/* Email Link */}
@@ -300,10 +303,13 @@ const Sobre: React.FC = () => {
             href="mailto:contato@historin.com.br"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex flex-col items-center text-blue-500 hover:text-blue-600 transition"
+            className="flex flex-col items-center p-4 bg-[#FEFCF8] rounded-xl shadow-sm ring-1 ring-[#A0958A]/20 hover:shadow-md transition-all group"
+            aria-label="Contato via E-mail"
           >
-            <i className="fas fa-envelope text-3xl"></i>
-            <span className="text-sm">E-mail</span>
+            <div className="w-12 h-12 rounded-full bg-[#8B4513]/10 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+              <i className="fas fa-envelope text-2xl text-[#8B4513]"></i>
+            </div>
+            <span className="text-sm font-medium text-[#4A3F35]">E-mail</span>
           </a>
 
           {/* Instagram Link */}
@@ -311,10 +317,13 @@ const Sobre: React.FC = () => {
             href="https://www.instagram.com/historin_ofc/"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex flex-col items-center text-pink-500 hover:text-pink-600 transition"
+            className="flex flex-col items-center p-4 bg-[#FEFCF8] rounded-xl shadow-sm ring-1 ring-[#A0958A]/20 hover:shadow-md transition-all group"
+            aria-label="Perfil no Instagram"
           >
-            <i className="fab fa-instagram text-3xl"></i>
-            <span className="text-sm">Instagram</span>
+            <div className="w-12 h-12 rounded-full bg-[#E1306C]/10 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+              <i className="fab fa-instagram text-2xl text-[#E1306C]"></i>
+            </div>
+            <span className="text-sm font-medium text-[#4A3F35]">Instagram</span>
           </a>
         </div>
       </section>

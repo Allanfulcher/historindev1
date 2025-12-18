@@ -145,16 +145,24 @@ const Home: React.FC<HomeProps> = ({ onPreviewOpen }) => {
 
       {/* Main Content */}
       <div className="relative">
-        {/* Interactive Map Section */}
+        {/* Interactive Map Section - Collapsible on mobile */}
         {showMap && (
-          <div className="bg-white shadow-sm">
-            <div className="max-w-6xl mx-auto px-0 py-0">
-              <MapWithPreview 
-                setSelectedRuaId={setSelectedRuaId}
-                setPreviewContent={handlePreviewContent}
-                ruas={ruas}
-                historias={historias}
-              />
+          <div className="bg-[#FEFCF8] shadow-sm border-b border-[#E6D3B4]">
+            <div className="max-w-6xl mx-auto">
+              <div className="h-64 md:h-96">
+                <MapWithPreview 
+                  setSelectedRuaId={setSelectedRuaId}
+                  setPreviewContent={handlePreviewContent}
+                  ruas={ruas}
+                  historias={historias}
+                />
+              </div>
+              {/* Scroll indicator */}
+              <div className="flex justify-center py-2 md:hidden">
+                <div className="flex flex-col items-center text-[#A0958A] animate-bounce">
+                  <i className="fas fa-chevron-down text-sm"></i>
+                </div>
+              </div>
             </div>
           </div>
         )}
@@ -167,28 +175,6 @@ const Home: React.FC<HomeProps> = ({ onPreviewOpen }) => {
         {/* Main Content Container */}
         <div className="max-w-4xl mx-auto px-4 pb-8">
           
-          {/* Quiz CTA Banner */}
-          <section className="mb-8">
-            <button
-              onClick={() => setShowQuiz(true)}
-              className="w-full bg-gradient-to-r from-[#8B4513] to-[#A0522D] hover:from-[#A0522D] hover:to-[#8B4513] text-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] cursor-pointer text-left"
-            >
-              <div className="flex items-center gap-4 mb-3">
-                <div className="bg-white/20 p-3 rounded-lg">
-                  <FiAward className="w-6 h-6 sm:w-8 sm:h-8" />
-                </div>
-                <div>
-                  <h3 className="text-lg sm:text-xl font-bold mb-1">Teste seus conhecimentos!</h3>
-                  <p className="text-sm sm:text-base text-white/90">Faça o quiz sobre a história de Gramado e Canela</p>
-                </div>
-              </div>
-              <div className="flex items-center justify-end gap-2">
-                <span className="text-sm font-bold">Faça o quiz</span>
-                <FiArrowRight className="w-5 h-5" />
-              </div>
-            </button>
-          </section>
-
           {/* Categories Section */}
           <section className="mb-10">
             <div className="flex items-center justify-between mb-4">
@@ -267,6 +253,26 @@ const Home: React.FC<HomeProps> = ({ onPreviewOpen }) => {
               <BusinessCard negocios={featuredNegocios} />
             </section>
           )}
+
+          {/* Quiz CTA Banner - Moved below main content */}
+          <section className="mb-10">
+            <button
+              onClick={() => setShowQuiz(true)}
+              className="w-full bg-gradient-to-r from-[#8B4513] to-[#A0522D] hover:from-[#A0522D] hover:to-[#8B4513] text-white rounded-xl p-5 shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer text-left"
+              aria-label="Iniciar quiz sobre a história de Gramado e Canela"
+            >
+              <div className="flex items-center gap-4">
+                <div className="bg-white/20 p-2.5 rounded-lg">
+                  <FiAward className="w-5 h-5 sm:w-6 sm:h-6" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-base sm:text-lg font-bold">Teste seus conhecimentos!</h3>
+                  <p className="text-sm text-white/80">Quiz sobre a história local</p>
+                </div>
+                <FiArrowRight className="w-5 h-5" />
+              </div>
+            </button>
+          </section>
 
           {/* African Legacy Card */}
           <section className="mb-10">

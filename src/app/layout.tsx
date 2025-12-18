@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-// Temporarily disabled Google Fonts to fix lightningcss build error
-// import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import HashRouter from "../components/HashRouter";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { ToastProvider } from "@/components/ui";
 
 // Temporarily disabled to fix build issues
 // const geistSans = Geist({
@@ -107,9 +106,16 @@ export default function RootLayout({
       <body
         className="antialiased min-h-screen bg-[#f4ede0] text-[#6B5B4F]"
       >
+        <a href="#main-content" className="skip-to-content">
+          Pular para o conteúdo principal
+        </a>
         <AuthProvider>
-          <HashRouter />
-          {children}
+          <ToastProvider>
+            <HashRouter />
+            <main id="main-content">
+              {children}
+            </main>
+          </ToastProvider>
         </AuthProvider>
       </body>
     </html>

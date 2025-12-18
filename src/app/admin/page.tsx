@@ -89,47 +89,83 @@ export default function AdminHome() {
         </div>
       )}
 
-      <nav className="space-y-2 p-6 bg-[#FEFCF8] border border-[#F5F1EB] rounded-lg shadow-sm">
-        <h2 className="font-semibold text-[#4A3F35]">Manage</h2>
-        <ul className="list-disc list-inside">
-          <li>
-            <Link className="text-[#8B4513] hover:text-[#A0522D] underline" href="/admin/questions">Quiz Questions</Link>
-          </li>
-          <li>
-            <Link className="text-[#8B4513] hover:text-[#A0522D] underline" href="/admin/quiz-results">Quiz Results</Link>
-          </li>
-          <li>
-            <Link className="text-[#8B4513] hover:text-[#A0522D] underline" href="/admin/popup-ads">Popup Ads (QR Codes)</Link>
-          </li>
-          <li>
-            <Link className="text-[#8B4513] hover:text-[#A0522D] underline" href="/admin/sites">Sites</Link>
-          </li>
-          <li>
-            <Link className="text-[#8B4513] hover:text-[#A0522D] underline" href="/admin/orgs">Organizations</Link>
-          </li>
-          <li>
-            <Link className="text-[#8B4513] hover:text-[#A0522D] underline" href="/admin/autores">Autores</Link>
-          </li>
-          <li>
-            <Link className="text-[#8B4513] hover:text-[#A0522D] underline" href="/admin/obras">Obras</Link>
-          </li>
-          <li>
-            <Link className="text-[#8B4513] hover:text-[#A0522D] underline" href="/admin/negocios">Negócios</Link>
-          </li>
-          <li>
-            <Link className="text-[#8B4513] hover:text-[#A0522D] underline" href="/admin/cidades">Cidades</Link>
-          </li>
-          <li>
-            <Link className="text-[#8B4513] hover:text-[#A0522D] underline" href="/admin/ruas">Ruas</Link>
-          </li>
-          <li>
-            <Link className="text-[#8B4513] hover:text-[#A0522D] underline" href="/admin/historias">Histórias</Link>
-          </li>
-          <li>
-            <Link className="text-[#8B4513] hover:text-[#A0522D] underline" href="/admin/qr-codes">QR Codes (Caça ao QR)</Link>
-          </li>
-        </ul>
-      </nav>
+      {/* Content Management */}
+      <div className="p-6 bg-[#FEFCF8] border border-[#F5F1EB] rounded-lg shadow-sm space-y-4">
+        <h2 className="font-semibold text-[#4A3F35] flex items-center gap-2">
+          <i className="fas fa-database text-[#8B4513]"></i>
+          Conteúdo
+        </h2>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+          <Link href="/admin/historias" className="flex items-center gap-3 p-3 bg-[#F5F1EB] hover:bg-[#E6D3B4] rounded-lg transition-colors group">
+            <i className="fas fa-book-open text-[#8B4513] group-hover:scale-110 transition-transform"></i>
+            <span className="text-sm font-medium text-[#4A3F35]">Histórias</span>
+          </Link>
+          <Link href="/admin/ruas" className="flex items-center gap-3 p-3 bg-[#F5F1EB] hover:bg-[#E6D3B4] rounded-lg transition-colors group">
+            <i className="fas fa-road text-[#8B4513] group-hover:scale-110 transition-transform"></i>
+            <span className="text-sm font-medium text-[#4A3F35]">Ruas</span>
+          </Link>
+          <Link href="/admin/cidades" className="flex items-center gap-3 p-3 bg-[#F5F1EB] hover:bg-[#E6D3B4] rounded-lg transition-colors group">
+            <i className="fas fa-city text-[#8B4513] group-hover:scale-110 transition-transform"></i>
+            <span className="text-sm font-medium text-[#4A3F35]">Cidades</span>
+          </Link>
+          <Link href="/admin/negocios" className="flex items-center gap-3 p-3 bg-[#F5F1EB] hover:bg-[#E6D3B4] rounded-lg transition-colors group">
+            <i className="fas fa-store text-[#8B4513] group-hover:scale-110 transition-transform"></i>
+            <span className="text-sm font-medium text-[#4A3F35]">Negócios</span>
+          </Link>
+        </div>
+      </div>
+
+      {/* Quiz & Engagement */}
+      <div className="p-6 bg-[#FEFCF8] border border-[#F5F1EB] rounded-lg shadow-sm space-y-4">
+        <h2 className="font-semibold text-[#4A3F35] flex items-center gap-2">
+          <i className="fas fa-gamepad text-[#8B4513]"></i>
+          Quiz & Engajamento
+        </h2>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+          <Link href="/admin/questions" className="flex items-center gap-3 p-3 bg-[#F5F1EB] hover:bg-[#E6D3B4] rounded-lg transition-colors group">
+            <i className="fas fa-question-circle text-[#8B4513] group-hover:scale-110 transition-transform"></i>
+            <span className="text-sm font-medium text-[#4A3F35]">Perguntas</span>
+          </Link>
+          <Link href="/admin/quiz-results" className="flex items-center gap-3 p-3 bg-[#F5F1EB] hover:bg-[#E6D3B4] rounded-lg transition-colors group">
+            <i className="fas fa-chart-bar text-[#8B4513] group-hover:scale-110 transition-transform"></i>
+            <span className="text-sm font-medium text-[#4A3F35]">Resultados</span>
+          </Link>
+          <Link href="/admin/qr-codes" className="flex items-center gap-3 p-3 bg-[#F5F1EB] hover:bg-[#E6D3B4] rounded-lg transition-colors group">
+            <i className="fas fa-qrcode text-[#8B4513] group-hover:scale-110 transition-transform"></i>
+            <span className="text-sm font-medium text-[#4A3F35]">QR Codes</span>
+          </Link>
+          <Link href="/admin/popup-ads" className="flex items-center gap-3 p-3 bg-[#F5F1EB] hover:bg-[#E6D3B4] rounded-lg transition-colors group">
+            <i className="fas fa-ad text-[#8B4513] group-hover:scale-110 transition-transform"></i>
+            <span className="text-sm font-medium text-[#4A3F35]">Popup Ads</span>
+          </Link>
+        </div>
+      </div>
+
+      {/* References */}
+      <div className="p-6 bg-[#FEFCF8] border border-[#F5F1EB] rounded-lg shadow-sm space-y-4">
+        <h2 className="font-semibold text-[#4A3F35] flex items-center gap-2">
+          <i className="fas fa-bookmark text-[#8B4513]"></i>
+          Referências
+        </h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <Link href="/admin/orgs" className="flex items-center gap-3 p-3 bg-[#F5F1EB] hover:bg-[#E6D3B4] rounded-lg transition-colors group">
+            <i className="fas fa-building text-[#8B4513] group-hover:scale-110 transition-transform"></i>
+            <span className="text-sm font-medium text-[#4A3F35]">Organizações</span>
+          </Link>
+          <Link href="/admin/autores" className="flex items-center gap-3 p-3 bg-[#F5F1EB] hover:bg-[#E6D3B4] rounded-lg transition-colors group">
+            <i className="fas fa-user-edit text-[#8B4513] group-hover:scale-110 transition-transform"></i>
+            <span className="text-sm font-medium text-[#4A3F35]">Autores</span>
+          </Link>
+          <Link href="/admin/obras" className="flex items-center gap-3 p-3 bg-[#F5F1EB] hover:bg-[#E6D3B4] rounded-lg transition-colors group">
+            <i className="fas fa-book text-[#8B4513] group-hover:scale-110 transition-transform"></i>
+            <span className="text-sm font-medium text-[#4A3F35]">Obras</span>
+          </Link>
+          <Link href="/admin/sites" className="flex items-center gap-3 p-3 bg-[#F5F1EB] hover:bg-[#E6D3B4] rounded-lg transition-colors group">
+            <i className="fas fa-globe text-[#8B4513] group-hover:scale-110 transition-transform"></i>
+            <span className="text-sm font-medium text-[#4A3F35]">Sites</span>
+          </Link>
+        </div>
+      </div>
 
       {supabaseUrl && (
         <div className="p-6 bg-[#FEFCF8] border border-[#F5F1EB] rounded-lg shadow-sm space-y-2">

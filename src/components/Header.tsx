@@ -72,6 +72,7 @@ const Header: React.FC<HeaderProps> = ({ setMenuOpen, setShowFeedback, setShowQu
         {/* Menu button */}
         <TransparentBtn
           onClick={() => setMenuOpen(true)}
+          aria-label="Abrir menu de navegação"
         >
           <i className="fas fa-bars" />
         </TransparentBtn>

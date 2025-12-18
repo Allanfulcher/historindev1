@@ -134,16 +134,9 @@ export default function PerfilPage() {
             </div>
           </div>
           
-          {/* Sign Out Button - Full width on mobile, inline on desktop */}
-          <button
-            onClick={handleSignOut}
-            className="mt-4 w-full sm:w-auto px-4 py-2 bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 rounded-lg transition-colors text-sm font-medium inline-flex items-center justify-center gap-2"
-            title="Desconectar"
-          >
-            <i className="fas fa-sign-out-alt"></i>
-            Desconectar da Conta
-          </button>
         </div>
+
+        {/* Sign Out Section - Moved to bottom */}
 
         {/* QR Hunt Progress - First Section */}
         {qrHuntProgress && qrHuntProgress.total > 0 ? (
@@ -171,14 +164,14 @@ export default function PerfilPage() {
             </div>
 
             {qrHuntProgress.percentage === 100 ? (
-              <div className="bg-green-50 border-2 border-green-500 rounded-lg p-4 mb-4">
+              <div className="bg-[#6B8E23]/10 border-2 border-[#6B8E23] rounded-lg p-4 mb-4">
                 <div className="flex items-center gap-3">
-                  <i className="fas fa-trophy text-3xl text-green-600"></i>
+                  <i className="fas fa-trophy text-3xl text-[#6B8E23]"></i>
                   <div>
-                    <p className="font-bold text-green-700 mb-1">
+                    <p className="font-bold text-[#4A3F35] mb-1">
                       🎉 Parabéns! Você completou a caça!
                     </p>
-                    <p className="text-sm text-green-600">
+                    <p className="text-sm text-[#6B5B4F]">
                       Você encontrou todos os QR Codes da cidade!
                     </p>
                   </div>
@@ -282,13 +275,29 @@ export default function PerfilPage() {
             </p>
             <Link
               href="/quiz"
-              className="inline-flex items-center gap-2 bg-[#8B4513] hover:bg-[#A0522D] text-white py-2 px-4 rounded transition-colors text-sm"
+              className="inline-flex items-center gap-2 bg-[#8B4513] hover:bg-[#A0522D] text-white py-2.5 px-5 rounded-lg transition-colors text-sm font-medium shadow-sm hover:shadow-md"
             >
               <i className="fas fa-play"></i>
               Fazer um Quiz
             </Link>
           </div>
         )}
+
+        {/* Sign Out Section - At the bottom */}
+        <div className="bg-[#FEFCF8] p-6 rounded-lg shadow-sm ring-1 ring-[#A0958A]/20 mb-6">
+          <h2 className="text-lg font-bold text-[#4A3F35] mb-3">
+            <i className="fas fa-cog mr-2"></i>
+            Configurações
+          </h2>
+          <button
+            onClick={handleSignOut}
+            className="text-sm text-[#A0522D] hover:text-[#8B4513] transition-colors inline-flex items-center gap-2"
+            title="Desconectar"
+          >
+            <i className="fas fa-sign-out-alt"></i>
+            Desconectar da Conta
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-interface SecondaryBtnProps {
+interface TertiaryBtnProps {
     children: React.ReactNode;
     onClick?: () => void;
     disabled?: boolean;
@@ -10,7 +10,7 @@ interface SecondaryBtnProps {
     className?: string;
 }
 
-const SecondaryBtn: React.FC<SecondaryBtnProps> = ({ 
+const TertiaryBtn: React.FC<TertiaryBtnProps> = ({ 
     children, 
     onClick, 
     disabled,
@@ -25,12 +25,11 @@ const SecondaryBtn: React.FC<SecondaryBtnProps> = ({
             className={`
                 inline-flex items-center justify-center gap-2
                 bg-transparent text-[#8B4513] font-medium
-                py-2.5 px-5 rounded-lg
-                border-2 border-[#8B4513]
-                hover:bg-[#8B4513] hover:text-white
-                active:bg-[#6B3410]
+                py-2 px-4 rounded-lg
+                hover:bg-[#F5F1EB] hover:text-[#6B3410]
+                active:bg-[#E6D3B4]
                 transition-all duration-200
-                focus:outline-none focus:ring-2 focus:ring-[#8B4513] focus:ring-offset-2
+                focus:outline-none focus:ring-2 focus:ring-[#8B4513]/30 focus:ring-offset-1
                 disabled:opacity-50 disabled:cursor-not-allowed
                 ${className}
             `}
@@ -40,6 +39,4 @@ const SecondaryBtn: React.FC<SecondaryBtnProps> = ({
     );
 };
 
-export default SecondaryBtn;
-
-export { SecondaryBtn };
+export default TertiaryBtn;

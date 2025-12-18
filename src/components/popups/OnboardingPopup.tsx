@@ -21,9 +21,9 @@ const OnboardingPopup: React.FC<OnboardingPopupProps> = ({ onClose }) => {
   };
 
   return (
-    <div className="z-50 fixed inset-0 flex items-center justify-center bg-black bg-opacity-75">
+    <div className="z-50 fixed inset-0 flex items-center justify-center bg-black/60 backdrop-blur-sm">
       <div
-        className="bg-white rounded-lg shadow-lg w-full max-w-md p-6 relative flex flex-col items-center"
+        className="bg-[#FEFCF8] rounded-xl shadow-xl w-full max-w-md p-6 relative flex flex-col items-center ring-1 ring-[#A0958A]/20"
         style={{
           maxHeight: '90vh',
           overflowY: 'auto',
@@ -35,19 +35,19 @@ const OnboardingPopup: React.FC<OnboardingPopupProps> = ({ onClose }) => {
           <div className="steps">
             {step === 0 && (
               <div className="step text-center">
-                <span className="step-number inline-block w-8 h-8 bg-blue-500 text-white rounded-full text-center leading-8 mb-2">1</span>
+                <span className="step-number inline-block w-8 h-8 bg-[#8B4513] text-white rounded-full text-center leading-8 mb-2">1</span>
                 <p>Explore histórias pela geografia e descubra a história por trás dos lugares!</p>
               </div>
             )}
             {step === 1 && (
               <div className="step text-center">
-                <span className="step-number inline-block w-8 h-8 bg-blue-500 text-white rounded-full text-center leading-8 mb-2">2</span>
+                <span className="step-number inline-block w-8 h-8 bg-[#8B4513] text-white rounded-full text-center leading-8 mb-2">2</span>
                 <p>Navegue pela linha do tempo para reviver os eventos que moldaram nossa cidade!</p>
               </div>
             )}
             {step === 2 && (
               <div className="step text-center">
-                <span className="step-number inline-block w-8 h-8 bg-blue-500 text-white rounded-full text-center leading-8 mb-2">3</span>
+                <span className="step-number inline-block w-8 h-8 bg-[#8B4513] text-white rounded-full text-center leading-8 mb-2">3</span>
                 <p>Contribua com suas histórias e experiências e aproveite a jornada!</p>
               </div>
             )}
@@ -57,7 +57,7 @@ const OnboardingPopup: React.FC<OnboardingPopupProps> = ({ onClose }) => {
         {/* Botão de Avançar */}
         {step < totalSteps - 1 && (
           <button
-            className="bg-blue-500 text-white px-6 py-2 rounded-md mb-4 hover:bg-blue-600 transition"
+            className="bg-[#8B4513] text-white px-6 py-2.5 rounded-lg mb-4 hover:bg-[#A0522D] transition-all duration-200 font-medium"
             onClick={handleNext}
             aria-label="Avançar"
           >
@@ -68,7 +68,7 @@ const OnboardingPopup: React.FC<OnboardingPopupProps> = ({ onClose }) => {
         {/* Botão "Começar" */}
         {step === totalSteps - 1 && (
           <button
-            className="bg-green-500 text-white px-6 py-2 rounded-md mb-4 hover:bg-green-600 transition"
+            className="bg-[#8B4513] text-white px-6 py-2.5 rounded-lg mb-4 hover:bg-[#A0522D] transition-all duration-200 font-medium"
             onClick={onClose}
             aria-label="Começar"
           >
@@ -79,7 +79,7 @@ const OnboardingPopup: React.FC<OnboardingPopupProps> = ({ onClose }) => {
         {/* Botão de Pular */}
         {step < totalSteps - 1 && (
           <button
-            className="text-gray-600 underline mb-4 hover:text-gray-800 transition"
+            className="text-[#6B5B4F] underline mb-4 hover:text-[#4A3F35] transition-colors"
             onClick={handleSkip}
             aria-label="Pular"
           >
@@ -89,7 +89,7 @@ const OnboardingPopup: React.FC<OnboardingPopupProps> = ({ onClose }) => {
 
         {/* Botão de Fechar */}
         <button
-          className="absolute top-2 right-2 text-gray-600 cursor-pointer hover:text-gray-800"
+          className="absolute top-3 right-3 text-[#A0958A] cursor-pointer hover:text-[#6B5B4F] transition-colors p-1"
           onClick={onClose}
           aria-label="Fechar onboarding"
         >

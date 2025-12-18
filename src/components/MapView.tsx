@@ -166,8 +166,11 @@ const MapView: React.FC<MapViewProps> = ({
   // Don't render the map on server side
   if (!isClient) {
     return (
-      <div className="map-container relative h-96 bg-gray-200 flex items-center justify-center">
-        <p>Carregando mapa...</p>
+      <div className="map-container relative h-64 md:h-96 bg-[#F5F1EB] flex items-center justify-center rounded-lg">
+        <div className="flex flex-col items-center gap-2 text-[#A0958A]">
+          <i className="fas fa-map-marked-alt text-3xl animate-pulse"></i>
+          <p className="text-sm">Carregando mapa...</p>
+        </div>
       </div>
     );
   }
@@ -178,8 +181,9 @@ const MapView: React.FC<MapViewProps> = ({
       <div className="absolute top-2 right-2 z-[1000]">
         <button
           onClick={recenterMap}
-          className="px-3 py-2 bg-white text-gray-700 rounded-md border border-gray-300 hover:bg-gray-50 transition-colors duration-200 shadow-sm"
+          className="px-3 py-2 bg-[#FEFCF8] text-[#6B5B4F] rounded-md border border-[#E6D3B4] hover:bg-[#F5F1EB] transition-colors duration-200 shadow-sm"
           title="Recentrar mapa em Gramado"
+          aria-label="Recentrar mapa"
           style={{ zIndex: 1000 }}
         >
           <svg 

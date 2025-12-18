@@ -117,9 +117,9 @@ const AddForm: React.FC = () => {
         <form onSubmit={handleSubmit}>
           {/* Success Message */}
           {submissionState.isSuccess && (
-            <div className="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
+            <div className="mb-4 p-4 bg-[#6B8E23]/10 border border-[#6B8E23]/30 text-[#4A3F35] rounded-lg">
               <div className="flex items-center">
-                <i className="fas fa-check-circle mr-2"></i>
+                <i className="fas fa-check-circle mr-2 text-[#6B8E23]"></i>
                 História enviada com sucesso! Entraremos em contato para captar os materiais.
               </div>
             </div>
@@ -127,9 +127,9 @@ const AddForm: React.FC = () => {
 
           {/* Error Message */}
           {submissionState.error && (
-            <div className="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
+            <div className="mb-4 p-4 bg-[#A0522D]/10 border border-[#A0522D]/30 text-[#4A3F35] rounded-lg">
               <div className="flex items-center">
-                <i className="fas fa-exclamation-circle mr-2"></i>
+                <i className="fas fa-exclamation-circle mr-2 text-[#A0522D]"></i>
                 {submissionState.error}
               </div>
             </div>
@@ -210,10 +210,10 @@ const AddForm: React.FC = () => {
             <button
               type="submit"
               disabled={submissionState.isSubmitting}
-              className={`font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-[#8B4513]/50 transition-colors duration-200 ${
+              className={`font-medium py-2.5 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8B4513]/50 transition-all duration-200 ${
                 submissionState.isSubmitting
-                  ? 'bg-gray-400 cursor-not-allowed text-white'
-                  : 'bg-[#8B4513] hover:bg-[#A0522D] text-white'
+                  ? 'bg-[#A0958A] cursor-not-allowed text-white'
+                  : 'bg-[#8B4513] hover:bg-[#A0522D] text-white shadow-sm hover:shadow-md'
               }`}
             >
               {submissionState.isSubmitting ? (

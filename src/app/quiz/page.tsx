@@ -208,11 +208,15 @@ export default function QuizPage() {
   };
 
   // Function to start quiz
+  // State for city validation error
+  const [cityError, setCityError] = useState(false);
+  
   const startQuiz = async () => {
     if (!city) {
-      alert('Por favor, selecione uma cidade antes de começar o quiz.');
+      setCityError(true);
       return;
     }
+    setCityError(false);
     
     setQuizStarted(true);
     setQuizCompleted(false);
@@ -281,16 +285,16 @@ export default function QuizPage() {
                 10 perguntas aleatórias sobre os locais históricos da cidade.
               </p>
               
-              {/* Login prompt if not logged in */}
+              {/* Login prompt if not logged in - subtle banner */}
               {!user && (
-                <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                  <p className="text-sm text-blue-900 mb-3 text-center">
-                    <i className="fas fa-info-circle mr-2"></i>
+                <div className="mb-6 p-4 bg-[#F5F1EB] border border-[#E6D3B4] rounded-lg">
+                  <p className="text-sm text-[#6B5B4F] mb-3 text-center">
+                    <i className="fas fa-user-circle mr-2 text-[#8B4513]"></i>
                     Faça login para salvar seus resultados automaticamente!
                   </p>
                   <button
                     onClick={signIn}
-                    className="w-full bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 py-2 px-4 rounded flex items-center justify-center gap-2 transition-colors"
+                    className="w-full bg-[#FEFCF8] border border-[#E6D3B4] hover:bg-[#F5F1EB] text-[#4A3F35] py-2 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors"
                   >
                     <svg className="w-5 h-5" viewBox="0 0 24 24">
                       <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -300,20 +304,20 @@ export default function QuizPage() {
                     </svg>
                     Entrar com Google
                   </button>
-                  <p className="text-xs text-gray-600 mt-2 text-center">
-                    Ou continue sem login (não salvaremos seus resultados)
+                  <p className="text-xs text-[#A0958A] mt-2 text-center">
+                    Ou continue sem login
                   </p>
                 </div>
               )}
 
               {/* User info display if logged in */}
               {user && (
-                <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
-                  <p className="text-sm text-green-900 text-center">
-                    <i className="fas fa-check-circle mr-2"></i>
+                <div className="mb-6 p-4 bg-[#6B8E23]/10 border border-[#6B8E23]/30 rounded-lg">
+                  <p className="text-sm text-[#4A3F35] text-center">
+                    <i className="fas fa-check-circle mr-2 text-[#6B8E23]"></i>
                     Logado como <strong>{profile.displayName}</strong>
                   </p>
-                  <p className="text-xs text-green-700 mt-1 text-center">
+                  <p className="text-xs text-[#6B5B4F] mt-1 text-center">
                     Seus resultados serão salvos automaticamente
                   </p>
                 </div>
@@ -345,21 +349,39 @@ export default function QuizPage() {
                   </>
                 )}
                 
-                <select
-                  value={city}
-                  onChange={(e) => setCity(e.target.value)}
-                  required
-                  className="shadow appearance-none border border-[#F5F1EB] rounded w-full py-2 px-3 text-[#6B5B4F] bg-[#FEFCF8] leading-tight focus:outline-none focus:ring-2 focus:ring-[#8B4513]/30 focus:border-[#8B4513] mb-4"
-                >
-                  <option value="">Selecione sua cidade</option>
-                  <option value="Gramado">Gramado</option>
-                  <option value="Canela">Canela</option>
-                </select>
+                <div className="relative">
+                  <select
+                    value={city}
+                    onChange={(e) => {
+                      setCity(e.target.value);
+                      setCityError(false);
+                    }}
+                    required
+                    className={`shadow appearance-none border rounded w-full py-2 px-3 text-[#6B5B4F] bg-[#FEFCF8] leading-tight focus:outline-none focus:ring-2 focus:ring-[#8B4513]/30 focus:border-[#8B4513] ${
+                      cityError ? 'border-[#A0522D] ring-2 ring-[#A0522D]/30' : 'border-[#F5F1EB]'
+                    }`}
+                  >
+                    <option value="">Selecione sua cidade *</option>
+                    <option value="Gramado">Gramado</option>
+                    <option value="Canela">Canela</option>
+                  </select>
+                  {cityError && (
+                    <p className="text-[#A0522D] text-sm mt-1 flex items-center gap-1">
+                      <i className="fas fa-exclamation-circle"></i>
+                      Por favor, selecione uma cidade
+                    </p>
+                  )}
+                </div>
               </div>
               
               <button
                 onClick={startQuiz}
-                className="bg-[#8B4513] hover:bg-[#A0522D] text-white py-2 px-4 rounded whitespace-nowrap w-full text-sm sm:text-base transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#8B4513]/50 transform hover:scale-105 active:scale-95"
+                disabled={!city}
+                className={`py-2.5 px-5 rounded-lg whitespace-nowrap w-full text-sm sm:text-base font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#8B4513]/50 ${
+                  city 
+                    ? 'bg-[#8B4513] hover:bg-[#A0522D] text-white transform hover:scale-[1.02] active:scale-[0.98] shadow-sm hover:shadow-md' 
+                    : 'bg-[#A0958A] text-white/80 cursor-not-allowed'
+                }`}
               >
                 Começar Quiz
               </button>
