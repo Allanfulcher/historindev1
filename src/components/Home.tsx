@@ -157,12 +157,6 @@ const Home: React.FC<HomeProps> = ({ onPreviewOpen }) => {
                   historias={historias}
                 />
               </div>
-              {/* Scroll indicator */}
-              <div className="flex justify-center py-2 md:hidden">
-                <div className="flex flex-col items-center text-[#A0958A] animate-bounce">
-                  <i className="fas fa-chevron-down text-sm"></i>
-                </div>
-              </div>
             </div>
           </div>
         )}
