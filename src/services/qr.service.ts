@@ -79,9 +79,9 @@ async function validateQrCode(scannedValue: string): Promise<QrCode | null> {
     return null;
   }
 
-  // Find QR code where scannedValue is in the valid_strings array
+  // Find QR code where any valid_string is contained within scannedValue (substring match)
   const qrCode = data.find(qr => 
-    qr.valid_strings && qr.valid_strings.includes(scannedValue)
+    qr.valid_strings && qr.valid_strings.some((validStr: string) => scannedValue.includes(validStr))
   );
 
   return qrCode || null;
