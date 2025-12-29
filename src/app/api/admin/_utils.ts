@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getSupabaseServerClient } from '@/lib/supabase/server';
+import { getSupabaseServiceRoleClient } from '@/lib/supabase/server';
 
 // Centralized JSON helpers
 export function jsonOk(body: any, init?: ResponseInit) {
@@ -24,5 +24,5 @@ export function requireAdmin(req: NextRequest): NextResponse | null {
 
 // Shared Supabase server client (awaited)
 export async function adminSupabase() {
-  return await getSupabaseServerClient();
+  return getSupabaseServiceRoleClient();
 }
