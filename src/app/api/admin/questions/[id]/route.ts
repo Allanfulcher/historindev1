@@ -1,18 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getSupabaseServerClient } from '@/lib/supabase/server';
-
-function unauthorized() {
-  return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-}
-
-function validateAuth(req: NextRequest): boolean {
-  const token = req.headers.get('x-admin-token') || req.headers.get('authorization')?.replace(/^Bearer\s+/i, '');
-  return !!process.env.ADMIN_TOKEN && token === process.env.ADMIN_TOKEN;
-}
+import { adminSupabase, jsonBadRequest, jsonServerError, requireAdmin } from '../../_utils';
 
 export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
-  if (!validateAuth(req)) return unauthorized();
   const id = params.id;
+  const unauthorized = requireAdmin(req);
+  if (unauthorized) return unauthorized;
+  if (!id) return jsonBadRequest('Missing id');
+
   const body = await req.json().catch(() => null);
   if (!body) return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
 
@@ -29,7 +23,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
     return NextResponse.json({ error: 'answer must be 1..4' }, { status: 400 });
   }
 
-  const supabase = await getSupabaseServerClient();
+  const supabase = await adminSupabase();
   const { data, error } = await supabase
     .from('quiz_questions')
     .update(patch)
@@ -37,15 +31,18 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
     .select('*')
     .single();
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) return jsonServerError(error.message);
   return NextResponse.json({ data });
 }
 
 export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
-  if (!validateAuth(req)) return unauthorized();
   const id = params.id;
-  const supabase = await getSupabaseServerClient();
+  const unauthorized = requireAdmin(req);
+  if (unauthorized) return unauthorized;
+  if (!id) return jsonBadRequest('Missing id');
+
+  const supabase = await adminSupabase();
   const { error } = await supabase.from('quiz_questions').delete().eq('id', id);
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error) return jsonServerError(error.message);
   return NextResponse.json({ ok: true });
 }

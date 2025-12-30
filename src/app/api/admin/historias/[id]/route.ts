@@ -5,6 +5,18 @@ function isUuid(v: string) {
   return /^[0-9a-fA-F-]{36}$/.test(v);
 }
 
+function getIdFromPathname(req: NextRequest): string | null {
+  try {
+    const { pathname } = new URL(req.url);
+    const parts = pathname.split('/').filter(Boolean);
+    const last = parts[parts.length - 1];
+    if (!last || last === 'historias') return null;
+    return last;
+  } catch {
+    return null;
+  }
+}
+
 function parseArrayMaybe(v: any): string[] | null | undefined {
   if (v === undefined) return undefined;
   if (v === null) return null;
@@ -18,7 +30,7 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
   const unauthorized = requireAdmin(req);
   if (unauthorized) return unauthorized;
 
-  const id = params.id;
+  const id = params?.id ?? getIdFromPathname(req);
   if (!id) return jsonBadRequest('Missing id');
 
   const supabase = await adminSupabase();
@@ -32,7 +44,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
   const unauthorized = requireAdmin(req);
   if (unauthorized) return unauthorized;
 
-  const id = params.id;
+  const id = params?.id ?? getIdFromPathname(req);
   if (!id) return jsonBadRequest('Missing id');
 
   const raw = await req.json().catch(() => null) as any;

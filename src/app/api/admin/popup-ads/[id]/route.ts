@@ -1,12 +1,12 @@
 import { NextRequest } from "next/server";
 import { adminSupabase, jsonOk, jsonServerError, requireAdmin, jsonBadRequest } from "../../_utils";
 
-export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
   const unauthorized = requireAdmin(req);
   if (unauthorized) return unauthorized;
 
   try {
-    const { id } = await params;
+    const { id } = params;
     const body = await req.json();
 
     // Validate required fields
@@ -38,12 +38,12 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
   }
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
   const unauthorized = requireAdmin(req);
   if (unauthorized) return unauthorized;
 
   try {
-    const { id } = await params;
+    const { id } = params;
 
     const supabase = await adminSupabase();
     const { error } = await supabase
