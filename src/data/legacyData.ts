@@ -572,7 +572,7 @@ const historias = [{
 	'id': 62,
 	'rua_id': 1,
 	'criador': 'Allan',
-	'fotos': ['/images/historias/1917-igreja.webp', '/images/historias/1917-igreja2.webp'],
+	'fotos': ['/images/historias/1917-igreja1.webp', '/images/historias/1917-igreja2.webp'],
 	'titulo': 'O Encontro Dominical em Frente à Igreja de Gramado',
 	'descricao': 'Em 1917, a cidade de Gramado era palco de encontros comunitários aos domingos pela manhã. Nesta foto histórica, uma multidão de moradores se reúne em frente à antiga igreja da cidade, no centro de Gramado. A simplicidade da arquitetura, toda em madeira, reflete a humildade e o caráter acolhedor da comunidade local. Ao lado da igreja, pode-se ver o prédio que abrigava o "Tiro de Guerra", uma instituição importante para a formação dos jovens da época. Esses encontros dominicais reforçavam os laços sociais e religiosos em uma vila que ainda estava em seus primeiros estágios de desenvolvimento. A foto captura o espírito comunitário e religioso que moldou Gramado nos primórdios de sua história.',
 	'ano': 1917,
