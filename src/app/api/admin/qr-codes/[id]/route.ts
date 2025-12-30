@@ -1,4 +1,4 @@
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { adminSupabase, jsonBadRequest, jsonOk, jsonServerError, requireAdmin } from '../../_utils';
 
 interface UpdateQrCodePayload {
@@ -68,15 +68,17 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
   const unauthorized = requireAdmin(req);
   if (unauthorized) return unauthorized;
 
+  if (!params?.id) return jsonBadRequest('Missing id');
+
   const supabase = await adminSupabase();
   const { data, error } = await supabase
     .from('qr_codes')
     .select('*')
     .eq('id', params.id)
-    .single();
+    .maybeSingle();
 
   if (error) return jsonServerError(error.message);
-  if (!data) return jsonBadRequest('QR code not found');
+  if (!data) return NextResponse.json({ error: 'QR code not found' }, { status: 404 });
   return jsonOk({ data });
 }
 
@@ -84,6 +86,8 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
 export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
   const unauthorized = requireAdmin(req);
   if (unauthorized) return unauthorized;
+
+  if (!params?.id) return jsonBadRequest('Missing id');
 
   const raw = await req.json().catch(() => null);
   const parsed = parseUpdate(raw);
@@ -95,9 +99,10 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
     .update(parsed.value)
     .eq('id', params.id)
     .select('*')
-    .single();
+    .maybeSingle();
 
   if (error) return jsonServerError(error.message);
+  if (!data) return NextResponse.json({ error: 'QR code not found' }, { status: 404 });
   return jsonOk({ data });
 }
 
@@ -105,6 +110,8 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
 export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
   const unauthorized = requireAdmin(req);
   if (unauthorized) return unauthorized;
+
+  if (!params?.id) return jsonBadRequest('Missing id');
 
   const supabase = await adminSupabase();
   const { error } = await supabase
