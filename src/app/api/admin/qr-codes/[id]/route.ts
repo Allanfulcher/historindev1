@@ -64,17 +64,19 @@ function parseUpdate(body: unknown): { ok: true; value: UpdateQrCodePayload } | 
 }
 
 // GET /api/admin/qr-codes/[id]
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(req: NextRequest, { params }: { params: any }) {
   const unauthorized = requireAdmin(req);
   if (unauthorized) return unauthorized;
 
-  if (!params?.id) return jsonBadRequest('Missing id');
+  const resolvedParams = await Promise.resolve(params);
+  const id = resolvedParams?.id as string | undefined;
+  if (!id) return jsonBadRequest('Missing id');
 
   const supabase = await adminSupabase();
   const { data, error } = await supabase
     .from('qr_codes')
     .select('*')
-    .eq('id', params.id)
+    .eq('id', id)
     .maybeSingle();
 
   if (error) return jsonServerError(error.message);
@@ -83,11 +85,13 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
 }
 
 // PATCH /api/admin/qr-codes/[id]
-export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PATCH(req: NextRequest, { params }: { params: any }) {
   const unauthorized = requireAdmin(req);
   if (unauthorized) return unauthorized;
 
-  if (!params?.id) return jsonBadRequest('Missing id');
+  const resolvedParams = await Promise.resolve(params);
+  const id = resolvedParams?.id as string | undefined;
+  if (!id) return jsonBadRequest('Missing id');
 
   const raw = await req.json().catch(() => null);
   const parsed = parseUpdate(raw);
@@ -97,7 +101,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
   const { data, error } = await supabase
     .from('qr_codes')
     .update(parsed.value)
-    .eq('id', params.id)
+    .eq('id', id)
     .select('*')
     .maybeSingle();
 
@@ -107,17 +111,19 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
 }
 
 // DELETE /api/admin/qr-codes/[id]
-export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(req: NextRequest, { params }: { params: any }) {
   const unauthorized = requireAdmin(req);
   if (unauthorized) return unauthorized;
 
-  if (!params?.id) return jsonBadRequest('Missing id');
+  const resolvedParams = await Promise.resolve(params);
+  const id = resolvedParams?.id as string | undefined;
+  if (!id) return jsonBadRequest('Missing id');
 
   const supabase = await adminSupabase();
   const { error } = await supabase
     .from('qr_codes')
     .delete()
-    .eq('id', params.id);
+    .eq('id', id);
 
   if (error) return jsonServerError(error.message);
   return jsonOk({ message: 'QR code deleted' });
