@@ -62,7 +62,7 @@ const WelcomeCard: React.FC = () => {
           <div className="flex flex-wrap gap-4 text-sm">
             <div className="flex items-center gap-2 text-[#6B5B4F]">
               <i className="fas fa-road text-[#CD853F]"></i>
-              <span><strong>50+</strong> ruas</span>
+              <span><strong>20+</strong> ruas</span>
             </div>
             <div className="flex items-center gap-2 text-[#6B5B4F]">
               <i className="fas fa-book-open text-[#CD853F]"></i>

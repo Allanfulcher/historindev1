@@ -244,11 +244,6 @@ const RuasEHistorias: React.FC = () => {
         
         <div className="mb-3">
           <h1 className="text-xl font-bold text-gray-900 mb-4 pt-4">Ruas e Histórias</h1>
-          <ViewMap 
-            ruas={ruas}
-            setSelectedRuaId={(id: string) => router.push(`/rua/${String(id)}`)}
-            setPreviewContent={(_content) => {}}
-          />
         </div>
 
         {/* Surpreenda-me Button */}
