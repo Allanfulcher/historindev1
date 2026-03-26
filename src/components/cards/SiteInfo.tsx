@@ -27,7 +27,7 @@ const SiteInfo = () => {
       label: 'Brocker Turismo',
     },
     {
-      src: 'https://lirp.cdn-website.com/6fcf29d3/dms3rep/multi/opt/01-aplicacao-principal-verde-c857a384-640w.png',
+      src: 'https://i.imgur.com/kYSB2cj.png',
       alt: 'Hotel Alpestre',
       label: 'Hotel Alpestre',
     },
