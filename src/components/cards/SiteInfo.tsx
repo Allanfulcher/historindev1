@@ -27,7 +27,7 @@ const SiteInfo = () => {
       label: 'Brocker Turismo',
     },
     {
-      src: 'https://i.imgur.com/kYSB2cj.png',
+      src: 'https://i.imgur.com/v7R1ad2.png',
       alt: 'Hotel Alpestre',
       label: 'Hotel Alpestre',
     },
