@@ -259,7 +259,7 @@ const Sobre: React.FC = () => {
 
           <div className="text-center">
             <img
-              src="https://lirp.cdn-website.com/6fcf29d3/dms3rep/multi/opt/01-aplicacao-principal-verde-c857a384-640w.png"
+              src="https://i.imgur.com/kYSB2cj.png"
               alt="Hotel Alpestre"
               className="mx-auto mb-1 h-12 w-auto"
             />
